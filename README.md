@@ -7,7 +7,7 @@
 
 ## Set up the Project
 
-The first thing your should do after cloning the repository is to type the command `npm i` in the root directory to install all node libraries.
+The first thing your should do after cloning the repository is to type the command `npm i` in the root directory to install all node external libraries.
 
 ## Scripts
 
