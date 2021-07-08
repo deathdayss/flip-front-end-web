@@ -8,13 +8,9 @@ import { Authentication } from './reducers/Authentication';
 // TODO: Add states to the store when needed
 export const ConfigureStore = () => {
     const store = createStore(
-        // combineReducers({
-        //     authentication: Authentication,
-        //     ...createForms({
-        //         feedback: InitialFeedback
-        //     })
-        // }),
-        // applyMiddleware(thunk)
+        combineReducers({
+            authentication: Authentication
+        }),
         applyMiddleware(thunk, logger)
     );
 
