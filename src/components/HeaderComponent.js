@@ -55,7 +55,7 @@ const Header = (props) => {
           <Col xs='auto' sm='4' className='logo' >
             <img src='images/header/logo.svg' />
           </Col>
-          <Col xs='auto' sm='4' className='search-bar text-center text-md-right'>
+          <Col xs='auto' sm='4' className='search-bar text-center'>
             1234
           </Col>
           <Col xs='auto' sm='4' className='header-user-buttons'>
