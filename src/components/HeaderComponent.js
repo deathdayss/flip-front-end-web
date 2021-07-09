@@ -52,13 +52,13 @@ const Header = (props) => {
     <div className='header-border' >
       <Container fluid className = 'header-first-line' >
         <Row>
-          <Col xs='auto' sm='4' className='logo ' >
+          <Col xs='auto' sm='auto' className='logo' >
             <img src='images/header/logo.svg' />
           </Col>
-          <Col xs='auto' sm='4' className='search-bar text-center text-md-right'>
+          <Col xs='auto' sm='auto' className='search-bar text-center text-md-right'>
             1234
           </Col>
-          <Col xs='auto' sm='4' className='header-user-buttons'>
+          <Col xs='auto' sm='auto' className='header-user-buttons'>
             <Container>
               <Row>
                 <Col>
