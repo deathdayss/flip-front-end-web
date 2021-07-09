@@ -3,13 +3,15 @@ import { createForms } from 'react-redux-form';
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
-import { Authentication } from './reducers/Authentication';
+import { AuthenticationReducer } from './reducers/AuthenticationReducer';
+import { LocalizationReducer } from './reducers/LocalizationReducer';
 
 // TODO: Add states to the store when needed
 export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
-            authentication: Authentication
+            authentication: AuthenticationReducer,
+            localization: LocalizationReducer
         }),
         applyMiddleware(thunk, logger)
     );
