@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 import { actions } from 'react-redux-form'
 
 import Test from './TestComponent.js'
+import Header from './HeaderComponent'
 
 class Main extends Component {
     componentDidMount() {
-
+        
     }
 
     pressButton() {
@@ -20,13 +21,13 @@ class Main extends Component {
         return (
             <div>
 
-                {/* <Header /> */}
+                <Header />
                 Hello World!
                 <Button outline onClick={this.pressButton}>Submit Comment</Button>
                 <Switch>
                     {/* <Route exact path */}
                     {/* <Route exact path='/test' component={() => <div>Hi</div>} /> */}
-                    <Route path='/test/:id' component={() => <Test a = {'1234'}/>} />
+                    <Route path='/test' component={() => <Test/>} />
                     {/* <Redirect to="/EN" /> */}
                 </Switch>
             </div>
