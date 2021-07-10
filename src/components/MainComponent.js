@@ -10,6 +10,7 @@ import { useLangToChangeWords } from '../redux/actions/creators/LocalizationActi
 
 const mapStateToProps = state => {
     return {
+        formInfo: state.searchBar,
         localization: state.localization,
     }
 }
@@ -21,6 +22,7 @@ const mapDispatchToProps = dispatch => ({
 
 class Main extends Component {
     componentDidMount() {
+        // TODO: Check user state
         this.props.useLangToChangeWords(this.props.localization.lang)
         console.log('componentDidMount');
         
@@ -29,7 +31,7 @@ class Main extends Component {
     pressButton = () => {
         console.log('pressButton')
         // history.push('/')
-        console.log(this.props.localization.lang)
+        console.log(this.props.formInfo)
 
     }
 

@@ -65,7 +65,7 @@ const Header = (props) => {
           </Col>
           <Col xs='4' sm='4' className='search-bar text-center'>
             <Form model='searchBar' onSubmit={(values) => handleSearch(values)}>
-              <Control.text model=".searchBar" id="searchBar" name="searchBar"
+              <Control.text model=".searchWord" id="searchWord" name="searchWord"
                 className="form-control"
               />
               <span>

@@ -3,10 +3,10 @@ import { Component } from 'react'
 import Main from './components/MainComponent';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from "./redux/ConfigureStore";
+import { store } from "./redux/configureStore";
 import { PersistGate } from 'redux-persist/integration/react'
 
-import { persistor } from "./redux/ConfigureStore";
+import { persistor } from "./redux/configureStore";
 
 class App extends Component {
 
