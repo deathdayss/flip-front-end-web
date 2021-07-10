@@ -7,7 +7,8 @@ import {Helmet} from "react-helmet"
 
 const mapStateToProps = state => {
     return {
-        authentication: state.authentication
+        authentication: state.authentication,
+        localization: state.localization
     }
 }
 export const Test = (props) => {
@@ -21,6 +22,7 @@ export const Test = (props) => {
             <Helmet lang = 'zh'>
                 <title>My Title</title>
             </Helmet>
+            {props.localization.words.header.all}
             <Button outline onClick={pressButton}>Redirect to the default address</Button>
         </>
     )

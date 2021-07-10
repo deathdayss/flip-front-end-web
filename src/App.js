@@ -3,20 +3,23 @@ import { Component } from 'react'
 import Main from './components/MainComponent';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ConfigureStore } from "./redux/configureStore";
+import { store } from "./redux/ConfigureStore";
+import { PersistGate } from 'redux-persist/integration/react'
 
-const store = ConfigureStore()
+import { persistor } from "./redux/ConfigureStore";
 
 class App extends Component {
 
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
-          <div className="App">
-            <Main />
-          </div>
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <div className="App">
+              <Main />
+            </div>
+          </BrowserRouter>
+        </PersistGate>
       </Provider>
     );
   }

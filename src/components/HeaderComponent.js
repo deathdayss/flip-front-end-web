@@ -11,18 +11,22 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
+  NavbarText,
+  Button
 } from 'reactstrap';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
+import { Control, Form, Errors, actions } from 'react-redux-form';
 
 import { toggleLanguage } from '../redux/actions/creators/LocalizationAction'
-import { Chinese } from '../data/words/Chinese'
+import { fetchHeaderSearch } from '../redux/actions/creators/SearchAction';
+
 import './HeaderComponent.scss'
 
 const mapDispatchToProps = dispatch => ({
-  toggleLanguage: (lang) => dispatch(toggleLanguage(lang))
+  toggleLanguage: (lang) => dispatch(toggleLanguage(lang)),
+  fetchHeaderSearch: (values) => dispatch(fetchHeaderSearch(values))
 })
 
 const mapStateToProps = state => {
@@ -44,25 +48,39 @@ const loginBeforeAfter = (userInfo) => {
 }
 
 const Header = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+  const handleSearch = (values) => {
+    console.log('What you want to search: ' + JSON.stringify(values))
+    props.toggleLanguage(props.localization.lang)
+    props.fetchHeaderSearch(values)
+  }
 
   return (
     <div className='header-border' >
-      <Container fluid className = 'header-first-line' >
+      {props.localization.words.header.all}
+      <Container fluid className='header-first-line' >
         <Row>
-          <Col xs='auto' sm='4' className='logo' >
+          <Col xs='4' sm='4' className='logo' >
             <img src='images/header/logo.svg' />
           </Col>
-          <Col xs='auto' sm='4' className='search-bar text-center'>
-            1234
+          <Col xs='4' sm='4' className='search-bar text-center'>
+            <Form model='searchBar' onSubmit={(values) => handleSearch(values)}>
+              <Control.text model=".searchBar" id="searchBar" name="searchBar"
+                className="form-control"
+              />
+              <span>
+                <Button type="submit" color="primary">
+                  Send Feedback
+                </Button>
+              </span>
+
+            </Form>
           </Col>
-          <Col xs='auto' sm='4' className='header-user-buttons'>
+          <Col xs='4' sm='4' className='header-user-buttons'>
             <Container>
               <Row>
                 <Col>
-                12345
+                  12345
                 </Col>
               </Row>
             </Container>

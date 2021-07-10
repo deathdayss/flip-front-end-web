@@ -1,5 +1,7 @@
 import { LocalizationTypes } from '../actions/types/LocalizationTypes';
 import { English } from '../../data/words/English';
+import storage from 'redux-persist/lib/storage'
+import { persistReducer } from 'redux-persist'
 
 export const LocalizationReducer = (state = { isLoading: true,
     errMess: null,
@@ -16,3 +18,11 @@ export const LocalizationReducer = (state = { isLoading: true,
             return state;
     }
 };
+
+const persistLocalizationConfig = {
+    key: 'root',
+    storage: storage,
+    whitelist: ['lang', 'words']
+  };
+
+export const persistedLocalizationReducer = persistReducer(persistLocalizationConfig, LocalizationReducer)
