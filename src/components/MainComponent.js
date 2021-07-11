@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
 
 class Main extends Component {
     componentDidMount() {
-        // TODO: Check user state
+        // TODO: Check user login state
         this.props.useLangToChangeWords(this.props.localization.lang)
         console.log('componentDidMount');
         

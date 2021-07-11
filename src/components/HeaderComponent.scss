@@ -1,17 +1,18 @@
-.header-border {
+#header-border {
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-bottom-color: #D8D8D8;
+    border-bottom-color: #d8d8d8;
 }
 
-.header-first-line {
+#header-first-line {
     margin-top: 10px;
 }
 
-.search-bar {
-
+#header-search-bar-form {
+    display: inline;
 }
 
-.header-user-buttons {
-
+#header-search-submit-button {
+    padding-left: 0px;
+    padding-right: 0px;
 }

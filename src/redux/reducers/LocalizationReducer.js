@@ -22,7 +22,7 @@ export const LocalizationReducer = (state = { isLoading: true,
 const persistLocalizationConfig = {
     key: 'root',
     storage: storage,
-    whitelist: ['lang', 'words']
+    whitelist: ['lang']
   };
 
 export const persistedLocalizationReducer = persistReducer(persistLocalizationConfig, LocalizationReducer)

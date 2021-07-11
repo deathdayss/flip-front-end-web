@@ -15,17 +15,17 @@ import {
   Button
 } from 'reactstrap';
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import { Control, Form, Errors, actions } from 'react-redux-form';
+import { Link } from 'react-router-dom';
 
-import { toggleLanguage } from '../redux/actions/creators/LocalizationAction'
 import { fetchHeaderSearch } from '../redux/actions/creators/SearchAction';
-
+import { toggleLanguage } from '../redux/actions/creators/LocalizationAction'
 import './HeaderComponent.scss'
 
 const mapDispatchToProps = dispatch => ({
-  toggleLanguage: (lang) => dispatch(toggleLanguage(lang)),
+  // toggleLanguage: (lang) => dispatch(toggleLanguage(lang)),
   fetchHeaderSearch: (values) => dispatch(fetchHeaderSearch(values))
 })
 
@@ -49,43 +49,100 @@ const loginBeforeAfter = (userInfo) => {
 
 const Header = (props) => {
 
-  const handleSearch = (values) => {
+  const handleHeaderSearch = (values) => {
     console.log('What you want to search: ' + JSON.stringify(values))
-    props.toggleLanguage(props.localization.lang)
     props.fetchHeaderSearch(values)
+    // props.toggleLanguage(props.localization.lang)
+  }
+
+  const handleRankButton = () => {
+    console.log('handleRankButton')
+  }
+
+  const HeaderRightContent = ({ login }) => {
+    if (login) {
+      return (
+        <>
+          <Col >
+            <Link className='my-link'>
+              <img src='images/header/header_upload_button.svg' />
+            </Link>
+          </Col>
+          <Col>
+            <Link className='my-link'>
+              <img src='images/header/header_file_button.svg' />
+            </Link>
+          </Col>
+          <Col>
+            <Link className='my-link'>
+              <img src='images/header/header_collection_button.svg' />
+            </Link>
+          </Col>
+          <Col>
+            <Link className='my-link'>
+              <img src='images/header/header_remind_button.svg' />
+            </Link>
+          </Col>
+          <Col>
+            <Link className='my-link'>
+              <img src='images/header/header_interaction_button.svg' />
+            </Link>
+          </Col>
+          <Col>
+            <Link className='my-link'>
+              <img src='images/header/header_avatar_button.svg' />
+            </Link>
+          </Col>
+        </>
+      )
+    }
+    else {
+      return (
+        <>
+          <Col xs='6' sm={{ size: 1, offset: 6 }}>
+            <Button id='header-signup-button' color="primary">
+              Signup
+            </Button>
+          </Col>
+          <Col xs='6' sm={{ size: 'auto', offset: 2 }}>
+            <Button id='header-login-button' color="primary">
+              Login
+            </Button>
+          </Col>
+        </>
+      )
+    }
   }
 
   return (
-    <div className='header-border' >
-      {props.localization.words.header.all}
-      <Container fluid className='header-first-line' >
-        <Row>
-          <Col xs='4' sm='4' className='logo' >
+    <div id='header-border' >
+      <Container fluid >
+        <Row id='header-first-line' >
+          <Col xs='1' sm='1' className='logo' >
             <img src='images/header/logo.svg' />
           </Col>
-          <Col xs='4' sm='4' className='search-bar text-center'>
-            <Form model='searchBar' onSubmit={(values) => handleSearch(values)}>
-              <Control.text model=".searchWord" id="searchWord" name="searchWord"
-                className="form-control"
+          <Col xs='5' sm='5' id='header-search' className='text-center'>
+            <Link className='my-link' onClick={handleRankButton}><img src='images/header/header_rank_button.svg' /> </Link>
+            <Form model='headerSearchBar' onSubmit={(values) => handleHeaderSearch(values)}
+              id='header-search-bar-form'>
+              <Control.text model=".searchWord" className="d-none d-sm-none d-md-inline"
               />
-              <span>
-                <Button type="submit" color="primary">
-                  Send Feedback
-                </Button>
-              </span>
+
+              <button id='header-search-submit-button' className='my-button' type="submit">
+                <img src='images/header/header_search_button.svg' />
+              </button>
 
             </Form>
           </Col>
-          <Col xs='4' sm='4' className='header-user-buttons'>
-            <Container>
+          <Col xs={{ size: '5', offset: '1' }} sm={{ size: '5', offset: '1' }} className='header-user-buttons text-center'>
+            <Container fluid>
               <Row>
-                <Col>
-                  12345
-                </Col>
+                <HeaderRightContent login={true} />
               </Row>
             </Container>
           </Col>
         </Row>
+         {/* TODO: the second lines in the main page */}
       </Container>
     </div>
   );
