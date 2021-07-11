@@ -1,0 +1,50 @@
+$default-border-color: #d8d8d8;
+$searchbar-border-radius: 3px;
+$theme-color-0: #5B28FF; 
+$theme-color-0-hover: #4f23dd;
+$theme-color-0-active: #4620c4;
+$theme-color-0-btn-text-color: white;
+$btn-border-radius: 4px;
+
+// Adjust Spacing
+@mixin horizontal-padding($left-padding, $right-padding) {
+    padding-left: $left-padding;
+    padding-right: $right-padding;
+}
+
+@mixin vertical-padding($top-padding, $bottom-padding) {
+    padding-top: $top-padding;
+    padding-bottom: $bottom-padding;
+}
+
+@mixin horizontal-padding-same($padding) {
+    @include horizontal-padding($padding, $padding)
+}
+
+@mixin vertical-padding-same($padding) {
+    @include vertical-padding($padding, $padding)
+}
+
+@mixin horizontal-margin($left-margin, $right-margin) {
+    margin-left: $left-margin;
+    margin-right: $right-margin;
+}
+
+@mixin vertical-margin($top-margin, $bottom-margin) {
+    margin-top: $top-margin;
+    margin-bottom: $bottom-margin;
+}
+
+@mixin horizontal-margin-same($margin) {
+    @include horizontal-margin($margin, $margin)
+}
+
+@mixin vertical-margin-same($margin) {
+    @include vertical-margin($margin, $margin)
+}
+
+// size
+@mixin width-height($width, $height) {
+    width: $width;
+    height: $height;
+}

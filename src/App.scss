@@ -1,7 +1,25 @@
-.my-link {
+@import "./scss/common_variables.scss";
+
+a.my-link {
     text-decoration: none;
 }
 
-.my-button {
+button.theme-color-0-btn {
+    color: $theme-color-0-btn-text-color;
+    background-color: $theme-color-0;
+    border-radius: $btn-border-radius;
     border: none;
+
+}
+
+button.theme-color-0-btn:hover {
+    background-color: $theme-color-0-hover;
+}
+
+button.theme-color-0-btn:active {
+    background-color: $theme-color-0-active;
+}
+
+input::placeholder {
+    color: #a8a8a8;
 }
