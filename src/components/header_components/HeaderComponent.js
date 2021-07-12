@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
-import './HeaderComponent.scss'
+import './header-component.scss'
 import HeaderFirstLayer from './HeaderFirstLayer';
+import HeaderSecondLayer from './HeaderSecondLayer';
 
 class Header extends Component {
 
@@ -12,13 +13,7 @@ class Header extends Component {
       <div id='header-border'>
         <Container fluid >
           <HeaderFirstLayer />
-          {/* TODO: the second lines in the main page */}
-          <Switch>
-            <Route path='/' />
-            <Route path='/fanmade' />
-            <Route path='/real_word' />
-            <Route path='/traditional' />
-          </Switch>
+          < HeaderSecondLayer />
         </Container>
       </div>
     )

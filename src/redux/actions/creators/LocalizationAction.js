@@ -1,13 +1,13 @@
 import { LocalizationTypes } from '../types/LocalizationTypes';
-import {Chinese} from '../../../data/words/Chinese'
-import {English} from '../../../data/words/English'
+import {chinese} from '../../../data/words/Chinese'
+import {english} from '../../../data/words/English'
 
 export const langToWords = (lang) => {
     switch (lang) {
         case 'zh':
-            return Chinese
+            return chinese
         case 'en':
-            return English
+            return english
         default:
             return null
     }
@@ -39,9 +39,9 @@ export const useLangToChangeWords = (lang) => (dispatch) => {
 
 export const toggleLanguage = (lang) => (dispatch) => {
     if (lang === 'zh') {
-        dispatch(changeLanguage('en', English))
+        dispatch(changeLanguage('en', english))
     }
     else if (lang === 'en') {
-        dispatch(changeLanguage('zh', Chinese))
+        dispatch(changeLanguage('zh', chinese))
     }
 }

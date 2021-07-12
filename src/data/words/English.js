@@ -1,14 +1,14 @@
-export const English = {
+export const english = {
     header: {
         signup: "Signup",
         login: "Login",
         all: "All",
-        fanMade: "Fanmade",
-        
+        headerSearchbarHolder: "Search",
+
         secondLayer: {
+            fanMade: "Fanmade",
             realWorld: "Real World",
             traditional: "Traditional",
-            headerSearchbarHolder: "Search"
         }
     }
 }

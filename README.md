@@ -16,3 +16,13 @@ The first thing your should do after cloning the repository is to type the comma
 | npm start | Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits. You will also see any lint errors in the console. |
 | npm build | Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information. |
 
+## Naming Convention
+
+| Category                                      | Method                                                     |
+| --------------------------------------------- | ---------------------------------------------------------- |
+| Folder                                        | Lowercase + underline. E.g. "public_related"               |
+| **.js** file                                  | Pascal case. E.g. "MainComponent.js", "HeaderComponent.js" |
+| **.css .scss** file                           | Lowercase + "-", E.g. "header-component.scss"              |
+| Component variables in **.js**                | Pascal case. E.g. "HeaderFirstLayer", "Main"               |
+| Other variables and functions in **.js**      | Camel case. E.g. "handleSearch", "handleSubmit",           |
+| id, class and all variables in **.css .scss** | Lowercase + "-", E.g. "header-border", "rank-btn"          |

@@ -1,12 +1,12 @@
 import { LocalizationTypes } from '../actions/types/LocalizationTypes';
-import { English } from '../../data/words/English';
+import { english } from '../../data/words/English';
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
 
 export const LocalizationReducer = (state = { isLoading: true,
     errMess: null,
     lang: 'en',
-    words: English}, action) => {
+    words: english}, action) => {
     switch (action.type) {
         case LocalizationTypes.CHANGE_LANGUAGE:
             return {...state, isLoading: false, errMess: null, lang: action.payload.lang, words: action.payload.words};

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { fetchHeaderSearch } from '../../redux/actions/creators/SearchAction';
 import { toggleLanguage } from '../../redux/actions/creators/LocalizationAction'
 import { headerRightContentPath } from '../../data/public_related/HeaderRightContentPath';
-import './HeaderFirstLayer.scss'
+import './header-first-layer.scss'
 
 const mapDispatchToProps = dispatch => ({
     toggleLanguage: (lang) => dispatch(toggleLanguage(lang)),
