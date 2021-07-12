@@ -1,0 +1,1 @@
+export const sectionRouteMarks = ['fanmade', 'real-world', 'traditional']

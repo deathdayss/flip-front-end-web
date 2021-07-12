@@ -5,10 +5,10 @@ export const english = {
         all: "All",
         headerSearchbarHolder: "Search",
 
-        secondLayer: {
+        subsection: {
             fanMade: "Fanmade",
             realWorld: "Real World",
-            traditional: "Traditional",
+            traditional: "Traditional"
         }
     }
 }

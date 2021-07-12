@@ -5,10 +5,10 @@ export const chinese = {
         all: "全部",
         headerSearchbarHolder: "搜索",
 
-        secondLayer: {
+        subsection: {
             fanMade: "二创",
             realWorld: "三次元",
-            traditional: "传统",
+            traditional: "传统"
         }
     }
 }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import SubsectionButtons from './SubsectionButtons'
-
-const sectionMarks = ['fanmade', 'real_world', 'traditional']
+import {sectionRouteMarks} from '../../../data/constants/SectionRouteMarks'
 
 class HeaderSecondLayer extends Component {
 
@@ -12,7 +11,7 @@ class HeaderSecondLayer extends Component {
                 <Route exact path='/' component={() => <SubsectionButtons subsection='main' />} />
                 <Route exact path='/page_id=:id' component={<SubsectionButtons subsection='main' />} />
                 {() => (
-                    sectionMarks.map(sectionMark => <Route path={'/' + sectionMark} component={() => <SubsectionButtons subsection={sectionMark} />} />
+                    sectionRouteMarks.map(sectionRouteMark => <Route path={'/' + sectionRouteMark} component={() => <SubsectionButtons subsection={sectionRouteMark} />} />
                     ))}
             </Switch>
         )

@@ -24,14 +24,10 @@ class Main extends Component {
     componentDidMount() {
         // TODO: Check user login state
         this.props.useLangToChangeWords(this.props.localization.lang)
-        console.log('componentDidMount');
         
     }
 
     pressButton = () => {
-        console.log('pressButton')
-        // history.push('/')
-        console.log(this.props.formInfo)
 
     }
 

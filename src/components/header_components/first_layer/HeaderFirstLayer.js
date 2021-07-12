@@ -39,17 +39,17 @@ const mapStateToProps = state => {
 class HeaderFirstLayer extends Component {
 
     handleRankBtn = () => {
-        console.log('handleRankButton')
+        
     }
 
     // TODO: press the search button
     headerSearch = value => {
         this.props.toggleLanguage(this.props.localization.lang)
-        console.log(value)
+        
     }
 
     componentDidMount() {
-        console.log(this.props.headerState)
+        
     }
 
     render() {
