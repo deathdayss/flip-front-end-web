@@ -1,4 +1,4 @@
-import { SearchTypes } from "../types/SearchTypes";
+import { searchTypes } from "../types/SearchTypes";
 
 export const fetchHeaderSearch = (value) => (dispatch) => {
     dispatch(headerSearchLoading())
@@ -7,15 +7,15 @@ export const fetchHeaderSearch = (value) => (dispatch) => {
 } 
 
 export const headerSearchResult = (searchResult) => ({
-    type: SearchTypes.HEADER_SEARCH,
+    type: searchTypes.HEADER_SEARCH,
     payload: searchResult
 })
 
 export const headerSearchLoading = () => ({
-    type: SearchTypes.HEADER_SEARCH_LOADING,
+    type: searchTypes.HEADER_SEARCH_LOADING,
 })
 
 export const headerSearchFailed = (err) => ({
-    type: SearchTypes.HEADER_SEARCH_FAILED,
+    type: searchTypes.HEADER_SEARCH_FAILED,
     payload: err
 })

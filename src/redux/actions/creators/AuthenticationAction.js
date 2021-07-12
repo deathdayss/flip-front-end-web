@@ -1,9 +1,9 @@
-import { AuthenticationTypes } from '../types/AuthenticationTypes';
+import { authenticationTypes } from '../types/AuthenticationTypes';
 
 export const signup = () => ({
-    type: AuthenticationTypes.SIGNUP
+    type: authenticationTypes.SIGNUP
 })
 
 export const login = () => ({
-    type: AuthenticationTypes.LOGIN
+    type: authenticationTypes.LOGIN
 })

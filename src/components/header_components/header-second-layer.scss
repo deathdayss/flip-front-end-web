@@ -1,0 +1,8 @@
+@import "../../scss/common-variables.scss";
+
+.header-subsection-underline {
+    text-decoration: 4px underline;
+    text-decoration-color: $theme-color-0;
+    text-underline-offset: 3px;
+    margin-bottom: 3px;
+}

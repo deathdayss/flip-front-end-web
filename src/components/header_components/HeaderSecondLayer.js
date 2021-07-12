@@ -5,7 +5,12 @@ import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
 
+import { setState } from '../../redux/actions/creators/HeaderStateAction';
 import './header-second-layer.scss'
+
+const mapDispatchToProps = dispatch => ({
+    setState: (headerState) => dispatch(setState(headerState))
+})
 
 const mapStateToProps = state => {
     return {
@@ -18,15 +23,23 @@ const sectionMarks = ['fanmade', 'real_world', 'traditional']
 
 class HeaderSecondLayer extends Component {
 
+    componentDidMount() {
+
+    }
+
     render() {
         // console.log(this.props.location.pathname)
         const SubsectionButtons = ({ subsection }) => {
             // console.log(match.params)
             console.log(subsection)
             return (
-                <div>
-                    124
-                </div>
+                <Row id='header-second-line-section'>
+                    <Col className='my-auto text-center'>
+                        <div className = 'header-subsection-underline'>
+                         12345
+                        </div>
+                    </Col>
+                </Row>
             )
         }
         return (
@@ -43,4 +56,4 @@ class HeaderSecondLayer extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(HeaderSecondLayer));
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderSecondLayer);

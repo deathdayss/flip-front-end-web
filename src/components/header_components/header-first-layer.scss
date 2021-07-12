@@ -6,6 +6,12 @@
 
 #header-first-line {
     @include vertical-margin-same(12px);
+    // padding-top: 12px;
+}
+
+#header-first-line-have-second {
+    // @include vertical-margin-same(12px);
+    padding-top: 12px;
 }
 
 #header-search-bar-form {
@@ -41,7 +47,7 @@
     border-top-right-radius: $searchbar-border-radius;
     border-bottom-right-radius: $searchbar-border-radius;
     @include width-height(33px, 33px);
-    margin-right: 100px;
+    margin-right: 70px;
 }
 
 #header-signup-btn {

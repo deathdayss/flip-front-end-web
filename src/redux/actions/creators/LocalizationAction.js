@@ -1,4 +1,4 @@
-import { LocalizationTypes } from '../types/LocalizationTypes';
+import { localizationTypes } from '../types/LocalizationTypes';
 import {chinese} from '../../../data/words/Chinese'
 import {english} from '../../../data/words/English'
 
@@ -14,7 +14,7 @@ export const langToWords = (lang) => {
 }
 
 export const changeLanguage = (lang, words) => ({
-    type: LocalizationTypes.CHANGE_LANGUAGE,
+    type: localizationTypes.CHANGE_LANGUAGE,
     payload: {
         lang: lang,
         words: words
@@ -22,7 +22,7 @@ export const changeLanguage = (lang, words) => ({
 })
 
 export const changeLanguageFailed = (err) => ({
-    type: LocalizationTypes.CHANGE_LANGUAGE_FAILED,
+    type: localizationTypes.CHANGE_LANGUAGE_FAILED,
     payload: err
 })
 

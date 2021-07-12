@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { fetchHeaderSearch } from '../../redux/actions/creators/SearchAction';
 import { toggleLanguage } from '../../redux/actions/creators/LocalizationAction'
 import { headerRightBtnInfos } from '../../data/public_related/HeaderRightContentPath';
+import { headerState } from '../../data/constants/HeaderState';
 import './header-first-layer.scss'
 
 const mapDispatchToProps = dispatch => ({
@@ -18,7 +19,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => {
     return {
         localization: state.localization,
-        authentication: state.authentication
+        authentication: state.authentication,
+        headerState: state.headerState
     }
 }
 
@@ -46,6 +48,9 @@ class HeaderFirstLayer extends Component {
         console.log(value)
     }
 
+    componentDidMount() {
+        console.log(this.props.headerState)
+    }
 
     render() {
 
@@ -83,7 +88,7 @@ class HeaderFirstLayer extends Component {
         }
 
         return (
-            <Row id='header-first-line' >
+            <Row id= {this.props.headerState.headerState === headerState.NORMAL ? 'header-first-line' : 'header-first-line-have-second'} >
                 <Col xs='3' md='2' lg='1' id='logo' className='my-auto'>
                     <Link to='/' className='my-link' onClick={this.handleRankBtn}>
                         <img src='images/header/logo.svg' />
@@ -92,7 +97,7 @@ class HeaderFirstLayer extends Component {
                         <img src='images/header/header_rank_btn.svg' height='28' width='28' />
                     </Link>
                 </Col>
-                <Col xs='auto' md='4' lg='7' xl={{ size: '6', offset: '1' }} className='my-auto text-end'>
+                <Col xs='auto' md='5' lg='7' xl={{ size: '6', offset: '1' }} className='my-auto text-end'>
                     <Link to='/' id='rank-btn' className='my-link' onClick={this.handleRankBtn}>
                         <img src='images/header/header_rank_btn.svg' height='28' width='28' />
                     </Link>
@@ -106,7 +111,7 @@ class HeaderFirstLayer extends Component {
                         </button>
                     </Form>
                 </Col>
-                <Col xs='8' md='6' lg='4' xl='4' className='header-user-btn my-auto text-end'>
+                <Col xs='8' md='5' lg='4' xl='4' className='header-user-btn my-auto text-end'>
                     <HeaderRightContent login={true} btnsInfo={headerRightBtnInfos} />
                 </Col>
             </Row>

@@ -2,20 +2,22 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createForms, modelReducer, formReducer } from 'react-redux-form';
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import { SearchReducer } from './reducers/SearchReducer';
 import { persistStore } from 'redux-persist'
 
 
-import { AuthenticationReducer } from './reducers/AuthenticationReducer';
-import { persistedLocalizationReducer, LocalizationReducer } from './reducers/LocalizationReducer';
+import { authenticationReducer } from './reducers/AuthenticationReducer';
+import { persistedLocalizationReducer, localizationReducer } from './reducers/LocalizationReducer';
 import { headerSearchbar } from './forms/HeaderSearchBar';
+import { searchReducer } from './reducers/SearchReducer';
+import { headerStateReducer } from './reducers/HeaderStateReducer';
 
 // TODO: Add states to the store when needed
 export const store = createStore(
     combineReducers({
-        authentication: AuthenticationReducer,
+        authentication: authenticationReducer,
         localization: persistedLocalizationReducer,
-        search: SearchReducer,
+        search: searchReducer,
+        headerState: headerStateReducer,
         ...createForms({
             headerSearchBar: headerSearchbar
         })

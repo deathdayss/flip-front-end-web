@@ -1,4 +1,4 @@
-export const AuthenticationTypes = {
+export const authenticationTypes = {
     SIGNUP: 'SIGNUP',
     LOGIN: 'LOGIN'
 }
