@@ -33,6 +33,7 @@ export const useLangToChangeWords = (lang) => (dispatch) => {
     } 
     else {
         dispatch(changeLanguage(lang, words))
+        document.documentElement.lang = lang; // change the language of header of the html page
     }
 }
 
