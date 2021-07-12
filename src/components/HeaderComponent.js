@@ -110,7 +110,7 @@ class Header extends Component {
               <Link to='/' className='my-link' onClick={this.handleRankBtn}>
                 <img src='images/header/logo.svg' />
               </Link>
-              <Link id='rank-btn-hide' className='my-link ms-4' onClick={this.handleRankBtn}>
+              <Link id='rank-btn-hide' className='my-link ms-3' onClick={this.handleRankBtn}>
                 <img src='images/header/header_rank_btn.svg' height='28' width='28' />
               </Link>
             </Col>
