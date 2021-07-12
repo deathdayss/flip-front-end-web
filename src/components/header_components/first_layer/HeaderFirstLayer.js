@@ -9,7 +9,7 @@ import { fetchHeaderSearch } from '../../../redux/actions/creators/SearchAction'
 import { toggleLanguage } from '../../../redux/actions/creators/LocalizationAction'
 import { headerRightBtnInfos } from '../../../data/public_related/HeaderRightContentPath'
 import { headerState } from '../../../data/constants/HeaderState'
-import './header-first-layer.scss'
+import './HeaderFirstLayer.scss'
 
 const mapDispatchToProps = dispatch => ({
     toggleLanguage: (lang) => dispatch(toggleLanguage(lang)),
