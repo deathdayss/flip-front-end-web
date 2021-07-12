@@ -38,7 +38,6 @@ class Main extends Component {
     render() {
         return (
             <div>
-
                 <Header />
                 Hello World!
                 <Button outline onClick={this.pressButton}>Submit Comment</Button>

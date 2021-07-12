@@ -22,6 +22,7 @@ import { Link } from 'react-router-dom';
 
 import { fetchHeaderSearch } from '../redux/actions/creators/SearchAction';
 import { toggleLanguage } from '../redux/actions/creators/LocalizationAction'
+import { headerRightContentPath } from '../data/public_related/HeaderRightContentPath';
 import './HeaderComponent.scss'
 
 const mapDispatchToProps = dispatch => ({
@@ -61,59 +62,26 @@ class Header extends Component {
 
 
   render() {
+
     const HeaderRightContent = ({ login }) => {
       if (login) {
-        return (
-          <>
-            <Col >
-              <Link className='my-link'>
-                <img src='images/header/header_upload_btn.svg' />
-              </Link>
-            </Col>
-            <Col>
-              <Link className='my-link'>
-                <img src='images/header/header_file_btn.svg' />
-              </Link>
-            </Col>
-            <Col>
-              <Link className='my-link'>
-                <img src='images/header/header_collection_btn.svg' />
-              </Link>
-            </Col>
-            <Col>
-              <Link className='my-link'>
-                <img src='images/header/header_remind_btn.svg' />
-              </Link>
-            </Col>
-            <Col>
-              <Link className='my-link'>
-                <img src='images/header/header_interaction_btn.svg' />
-              </Link>
-            </Col>
-            <Col>
-              <Link className='my-link'>
-                <img src='images/header/header_avatar_btn.svg' />
-              </Link>
-            </Col>
-          </>
-        )
+        return headerRightContentPath.map(path => {
+          return (
+            <Link key={path} className='my-link me-4'>
+              <img src={path} height='25' width='25' />
+            </Link>
+          )
+        })
       }
       else {
         return (
           <>
-            {/* <Col xs='6' md = {{ size: 5, offset: 4 }} lg={{ size: 2, offset: 8 }} className=''>
-              <button id='header-signup-btn' className='theme-color-0-btn'>
-                {this.props.localization.words.header.signup}
-              </button>
-            </Col> */}
-            <Col sm={{ size: '12', offset: '0' }} >
-              <button id='header-signup-btn' className='theme-color-0-btn me-3'>
+              <button id='header-signup-btn' className='theme-color-0-btn me-md-3'>
                 {this.props.localization.words.header.signup}
               </button>
               <button id='header-login-btn' className='theme-color-0-btn'>
                 {this.props.localization.words.header.login}
               </button>
-            </Col>
           </>
         )
       }
@@ -122,23 +90,13 @@ class Header extends Component {
     return (
       <div id='header-border'>
         <Container fluid >
-          {/* <Container>
-            <Row>
-              <Col xs = '1'>
-                <div>12234123123</div>
-              </Col>
-              <Col xs = '11'>
-                <div>2</div>
-              </Col>
-            </Row>
-          </Container> */}
           <Row id='header-first-line' className='gx-sm-2'>
             <Col xs='auto' md='auto' xl='1' id='logo' className='my-auto'>
               <img src='images/header/logo.svg' />
             </Col>
-            <Col xs='auto'  xl={{ size: '6', offset: '1' }} className='text-end'>
+            <Col xs='1' sm='auto' xl={{ size: '6', offset: '1' }} className='my-auto text-end'>
               <Link to='/' id='rank-btn' className='my-link' onClick={this.handleRankBtn}>
-                <img src='images/header/header_rank_btn.svg' />
+                <img src='images/header/header_rank_btn.svg' height='25' width='25' />
               </Link>
               <Form model='headerSearchBar' onSubmit={this.headerSearch}
                 className='my-auto' id='header-search-bar-form'>
@@ -153,14 +111,15 @@ class Header extends Component {
               </Form>
             </Col>
             <Col xs='auto' xl='4' className='header-user-btn my-auto text-end'>
-              <Container fluid>
-                <Row>
-                  <HeaderRightContent login={false} />
-                </Row>
-              </Container>
+              <HeaderRightContent login={false} />
             </Col>
           </Row>
           {/* TODO: the second lines in the main page */}
+          <Switch>
+            <Route path='/fanmade' />
+            <Route path='/real_word' />
+            <Route path='/traditional' />
+          </Switch>
         </Container>
       </div>
     )

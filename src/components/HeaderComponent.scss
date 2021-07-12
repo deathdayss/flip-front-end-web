@@ -57,8 +57,16 @@
     @include horizontal-padding-same(15px);
     margin-right: 10px;
 }
-@media (max-width: 829px) {
+@media (max-width: 1200px) {
+    #header-search-bar-form input {
+        // display: none;
+        width: 200px;
+    }
+}
+
+@media (max-width: 724px) {
     #header-search-bar-form {
         display: none;
+        // width: 200px;
     }
 }
