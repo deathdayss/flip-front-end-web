@@ -3,8 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import './header-component.scss'
-import HeaderFirstLayer from './HeaderFirstLayer';
-import HeaderSecondLayer from './HeaderSecondLayer';
+import HeaderFirstLayer from './first_layer/HeaderFirstLayer';
+import HeaderSecondLayer from './second_layer/HeaderSecondLayer';
 
 class Header extends Component {
 

@@ -5,10 +5,10 @@ import { Container, Row, Col } from 'reactstrap';
 import { Control, Form } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 
-import { fetchHeaderSearch } from '../../redux/actions/creators/SearchAction';
-import { toggleLanguage } from '../../redux/actions/creators/LocalizationAction'
-import { headerRightBtnInfos } from '../../data/public_related/HeaderRightContentPath';
-import { headerState } from '../../data/constants/HeaderState';
+import { fetchHeaderSearch } from '../../../redux/actions/creators/SearchAction'
+import { toggleLanguage } from '../../../redux/actions/creators/LocalizationAction'
+import { headerRightBtnInfos } from '../../../data/public_related/HeaderRightContentPath'
+import { headerState } from '../../../data/constants/HeaderState'
 import './header-first-layer.scss'
 
 const mapDispatchToProps = dispatch => ({

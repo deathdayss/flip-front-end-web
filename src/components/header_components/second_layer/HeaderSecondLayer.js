@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
 
-import { setState } from '../../redux/actions/creators/HeaderStateAction';
+import { setState } from '../../../redux/actions/creators/HeaderStateAction';
 import './header-second-layer.scss'
 
 const mapDispatchToProps = dispatch => ({
