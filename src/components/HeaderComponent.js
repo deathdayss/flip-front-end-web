@@ -65,6 +65,21 @@ class Header extends Component {
 
     const HeaderRightContent = ({ login }) => {
       if (login) {
+        // const HeaderRightBtns = headerRightContentPath.map(path => {
+        //   return (
+        //     <Link key={path} className='my-link me-4'>
+        //       <img src={path} height='25' width='25' />
+        //     </Link>
+        //   )
+        // })
+        // return (
+        //   <>
+        //     <Link to='/' id='rank-btn-hide' className='my-link me-4' onClick={this.handleRankBtn}>
+        //       <img src='images/header/header_rank_btn.svg' height='25' width='25' />
+        //     </Link>
+        //     {HeaderRightBtns}
+        //   </>
+        // )
         return headerRightContentPath.map(path => {
           return (
             <Link key={path} className='my-link me-4'>
@@ -76,12 +91,12 @@ class Header extends Component {
       else {
         return (
           <>
-              <button id='header-signup-btn' className='theme-color-0-btn me-md-3'>
-                {this.props.localization.words.header.signup}
-              </button>
-              <button id='header-login-btn' className='theme-color-0-btn'>
-                {this.props.localization.words.header.login}
-              </button>
+            <button id='header-signup-btn' className='theme-color-0-btn me-md-3'>
+              {this.props.localization.words.header.signup}
+            </button>
+            <button id='header-login-btn' className='theme-color-0-btn'>
+              {this.props.localization.words.header.login}
+            </button>
           </>
         )
       }
@@ -90,11 +105,14 @@ class Header extends Component {
     return (
       <div id='header-border'>
         <Container fluid >
-          <Row id='header-first-line' className='gx-sm-2'>
-            <Col xs='auto' md='auto' xl='1' id='logo' className='my-auto'>
+          <Row id='header-first-line' >
+            <Col xs='3' md = '2' lg = '1' id='logo' className='my-auto'>
               <img src='images/header/logo.svg' />
+              <Link to='/' id='rank-btn-hide' className='my-link ms-4' onClick={this.handleRankBtn}>
+                <img src='images/header/header_rank_btn.svg' height='25' width='25' />
+              </Link>
             </Col>
-            <Col xs='1' sm='auto' xl={{ size: '6', offset: '1' }} className='my-auto text-end'>
+            <Col xs='auto' md='4' lg='6' xl={{ size: '6', offset: '1' }} className='my-auto text-end'>
               <Link to='/' id='rank-btn' className='my-link' onClick={this.handleRankBtn}>
                 <img src='images/header/header_rank_btn.svg' height='25' width='25' />
               </Link>
@@ -110,8 +128,8 @@ class Header extends Component {
 
               </Form>
             </Col>
-            <Col xs='auto' xl='4' className='header-user-btn my-auto text-end'>
-              <HeaderRightContent login={false} />
+            <Col xs='8' md='6' lg='4' xl='4' className='header-user-btn my-auto text-end'>
+              <HeaderRightContent login={true} />
             </Col>
           </Row>
           {/* TODO: the second lines in the main page */}

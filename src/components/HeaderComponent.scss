@@ -30,6 +30,10 @@
     @include width-height(400px, 33px);
 }
 
+#rank-btn-hide {
+    display: none;
+}
+
 #header-search-bar-form input:focus {
     border-color: $theme-color-0;
     outline:0;
@@ -60,13 +64,21 @@
 @media (max-width: 1200px) {
     #header-search-bar-form input {
         // display: none;
-        width: 200px;
+        width: 250px;
     }
 }
 
-@media (max-width: 724px) {
+@media (max-width: 991px) {
     #header-search-bar-form {
         display: none;
-        // width: 200px;
+        // width: 100px;
+    }
+
+    #rank-btn {
+        display: none;
+    }
+
+    #rank-btn-hide {
+        display: inline-block;
     }
 }
