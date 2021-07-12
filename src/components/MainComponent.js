@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { actions } from 'react-redux-form'
 
 import Test from './TestComponent.js'
-import Header from './HeaderComponent'
+import Header from './HeaderComponents/HeaderComponent'
 import { useLangToChangeWords } from '../redux/actions/creators/LocalizationAction'
 
 const mapStateToProps = state => {

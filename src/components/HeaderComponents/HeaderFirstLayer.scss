@@ -1,10 +1,4 @@
-@import "../scss/common_variables.scss";
-
-#header-border {
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: $default-border-color;
-}
+@import "../../scss/common_variables.scss";
 
 #rank-btn {
     margin-right: 20px;
@@ -61,7 +55,7 @@
     @include horizontal-padding-same(15px);
     margin-right: 10px;
 }
-@media (max-width: 1204px) {
+@media (max-width: 1210px) {
     #header-search-bar-form input {
         width: 250px;
     }
