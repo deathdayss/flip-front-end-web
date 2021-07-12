@@ -133,15 +133,15 @@ class Header extends Component {
             </Row>
           </Container> */}
           <Row id='header-first-line' className='gx-sm-2'>
-            <Col xs='2' sm='2' md='auto' lg='1' xl='1' id='logo' className='my-auto'>
+            <Col xs='auto' md='auto' xl='1' id='logo' className='my-auto'>
               <img src='images/header/logo.svg' />
             </Col>
-            <Col xs={{ size: '2', offset: '0' }} sm={{ size: '2', offset: '0' }} md={{ size: '6', offset: '0' }} lg={{ size: 'auto', offset: '0' }} xl={{ size: '6', offset: '1' }} className='text-end'>
+            <Col xs='auto'  xl={{ size: '6', offset: '1' }} className='text-end'>
               <Link to='/' id='rank-btn' className='my-link' onClick={this.handleRankBtn}>
                 <img src='images/header/header_rank_btn.svg' />
               </Link>
               <Form model='headerSearchBar' onSubmit={this.headerSearch}
-                className='my-auto' id='header-search-bar-form' className="d-none d-md-none d-lg-inline">
+                className='my-auto' id='header-search-bar-form'>
                 <Control.text id='header-search-bar' model=".searchWord"
                   placeholder={this.props.localization.words.header.headerSearchbarHolder}
                 />
@@ -152,7 +152,7 @@ class Header extends Component {
 
               </Form>
             </Col>
-            <Col xs={{ size: '7', offset: '0' }} sm={{ size: '5', offset: '0' }} md={{ size: '5', offset: '0' }} lg={{ size: '5', offset: '0' }} xl={{ size: '4', offset: '0' }} className='header-user-btn my-auto text-end'>
+            <Col xs='auto' xl='4' className='header-user-btn my-auto text-end'>
               <Container fluid>
                 <Row>
                   <HeaderRightContent login={false} />
