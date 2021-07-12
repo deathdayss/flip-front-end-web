@@ -6,6 +6,10 @@
     border-bottom-color: $default-border-color;
 }
 
+#rank-btn {
+    margin-right: 20px;
+}
+
 #header-first-line {
     @include vertical-margin-same(10px);
 }
@@ -15,8 +19,6 @@
 }
 
 #header-search-bar-form input {
-    // display: inline;
-    // display: none;
     position: relative;
     left: 1px;
     top: 3px;
@@ -40,15 +42,18 @@
     border: 1px solid $default-border-color;
     border-top-right-radius: $searchbar-border-radius;
     border-bottom-right-radius: $searchbar-border-radius;
-    @include width-height(33px, 33px)
+    @include width-height(33px, 33px);
+    margin-right: 60px;
 }
 
 #header-signup-btn {
     @include vertical-padding-same(3px);
     @include horizontal-padding-same(15px);
+    margin-right: 20px;
 }
 
 #header-login-btn {
     @include vertical-padding-same(3px);
     @include horizontal-padding-same(15px);
+    margin-right: 10px;
 }

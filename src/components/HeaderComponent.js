@@ -101,12 +101,15 @@ class Header extends Component {
       else {
         return (
           <>
-            <Col xs='6' sm={{ size: '5', offset: 0 }} className=''>
+            {/* <Col xs='6' md = {{ size: 5, offset: 4 }} lg={{ size: 2, offset: 8 }} className=''>
               <button id='header-signup-btn' className='theme-color-0-btn'>
                 {this.props.localization.words.header.signup}
               </button>
-            </Col>
-            <Col xs='6' sm={{ size: '5', offset: 0 }} className=''>
+            </Col> */}
+            <Col sm={{ size: '12', offset: '0' }} >
+              <button id='header-signup-btn' className='theme-color-0-btn me-3'>
+                {this.props.localization.words.header.signup}
+              </button>
               <button id='header-login-btn' className='theme-color-0-btn'>
                 {this.props.localization.words.header.login}
               </button>
@@ -119,18 +122,28 @@ class Header extends Component {
     return (
       <div id='header-border'>
         <Container fluid >
-          <Row id='header-first-line' >
-            <Col xs='1' sm='1' id='logo' className='my-auto'>
+          {/* <Container>
+            <Row>
+              <Col xs = '1'>
+                <div>12234123123</div>
+              </Col>
+              <Col xs = '11'>
+                <div>2</div>
+              </Col>
+            </Row>
+          </Container> */}
+          <Row id='header-first-line' className='gx-sm-2'>
+            <Col xs='2' sm='2' md='auto' lg='1' xl='1' id='logo' className='my-auto'>
               <img src='images/header/logo.svg' />
             </Col>
-            <Col xs='6' sm='6' className='text-end'>
-              <Link to='/' className='my-link' onClick={this.handleRankBtn}>
+            <Col xs={{ size: '2', offset: '0' }} sm={{ size: '2', offset: '0' }} md={{ size: '6', offset: '0' }} lg={{ size: 'auto', offset: '0' }} xl={{ size: '6', offset: '1' }} className='text-end'>
+              <Link to='/' id='rank-btn' className='my-link' onClick={this.handleRankBtn}>
                 <img src='images/header/header_rank_btn.svg' />
               </Link>
               <Form model='headerSearchBar' onSubmit={this.headerSearch}
-                className='my-auto' id='header-search-bar-form'>
-                <Control.text id='header-search-bar' model=".searchWord" className="d-none d-sm-none d-md-inline"
-                placeholder= {this.props.localization.words.header.headerSearchbarHolder}
+                className='my-auto' id='header-search-bar-form' className="d-none d-md-none d-lg-inline">
+                <Control.text id='header-search-bar' model=".searchWord"
+                  placeholder={this.props.localization.words.header.headerSearchbarHolder}
                 />
 
                 <button className='my-btn'>
@@ -139,11 +152,9 @@ class Header extends Component {
 
               </Form>
             </Col>
-            <Col xs={{ size: '5', offset: '0' }} sm={{ size: '5', offset: '0' }} className='header-user-btn my-auto text-end'>
+            <Col xs={{ size: '7', offset: '0' }} sm={{ size: '5', offset: '0' }} md={{ size: '5', offset: '0' }} lg={{ size: '5', offset: '0' }} xl={{ size: '4', offset: '0' }} className='header-user-btn my-auto text-end'>
               <Container fluid>
                 <Row>
-                  {/* {() => <headerRightContent login={true} />}
-                  {() => <abc />} */}
                   <HeaderRightContent login={false} />
                 </Row>
               </Container>
