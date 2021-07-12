@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { fetchHeaderSearch } from '../../redux/actions/creators/SearchAction';
 import { toggleLanguage } from '../../redux/actions/creators/LocalizationAction'
-import { headerRightContentPath } from '../../data/public_related/HeaderRightContentPath';
+import { headerRightBtnInfos } from '../../data/public_related/HeaderRightContentPath';
 import './header-first-layer.scss'
 
 const mapDispatchToProps = dispatch => ({
@@ -49,14 +49,23 @@ class HeaderFirstLayer extends Component {
 
     render() {
 
-        const HeaderRightContent = ({ login, buttonsPaths }) => {
+        const HeaderRightContent = ({ login, btnsInfo }) => {
             if (login) {
-                return buttonsPaths.map(path => {
-                    return (
-                        <Link key={path} className='my-link me-4'>
-                            <img src={path} height='25' width='25' />
-                        </Link>
-                    )
+                return btnsInfo.map((btnInfo, index) => {
+                    if (index != btnsInfo.length - 1) {
+                        return (
+                            <Link key={btnInfo[0]} className={'my-link me-' + btnInfo[2]}>
+                                <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
+                            </Link>
+                        )
+                    }
+                    else {
+                        return (
+                            <Link key={btnInfo[0]} className={'my-link me-lg-4 me-xl-5'}>
+                                <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
+                            </Link>
+                        )
+                    }
                 })
             }
             else {
@@ -98,7 +107,7 @@ class HeaderFirstLayer extends Component {
                     </Form>
                 </Col>
                 <Col xs='8' md='6' lg='4' xl='4' className='header-user-btn my-auto text-end'>
-                    <HeaderRightContent login={true} buttonsPaths={headerRightContentPath} />
+                    <HeaderRightContent login={true} btnsInfo={headerRightBtnInfos} />
                 </Col>
             </Row>
         )
