@@ -106,15 +106,17 @@ class Header extends Component {
       <div id='header-border'>
         <Container fluid >
           <Row id='header-first-line' >
-            <Col xs='3' md = '2' lg = '1' id='logo' className='my-auto'>
-              <img src='images/header/logo.svg' />
-              <Link to='/' id='rank-btn-hide' className='my-link ms-4' onClick={this.handleRankBtn}>
-                <img src='images/header/header_rank_btn.svg' height='25' width='25' />
+            <Col xs='3' md='2' lg='1' id='logo' className='my-auto'>
+              <Link to='/' className='my-link' onClick={this.handleRankBtn}>
+                <img src='images/header/logo.svg' />
+              </Link>
+              <Link id='rank-btn-hide' className='my-link ms-4' onClick={this.handleRankBtn}>
+                <img src='images/header/header_rank_btn.svg' height='28' width='28' />
               </Link>
             </Col>
-            <Col xs='auto' md='4' lg='6' xl={{ size: '6', offset: '1' }} className='my-auto text-end'>
+            <Col xs='auto' md='4' lg='7' xl={{ size: '6', offset: '1' }} className='my-auto text-end'>
               <Link to='/' id='rank-btn' className='my-link' onClick={this.handleRankBtn}>
-                <img src='images/header/header_rank_btn.svg' height='25' width='25' />
+                <img src='images/header/header_rank_btn.svg' height='28' width='28' />
               </Link>
               <Form model='headerSearchBar' onSubmit={this.headerSearch}
                 className='my-auto' id='header-search-bar-form'>

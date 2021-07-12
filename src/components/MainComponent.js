@@ -44,7 +44,7 @@ class Main extends Component {
                 <Switch>
                     {/* <Route exact path */}
                     {/* <Route exact path='/test' component={() => <div>Hi</div>} /> */}
-                    <Route path='/test' component={() => <Header />} />
+                    {/* <Route path='/test' component={() => <Header />} /> */}
                     {/* <Redirect to="/EN" /> */}
                 </Switch>
             </div>
