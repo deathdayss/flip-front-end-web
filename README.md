@@ -26,3 +26,23 @@ The first thing your should do after cloning the repository is to type the comma
 | Component variables in **.js**                | Pascal case. E.g. "HeaderFirstLayer", "Main"               |
 | Other variables and functions in **.js**      | Camel case. E.g. "handleSearch", "handleSubmit",           |
 | id, class and all variables in **.css .scss** | Lowercase + "-", E.g. "header-border", "rank-btn"          |
+
+## Coding Style
+
+1. If the function is only used within the function component or the class component, it should be defined within that component
+
+2. All constant variables should be defined in the `src/data/constants` folder.
+
+3. The import parts of each .js file should be divided into two area by an empty line. One is to import library, the other one is to import our own files.
+
+   E.g
+
+   ```javascript
+   import React, { Component } from 'react';
+   import { connect } from "react-redux";
+   										// division line
+   import { setHeaderState } from '../../../redux/actions/creators/HeaderStateAction';
+   import './SubsectionButtons.scss'
+   ```
+
+   
