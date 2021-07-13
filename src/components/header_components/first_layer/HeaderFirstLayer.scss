@@ -13,6 +13,27 @@
     margin-top: 9px;
 }
 
+#header-signup-btn {
+    height: 34px;
+}
+
+#header-login-btn {
+    color: $theme-color-0;
+    background-color: white;
+    border-radius: $btn-border-radius;
+    height: 33px;
+    border-color: $theme-color-0;
+    border: 1px solid;
+}
+
+#header-login-btn:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+#header-login-btn:active {
+    background-color: rgb(220, 220, 220);
+}
+
 #header-search-bar-form {
     display: inline;
 }
@@ -48,6 +69,7 @@
     @include width-height(33px, 33px);
     margin-right: 70px;
 }
+
 
 #header-signup-btn {
     @include vertical-padding-same(3px);

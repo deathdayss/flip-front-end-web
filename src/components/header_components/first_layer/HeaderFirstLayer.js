@@ -79,7 +79,7 @@ class HeaderFirstLayer extends Component {
                         <button id='header-signup-btn' className='theme-color-0-btn me-md-3'>
                             {this.props.localization.words.header.signup}
                         </button>
-                        <button id='header-login-btn' className='theme-color-0-btn'>
+                        <button id='header-login-btn' className='me-md-5'>
                             {this.props.localization.words.header.login}
                         </button>
                     </>
@@ -112,7 +112,7 @@ class HeaderFirstLayer extends Component {
                     </Form>
                 </Col>
                 <Col xs='8' md='5' lg='4' xl='4' className='header-user-btn my-auto text-end'>
-                    <HeaderRightContent login={true} btnsInfo={headerRightBtnInfos} />
+                    <HeaderRightContent login={false} btnsInfo={headerRightBtnInfos} />
                 </Col>
             </Row>
         )
