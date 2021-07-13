@@ -6,7 +6,7 @@ export const english = {
         headerSearchbarHolder: "Search",
 
         subsection: {
-            fanMade: "Fanmade",
+            fanmade: "Fanmade",
             realWorld: "Real World",
             traditional: "Traditional"
         }

@@ -1,8 +1,16 @@
 @import "../../../scss/Common.scss";
 
 .header-subsection-underline {
-    text-decoration: 4px underline;
+    text-decoration: 3px underline;
     text-decoration-color: $theme-color-0;
-    text-underline-offset: 3px;
+    text-underline-offset: 4px;
+    color: $theme-color-0;
+}
+
+.subsection-link:hover {
+    color: $theme-color-0;
+}
+
+#header-second-line-section {
     margin-bottom: 3px;
 }

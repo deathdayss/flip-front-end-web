@@ -6,7 +6,7 @@ export const chinese = {
         headerSearchbarHolder: "搜索",
 
         subsection: {
-            fanMade: "二创",
+            fanmade: "二创",
             realWorld: "三次元",
             traditional: "传统"
         }

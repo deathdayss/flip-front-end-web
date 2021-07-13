@@ -1,7 +1,12 @@
 @import "./scss/Common.scss";
 
 a.my-link {
+    color: black;
     text-decoration: none;
+}
+
+a.my-link:hover {
+    color: black;
 }
 
 button.theme-color-0-btn {

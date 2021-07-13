@@ -4,8 +4,9 @@ import { Row, Col } from 'reactstrap';
 
 import { setHeaderState } from '../../../redux/actions/creators/HeaderStateAction';
 import { headerState } from '../../../data/constants/HeaderState';
-import {sectionRouteMarks} from '../../../data/constants/SectionRouteMarks'
+import { sectionRouteMarks } from '../../../data/constants/SectionRouteMarks'
 import './SubsectionButtons.scss'
+import { Link } from 'react-router-dom';
 
 const mapDispatchToProps = dispatch => ({
     setHeaderState: (headerState) => dispatch(setHeaderState(headerState))
@@ -30,6 +31,15 @@ const routeSectionParamsToIndex = params => {
     }
 }
 
+const keyToRoute = key => {
+    switch(key) {
+        case 'realWorld':
+            return 'real_world'
+        default:
+            return key
+    }
+}
+
 class SubsectionButtons extends Component {
 
     componentDidMount() {
@@ -38,27 +48,24 @@ class SubsectionButtons extends Component {
 
     render() {
 
-        // const chosenSectionIndex = routeSectionParamsToIndex(this.props.subsection)
+        const chosenSectionIndex = routeSectionParamsToIndex(this.props.subsection)
+        const subsectionWordsObject = this.props.localization.words.header.subsection
+        const SectionButtons = Object.keys(subsectionWordsObject).map((key, index) => {
+            const hasUnderline = chosenSectionIndex === index
 
-        // const subsectionWordsObject = this.props.localization.words.header.subsection
-        // const sectionButtons = Object.keys.(subsectionWordsObject)
-        // const sectionButtons = Object.keys.(subsectionWordsObject).map((key, index) => {
-        //     const hasUnderline = chosenSectionIndex === index
-        //     return (
-        //         <div Key = {key}>
-        //             {word}
-        //         </div>
-        //     )
-        // })
-
-        // for (let key in this.props.localization.words.header.subsection) {
-        //     console.log(key)
-        // }
+            return (
+                <Link to={'/' + keyToRoute(key)} className={'my-link me-2 ms-2'}>
+                    <span className = {'subsection-link ' + (hasUnderline ? 'header-subsection-underline' : '')} >
+                        {subsectionWordsObject[key]}
+                    </span>
+                </Link>
+            )
+        })
 
         return (
             <Row id='header-second-line-section'>
                 <Col className='my-auto text-center'>
-                    {/* {sectionButtons} */}1234
+                    {SectionButtons}
                 </Col>
             </Row>
         )

@@ -22,7 +22,9 @@ export const store = createStore(
             headerSearchBar: headerSearchbar
         })
     }),
-    applyMiddleware(thunk, logger)
+    // If you want to see the logs of dispatch action, uncomment the next line and comment the next next line.
+    // applyMiddleware(thunk, logger)
+    applyMiddleware(thunk)
 );
 
 export const persistor = persistStore(store)
