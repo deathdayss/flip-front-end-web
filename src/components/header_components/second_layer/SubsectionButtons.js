@@ -44,7 +44,7 @@ class SubsectionButtons extends Component {
         const SectionButtons = Object.keys(subsectionWordsObject).map((key, index) => {
             const hasUnderline = chosenSectionIndex === index
             return (
-                <Link to={'/' + sectionRouteMarks[index]} className={'my-link me-2 ms-2'}>
+                <Link Key={key} to={'/' + sectionRouteMarks[index]} className={'my-link me-2 ms-2'}>
                     <span className={'subsection-link ' + (hasUnderline ? 'header-subsection-underline' : '')} >
                         {subsectionWordsObject[key]}
                     </span>

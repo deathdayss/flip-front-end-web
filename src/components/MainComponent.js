@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
-import { actions } from 'react-redux-form'
 
-import Test from './TestComponent.js'
 import Header from './header_components/HeaderComponent'
 import { useLangToChangeWords } from '../redux/actions/creators/LocalizationAction'
+import Homepage from './homepage_components/HomepageComponent'
 
 const mapStateToProps = state => {
     return {
-        formInfo: state.searchBar,
-        localization: state.localization,
+        localization: state.localization
     }
 }
 
@@ -19,12 +16,20 @@ const mapDispatchToProps = dispatch => ({
     useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang))
 })
 
+const Test = ({match}) => {
+    console.log(match)
+    return (
+        <div>
+            12345
+        </div>
+    )
+}
 
 class Main extends Component {
     componentDidMount() {
         // TODO: Check user login state
         this.props.useLangToChangeWords(this.props.localization.lang)
-        
+        console.log(this.props.location)
     }
 
     pressButton = () => {
@@ -35,10 +40,8 @@ class Main extends Component {
         return (
             <div>
                 <Header />
-                Hello World!
-                <Button outline onClick={this.pressButton}>Submit Comment</Button>
                 <Switch>
-                    {/* <Route exact path */}
+                    <Route exact path='/users' component= {Homepage} />
                     {/* <Route exact path='/test' component={() => <div>Hi</div>} /> */}
                     {/* <Route path='/test' component={() => <Header />} /> */}
                     {/* <Redirect to="/EN" /> */}
