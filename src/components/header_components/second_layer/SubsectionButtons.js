@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import { setHeaderState } from '../../../redux/actions/creators/HeaderStateAction';
 import { headerState } from '../../../data/constants/HeaderState';
 import { sectionRouteMarks } from '../../../data/constants/SectionRouteMarks'
-import { Link } from 'react-router-dom';
 import './SubsectionButtons.scss'
-
 
 const mapDispatchToProps = dispatch => ({
     setHeaderState: (headerState) => dispatch(setHeaderState(headerState))
