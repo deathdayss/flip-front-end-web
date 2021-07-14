@@ -39,23 +39,24 @@ class SubsectionButtons extends Component {
 
     render() {
 
-        const chosenSectionIndex = this.routeSectionParamsToIndex(this.props.subsection)
-        const subsectionWordsObject = this.props.localization.words.header.subsection
-        const SectionButtons = Object.keys(subsectionWordsObject).map((key, index) => {
-            const hasUnderline = chosenSectionIndex === index
-            return (
-                <Link Key={key} to={'/' + sectionRouteMarks[index]} className={'my-link me-2 ms-2'}>
-                    <span className={'subsection-link ' + (hasUnderline ? 'header-subsection-underline' : '')} >
-                        {subsectionWordsObject[key]}
-                    </span>
-                </Link>
-            )
-        })
+        const SectionButtons = ({localization, sectionRouteMark}) => {
+            const chosenSectionIndex = this.routeSectionParamsToIndex(sectionRouteMark)
+            const subsectionWordsObject = localization.words.header.subsection
+            return Object.keys(subsectionWordsObject).map((key, index) => {
+                return (
+                    <Link key ={key} to={'/' + sectionRouteMarks[index]} className={'my-link me-2 ms-2'}>
+                        <span className={'subsection-link ' + (chosenSectionIndex === index ? 'header-subsection-underline' : '')} >
+                            {subsectionWordsObject[key]}
+                        </span>
+                    </Link>
+                )
+            })
+        }
 
         return (
             <Row id='header-second-line-section'>
                 <Col className='my-auto text-center'>
-                    {SectionButtons}
+                    <SectionButtons localization = {this.props.localization} sectionRouteMark = {this.props.sectionRouteMark} />
                 </Col>
             </Row>
         )

@@ -16,14 +16,14 @@ const mapDispatchToProps = dispatch => ({
     useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang))
 })
 
-const Test = ({match}) => {
-    console.log(match)
-    return (
-        <div>
-            12345
-        </div>
-    )
-}
+// const Test = ({match}) => {
+//     console.log(match)
+//     return (
+//         <div>
+//             12345
+//         </div>
+//     )
+// }
 
 class Main extends Component {
     componentDidMount() {

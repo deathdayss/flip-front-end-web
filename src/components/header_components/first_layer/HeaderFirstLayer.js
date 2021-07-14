@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Switch, Route, withRouter } from 'react-router-dom';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import { Control, Form } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 
@@ -54,19 +53,20 @@ class HeaderFirstLayer extends Component {
 
     render() {
 
+        //TODO: Change the link here
         const HeaderRightContent = ({ login, btnsInfo }) => {
             if (login) {
                 return btnsInfo.map((btnInfo, index) => {
                     if (index != btnsInfo.length - 1) {
                         return (
-                            <Link key={btnInfo[0]} className={'my-link me-' + btnInfo[2]}>
+                            <Link to = '/TobeChanged' key={btnInfo[0]} className={'my-link me-' + btnInfo[2]}>
                                 <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
                             </Link>
                         )
                     }
                     else {
                         return (
-                            <Link key={btnInfo[0]} className={'my-link me-lg-4 me-xl-5'}>
+                            <Link to = '/TobeChanged' key={btnInfo[0]} className={'my-link me-lg-4 me-xl-5'}>
                                 <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
                             </Link>
                         )
@@ -93,7 +93,8 @@ class HeaderFirstLayer extends Component {
                     <Link to='/' className='my-link' onClick={this.handleRankBtn}>
                         <img src='images/header/logo.svg' />
                     </Link>
-                    <Link id='rank-btn-hide' className='my-link ms-3' onClick={this.handleRankBtn}>
+                    {/* TODO: change Link */}
+                    <Link to='/TobeChanged' id='rank-btn-hide' className='my-link ms-3' onClick={this.handleRankBtn}> 
                         <img src='images/header/header_rank_btn.svg' height='28' width='28' />
                     </Link>
                 </Col>

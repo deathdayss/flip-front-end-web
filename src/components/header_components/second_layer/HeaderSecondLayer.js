@@ -11,13 +11,13 @@ class HeaderSecondLayer extends Component {
 
         const RouteByButtons = () => {
             return sectionRouteMarks.map(sectionRouteMark => 
-                <Route Key={sectionRouteMark} exact path={'/' + sectionRouteMark} component={() => <SubsectionButtons subsection={sectionRouteMark} />} />
+                <Route key={sectionRouteMark} exact path={'/' + sectionRouteMark} component={() => <SubsectionButtons sectionRouteMark={sectionRouteMark} />} />
             )
         }
 
         return (
             <Switch>
-                <Route exact path='/' component={() => <SubsectionButtons subsection='main' />} />
+                <Route exact path='/' component={() => <SubsectionButtons sectionRouteMark='main' />} />
                 <RouteByButtons />
             </Switch>
         )
