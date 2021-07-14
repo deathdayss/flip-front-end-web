@@ -1,0 +1,5 @@
+// buttons
+@mixin  default-btn-setup() {
+    border: none;
+    border-radius: $btn-border-radius;
+}

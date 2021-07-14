@@ -1,4 +1,5 @@
-@import "./scss/Common.scss";
+@import "./scss/Spacing.scss";
+@import './scss/Button.scss';
 
 a.my-link {
     color: black;
@@ -12,8 +13,7 @@ a.my-link:hover {
 button.theme-color-0-btn {
     color: $theme-color-0-btn-text-color;
     background-color: $theme-color-0;
-    border-radius: $btn-border-radius;
-    border: none;
+    @include default-btn-setup();
 
 }
 
