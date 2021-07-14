@@ -1,0 +1,5 @@
+@import "../../scss/Common.scss";
+
+#main-page-container {
+    @include horizontal-padding-same(200px)
+}

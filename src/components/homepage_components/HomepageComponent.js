@@ -1,15 +1,36 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
+import { Col, Container, Row } from 'reactstrap'
+
+import './HomepageComponent.scss'
 
 var qs = require('qs')
 
 class Homepage extends Component {
     componentDidMount() {
-        console.log(qs.stringify(qs.parse(this.props.location.search.substring(1, this.props.location.search.length))))
+
     }
     render() {
         return (
-            <div>Homepage</div>
+            <Container fluid  id='main-page-container'>
+                <Row className=''>
+                    <Col>
+                    1
+                    </Col>
+                    <Col>
+                    2
+                    </Col>
+                    <Col>
+                    3
+                    </Col>
+                    <Col>
+                    4
+                    </Col>
+                    <Col>
+                    5
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }

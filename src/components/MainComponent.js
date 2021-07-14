@@ -16,15 +16,6 @@ const mapDispatchToProps = dispatch => ({
     useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang))
 })
 
-// const Test = ({match}) => {
-//     console.log(match)
-//     return (
-//         <div>
-//             12345
-//         </div>
-//     )
-// }
-
 class Main extends Component {
     componentDidMount() {
         // TODO: Check user login state
@@ -41,7 +32,7 @@ class Main extends Component {
             <div>
                 <Header />
                 <Switch>
-                    <Route exact path='/users' component= {Homepage} />
+                    <Route exact path='/' component= {Homepage} />
                     {/* <Route exact path='/test' component={() => <div>Hi</div>} /> */}
                     {/* <Route path='/test' component={() => <Header />} /> */}
                     {/* <Redirect to="/EN" /> */}
