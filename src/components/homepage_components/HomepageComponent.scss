@@ -1,4 +1,9 @@
-@import "../../scss/Common.scss";
+@import "../../scss/Spacing.scss";
+@import '../../scss/Button.scss';
+
+.rank-time-btn {
+    @include default-btn-setup();
+}
 
 #main-page-container {
     @include horizontal-padding-same(200px)
