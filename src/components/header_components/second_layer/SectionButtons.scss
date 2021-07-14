@@ -1,13 +1,13 @@
 @import "../../../scss/Common.scss";
 
-.header-subsection-underline {
+.header-section-underline {
     text-decoration: 3px underline;
     text-decoration-color: $theme-color-0;
     text-underline-offset: 4px;
     color: $theme-color-0;
 }
 
-.subsection-link:hover {
+.section-link:hover {
     color: $theme-color-0;
 }
 

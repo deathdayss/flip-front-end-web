@@ -5,7 +5,7 @@ export const chinese = {
         all: "全部",
         headerSearchbarHolder: "搜索",
 
-        subsection: {
+        section: {
             fanmade: "二创",
             realWorld: "三次元",
             traditional: "传统"

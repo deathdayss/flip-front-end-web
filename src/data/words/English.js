@@ -5,7 +5,7 @@ export const english = {
         all: "All",
         headerSearchbarHolder: "Search",
 
-        subsection: {
+        section: {
             fanmade: "Fanmade",
             realWorld: "Real World",
             traditional: "Traditional"

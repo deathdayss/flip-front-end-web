@@ -42,7 +42,7 @@ The first thing your should do after cloning the repository is to type the comma
    import { connect } from "react-redux";
    										// division line
    import { setHeaderState } from '../../../redux/actions/creators/HeaderStateAction';
-   import './SubsectionButtons.scss'
+   import './SectionButtons.scss'
    ```
 
    
