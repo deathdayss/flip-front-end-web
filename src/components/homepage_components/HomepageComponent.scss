@@ -8,3 +8,23 @@
 #main-page-container {
     @include horizontal-padding-same(200px)
 }
+
+img.Home-Content-img {
+    max-width: 100%;
+    height: auto;
+}
+
+img.Home-Show-img {
+    max-width: 100%;
+    height: auto;
+}
+
+img.Home-Rank-img {
+    max-width: 100%;
+    height: auto;
+
+}
+
+@mixin name {
+    
+}
