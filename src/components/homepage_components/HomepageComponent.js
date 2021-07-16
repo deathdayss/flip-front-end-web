@@ -38,7 +38,6 @@ class Homepage extends Component {
 
         const rank_width = 366.5 / 2
         const rank_ratio = 9 / 16
-        // const rank_up_padding = '13px'
 
         const RowSmallContent = ({ index }) => {
             const TwoBoxes = []
@@ -56,6 +55,30 @@ class Homepage extends Component {
             )
         }
 
+        const ContentWords = (props) =>
+        (<Box {...props}>
+            <Flex>
+                <Box width={1}>
+                    作品名
+                </Box>
+            </Flex>
+            <Flex>
+                <Box width={1}>
+                    作品名二行
+                </Box>
+            </Flex>
+            <Flex>
+                <Box width={1}>
+                    1000游玩 · 1000赞
+                </Box>
+            </Flex>
+            <Flex>
+                <Box width={1}>
+                    UP主名字
+                </Box>
+            </Flex>
+        </Box>)
+
         const RankContent = () => {
             const BoxesRows = []
             for (let i = 0; i < 5; i++) {
@@ -64,28 +87,7 @@ class Homepage extends Component {
                         <Box width={0.5} >
                             <img src='fake_data/work_cover.jpg' width={rank_width} height={rank_width * rank_ratio} />
                         </Box>
-                        <Box width={0.475} pl={'20px'}>
-                            <Flex>
-                                <Box width={1}>
-                                    作品名
-                                </Box>
-                            </Flex>
-                            <Flex>
-                                <Box width={1}>
-                                    作品名二行
-                                </Box>
-                            </Flex>
-                            <Flex>
-                                <Box width={1}>
-                                    1000游玩 · 1000赞
-                                </Box>
-                            </Flex>
-                            <Flex>
-                                <Box width={1}>
-                                    UP主名字
-                                </Box>
-                            </Flex>
-                        </Box>
+                        <ContentWords width={0.475} pl={'20px'}/>
                     </Flex>
                 )
             }
@@ -103,29 +105,7 @@ class Homepage extends Component {
                     <Box width={1 / 5} >
                         <img src='fake_data/work_cover.jpg' width={small_width} height={small_width * small_ratio} />
                         <Flex className='text-start'>
-                            <Box pl={'10px'}>
-                                <Flex>
-                                    <Box width={1}>
-                                        作品名
-                                    </Box>
-                                </Flex>
-                                <Flex>
-                                    <Box width={1}>
-                                        作品名二行
-                                    </Box>
-                                </Flex>
-                                <Flex>
-                                    <Box width={1}>
-                                        1000游玩 · 1000赞
-                                    </Box>
-                                </Flex>
-                                <Flex>
-                                    <Box width={1}>
-                                        UP主名字
-                                    </Box>
-                                </Flex>
-                            </Box>
-
+                            <ContentWords pl = {'10px'} />
                         </Flex>
 
                     </Box>)
