@@ -49,7 +49,7 @@ class Homepage extends Component {
             for (let i = 0; i < 2; i++) {
                 TwoBoxes.push(
                     <Box key={i} width={[1, 0.5,0.5,0.5, 0.5]} px={responsive_content_padding}>
-                        <img className='Home-Content-img' src='fake_data/work_cover.jpg' width={small_width} height={small_width * small_ratio} />
+                        <img className='Home-Content-img' src='fake_data/work_cover.jpg' />
                     </Box>
                 )
             }
@@ -90,7 +90,7 @@ class Homepage extends Component {
                 BoxesRows.push(
                     <Flex key={i} pt={i === 0 ? '' : up_content_padding} pl={up_left_padding} >
                         <Box width={0.55} >
-                            <img className='Home-Rank-img' src='fake_data/work_cover.jpg' width={rank_width} height={rank_width * rank_ratio} />
+                            <img className='Home-Rank-img' src='fake_data/work_cover.jpg' />
                         </Box>
                         <ContentWords width={0.45} pl={responsive_rank_words_padding} />
                     </Flex>
@@ -108,7 +108,7 @@ class Homepage extends Component {
             for (let j = 0; j < 5; j++) {
                 BoxesColumns.push(
                     <Box width={[1, 1/2, 1/4, 1/5, 1/5]} px={responsive_content_padding}>
-                        <img className='Home-Content-img' src='fake_data/work_cover.jpg' width={small_width} height={small_width * small_ratio} />
+                        <img className='Home-Content-img' src='fake_data/work_cover.jpg' />
                         <Flex className='text-start'>
                             <ContentWords pl={'10px'} />
                         </Flex>
@@ -153,7 +153,7 @@ class Homepage extends Component {
                     <Box width={[1, 1,1,0.5, 0.4]} >
                         <Flex>
                             <Box width={1} px={responsive_show_padding}>
-                                <img className='Home-Show-img' src='fake_data/advertise.png' width={large_width} height={large_width * large_ratio} />
+                                <img className='Home-Show-img' src='fake_data/advertise.png' />
                             </Box>
                         </Flex>
                         <RowSmallContent />
