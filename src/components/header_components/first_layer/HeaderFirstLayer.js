@@ -113,7 +113,7 @@ class HeaderFirstLayer extends Component {
                     </Form>
                 </Col>
                 <Col xs='8' md='5' lg='4' xl='4' className='header-user-btn my-auto text-end'>
-                    <HeaderRightContent login={false} btnsInfo={headerRightBtnInfos} />
+                    <HeaderRightContent login={true} btnsInfo={headerRightBtnInfos} />
                 </Col>
             </Row>
         )
