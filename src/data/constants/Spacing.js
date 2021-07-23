@@ -1,3 +1,9 @@
+/**
+ * @author Zhicheng Wang
+ * @create date 2021-07-23 20:34:12
+ * @modify date 2021-07-23 20:34:12
+ */
+
 export const homepageSpacing = {
     main_margin: '50px',
     main_margin_mobile: '10px',

@@ -1,3 +1,9 @@
+/**
+ * @author Zhicheng Wang
+ * @create date 2021-07-23 20:34:48
+ * @modify date 2021-07-23 20:34:48
+ */
+
 import './App.scss';
 import { Component } from 'react'
 import Main from './components/MainComponent';

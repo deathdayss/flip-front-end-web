@@ -1,3 +1,9 @@
+/**
+ * @author Zhicheng Wang
+ * @create date 2021-07-23 20:34:26
+ * @modify date 2021-07-23 20:34:26
+ */
+
 export const chinese = {
     header: {
         signup: "注册",

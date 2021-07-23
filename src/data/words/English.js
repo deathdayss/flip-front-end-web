@@ -1,3 +1,9 @@
+/**
+ * @author Zhicheng Wang
+ * @create date 2021-07-23 20:34:30
+ * @modify date 2021-07-23 20:34:30
+ */
+
 export const english = {
     header: {
         signup: "Signup",
