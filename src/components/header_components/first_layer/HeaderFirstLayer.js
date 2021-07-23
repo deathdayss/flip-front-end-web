@@ -4,7 +4,6 @@
  * @modify date 2021-07-23 20:38:07
  */
 
-
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Row, Col } from 'reactstrap';
