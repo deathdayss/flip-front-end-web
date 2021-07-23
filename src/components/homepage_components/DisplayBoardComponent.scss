@@ -1,0 +1,18 @@
+@import "../../scss/Spacing.scss";
+@import '../../scss/Button.scss';
+
+.rank-time-btn {
+    @include default-btn-setup();
+}
+
+@media screen and (max-width: '1704px') {
+    #rank-btns-left {
+        display: none;
+    }
+    #more-btn {
+        display: none;
+    }
+    #rank-content {
+        display: none;
+    }
+}

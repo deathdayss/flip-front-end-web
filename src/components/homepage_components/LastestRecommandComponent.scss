@@ -1,0 +1,25 @@
+div.bottom-row-4 {
+    display: none;
+}   
+
+div.bottom-row-2 {
+    display: none;
+}   
+
+@media screen and (max-width: '1200px') {
+    div.bottom-row-5 {
+        display: none;
+    }
+    div.bottom-row-4 {
+        display: flex;
+    }   
+}
+
+@media screen and (max-width: '992px') {
+    div.bottom-row-4 {
+        display: none;
+    }
+    div.bottom-row-2 {
+        display: flex;
+    }   
+}

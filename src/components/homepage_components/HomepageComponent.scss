@@ -1,14 +1,6 @@
 @import "../../scss/Spacing.scss";
 @import '../../scss/Button.scss';
 
-.rank-time-btn {
-    @include default-btn-setup();
-}
-
-#main-page-container {
-    @include horizontal-padding-same(200px)
-}
-
 img.Home-Content-img {
     max-width: 100%;
     height: auto;
@@ -22,44 +14,4 @@ img.Home-Show-img {
 img.Home-Rank-img {
     max-width: 100%;
     height: auto;
-
 }
-
-div.bottom-row-4 {
-    display: none;
-}   
-
-div.bottom-row-2 {
-    display: none;
-}   
-
-@media screen and (max-width: '1704px') {
-    #rank-content {
-        display: none;
-    }
-    #more-btn {
-        display: none;
-    }
-    #rank-btns-left {
-        display: none;
-    }
-}
-
-@media screen and (max-width: '1200px') {
-    div.bottom-row-5 {
-        display: none;
-    }
-    div.bottom-row-4 {
-        display: flex;
-    }   
-}
-
-@media screen and (max-width: '992px') {
-    div.bottom-row-4 {
-        display: none;
-    }
-    div.bottom-row-2 {
-        display: flex;
-    }   
-}
-
