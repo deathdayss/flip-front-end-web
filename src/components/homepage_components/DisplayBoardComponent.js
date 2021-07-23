@@ -23,23 +23,40 @@ class DisplayBoard extends Component {
                     </Flex>} />
         }
 
-        const RankContent = () =>{
+        const RankContent = () => {
             return <ForLoop loopNum={5}
 
-            LoopContent={({index}) => {
-                const first_top_margin = index === 0 ? homepageSpacing.top_margin : homepageSpacing.up_content_padding
-                return (<Flex key={index} pt={[first_top_margin, first_top_margin, index === 0 ? '0px' : homepageSpacing.up_content_padding]} pl={homepageSpacing.up_left_padding} >
-                    <Box width={0.558} >
-                        <img className='Home-Rank-img' src='fake_data/work_cover.jpg' />
-                    </Box>
-                    <this.props.ContentWords styles={{ width: 0.442, pl: homepageSpacing.responsive_rank_words_padding }} words={this.props.words} />
-                </Flex>)
-            }}
+                LoopContent={({ index }) => {
+                    const first_top_margin = index === 0 ? homepageSpacing.top_margin : homepageSpacing.up_content_padding
+                    return (<Flex key={index} pt={[first_top_margin, first_top_margin, index === 0 ? '0px' : homepageSpacing.up_content_padding]} pl={homepageSpacing.up_left_padding} >
+                        <Box width={0.558} >
+                            <img className='Home-Rank-img' src='fake_data/work_cover.jpg' />
+                        </Box>
+                        <this.props.ContentWords styles={{ width: 0.442, pl: homepageSpacing.responsive_rank_words_padding }} words={this.props.words} />
+                    </Flex>)
+                }}
 
-            PackingContent = {({Output}) => 
-            <div id = 'rank-content'>
-                {Output}
-            </div>} />}
+                PackingContent={({ Output }) =>
+                    <div id='rank-content'>
+                        {Output}
+                    </div>} />
+        }
+
+        const Buttons = () => {
+            const Buttons = [<button id='' className='rank-time-btn'>
+                1234
+            </button>,
+            <button id='' className='rank-time-btn'>
+                1234
+            </button>,
+            <button id='' className='rank-time-btn'>
+                1234
+            </button>]
+            return Buttons.map(button =>
+                <Box width={1 / 3} px={3}>
+                    {button}
+                </Box>)
+        }
 
 
         return (
@@ -49,22 +66,7 @@ class DisplayBoard extends Component {
                     </Box>
                     <Box width={0.2}>
                         <Flex>
-                            <Box width={1 / 3} px={3}>
-                                <button id='' className='rank-time-btn'>
-                                    1234
-                                </button>
-                            </Box>
-                            <Box width={1 / 3} px={3}>
-                                <button id='' className='rank-time-btn'>
-                                    1234
-                                </button>
-                            </Box>
-                            <Box width={1 / 3} px={3}>
-                                <button id='' className='rank-time-btn'>
-                                    1234
-                                </button>
-                            </Box>
-
+                            <Buttons />
                         </Flex>
                     </Box>
                 </Flex>
