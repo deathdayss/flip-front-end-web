@@ -22,10 +22,12 @@ The first thing your should do after cloning the repository is to type the comma
 | --------------------------------------------- | ---------------------------------------------------------- |
 | Folder                                        | Lowercase + underline. E.g. "public_related"               |
 | **.js** file                                  | Pascal case. E.g. "MainComponent.js", "HeaderComponent.js" |
-| **.css .scss** file                           | Same as **.js** file                                       |
 | Component variables in **.js**                | Pascal case. E.g. "HeaderFirstLayer", "Main"               |
-| Other variables and functions in **.js**      | Camel case. E.g. "handleSearch", "handleSubmit",           |
+| Function variables in **.js**                 | Camel case. E.g. "handleSearch", "handleSubmit",           |
+| Constant values in **.js**                    | Lowercase + underline. E.g. "main_margin"                  |
+| **.css .scss** file                           | Same as **.js** file                                       |
 | id, class and all variables in **.css .scss** | Lowercase + "-", E.g. "header-border", "rank-btn"          |
+|                                               |                                                            |
 
 ## Coding Style
 
