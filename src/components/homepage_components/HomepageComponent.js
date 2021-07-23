@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import { Col, Container, Row } from 'reactstrap'
 import { Flex, Box } from '@rebass/grid'
 import { ThemeProvider } from 'styled-components'
+import { connect } from "react-redux";
 
-import { ForLoop } from '../helper_components/HelperComponents'
 import DisplayBoard from './DisplayBoardComponent'
 import LastestRecommand from './LastestRecommandComponent'
 import { HomepageTheme } from '../../data/constants/Theme'
-import { homepageSpacing } from '../../data/constants/Spacing'
 import './HomepageComponent.scss'
 
 var qs = require('qs')
+
+const mapStateToProps = state => {
+    return {
+        localization: state.localization,
+    }
+}
 
 class Homepage extends Component {
     componentDidMount() {
@@ -38,12 +41,12 @@ class Homepage extends Component {
         return (
             <>
                 <ThemeProvider theme={HomepageTheme}>
-                    <DisplayBoard ContentWords={ContentWords} />
-                    <LastestRecommand ContentWords={ContentWords} />
+                    <DisplayBoard ContentWords={ContentWords} words = {this.props.localization.words.homepage.contentWords}/>
+                    <LastestRecommand ContentWords={ContentWords} words = {this.props.localization.words.homepage.contentWords}/>
                 </ThemeProvider>
             </>
         )
     }
 }
 
-export default Homepage
+export default connect(mapStateToProps)(Homepage)

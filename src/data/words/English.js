@@ -10,5 +10,14 @@ export const english = {
             realWorld: "Real World",
             traditional: "Traditional"
         }
+    },
+
+    homepage: {
+        contentWords: [
+            "Work Name",
+            "Work Name Line 2",
+            "1000 play · 1000 like",
+            "Uploader's name"
+        ]
     }
 }

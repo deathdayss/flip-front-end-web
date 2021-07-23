@@ -15,7 +15,7 @@ class LastestRecommand extends Component {
                 LoopContent={() => <Box width={1 / colNum} px={homepageSpacing.responsive_content_padding}>
                     <img className='Home-Content-img' src='fake_data/work_cover.jpg' />
                     <Flex className='text-start'>
-                        <this.props.ContentWords styles={{ pl: '2px' }} words={["作品名", "作品名二行", "10000游玩·1000赞", "UP主名字"]} />
+                        <this.props.ContentWords styles={{ pl: '2px' }} words={this.props.words} />
                     </Flex>
                 </Box>}
 

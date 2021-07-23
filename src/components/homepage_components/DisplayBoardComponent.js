@@ -32,7 +32,7 @@ class DisplayBoard extends Component {
                     <Box width={0.558} >
                         <img className='Home-Rank-img' src='fake_data/work_cover.jpg' />
                     </Box>
-                    <this.props.ContentWords styles={{ width: 0.442, pl: homepageSpacing.responsive_rank_words_padding }} words={["作品名", "作品名二行", "10000游玩·1000赞", "UP主名字"]} />
+                    <this.props.ContentWords styles={{ width: 0.442, pl: homepageSpacing.responsive_rank_words_padding }} words={this.props.words} />
                 </Flex>)
             }}
 
@@ -40,6 +40,7 @@ class DisplayBoard extends Component {
             <div id = 'rank-content'>
                 {Output}
             </div>} />}
+
 
         return (
             <>

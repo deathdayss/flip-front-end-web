@@ -10,5 +10,14 @@ export const chinese = {
             realWorld: "三次元",
             traditional: "传统"
         }
+    },
+
+    homepage: {
+        contentWords: [
+            "作品名",
+            "作品名二行",
+            "1000游玩 · 1000赞",
+            "UP主名字"
+        ]
     }
 }
