@@ -1,7 +1,7 @@
 /**
  * @author Zhicheng Wang
  * @create date 2021-07-23 20:33:35
- * @modify date 2021-07-23 20:33:35
+ * @modify date 2021-07-23 22:24:58
  */
 
 import React, { Component } from 'react'
@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 
 import DisplayBoard from './DisplayBoardComponent'
 import LastestRecommand from './LastestRecommandComponent'
-import { HomepageTheme } from '../../data/constants/Theme'
+import { homepageTheme } from '../../data/constants/Theme'
 import './HomepageComponent.scss'
 
 var qs = require('qs')
@@ -46,7 +46,7 @@ class Homepage extends Component {
 
         return (
             <>
-                <ThemeProvider theme={HomepageTheme}>
+                <ThemeProvider theme={homepageTheme}>
                     <DisplayBoard ContentWords={ContentWords} words = {this.props.localization.words.homepage.contentWords}/>
                     <LastestRecommand ContentWords={ContentWords} words = {this.props.localization.words.homepage.contentWords}/>
                 </ThemeProvider>

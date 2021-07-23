@@ -1,15 +1,15 @@
 /**
  * @author Zhicheng Wang
  * @create date 2021-07-23 20:34:16
- * @modify date 2021-07-23 20:34:16
+ * @modify date 2021-07-23 22:24:54
  */
 
-export const HomepageTheme = {
+export const homepageTheme = {
     breakpoints: [
         // '576px',
         // '768px',
         '992px',
         // '1200px',
-        '1808px'
+        '1809px'
     ]
 }
