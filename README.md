@@ -42,7 +42,6 @@ The first thing your should do after cloning the repository is to type the comma
 | Constant values in **.js**                    | Lowercase + underline. E.g. "main_margin"                  |
 | **.css .scss** file                           | Same as **.js** file                                       |
 | id, class and all variables in **.css .scss** | Lowercase + "-", E.g. "header-border", "rank-btn"          |
-|                                               |                                                            |
 
 ## Coding Style
 
