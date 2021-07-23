@@ -18,7 +18,7 @@
 
    
 
-5. **Install Yarn** (Optional): Use the instrauction `yarn add`  instead of `npm i` to install libraries faster 
+5. **Install Yarn** (Optional): Use the instruction `yarn add`  instead of `npm i` to install libraries faster 
 
 ## Set up the Project
 
