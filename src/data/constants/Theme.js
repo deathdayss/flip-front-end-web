@@ -8,7 +8,7 @@ export const homepageTheme = {
     breakpoints: [
         // '576px',
         // '768px',
-        '992px',
+        '993px',
         // '1200px',
         '1809px'
     ]
