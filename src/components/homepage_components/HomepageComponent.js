@@ -8,6 +8,7 @@ import { ForLoop } from '../helper_components/HelperComponents'
 import DisplayBoard from './DisplayBoardComponent'
 import LastestRecommand from './LastestRecommandComponent'
 import { HomepageTheme } from '../../data/constants/Theme'
+import { homepageSpacing } from '../../data/constants/Spacing'
 import './HomepageComponent.scss'
 
 var qs = require('qs')
@@ -17,20 +18,6 @@ class Homepage extends Component {
 
     }
     render() {
-
-        const spacing_params = {
-            main_margin: '50px',
-            main_margin_mobile: '10px',
-            top_margin: '10px',
-            up_left_padding: '5px',
-
-            up_content_padding: '16px',
-            bottom_content_padding: '30px',
-
-            responsive_content_padding: '5px',
-            responsive_show_padding: '5px',
-            responsive_rank_words_padding: '4px'
-        }
 
         const ContentWords = ({ styles, words }) => {
             const Content = []
@@ -51,8 +38,8 @@ class Homepage extends Component {
         return (
             <>
                 <ThemeProvider theme={HomepageTheme}>
-                    <DisplayBoard ContentWords={ContentWords} spacing_params = {spacing_params}/>
-                    <LastestRecommand ContentWords={ContentWords} spacing_params = {spacing_params}/>
+                    <DisplayBoard ContentWords={ContentWords} />
+                    <LastestRecommand ContentWords={ContentWords} />
                 </ThemeProvider>
             </>
         )
