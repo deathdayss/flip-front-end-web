@@ -34,20 +34,22 @@ The first thing your should do after cloning the repository is to type the comma
 | Category                                      | Method                                                     |
 | --------------------------------------------- | ---------------------------------------------------------- |
 | Folder                                        | Lowercase + underline. E.g. "public_related"               |
-| **.js** file                                  | Pascal case. E.g. "MainComponent.js", "HeaderComponent.js" |
-| Component variables in **.js**                | Pascal case. E.g. "HeaderFirstLayer", "Main"               |
-| Function variables in **.js**                 | Camel case. E.g. "handleSearch", "handleSubmit",           |
-| Constant values in **.js**                    | Lowercase + underline. E.g. "main_margin"                  |
-| **.css .scss** file                           | Same as **.js** file                                       |
+| **.js .jsx** file                             | Pascal case. E.g. "MainComponent.js", "HeaderComponent.js" |
+| Component variables in **.jsx**               | Pascal case. E.g. "HeaderFirstLayer", "Main"               |
+| Function variables in **.js .jsx**            | Camel case. E.g. "handleSearch", "handleSubmit",           |
+| Constant values in **.js .jsx**               | Lowercase + underline. E.g. "main_margin"                  |
+| **.css .scss** file                           | Same as **.js .jsx** file                                  |
 | id, class and all variables in **.css .scss** | Lowercase + "-", E.g. "header-border", "rank-btn"          |
 
 ## Coding Style
 
-1. If the function is only used within the function component or the class component, it should be defined within that component
+1. All react components should be put into .jsx files.
 
-2. All constant variables should be defined in the `src/data/constants` folder.
+2. If the function is only used within the function component or the class component, it should be defined within that component
 
-3. The import parts of each .js file should be divided into two area by an empty line. One is to import library, the other one is to import our own files.
+3. All constant variables should be defined in the `src/data/constants` folder.
+
+4. The import parts of each .js file should be divided into two area by an empty line. One is to import library, the other one is to import our own files.
 
    E.g
 
