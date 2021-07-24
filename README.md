@@ -43,7 +43,7 @@ The first thing your should do after cloning the repository is to type the comma
 
 ## Coding Style
 
-1. All react components should be put into .jsx files.
+1. Javascript files which contain React components should be named with .jsx.
 
 2. If the function is only used within the function component or the class component, it should be defined within that component
 
