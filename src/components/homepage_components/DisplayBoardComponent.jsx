@@ -1,13 +1,13 @@
 /**
  * @author Zhicheng Wang
  * @create date 2021-07-23 20:33:26
- * @modify date 2021-07-23 20:33:26
+ * @modify date 2021-07-24 21:15:44
  */
 
 import React, { Component } from 'react'
 import { Flex, Box } from '@rebass/grid'
 
-import { ForLoop } from '../helper_components/HelperComponents'
+import { ForLoop } from '../helper_components/HelperComponents.jsx'
 import { homepageSpacing } from '../../data/constants/Spacing'
 import './DisplayBoardComponent.scss'
 

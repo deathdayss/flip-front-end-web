@@ -1,16 +1,16 @@
 /**
  * @author Zhicheng Wang
  * @create date 2021-07-23 20:33:55
- * @modify date 2021-07-23 20:33:55
+ * @modify date 2021-07-24 21:16:49
  */
 
 import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-import Header from './header_components/HeaderComponent'
+import Header from './header_components/HeaderComponent.jsx'
 import { useLangToChangeWords } from '../redux/actions/creators/LocalizationAction'
-import Homepage from './homepage_components/HomepageComponent'
+import Homepage from './homepage_components/HomepageComponent.jsx'
 
 const mapStateToProps = state => {
     return {
