@@ -7,9 +7,9 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 
-import './HeaderComponent.scss'
 import HeaderFirstLayer from './first_layer/HeaderFirstLayer.jsx';
 import HeaderSecondLayer from './second_layer/HeaderSecondLayer.jsx';
+import './Header.scss'
 
 class Header extends Component {
 

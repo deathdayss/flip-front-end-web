@@ -8,9 +8,9 @@ import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-import Header from './header_components/HeaderComponent.jsx'
+import Header from './header_components/Header.jsx'
+import Homepage from './homepage_components/Homepage.jsx'
 import { useLangToChangeWords } from '../redux/actions/creators/LocalizationAction'
-import Homepage from './homepage_components/HomepageComponent.jsx'
 
 const mapStateToProps = state => {
     return {

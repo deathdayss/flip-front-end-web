@@ -7,9 +7,9 @@
 import React, { Component } from 'react'
 import { Flex, Box } from '@rebass/grid'
 
-import { ForLoop } from '../helper_components/HelperComponents.jsx'
+import { ForLoop } from '../helper_components/Helper.jsx'
 import { homepageSpacing } from '../../data/constants/Spacing'
-import './LastestRecommandComponent.scss'
+import './LastestRecommand.scss'
 
 class LastestRecommand extends Component {
 

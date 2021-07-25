@@ -12,7 +12,7 @@ import { store } from "./redux/configureStore";
 import { PersistGate } from 'redux-persist/integration/react'
 
 import { persistor } from "./redux/configureStore";
-import Main from './components/MainComponent.jsx';
+import Main from './components/Main.jsx';
 
 class App extends Component {
 

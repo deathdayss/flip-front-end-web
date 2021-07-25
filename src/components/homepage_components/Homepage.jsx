@@ -9,10 +9,10 @@ import { Flex, Box } from '@rebass/grid'
 import { ThemeProvider } from 'styled-components'
 import { connect } from "react-redux";
 
-import DisplayBoard from './DisplayBoardComponent.jsx'
-import LastestRecommand from './LastestRecommandComponent.jsx'
+import DisplayBoard from './DisplayBoard.jsx'
+import LastestRecommand from './LastestRecommand.jsx'
 import { homepageTheme } from '../../data/constants/Theme'
-import './HomepageComponent.scss'
+import './Homepage.scss'
 
 var qs = require('qs')
 
