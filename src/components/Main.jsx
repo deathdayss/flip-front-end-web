@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import Header from './header_components/Header.jsx'
 import Homepage from './homepage_components/Homepage.jsx'
 import { useLangToChangeWords } from '../redux/actions/creators/LocalizationAction'
+import DragUpload from './upload_components/DragUpload'
 
 const mapStateToProps = state => {
     return {
@@ -38,6 +39,11 @@ class Main extends Component {
             <div>
                 <Header />
                 <Switch>
+                    
+                    <Route exact path='/upload/file' component={DragUpload}/>       {/* Router for the "game drag and drop" uploading page */}
+                    {/* <Route exact path='/upload/form/:id'/> */}                   {/* Router for the "fill in game info"  uploading page*/}
+                    {/* Notice that the id placehodler here is for after retrieving the unique generated id from backend, two-step-request */}
+
                     <Route exact path='/' component= {Homepage} />
                     {/* <Route exact path='/test' component={() => <div>Hi</div>} /> */}
                     {/* <Route path='/test' component={() => <Header />} /> */}
