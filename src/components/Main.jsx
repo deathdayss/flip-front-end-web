@@ -75,7 +75,7 @@ class Main extends Component {
                 {/* CONTENT */}
                     <Route exact path='/home'  component= {Homepage}/>
                     <Route path='/user'        component= {UserContent}/>
-                    <Route path='/upload/file' component= {DragUpload}/>
+                    <Route path='/upload/file' component= {DragUpload}/>            {/* TODO: Fix the formatting of the upload box */}
                     {/* <Route path='/upload/form' component={UploadForm}/>  TODO: Make a content for the upload form page*/}
             </Layout>
         );
