@@ -1,10 +1,9 @@
 /**
  * @author Zhicheng Wang
  * @create date 2021-07-23 20:34:48
- * @modify date 2021-08-11 18:32:47
+ * @modify date 2021-08-13 11:19:20
  */
 
-import 'antd/dist/antd.css'
 import './App.scss';
 import { Component } from 'react'
 import { BrowserRouter } from 'react-router-dom';
@@ -22,9 +21,11 @@ class App extends Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
-            <div className="App">
+
+            <div className="App">    
               <Main />
             </div>
+
           </BrowserRouter>
         </PersistGate>
       </Provider>
