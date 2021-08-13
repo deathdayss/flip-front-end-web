@@ -13,6 +13,9 @@ import { InboxOutlined } from '@ant-design/icons';
 
 const { Dragger } = Upload;
 
+// TODO: Read the documents and finish the remaiing upload "HTTP-Posting" stuff  
+// https://ant.design/components/upload-cn/
+
 const props = {
   name: 'file',
   multiple: true,
