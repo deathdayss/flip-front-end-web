@@ -1,16 +1,17 @@
 /**
- * @author Zhicheng Wang
+ * @author Zhicheng Wang, Suowei Hu
  * @create date 2021-07-23 20:33:55
- * @modify date 2021-07-24 21:16:49
+ * @modify date 2021-08-13 11:58:17
  */
 
 import React, { Component } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Redirect, Switch, Route, withRouter, Link } from 'react-router-dom';
 import { connect } from "react-redux";
+import { Layout, Menu, Breadcrumb } from 'antd';
 
+import { useLangToChangeWords } from '../redux/actions/creators/LocalizationAction'
 import Header from './header_components/Header.jsx'
 import Homepage from './homepage_components/Homepage.jsx'
-import { useLangToChangeWords } from '../redux/actions/creators/LocalizationAction'
 import DragUpload from './upload_components/DragUpload'
 
 import UserFrame                from './user/index.js'
@@ -20,6 +21,8 @@ import UserWork                 from './user/work/UserWork'
 import UserNotification         from './user/notification/UserNotification'
 import UserSubscription         from './user/subscription/UserSubscription'
 import UserSetting              from './user/setting/UserSetting'
+import UserContent from './user/UserContent';
+import UserHeader from './user/UserHeader';
 
 
 const mapStateToProps = state => {
@@ -39,14 +42,10 @@ class Main extends Component {
         console.log(this.props.location)
     }
 
-    pressButton = () => {
-
-    }
-
     // render() {
     //     return (
     //         <div>
-    //             <Header />
+    //             <Header/>
     //             <Switch>
 
     //                 <Route exact path='/upload/file' component={DragUpload}/>       {/* Router for the "game drag and drop" uploading page */}
@@ -65,19 +64,20 @@ class Main extends Component {
     // Replace the original layout with the AND pre-specified layout
     render() {
         return (
-            // {/* <Route path="/user" component={UserFrame} /> */}
-            // {/* <Route path="/index" component={Temp_Welcome} /> */}
-            // {/* <Route path="/" component={Temp_Welcome} /> */}
-            <UserFrame>
-                <Switch>
-                    <Route exact path='/' component= {Homepage} />
-                    <Route exact path="/user/work" component={UserWork} />
-                    <Route exact path="/user/home" component={UserHome} />
-                    <Route exact path="/user/notification" component={UserNotification} />
-                    <Route exact path="/user/subscription" component={UserSubscription} />
-                    <Route exact path="/user/setting" component={UserSetting} />
-                </Switch>
-            </UserFrame>
+            <Layout className="layout_root">
+                {/* INDEX/HOME */}
+                    <Route exact path="/"> <Redirect to="/home" /> </Route>         {/* TODO: Perform login check (SEE NEXT LINE)*/} 
+                    {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
+                {/* HEADERS */}
+                    <Route path='/home'        component= {Header}/>                {/* TODO: Make a header for the main page */}       
+                    <Route path='/user'        component= {UserHeader}/>
+                    <Route path='/upload'      component= {UserHeader}/>            {/* TODO: Make a header for the  page */}
+                {/* CONTENT */}
+                    <Route exact path='/home'  component= {Homepage}/>
+                    <Route path='/user'        component= {UserContent}/>
+                    <Route path='/upload/file' component= {DragUpload}/>
+                    {/* <Route path='/upload/form' component={UploadForm}/>  TODO: Make a content for the upload form page*/}
+            </Layout>
         );
     }
 }

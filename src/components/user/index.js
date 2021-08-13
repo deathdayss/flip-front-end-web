@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import './index.css'
 import { Route, Link, Switch } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb } from 'antd';
-import Null_Component from './Null_Component';
 import {
     UserOutlined,
     LaptopOutlined,
@@ -11,13 +10,19 @@ import {
     SettingOutlined,
     ProfileOutlined
 } from '@ant-design/icons';
-import UserHome from './home/UserHome';
 
+import Null_Component           from './Null_Component.js'
+import UserHome                 from './home/UserHome.js'
+import UserWork                 from './work/UserWork'
+import UserNotification         from './notification/UserNotification'
+import UserSubscription         from './subscription/UserSubscription'
+import UserSetting              from './setting/UserSetting'
 
 
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
+
 
 class UserFrame extends Component {
     render() {
@@ -28,11 +33,14 @@ class UserFrame extends Component {
             <Layout className="layout_root">
                 <Header className="header">
                     <div className="logo" />
+
+                    
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[]}>
                         <Menu.Item key="1">临时</Menu.Item>
                         <Menu.Item key="2">测试</Menu.Item>
                         <Menu.Item key="3">菜单</Menu.Item>
                     </Menu>
+
                 </Header>
                 <Content style={{ padding: '50px 50px' }}>
                     {/* REMOVED BREAD SCRUMB */}
@@ -82,15 +90,29 @@ class UserFrame extends Component {
                         <Content style={{ padding: '0 24px', minHeight: 280 }}>
 
                             {/* Only display one of the following content */}
-                            {/* <Switch>
-                                <Route path="/user/home" component={UserHome} />
-                                <Route path="/user/work" component={() => { return <Null_Component txt={"work"} /> }} />
-                                <Route path="/user/notification" component={() => { return <Null_Component txt={"notification"} /> }} />
-                                <Route path="/user/subscription" component={() => { return <Null_Component txt={"subscription"} /> }} />
-                                <Route path="/user/setting" component={() => { return <Null_Component txt={"setting"} /> }} />
-                            </Switch> */}
+                            <Switch>
+                                <Route exact path="/user/work"              component={UserWork} />
+                                <Route exact path="/user/home"              component={UserHome} />
+                                <Route exact path="/user/notification"      component={UserNotification} />
+                                <Route exact path="/user/subscription"      component={UserSubscription} />
+                                <Route exact path="/user/setting"           component={UserSetting} />
+                            </Switch>
                             
-                            {this.props.children}
+                            {/* If you choose to put in DOM children instead */}
+                            {/* {this.props.children} */}
+
+                            {/* DOM CHILDREN EXAMPLE */}
+                            {/* <UserFrame>
+                                <Switch>
+                                    <Route exact path='/'                       component={Homepage} />
+                                    <Route exact path="/user/work"              component={UserWork} />
+                                    <Route exact path="/user/home"              component={UserHome} />
+                                    <Route exact path="/user/notification"      component={UserNotification} />
+                                    <Route exact path="/user/subscription"      component={UserSubscription} />
+                                    <Route exact path="/user/setting"           component={UserSetting} />
+                                    <Route exact path='/upload/file'            component={DragUpload}/>           
+                                </Switch>
+                            </UserFrame> */}
 
                         </Content>
                         {/* ========================================================================== */}
