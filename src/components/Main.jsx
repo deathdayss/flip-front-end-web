@@ -66,14 +66,14 @@ class Main extends Component {
         return (
             <Layout className="layout_root">
                 {/* INDEX/HOME */}
-                    <Route exact path="/"> <Redirect to="/home" /> </Route>         {/* TODO: Perform login check (SEE NEXT LINE)*/} 
+                    {/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/} 
                     {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
                 {/* HEADERS */}
-                    <Route path='/home'        component= {Header}/>                {/* TODO: Make a header for the main page */}       
+                    <Route exact path='/'        component= {Header}/>                {/* TODO: Make a header for the main page */}       
                     <Route path='/user'        component= {UserHeader}/>
                     <Route path='/upload'      component= {UserHeader}/>            {/* TODO: Make a header for the  page */}
                 {/* CONTENT */}
-                    <Route exact path='/home'  component= {Homepage}/>
+                    <Route exact path='/'  component= {Homepage}/>
                     <Route path='/user'        component= {UserContent}/>
                     <Route path='/upload/file' component= {DragUpload}/>            {/* TODO: Fix the formatting of the upload box */}
                     {/* <Route path='/upload/form' component={UploadForm}/>  TODO: Make a content for the upload form page*/}
