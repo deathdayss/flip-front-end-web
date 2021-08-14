@@ -21,6 +21,7 @@ import UserWork                 from './user/work/UserWork'
 import UserNotification         from './user/notification/UserNotification'
 import UserSubscription         from './user/subscription/UserSubscription'
 import UserSetting              from './user/setting/UserSetting'
+import Play from './Test_Components/PlayComponent';
 import UserContent from './user/UserContent';
 import UserHeader from './user/UserHeader';
 
@@ -72,6 +73,7 @@ class Main extends Component {
                     <Route path='/home'        component= {Header}/>                {/* TODO: Make a header for the main page */}       
                     <Route path='/user'        component= {UserHeader}/>
                     <Route path='/upload'      component= {UserHeader}/>            {/* TODO: Make a header for the  page */}
+                    <Route path = '/Play' component = {Play} />
                 {/* CONTENT */}
                     <Route exact path='/home'  component= {Homepage}/>
                     <Route path='/user'        component= {UserContent}/>
