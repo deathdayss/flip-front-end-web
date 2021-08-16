@@ -14,13 +14,13 @@ import Header from './header_components/Header.jsx'
 import Homepage from './homepage_components/Homepage.jsx'
 import DragUpload from './upload_components/DragUpload'
 
-import UserFrame                from './user/index.js'
-import Null_Component           from './user/Null_Component.js'
-import UserHome                 from './user/home/UserHome.js'
-import UserWork                 from './user/work/UserWork'
-import UserNotification         from './user/notification/UserNotification'
-import UserSubscription         from './user/subscription/UserSubscription'
-import UserSetting              from './user/setting/UserSetting'
+import UserFrame from './user/index.js'
+import Null_Component from './user/Null_Component.js'
+import UserHome from './user/home/UserHome.js'
+import UserWork from './user/work/UserWork'
+import UserNotification from './user/notification/UserNotification'
+import UserSubscription from './user/subscription/UserSubscription'
+import UserSetting from './user/setting/UserSetting'
 import Play from './Test_Components/PlayComponent';
 import UserContent from './user/UserContent';
 import UserHeader from './user/UserHeader';
@@ -67,18 +67,18 @@ class Main extends Component {
         return (
             <Layout className="layout_root">
                 {/* INDEX/HOME */}
-                    {/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/} 
-                    {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
+                {/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/}
+                {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
                 {/* HEADERS */}
-                    <Route exact path='/'        component= {Header}/>                {/* TODO: Make a header for the main page */}       
-                    <Route path='/user'        component= {UserHeader}/>
-                    <Route path='/upload'      component= {UserHeader}/>            {/* TODO: Make a header for the  page */}
-                    <Route path = '/Play' component = {Play} />
+                <Route exact path='/' component={Header} />                {/* TODO: Make a header for the main page */}
+                <Route path='/user' component={UserHeader} />
+                <Route path='/upload' component={UserHeader} />            {/* TODO: Make a header for the  page */}
+                <Route path='/play' component={Play} />
                 {/* CONTENT */}
-                    <Route exact path='/'  component= {Homepage}/>
-                    <Route path='/user'        component= {UserContent}/>
-                    <Route path='/upload/file' component= {DragUpload}/>            {/* TODO: Fix the formatting of the upload box */}
-                    {/* <Route path='/upload/form' component={UploadForm}/>  TODO: Make a content for the upload form page*/}
+                <Route exact path='/' component={Homepage} />
+                <Route path='/user' component={UserContent} />
+                <Route path='/upload/file' component={DragUpload} />            {/* TODO: Fix the formatting of the upload box */}
+                {/* <Route path='/upload/form' component={UploadForm}/>  TODO: Make a content for the upload form page*/}
             </Layout>
         );
     }

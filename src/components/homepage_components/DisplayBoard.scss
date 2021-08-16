@@ -4,21 +4,32 @@
  * @modify date 2021-07-23 20:33:31
  */
  
-@import "../../scss/Spacing.scss";
-@import '../../scss/Button.scss';
-
-.rank-time-btn {
-    @include default-btn-setup();
-}
-
-@media screen and (max-width: '1808px') {
-    #rank-btns-left {
-        display: none;
-    }
-    #more-btn {
-        display: none;
-    }
-    #rank-content {
-        display: none;
-    }
-}
+ @import "../../scss/Spacing.scss";
+ @import '../../scss/Button.scss';
+ 
+//  body {
+//      font-size: 10px !important;
+//  }
+ 
+//  .section-heading {
+//      font-size: 0.8rem !important;
+//  }
+ 
+ .rank-time-btn {
+     @include default-btn-setup();
+     background-color: #DACEFF; //$theme-color-0
+     // opacity: 0.5;
+ 
+ }
+ 
+ @media screen and (max-width: '1808px') {
+     #rank-btns-left {
+         // display: none;
+     }
+     #more-btn {
+         // display: none;
+     }
+     #rank-content {
+         // display: none;
+     }
+ }
