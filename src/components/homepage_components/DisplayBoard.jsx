@@ -113,7 +113,7 @@ const DisplayBoard = (props) => {
                         <RankContent />
                     </Box>
                     <Flex id='more-btn' >
-                        更多
+                        More
                     </Flex>
                 </Box>
             </Flex>

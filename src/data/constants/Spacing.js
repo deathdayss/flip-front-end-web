@@ -17,3 +17,11 @@ export const homepageSpacing = {
     responsive_show_padding: '5px',
     responsive_rank_words_padding: '4px'
 }
+
+export const gameDisplaySpacing = {
+    main_margin: '100px',
+    main_margin_mobile: '10px',
+    top_margin: '20px',
+    span_margin_left: '8px',
+    recommendation_margin_top: '10px'
+}

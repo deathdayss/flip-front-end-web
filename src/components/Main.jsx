@@ -25,6 +25,7 @@ import Play from './Test_Components/PlayComponent';
 import UserContent from './user/UserContent';
 import UserHeader from './user/UserHeader';
 import Test_Suowei from './Test_Suowei';
+import GameDisplay from './game/GameDisplay';
 
 
 const mapStateToProps = state => {
@@ -68,30 +69,19 @@ class Main extends Component {
         return (
             <Layout className="layout_root">
                 {/* INDEX/HOME */}
-                <Switch>
-                    {/* ======================================================================================================================== */}
-                    <Route path='/devs'>
-                        <Route path='/devs/suowei'>
-                            <Test_Suowei/>
-                        </Route>
-                    </Route>
-                    {/* ======================================================================================================================== */}
-                    <Route path='/'> 
-                        {/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/}
-                        {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
-                        {/* HEADERS */}
-                        <Route exact path='/' component={Header} />             {/* TODO: Make a header for the main page */}
-                        <Route path='/user' component={UserHeader} />
-                        <Route path='/upload' component={UserHeader} />         {/* TODO: Make a header for the  page */}
-                        <Route path='/play' component={Play} />
-                        {/* CONTENT */}
-                        <Route exact path='/' component={Homepage} />
-                        <Route path='/user' component={UserContent} />
-                        <Route path='/upload/file' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}
-                        {/* <Route path='/upload/form' component={UploadForm}/>  TODO: Make a content for the upload form page*/}
-                    </Route>
-                    {/* ======================================================================================================================== */}
-                </Switch>
+                {/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/}
+                {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
+                {/* HEADERS */}
+                <Route path='/' component={Header} />                {/* TODO: Make a header for the main page */}
+                <Route path='/user' component={UserHeader} />
+                <Route path='/upload' component={UserHeader} />            {/* TODO: Make a header for the  page */}
+                <Route path='/play' component={Play} />
+                {/* CONTENT */}
+                <Route exact path='/' component={Homepage} />
+                <Route path='/user' component={UserContent} />
+                <Route path='/gameDisplay' component={GameDisplay} />
+                <Route path='/upload/file' component={DragUpload} />            {/* TODO: Fix the formatting of the upload box */}
+                {/* <Route path='/upload/form' component={UploadForm}/>  TODO: Make a content for the upload form page*/}
             </Layout>
         );
     }
