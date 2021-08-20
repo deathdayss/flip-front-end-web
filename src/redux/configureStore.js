@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createForms, modelReducer, formReducer } from 'react-redux-form';
 import thunk from 'redux-thunk'
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
 import { persistStore } from 'redux-persist'
 
 

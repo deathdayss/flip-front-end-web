@@ -1,7 +1,7 @@
 /**
  * @author Zhicheng Wang
  * @create date 2021-07-23 20:35:11
- * @modify date 2021-08-13 11:18:47
+ * @modify date 2021-08-20 17:13:36
  */
 
 import React from 'react';
@@ -11,7 +11,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.css';
-import 'antd/dist/antd.css'                       //IMPORT ANTD CSS LIB
+import 'antd/dist/antd.css'                       //IMPORT ANTD     CSS LIBRARY
+import 'ant-design-pro/dist/ant-design-pro.css'   //IMPORT ANTD-PRO CSS LIBRARY
 
 ReactDOM.render(
   <React.StrictMode>

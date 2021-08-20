@@ -3,8 +3,9 @@
  * @create date 2021-08-14 15:43:22
  * @modify date 2021-08-14 15:43:22
  */
-import React, { Component } from 'react';
-import { useEffect } from 'react';
+import React from 'react';
+// import React, { Component } from 'react';
+// import { useEffect } from 'react';
 
 const Play = (props) => {
 

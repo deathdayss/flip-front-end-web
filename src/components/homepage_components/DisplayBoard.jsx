@@ -4,7 +4,7 @@
  * @modify date 2021-07-24 21:15:44
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 import { Flex, Box } from '@rebass/grid'
 import { useHistory } from 'react-router-dom';
 import { ForLoop } from '../helper_components/Helper.jsx'
