@@ -1,0 +1,35 @@
+/**
+ * @author Huiying Hu
+ * @create date 2021-08-20 15:06:59
+ * @modify date 2021-08-20 15:06:59
+ */
+
+  
+ @import "../../scss/Spacing.scss";
+ @import "../../scss/Button.scss";
+
+ .title {
+     font-size: 1.5rem;
+     text-align: center;
+ }
+ 
+.header-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    font-size: 10px !important;
+}
+
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 10px !important;
+
+}
+
+.follow-btn {
+    @include default-btn-setup();
+    background-color: $theme-color-0;
+    color: #ffffff;
+}
