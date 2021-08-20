@@ -2,6 +2,19 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './LoginForm.css'
 
+const tailFormItemLayout = {
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0,
+        },
+        sm: {
+            span: 16,
+            offset: 8,
+        },
+    },
+};
+
 const LoginForm = () => {
     const onFinish = (values) => {
         console.log('Success:', values);
@@ -13,7 +26,7 @@ const LoginForm = () => {
 
     return (
         <div className="LoginForm">
-            <h1 className="LoginForm-Title"> 登陆标题字符 </h1>
+            <h1 className="LoginForm-Title"> 注册预置标题栏 </h1>
             <Form
                 name="normal_login"
                 className="login-form"
@@ -22,6 +35,7 @@ const LoginForm = () => {
             >
                 <Form.Item name="username" rules={[{ required: true, message: '用户名不能为空哦' }]}>
                     <Input
+                        label="E-mail"
                         prefix={<UserOutlined className="site-form-item-icon" />}
                         type="email"
                         placeholder="邮箱/用户名"
@@ -39,7 +53,7 @@ const LoginForm = () => {
                         <Checkbox>Remember me</Checkbox>
                     </Form.Item> <a className="login-form-forgot" href=""> Forgot password</a>
                 </Form.Item> */}
-                <Form.Item className="login-button-container">
+                <Form.Item className="login-button-container" {...tailFormItemLayout}>
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button> 

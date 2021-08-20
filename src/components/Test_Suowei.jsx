@@ -6,11 +6,13 @@
  * @desc [description]
  */
 
-import LoginForm from "./login_components/LoginForm";
- 
+import LoginForm  from "./login_components/LoginForm";
+import SignUpForm from "./signup_components/SignUpForm"
+
  const Test_Suowei = () => {
      return (
         <LoginForm/>
+        // <SignUpForm/>
      );
  }
  
