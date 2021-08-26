@@ -25,19 +25,14 @@ import Play from './Test_Components/PlayComponent';
 import UserContent from './user/UserContent';
 import UserHeader from './user/UserHeader';
 import Test_Suowei from './Test_Suowei';
+import Test_Zhicheng from './Test_Zhicheng'
 import GameDisplay from './game/GameDisplay';
+import SignUpForm from './signup_components/SignUpForm.jsx'
+import LoginForm  from './login_components/LoginForm.jsx'
 
 
-const mapStateToProps = state => {
-    return {
-        localization: state.localization
-    }
-}
-
-const mapDispatchToProps = dispatch => ({
-    useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang))
-})
-
+const mapStateToProps = state => {return {localization: state.localization}}
+const mapDispatchToProps = dispatch => ({useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang))})
 class Main extends Component {
     componentDidMount() {
         // TODO: Check user login state
@@ -45,38 +40,17 @@ class Main extends Component {
         console.log(this.props.location)
     }
 
-    // render() {
-    //     return (
-    //         <div>
-    //             <Header/>
-    //             <Switch>
-
-    //                 <Route exact path='/upload/file' component={DragUpload}/>       {/* Router for the "game drag and drop" uploading page */}
-    //                 {/* <Route exact path='/upload/form/:id'/> */}                   {/* Router for the "fill in game info"  uploading page*/}
-    //                 {/* Notice that the id placehodler here is for after retrieving the unique generated id from backend, two-step-request */}
-
-    //                 <Route exact path='/' component= {Homepage} />
-    //                 {/* <Route exact path='/test' component={() => <div>Hi</div>} /> */}
-    //                 {/* <Route path='/test' component={() => <Header />} /> */}
-    //                 {/* <Redirect to="/EN" /> */}
-    //             </Switch>
-    //         </div>
-    //     );
-    // }
-
-    // Replace the original layout with the AND pre-specified layout
     render() {
         return (
             <Layout className="layout_root">
                 {/* INDEX/HOME */}
                 <Switch>
-                    {/* ======================================================================================================================== */}
                     <Route path='/devs'>
-                        <Route path='/devs/suowei'>
-                            <Test_Suowei/>
-                        </Route>
+                        <Route path='/devs/suowei'><Test_Suowei/></Route>
+                        <Route path='/devs/zhichent'><Test_Zhicheng/></Route>
                     </Route>
-                    {/* ======================================================================================================================== */}
+                    <Route path='/login' component={LoginForm}/>
+                    <Route path='/singup' component={SignUpForm}/>
                     <Route path='/'> 
                         {/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/}
                         {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
@@ -91,7 +65,6 @@ class Main extends Component {
                         <Route path='/upload/file' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}
                         {/* <Route path='/upload/form' component={UploadForm}/>  TODO: Make a content for the upload form page*/}
                     </Route>
-                    {/* ======================================================================================================================== */}
                 </Switch>
             </Layout>
         );
