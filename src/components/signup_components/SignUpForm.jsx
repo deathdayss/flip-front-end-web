@@ -1,4 +1,4 @@
-import './SignUpForm.css'
+import './SignUpForm.scss'
 
 import React, { useState } from 'react';
 import { Form, Input, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
@@ -106,6 +106,7 @@ const RegistrationForm = () => {
     return (
         <Form
             {...formItemLayout}
+            className="Flip_SignupForm"
             form={form}
             name="register"
             onFinish={onFinish}
@@ -116,6 +117,7 @@ const RegistrationForm = () => {
             scrollToFirstError
         >
             <Form.Item
+                className="Flip_SignupForm_Item"
                 name="email"
                 label="E-mail"
                 rules={[
@@ -133,6 +135,23 @@ const RegistrationForm = () => {
             </Form.Item>
 
             <Form.Item
+                className="Flip_SignupForm_Item"
+                name="nickname"
+                label="Nickname"
+                tooltip="What do you want others to call you?"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input your nickname!',
+                        whitespace: true,
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+
+            <Form.Item
+                className="Flip_SignupForm_Item"
                 name="password"
                 label="Password"
                 rules={[
@@ -147,6 +166,7 @@ const RegistrationForm = () => {
             </Form.Item>
 
             <Form.Item
+                className="Flip_SignupForm_Item"
                 name="confirm"
                 label="Confirm Password"
                 dependencies={['password']}
@@ -170,20 +190,33 @@ const RegistrationForm = () => {
                 <Input.Password />
             </Form.Item>
 
+           
+
             <Form.Item
-                name="nickname"
-                label="Nickname"
-                tooltip="What do you want others to call you?"
+                className="Flip_SignupForm_Item"
+                name="agreement"
+                valuePropName="checked"
                 rules={[
                     {
-                        required: true,
-                        message: 'Please input your nickname!',
-                        whitespace: true,
+                        validator: (_, value) =>
+                            value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
                     },
                 ]}
+                {...tailFormItemLayout}
             >
-                <Input />
+                <Checkbox>
+                    I have read the <a href="">agreement</a>
+                </Checkbox>
             </Form.Item>
+            <Form.Item {...tailFormItemLayout}>
+                <Button type="primary" htmlType="submit">
+                    Register
+                </Button>
+            </Form.Item>
+
+            
+
+            
 
             {/* <Form.Item
                 name="residence"
@@ -270,27 +303,6 @@ const RegistrationForm = () => {
                     </Col>
                 </Row>
             </Form.Item> */}
-
-            <Form.Item
-                name="agreement"
-                valuePropName="checked"
-                rules={[
-                    {
-                        validator: (_, value) =>
-                            value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-                    },
-                ]}
-                {...tailFormItemLayout}
-            >
-                <Checkbox>
-                    I have read the <a href="">agreement</a>
-                </Checkbox>
-            </Form.Item>
-            <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
-                    Register
-                </Button>
-            </Form.Item>
         </Form>
     );
 };
@@ -299,7 +311,7 @@ const RegistrationForm = () => {
 const SignUpForm = () => {
     return (
         <div className="SignupForm-container">
-            <h1 style={{textAlign:'center'}}>注册预置标题栏</h1>
+            <h1 style={{textAlign:'center'}}>Start your jounery...</h1>
             <RegistrationForm/>
         </div>
     );

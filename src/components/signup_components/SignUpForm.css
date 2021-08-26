@@ -1,8 +1,0 @@
-html, body, #root, .App, .ant-layout, .ant-form{
-    width: 100%;
-    height: 100%;
-}
-.SignupForm-container{
-    /* margin: auto auto; */
-    width: 20%;
-}

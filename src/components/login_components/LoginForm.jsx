@@ -1,6 +1,6 @@
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import './LoginForm.css'
+import './LoginForm.scss'
 
 const tailFormItemLayout = {
     wrapperCol: {
@@ -14,53 +14,92 @@ const tailFormItemLayout = {
         },
     },
 };
+const formItemLayout = {
+    labelCol: {
+        xs: {
+            span: 24,
+        },
+        sm: {
+            span: 8,
+        },
+    },
+    wrapperCol: {
+        xs: {
+            span: 24,
+        },
+        sm: {
+            span: 16,
+        },
+    },
+};
 
 const LoginForm = () => {
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
+    
+    const onFinish = (values) => {console.log('Success:', values);};
+    const onFinishFailed = (errorInfo) => {console.log('Failed:', errorInfo);};
 
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
 
+
+
+
+    // ====================================================================================================
+    // ====================================================================================================
     return (
-        <div className="LoginForm">
-            <h1 className="LoginForm-Title"> 注册预置标题栏 </h1>
+        <div className="LoginForm-container">
+            <h3 className="LoginForm-Title"> Flip, {"<SLOGAN>"} </h3>
+            <br/>
             <Form
+                {...formItemLayout}
                 name="normal_login"
-                className="login-form"
+                className="Flip_LoginForm"
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
+                scrollToFirstError
             >
-                <Form.Item name="username" rules={[{ required: true, message: '用户名不能为空哦' }]}>
-                    <Input
-                        label="E-mail"
-                        prefix={<UserOutlined className="site-form-item-icon" />}
-                        type="email"
-                        placeholder="邮箱/用户名"
-                    />
+                <Form.Item
+                    className="Flip_LoginForm_Item"
+                    name="email"
+                    label="E-mail"
+                    rules={[
+                        {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                        },
+                        {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                        },
+                    ]}
+                >
+                    <Input />
                 </Form.Item>
-                <Form.Item name="password" rules={[{ required: true, message: '也别忘了你的密码' }]}>
-                    <Input
-                        prefix={<LockOutlined className="site-form-item-icon" />}
-                        type="password"
-                        placeholder="密码"
-                    />
+
+                <Form.Item
+                    className="Flip_LoginForm_Item"
+                    name="password"
+                    label="Password"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your password!',
+                        },
+                    ]}
+                    hasFeedback
+                >
+                    <Input.Password />
                 </Form.Item>
-                {/* <Form.Item>
-                    <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox>Remember me</Checkbox>
-                    </Form.Item> <a className="login-form-forgot" href=""> Forgot password</a>
-                </Form.Item> */}
+
                 <Form.Item className="login-button-container" {...tailFormItemLayout}>
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
-                    </Button> 
+                    </Button>
                     {/* Or <a href="">register now!</a> */}
                 </Form.Item>
             </Form>
         </div>
     );
+    // ====================================================================================================
+    // ====================================================================================================
 };
+
 export default LoginForm;

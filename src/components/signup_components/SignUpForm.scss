@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+html, body, #root, .App, .ant-layout, .ant-form{
+    width: 100%;
+    height: 100%;
+    
+    position: relative;
+}
+.SignupForm-container{
+    /* margin: auto auto; */
+    border: 2px solid lightblue;
+    width: 30%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.Flip_SignupForm{
+    border: 2px solid white;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+}
