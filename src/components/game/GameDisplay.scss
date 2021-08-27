@@ -9,7 +9,7 @@
  @import "../../scss/Button.scss";
 
  .title {
-     font-size: 1.5rem;
+     font-size: 1.7rem;
      text-align: center;
  }
  
@@ -25,6 +25,7 @@
     justify-content: flex-end;
     align-items: flex-end;
     font-size: 10px !important;
+    color: $dark-grey;
 
 }
 
@@ -38,4 +39,22 @@
     border-top: 1px solid #CECECE;
     height: 120px;
     border-bottom: 1px solid #CECECE;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px
+}
+
+.unity-container {
+    width: 800px;
+    height: 500px;
+}
+
+.subscribers {
+    color: $dark-grey;
+    min-Width: 100px;
+}
+
+.creator {
+    
+    width: 95px;
 }

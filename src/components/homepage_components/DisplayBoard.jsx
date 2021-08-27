@@ -4,15 +4,18 @@
  * @modify date 2021-07-24 21:15:44
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Flex, Box } from '@rebass/grid'
 import { useHistory } from 'react-router-dom';
 import { ForLoop } from '../helper_components/Helper.jsx'
 import { homepageSpacing } from '../../data/constants/Spacing'
 import './DisplayBoard.scss'
 
+const rankLabels = ["Daily", "Weekly", "Monthly"];
+
 const DisplayBoard = (props) => {
     const { ContentWords, words } = props;
+    const [rank, setRank] = useState("Daily");
 
     const history = useHistory();
 
@@ -50,15 +53,19 @@ const DisplayBoard = (props) => {
     }
 
     const Buttons = () => {
-        const Buttons = [<button id='' className='rank-time-btn'>
-            Daily
-        </button>,
-        <button id='' className='rank-time-btn'>
-            Weekly
-        </button>,
-        <button id='' className='rank-time-btn'>
-            Monthly
-        </button>]
+        // const Buttons = [<button id='' className='rank-time-btn'>
+        //     Daily
+        // </button>,
+        // <button id='' className='rank-time-btn' onClick={}>
+        //     Weekly
+        // </button>,
+        // <button id='' className='rank-time-btn'>
+        //     Monthly
+        // </button>]
+        const Buttons = rankLabels.map(label => <button id='' className='rank-time-btn'
+            onClick={() => setRank(label)} style={{ backgroundColor: (rank == label) ? '#DACEFF' : '#BDBBC5' }}>
+            {label}
+        </button>)
         return Buttons.map(button =>
             <Box width={1 / 3} px={3}>
                 {button}
@@ -112,8 +119,10 @@ const DisplayBoard = (props) => {
                     <Box width={[1, 1, 0.2]} className='text-start' flex='1 1 auto'>
                         <RankContent />
                     </Box>
-                    <Flex id='more-btn' >
-                        More
+                    <Flex id='more-btn' mt={homepageSpacing.top_margin}>
+                        <Box style={{ margin: '10px auto' }}>
+                            <button className='more-btn'>More</button>
+                        </Box>
                     </Flex>
                 </Box>
             </Flex>

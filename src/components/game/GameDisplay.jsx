@@ -12,16 +12,17 @@ import { ForLoop } from '../helper_components/Helper.jsx'
 import { homepageSpacing, gameDisplaySpacing } from '../../data/constants/Spacing'
 import Play from '../Test_Components/PlayComponent.jsx';
 import './GameDisplay.scss'
+import Header from '../header_components/Header.jsx'
 
 const gameDetail = {
-    name: "Uploader's name",
+    creator: "Creator",
     title: "Title title title title title",
     play: "1000 plays",
     date: "2021-08-20 11:46:28",
     subscribers: "4513 subscribers",
     subscribe: "SUBSCRIBE",
-    description: "A doc-style video to summarize early design and gameplay elements that were much more impressive compared to the final product. Infinite went through many revisions over the course of its development, Irrational Games had to scale back a lot of ideas, which was disappointing for a lot of people after the E3 showcases. Everything shown here has been removed or downgraded to the point where it's just not comparable. Self-explanatory quote from Ken Levine: \"we cut enough content to make 5-6 full games\". There's more in the official artbook if you're interrested."
-
+    description: "A doc-style video to summarize early design and gameplay elements that were much more impressive compared to the final product. Infinite went through many revisions over the course of its development, Irrational Games had to scale back a lot of ideas, which was disappointing for a lot of people after the E3 showcases. Everything shown here has been removed or downgraded to the point where it's just not comparable. Self-explanatory quote from Ken Levine: \"we cut enough content to make 5-6 full games\". There's more in the official artbook if you're interrested.",
+    comments: "2342 comments"
 
 
 }
@@ -44,6 +45,7 @@ const GameDisplay = (props) => {
 
     return (
         <>
+            <Header></Header>
             <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]} mt={gameDisplaySpacing.top_margin}>
                 <Box width={0.2}>
                     <Flex className="header-left">
@@ -52,11 +54,11 @@ const GameDisplay = (props) => {
                                 <Avatar src="images/header/header_avatar_btn.svg"></Avatar>
                             </a>
                         </Box>
-                        <Box ml={gameDisplaySpacing.span_margin_left} width="95px">
-                            {gameDetail.name}
+                        <Box ml={gameDisplaySpacing.span_margin_left} className='creator'>
+                            <span style={{ fontSize: '14px' }}>{gameDetail.creator}</span>
                             <button className="follow-btn">{gameDetail.subscribe}</button>
                         </Box>
-                        <Box ml={gameDisplaySpacing.span_margin_left} minWidth="100px">
+                        <Box ml={gameDisplaySpacing.span_margin_left} className='subscribers'>
                             <span>{gameDetail.subscribers}</span>
                         </Box>
                     </Flex>
@@ -68,17 +70,27 @@ const GameDisplay = (props) => {
                 </Box>
             </Flex>
             <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
-                <Play></Play>
-                {/* <img className="Home-Content-img" src="fake_data/work_cover.jpg" /> */}
+                <Box width={1}>
+                    <Play></Play>
+                    {/* <img className="Home-Content-img" src="fake_data/work_cover.jpg" /> */}
+                </Box>
             </Flex>
             <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]} mt={gameDisplaySpacing.recommendation_margin_top}>
                 <Box width={1}>
                     <ForLoop loopNum={1} LoopContent={RecommendContent} />
                 </Box>
             </Flex>
-            <Flex className='description' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]} my={gameDisplaySpacing.recommendation_margin_top}>
-                {gameDetail.description}
+            <Flex className='description' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
+                <Box width={1}>
+                    {gameDetail.description}
+                </Box>
             </Flex>
+            <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
+                <Box width={1}>
+                    {gameDetail.comments}
+                </Box>
+            </Flex>
+
 
         </>)
 }

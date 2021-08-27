@@ -28,16 +28,16 @@ import Test_Suowei from './Test_Suowei';
 import Test_Zhicheng from './Test_Zhicheng'
 import GameDisplay from './game/GameDisplay';
 import SignUpForm from './signup_components/SignUpForm.jsx'
-import LoginForm  from './login_components/LoginForm.jsx'
+import LoginForm from './login_components/LoginForm.jsx'
 
 
-const mapStateToProps = state => {return {localization: state.localization}}
-const mapDispatchToProps = dispatch => ({useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang))})
+const mapStateToProps = state => { return { localization: state.localization } }
+const mapDispatchToProps = dispatch => ({ useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang)) })
 class Main extends Component {
     componentDidMount() {
         // TODO: Check user login state
-        this.props.useLangToChangeWords(this.props.localization.lang)
-        console.log(this.props.location)
+        this.props.useLangToChangeWords('en')
+        console.log(this.props.localization.lang) //zh
     }
 
     render() {
@@ -46,12 +46,12 @@ class Main extends Component {
                 {/* INDEX/HOME */}
                 <Switch>
                     <Route path='/devs'>
-                        <Route path='/devs/suowei'><Test_Suowei/></Route>
-                        <Route path='/devs/zhichent'><Test_Zhicheng/></Route>
+                        <Route path='/devs/suowei'><Test_Suowei /></Route>
+                        <Route path='/devs/zhichent'><Test_Zhicheng /></Route>
                     </Route>
-                    <Route path='/login' component={LoginForm}/>
-                    <Route path='/singup' component={SignUpForm}/>
-                    <Route path='/'> 
+                    <Route path='/login' component={LoginForm} />
+                    <Route path='/singup' component={SignUpForm} />
+                    <Route path='/'>
                         {/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/}
                         {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
                         {/* HEADERS */}
@@ -64,6 +64,7 @@ class Main extends Component {
                         <Route path='/user' component={UserContent} />
                         <Route path='/upload/file' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}
                         {/* <Route path='/upload/form' component={UploadForm}/>  TODO: Make a content for the upload form page*/}
+                        <Route path='/gameDisplay' component={GameDisplay} />
                     </Route>
                 </Switch>
             </Layout>
