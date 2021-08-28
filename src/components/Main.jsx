@@ -49,16 +49,24 @@ class Main extends Component {
                         <Route path='/devs/suowei'><Test_Suowei /></Route>
                         <Route path='/devs/zhichent'><Test_Zhicheng /></Route>
                     </Route>
+<<<<<<< Updated upstream
                     <Route path='/login' component={LoginForm} />
                     <Route path='/singup' component={SignUpForm} />
                     <Route path='/'>
+=======
+                    <Route path='/login' component={LoginForm}/>
+                    <Route path='/signup' component={SignUpForm}/>
+                    <Route path='/'> 
+>>>>>>> Stashed changes
                         {/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/}
                         {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
                         {/* HEADERS */}
-                        <Route exact path='/' component={Header} />             {/* TODO: Make a header for the main page */}
-                        <Route path='/user' component={UserHeader} />
-                        <Route path='/upload' component={UserHeader} />         {/* TODO: Make a header for the  page */}
-                        <Route path='/play' component={Play} />
+                        <Switch>
+                            <Route exact path='/' component={Header} />             {/* TODO: Make a header for the main page */}
+                            <Route path='/user'   component={UserHeader} />
+                            <Route path='/upload' component={UserHeader} />         {/* TODO: Make a header for the  page */}
+                            <Route path='/play'   component={Play} />
+                        </Switch>
                         {/* CONTENT */}
                         <Route exact path='/' component={Homepage} />
                         <Route path='/user' component={UserContent} />
