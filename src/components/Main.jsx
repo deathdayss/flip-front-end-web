@@ -29,9 +29,11 @@ import Test_Zhicheng from './Test_Zhicheng'
 import GameDisplay from './game/GameDisplay';
 import SignUpForm from './signup_components/SignUpForm.jsx'
 import LoginForm from './login_components/LoginForm.jsx'
+import './Main.scss'
 
 
-const mapStateToProps = state => { return { localization: state.localization } }
+
+const mapStateToProps    = state => { return { localization: state.localization } }
 const mapDispatchToProps = dispatch => ({ useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang)) })
 class Main extends Component {
     componentDidMount() {
@@ -42,22 +44,16 @@ class Main extends Component {
 
     render() {
         return (
-            <Layout className="layout_root">
+            <Layout className="layout_root main_page_layout">
                 {/* INDEX/HOME */}
                 <Switch>
                     <Route path='/devs'>
                         <Route path='/devs/suowei'><Test_Suowei /></Route>
                         <Route path='/devs/zhichent'><Test_Zhicheng /></Route>
                     </Route>
-<<<<<<< Updated upstream
-                    <Route path='/login' component={LoginForm} />
-                    <Route path='/singup' component={SignUpForm} />
-                    <Route path='/'>
-=======
-                    <Route path='/login' component={LoginForm}/>
+                    <Route path='/login'  component={LoginForm}/>
                     <Route path='/signup' component={SignUpForm}/>
                     <Route path='/'> 
->>>>>>> Stashed changes
                         {/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/}
                         {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
                         {/* HEADERS */}
