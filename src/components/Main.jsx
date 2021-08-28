@@ -51,8 +51,11 @@ class Main extends Component {
                         <Route path='/devs/suowei'><Test_Suowei /></Route>
                         <Route path='/devs/zhichent'><Test_Zhicheng /></Route>
                     </Route>
+                    
                     <Route path='/login'  component={LoginForm}/>
                     <Route path='/signup' component={SignUpForm}/>
+                    <Route path='/register' component={SignUpForm}/>
+                    
                     <Route path='/'> 
                         {/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/}
                         {/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}

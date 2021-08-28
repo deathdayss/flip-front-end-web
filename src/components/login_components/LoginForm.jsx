@@ -16,7 +16,7 @@ const LoginForm = (props) => {
     // const onFinish = (values) => { console.log('Success:', values); };
     // const onFinishFailed = (errorInfo) => { console.log('Failed:', errorInfo); };
     let history = useHistory();
-    const fail_forward = true;
+    const fail_forward = false;
 
     const [val_email, set_ValEmail] = useState("");
     const [val_passw, set_ValPassw] = useState("");
@@ -24,7 +24,8 @@ const LoginForm = (props) => {
     const handle_passwChange = (e) => { set_ValPassw(e.target.value); }
 
     const handle_loginRequest = (history) => {
-        const url = "http://192.168.1.13:5000/login";
+        // const url = "http://192.168.1.13:5000/login";
+        const url = "http://106.52.167.166:8084/v1/user/login";
         console.log("HTTP request made towards: " + url);
         // 第一个参数是提交的地址
         try {
@@ -34,11 +35,14 @@ const LoginForm = (props) => {
                     password: val_passw
                 },
                 function (data, status) {
-                    console.log(data);
-                    var dataObj = eval("(" + data + ")");//转换为json对象 
-                    if (dataObj.code === 200) {
+                    console.log("DATA  " + data);
+                    console.log("STATUS" + status);
+                    // var dataObj = eval("(" + data + ")");//转换为json对象 
+                    var dataObj = data;
+                    if (dataObj.status === 200) {
                         console.log("LOGIN SUCCESS")
-                        history.push('/');
+                        message.info('Successfully Login', 0.6);
+                        // history.push('/');
                         return;
                     } else {
                         console.log("LOGIN FAILURE")
@@ -47,7 +51,12 @@ const LoginForm = (props) => {
                         return;
                     }
                 }
-            ).fail(function(){message.warn('Connection to server is a failure', 0.6); if(fail_forward){history.push('/')} }); 
+            ).fail(
+                function () {
+                    message.warn('Incorrect username or password ', 0.6); 
+                    if (fail_forward) { history.push('/') }
+                }
+            );
         } catch (e) {
             message.warn('Connection to server is a failure', 0.6);
         }

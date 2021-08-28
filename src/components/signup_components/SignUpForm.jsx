@@ -20,7 +20,7 @@ const RegistrationForm = () => {
     const [autoCompleteResult, setAutoCompleteResult] = useState([]);
     // const onWebsiteChange = (value) => {if (!value) {setAutoCompleteResult([]);} else {setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));}};
     let history = useHistory();
-    const fail_forward = true;
+    const fail_forward = false;
 
     const [val_email, set_ValEmail] = useState("");
     const [val_nickn, set_ValNickn] = useState("");
@@ -32,7 +32,8 @@ const RegistrationForm = () => {
     const handle_p_verChange = (e) => { console.log("set_ValPVeri: " + val_p_ver); set_ValPVeri(e.target.value); }
 
     const handle_signupRequest = (history) => {
-        const url = "http://192.168.1.13:5000/signup";
+        // const url = "http://192.168.1.13:5000/signup";
+        const url = "http://106.52.167.166:8084/v1/user/register"
         console.log("HTTP request made towards: " + url);
         try {
             $.post(url,
@@ -43,18 +44,20 @@ const RegistrationForm = () => {
                 },
                 function (data, status) {
                     console.log(data);
-                    var dataObj = eval("(" + data + ")");//转换为json对象 
-                    if (dataObj.code === 200) {
+                    // var dataObj = eval("(" + data + ")");//转换为json对象 
+                    var dataObj = data;
+                    if (dataObj.status === 200) {
                         console.log("LOGIN SUCCESS")
-                        history.push('/');
+                        // history.push('/');
+                        message.info('Successfully Signup', 0.6);
                         return;
                     } else {
                         console.log("LOGIN FAILURE")
-                        alert(dataObj.msg)
+                        // alert(dataObj.msg)
                         return;
                     }
                 }
-            ).fail(function () { message.warn('Connection to server is a failure', 0.6);  if(fail_forward){history.push('/');} }); 
+            ).fail(function () { message.warn('Incorrect form data', 0.6);  if(fail_forward){history.push('/');} }); 
         } catch (e) {
             message.warn('Connection to server is a failure', 0.6);
         }
