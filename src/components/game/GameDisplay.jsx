@@ -23,9 +23,20 @@ const gameDetail = {
     subscribe: "SUBSCRIBE",
     description: "A doc-style video to summarize early design and gameplay elements that were much more impressive compared to the final product. Infinite went through many revisions over the course of its development, Irrational Games had to scale back a lot of ideas, which was disappointing for a lot of people after the E3 showcases. Everything shown here has been removed or downgraded to the point where it's just not comparable. Self-explanatory quote from Ken Levine: \"we cut enough content to make 5-6 full games\". There's more in the official artbook if you're interrested.",
     comments: "2342 comments"
-
-
 }
+
+const btnInfos =
+    [['images/header/like.svg', 25, '4']
+        , ['images/header/header_collection_btn.svg', 25, '4']
+        , ['images/header/forward.svg', 25, '4']
+    ]
+
+const Buttons = () => (btnInfos.map((btnInfo, index) =>
+    <Box width={80}>
+        <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
+        <span>123</span>
+    </Box>
+))
 
 const GameDisplay = (props) => {
 
@@ -80,10 +91,12 @@ const GameDisplay = (props) => {
                     <ForLoop loopNum={1} LoopContent={RecommendContent} />
                 </Box>
             </Flex>
+
+            <Flex className="buttons" mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
+                <Buttons></Buttons>
+            </Flex>
             <Flex className='description' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
-                <Box width={1}>
-                    {gameDetail.description}
-                </Box>
+                {gameDetail.description}
             </Flex>
             <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
                 <Box width={1}>
