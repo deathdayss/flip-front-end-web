@@ -20,10 +20,10 @@ export const english = {
 
     homepage: {
         contentWords: [
-            "Work Name",
-            "Work Name Line 2",
+            "Title title title title title",
+            "second line",
             "1000 play · 1000 like",
-            "Uploader's name"
+            "Creator"
         ]
     }
 }

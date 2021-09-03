@@ -81,7 +81,7 @@ const GameDisplay = (props) => {
                 </Box>
             </Flex>
             <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
-                <Box width={1}>
+                <Box width={1} className="game-frame">
                     <Play></Play>
                     {/* <img className="Home-Content-img" src="fake_data/work_cover.jpg" /> */}
                 </Box>

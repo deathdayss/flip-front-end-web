@@ -74,7 +74,7 @@ const DisplayBoard = (props) => {
 
 
     const enterGame = () => {
-        history.push('/play')
+        history.push('/gameDisplay')
     }
 
     return (

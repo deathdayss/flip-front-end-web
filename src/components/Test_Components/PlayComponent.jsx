@@ -23,9 +23,9 @@ const Play = (props) => {
                 WebGL builds are not supported on mobile devices.
             </div>
             <div id="unity-footer">
-                <div id="unity-webgl-logo"></div>
+                {/* <div id="unity-webgl-logo"></div> */}
                 <div id="unity-fullscreen-button"></div>
-                <div id="unity-build-title">XiaochuanJ_Bird_Project</div>
+                {/* <div id="unity-build-title">XiaochuanJ_Bird_Project</div> */}
             </div>
         </div>
     )
