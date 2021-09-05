@@ -10,6 +10,7 @@ import React from 'react'
 
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
+import './DragUpload.scss'
 
 const { Dragger } = Upload;
 
@@ -39,7 +40,7 @@ const props = {
 
 function DragUpload() {
   return (
-    <div>
+    <div className="uploader-container">
       <Dragger {...props}>
         <p className="ant-upload-drag-icon">
           <InboxOutlined />

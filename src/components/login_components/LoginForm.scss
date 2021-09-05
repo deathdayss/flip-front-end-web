@@ -21,7 +21,6 @@ p {background-color: yellow;} */
 html, body, #root, .App, .ant-layout, .ant-form{
     width: 100%;
     height: 100%;
-    
     position: relative;
 }
 .LoginForm-container{
@@ -33,8 +32,6 @@ html, body, #root, .App, .ant-layout, .ant-form{
     top: 50%;
     transform: translate(-50%, -50%);
 }
-
-
 .Flip_LoginForm{
     border: 2px solid lightcoral;
     display: flex;
