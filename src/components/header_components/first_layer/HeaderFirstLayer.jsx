@@ -4,6 +4,7 @@
  * @modify date 2021-07-24 21:14:19
  */
 
+import { Popover, Button } from 'antd';
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Row, Col } from 'reactstrap';
@@ -43,21 +44,13 @@ const mapStateToProps = state => {
 
 class HeaderFirstLayer extends Component {
 
-    handleRankBtn = () => {
-        
-    }
-
+    handleRankBtn = () => { }
     // TODO: press the search button
-    headerSearch = value => {
-        this.props.toggleLanguage(this.props.localization.lang)
-        
-    }
-
-    componentDidMount() {
-        
-    }
+    headerSearch = value => { this.props.toggleLanguage(this.props.localization.lang) }
+    componentDidMount() { }
 
     render() {
+
 
         //TODO: Change the link here
         const HeaderRightContent = ({ login, btnsInfo }) => {
@@ -65,16 +58,35 @@ class HeaderFirstLayer extends Component {
                 return btnsInfo.map((btnInfo, index) => {
                     if (index != btnsInfo.length - 1) {
                         return (
-                            <Link to = '/TobeChanged' key={btnInfo[0]} className={'my-link me-' + btnInfo[2]}>
+                            <Link to='/TobeChanged1' key={btnInfo[0]} className={'my-link me-' + btnInfo[2]}>
                                 <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
                             </Link>
                         )
                     }
                     else {
                         return (
-                            <Link to = '/TobeChanged' key={btnInfo[0]} className={'my-link me-lg-4 me-xl-5'}>
+                            // <Link to='/TobeChanged2' key={btnInfo[0]} className={'my-link me-lg-4 me-xl-5'}>
+                            <Popover
+                                title={
+                                    ""
+                                }
+                                content={
+                                    <ul style={{textAlign:'left', padding: 0, margin: 0}}>
+                                        <li><a href="/login">Login</a></li>
+                                        <li><a href="/signup">Sign-up</a></li>
+                                        {/* <Button type="primary"> Login  </Button> <br></br> */}
+                                        {/* <Button type="primary"> Sign-up </Button> */}
+                                    </ul>
+                                }
+                                key={btnInfo[0]}
+                                className={'my-link me-lg-4 me-xl-5'}
+                                trigger='hover'
+                                placement="leftTop"
+                            >
+                                {/* <Button type="primary"> 123</Button> */}
                                 <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
-                            </Link>
+                            </Popover>
+                            // </Link>
                         )
                     }
                 })
@@ -94,13 +106,13 @@ class HeaderFirstLayer extends Component {
         }
 
         return (
-            <Row id= {this.props.headerState.headerState === headerState.NORMAL ? 'header-first-line' : 'header-first-line-have-second'} >
+            <Row id={this.props.headerState.headerState === headerState.NORMAL ? 'header-first-line' : 'header-first-line-have-second'} >
                 <Col xs='3' md='2' lg='1' id='logo' className='my-auto'>
                     <Link to='/' className='my-link' onClick={this.handleRankBtn}>
                         <img src='images/header/logo.svg' />
                     </Link>
                     {/* TODO: change Link */}
-                    <Link to='/TobeChanged' id='rank-btn-hide' className='my-link ms-3' onClick={this.handleRankBtn}> 
+                    <Link to='/TobeChanged3' id='rank-btn-hide' className='my-link ms-3' onClick={this.handleRankBtn}>
                         <img src='images/header/header_rank_btn.svg' height='28' width='28' />
                     </Link>
                 </Col>

@@ -3,7 +3,6 @@
  * @create date 2021-08-20 11:46:28
  * @modify date 2021-08-20 11:46:28
  */
-
 import React, { Component } from 'react'
 import { Avatar } from 'antd';
 import { Flex, Box } from '@rebass/grid'
@@ -61,8 +60,10 @@ const GameDisplay = (props) => {
                 <Box width={0.2}>
                     <Flex className="header-left">
                         <Box>
-                            <a>
+                            <a href="">
+                                
                                 <Avatar src="images/header/header_avatar_btn.svg"></Avatar>
+                                
                             </a>
                         </Box>
                         <Box ml={gameDisplaySpacing.span_margin_left} className='creator'>

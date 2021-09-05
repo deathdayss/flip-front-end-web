@@ -32,8 +32,8 @@ const RegistrationForm = () => {
     const handle_p_verChange = (e) => { console.log("set_ValPVeri: " + val_p_ver); set_ValPVeri(e.target.value); }
 
     const handle_signupRequest = (history) => {
-        // const url = "http://192.168.1.13:5000/signup";
-        const url = "http://106.52.167.166:8084/v1/user/register"
+        const url = "http://192.168.1.9:5000/signup";
+        // const url = "http://106.52.167.166:8084/v1/user/register"
         console.log("HTTP request made towards: " + url);
         try {
             $.post(url,
@@ -48,8 +48,8 @@ const RegistrationForm = () => {
                     var dataObj = data;
                     if (dataObj.status === 200) {
                         console.log("LOGIN SUCCESS")
-                        // history.push('/');
-                        message.info('Successfully Signup', 0.6);
+                        message.info('Successfully Signup', 2.0);
+                        setTimeout(function(){history.push('/');}, 2000)
                         return;
                     } else {
                         console.log("LOGIN FAILURE")
@@ -57,7 +57,7 @@ const RegistrationForm = () => {
                         return;
                     }
                 }
-            ).fail(function () { message.warn('Incorrect form data', 0.6);  if(fail_forward){history.push('/');} }); 
+            ).fail(function () { message.warn('Incorrect registration form data', 0.6);  if(fail_forward){history.push('/');} }); 
         } catch (e) {
             message.warn('Connection to server is a failure', 0.6);
         }

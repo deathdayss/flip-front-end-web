@@ -32,7 +32,6 @@ import LoginForm from './login_components/LoginForm.jsx'
 import './Main.scss'
 
 
-
 const mapStateToProps    = state => { return { localization: state.localization } }
 const mapDispatchToProps = dispatch => ({ useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang)) })
 class Main extends Component {
@@ -44,7 +43,7 @@ class Main extends Component {
 
     render() {
         return (
-            <Layout className="layout_root main_page_layout">
+            <Layout className="layout_root main_page_layout" style={{backgroundColor: 'white'}}>
                 {/* INDEX/HOME */}
                 <Switch>
                     <Route path='/devs'>
@@ -52,8 +51,8 @@ class Main extends Component {
                         <Route path='/devs/zhichent'><Test_Zhicheng /></Route>
                     </Route>
                     
-                    <Route path='/login'  component={LoginForm}/>
-                    <Route path='/signup' component={SignUpForm}/>
+                    <Route path='/login'    component={LoginForm}/>
+                    <Route path='/signup'   component={SignUpForm}/>
                     <Route path='/register' component={SignUpForm}/>
                     
                     <Route path='/'> 

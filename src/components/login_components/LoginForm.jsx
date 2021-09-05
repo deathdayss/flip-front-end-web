@@ -24,8 +24,8 @@ const LoginForm = (props) => {
     const handle_passwChange = (e) => { set_ValPassw(e.target.value); }
 
     const handle_loginRequest = (history) => {
-        // const url = "http://192.168.1.13:5000/login";
-        const url = "http://106.52.167.166:8084/v1/user/login";
+        const url = "http://192.168.1.9:5000/login";
+        // const url = "http://106.52.167.166:8084/v1/user/login";
         console.log("HTTP request made towards: " + url);
         // 第一个参数是提交的地址
         try {
@@ -41,7 +41,8 @@ const LoginForm = (props) => {
                     var dataObj = data;
                     if (dataObj.status === 200) {
                         console.log("LOGIN SUCCESS")
-                        message.info('Successfully Login', 0.6);
+                        message.info('Successfully Login', 2.0);
+                        setTimeout(function(){history.push('/');message.info('Welcome '+dataObj.nickname + ' !', 2.0);}, 2000)
                         // history.push('/');
                         return;
                     } else {
