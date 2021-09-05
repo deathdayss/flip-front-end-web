@@ -2,22 +2,31 @@ import React from 'react'
 import "./UploadForm.scss"
 import { Form, Input, Select, Row, Col, Checkbox, Button } from 'antd'
 import UserHeader from '../user/UserHeader';
-
+import { useState } from 'react';
 const { Option } = Select;
 
 const UploadForm = () => {
+
+    // ==============================================================
+
     const [form] = Form.useForm();
     const submitGameInfo = (values) => {
         console.log("Form submitted");
     }
     const formItemLayout = {
-        labelCol: { xs: { span: 24, }, sm: { span: 8, }, },
+        labelCol:   { xs: { span: 24, }, sm: { span: 8, }, },
         wrapperCol: { xs: { span: 24, }, sm: { span: 16, }, },
     };
-
+    
+    const [title,    updateTitle]    = useState("");
+    const [category, updateCategory] = useState("");
+    const [folder,   updateFolder]   = useState("1");
+    
+    
+    // ==============================================================
+    
     return (
         <div>
-
             <UserHeader />
             <div
                 className="upload-container"
@@ -39,18 +48,20 @@ const UploadForm = () => {
                             <Form.Item
                                 label="Game Title"
                             >
-                                <Input></Input>
+                                <Input value={title} onChange={ (e)=>{ updateTitle(e.target.value); console.log("Title changed", e.target.value); }}></Input>
                             </Form.Item>
                             <Form.Item
                                 label="File Name"
                             >
-                                <Input></Input>
+                                <Input value={folder} onChange={ (e)=>{ updateFolder(e.target.value); console.log("Folder changed", e.target.value); }}></Input>
                             </Form.Item>
                             <Form.Item
                                 label="Category"
                             >
                                 <Select
                                     defaultValue="1"
+                                    value={category}
+                                    onChange={(e)=>{updateCategory(e);console.log("Category changed:", e);}}
                                 >
                                     <Option value="1">TYPE-1 PLACEHOLDER</Option>
                                     <Option value="2">TYPE-2 PLACEHOLDER</Option>
@@ -63,7 +74,11 @@ const UploadForm = () => {
                             <div
                                 className="ant-form-item"
                                 style={{ height: 144, textAlign: 'center', lineHeight: 10 }}
-                            >THUBMNAIL</div>
+                            >
+                                <div style={{padding:10, border: "2px dashed grey"}}>
+                                    THUBMNAIL
+                                </div>
+                            </div>
                         </div>
                         <div className="sub-upload-container-comment">
                             <div style={{height:40}}></div>
