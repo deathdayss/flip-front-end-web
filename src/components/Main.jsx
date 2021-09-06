@@ -12,7 +12,9 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import { useLangToChangeWords } from '../redux/actions/creators/LocalizationAction'
 import Header from './header_components/Header.jsx'
 import Homepage from './homepage_components/Homepage.jsx'
-import DragUpload from './upload_components/DragUpload'
+import DragUpload from './upload_components/DragUpload.jsx'
+import UploadForm from './upload_components/UploadForm1.jsx'
+
 
 // import UserFrame from './user/index.js'
 // import Null_Component from './user/Null_Component.js'
@@ -62,14 +64,14 @@ class Main extends Component {
                         <Switch>
                             <Route exact path='/' component={Header} />             {/* TODO: Make a header for the main page */}
                             <Route path='/user'   component={UserHeader} />
-                            <Route path='/upload' component={UserHeader} />         {/* TODO: Make a header for the  page */}
+                            <Route path='/upload' component={Header} />         {/* TODO: Make a header for the  page */}
                             <Route path='/play'   component={Play} />
                         </Switch>
                         {/* CONTENT */}
                         <Route exact path='/' component={Homepage} />
                         <Route path='/user' component={UserContent} />
-                        <Route path='/upload/file' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}
-                        {/* <Route path='/upload/form' component={UploadForm}/>  TODO: Make a content for the upload form page*/}
+                        <Route path='/upload_work' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}
+                        <Route path='/upload_form' component={UploadForm}/> {/* TODO: Make a content for the upload form page*/}
                         <Route path='/gameDisplay' component={GameDisplay} />
                     </Route>
                 </Switch>
