@@ -142,7 +142,6 @@ function getBase64(file) {
 //  }
  
  
-
  
  class UploadForm1 extends Component {
      render() {
