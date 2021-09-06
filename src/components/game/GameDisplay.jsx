@@ -3,7 +3,8 @@
  * @create date 2021-08-20 11:46:28
  * @modify date 2021-08-20 11:46:28
  */
-import React, { Component } from 'react'
+
+import React, { Component, useEffect } from 'react'
 import { Avatar } from 'antd';
 import { Flex, Box } from '@rebass/grid'
 import { useHistory } from 'react-router-dom';
@@ -12,6 +13,9 @@ import { homepageSpacing, gameDisplaySpacing } from '../../data/constants/Spacin
 import Play from '../Test_Components/PlayComponent.jsx';
 import './GameDisplay.scss'
 import Header from '../header_components/Header.jsx'
+import request from 'umi-request';
+
+const API_RANK = "http://106.52.167.166:8084/v1/rank/zone"
 
 const gameDetail = {
     creator: "Creator",
@@ -39,6 +43,21 @@ const Buttons = () => (btnInfos.map((btnInfo, index) =>
 
 const GameDisplay = (props) => {
 
+    // useEffect(() => {
+    //     const getRanking = async () => {
+    //         const result = await getRankingService({
+    //             zone: "test",
+    //             num: 2,
+    //         });
+    //         console.log(result);
+    //     }
+    //     getRanking();
+    // })
+
+    const getRankingService = (params) => {
+        return request(`${API_RANK}`, { params });
+    }
+
     const RecommendContent = ({ index }) => {
         return <ForLoop index={index} loopNum={7}
 
@@ -61,9 +80,9 @@ const GameDisplay = (props) => {
                     <Flex className="header-left">
                         <Box>
                             <a href="">
-                                
+
                                 <Avatar src="images/header/header_avatar_btn.svg"></Avatar>
-                                
+
                             </a>
                         </Box>
                         <Box ml={gameDisplaySpacing.span_margin_left} className='creator'>
