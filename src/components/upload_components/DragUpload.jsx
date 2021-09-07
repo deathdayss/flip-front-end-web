@@ -22,6 +22,9 @@
  const props = {
    className: 'uploader',
    name: 'file',
+   style: {
+     backgroundColor: '#fff'
+   },
    multiple: false,
    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
    onChange(info) {
@@ -44,7 +47,10 @@
   position: 'absolute',
   top: '50%',
   left: '50%',
-  margin: '-336px 0 0 -519px',height: '672px',width: '1038px'
+  margin: '-336px 0 0 -519px',
+  boxSizing: 'inner-box',
+  height: '672px',
+  width: '1038px',
  }
  
  
@@ -56,13 +62,10 @@
          <div style={style}>
          <Dragger {...props} directory>
            <p className="ant-upload-drag-icon">
-             <UploadOutlined />
+            <img src='images/content/UploadSimple.svg' height='90' width='90' />
            </p>
            <p className="ant-upload-text">Click or drag WebGL folder to this area to upload</p>
-           <p className="ant-upload-hint">
-             Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-             band files
-           </p>
+        
          </Dragger>
          </div>
        </div>
