@@ -15,9 +15,9 @@ import "./UploadForm1.scss";
 import { Layout, Input, Form, Select, Modal, Button, Upload } from 'antd';
 
 import { PlusOutlined } from '@ant-design/icons';
-import TextArea from 'antd/lib/input/TextArea';
+
+const { TextArea } = Input;
 const { Option } = Select;
-const { Footer, Sider, Content } = Layout;
 
 const formItemLayout = {
     labelCol: {
@@ -45,7 +45,7 @@ const beforeUpload = ({ fileList }) => {
 
 
 const handleUploadRequest = (values) => {
-    console.log("Form submitted");
+    console.log("Form submitted", values);
 }
 
 //Miniature display
@@ -91,7 +91,7 @@ class PicturesWall extends Component {
             </div>
         );
         return (
-            <div style={{ float: 'left', marginRight: '264px' }}>
+            <div style={{ float: 'left', marginRight: '26px' }}>
                 <Upload
                     listType="picture-card"
                     fileList={fileList}
@@ -99,7 +99,7 @@ class PicturesWall extends Component {
                     onChange={this.handleChange}
                     beforeUpload={beforeUpload}
                 >
-                    {fileList.length > 1 ? null : uploadButton}
+                    {fileList.length >= 1 ? null : uploadButton}
                 </Upload>
                 <Modal
                     visible={previewVisible}
@@ -107,7 +107,6 @@ class PicturesWall extends Component {
                     footer={null}
                     onCancel={this.handleCancel}
                 >
-                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
                 </Modal>
             </div>
         );
@@ -144,9 +143,9 @@ class PicturesWall extends Component {
 //      }
 //  }
 
+
 const style = {
     position: 'relative',
-    border: '1px solid',
     height: '919px',
     width: '928px',
     margin: '43px 495px 55px 497px',
@@ -163,21 +162,26 @@ class UploadForm1 extends Component {
                 <div style={style}>
                     <Form
                         name="validate_other"
+                        id="upload_form"
                         onFinish={handleUploadRequest}
-                        initialValues={{
-                            'input-number': 3,
-                            'checkbox-group': ['A', 'B'],
-                            rate: 3.5,
-                        }}
                     >
                         <Form.Item
+                            name="file_name"
                             wrapperCol={
                                 { span: 1, }
                             }
+                            rules={
+                                [
+                                    {
+                                        required: true,
+                                        message: 'Please input the file name',
+                                    },
+                                ]
+                            }
                         >
                             <div className='item'>
-                                <label for='fileName' style={{ fontSize: '20px', fontFamily: 'Arial' }}>File</label>
-                                <Input id='fileName' suffix={<span style={{ color: '#9E9E9E' }}>x</span>} type='text' placeholder='File Name' required='required' style={{ borderTop: '0px', borderLeft: '0px', borderRight: '0px', borderBottom: '#C4C4C4 3px solid', width: '422px' }} />
+                                <label htmlFor='fileName' style={{ fontSize: '20px', fontFamily: 'Arial' }}>File</label>
+                                <Input id='fileName' allowClear type='text' placeholder='File Name' style={{ marginTop: '10px', borderTop: '0px', borderLeft: '0px', borderRight: '0px', borderBottom: '#C4C4C4 3px solid', width: '422px' }} />
                             </div>
                         </Form.Item>
 
@@ -188,13 +192,22 @@ class UploadForm1 extends Component {
                             extra=""
                         >
                             <div className='item'>
-                                <label for='covers' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Cover Picture</label>
-                                <div id='covers'>
-                                    <PicturesWall style={{ float: 'left', }} />
+                                <label htmlFor='covers' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Cover Picture</label>
+                                <div className='covers'>
+                                    <div className='cover'>
+                                        <PicturesWall style={{ float: 'left', }} />
+                                        <div style={{ width: '185px', height: '128px', float: 'left' }}>
+                                            <p>xxxxxx</p>
+                                        </div>
+                                    </div>
+                                    <div className='cover'>
+                                        <PicturesWall style={{ float: 'left', }} />
+                                        <div style={{ width: '185px', height: '128px', float: 'left' }}>
+                                            <p>xxxxxx</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id='covers'>
-                                    <PicturesWall style={{ float: 'left', }} />
-                                </div>
+
                             </div>
                         </Form.Item>
 
@@ -208,15 +221,15 @@ class UploadForm1 extends Component {
                             ]}
                         >
                             <div className='item'>
-                                <label for='game_title' className='title' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Title</label>
-                                <Input id='game_title' placeholder="100/100" />
+                                <label htmlFor='game_title' className='title' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Title</label>
+                                <Input id='game_title' showCount maxLength={100} style={{ border: '1px solid #ABABAB', borderRadius: '5px', height: '42px', width: '925px', boxSizing: 'border-box', marginTop: '16px' }} />
                             </div>
 
                         </Form.Item>
 
                         <Form.Item
                             name="select"
-                            hasFeedback
+
                             rules={[
                                 {
                                     required: true,
@@ -229,12 +242,17 @@ class UploadForm1 extends Component {
                             }}
                         >
                             <div className='item'>
-                                <label for='category' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Category</label>
-                                <Select id='category' placeholder="Please select a section">
-                                    <Option value="renew">二创</Option>
-                                    <Option value="3d">三次元</Option>
-                                    <Option value="classic">传统</Option>
-                                </Select>
+                                <label htmlFor='category' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Category</label>
+                                <select form='upload_form' id='category' placeholder="Please select a section" style={{ width: '136px', height: '42px', boxSizing: 'border-box', border: '#ABABAB 1px solid', borderRadius: '3px', marginTop: '16px' }}>
+                                    <option value="renew">Renew</option>
+                                    <option value="3D">3D</option>
+                                    <option value="classic">Classic</option>
+                                </select>
+                                {/* <Select id='category' placeholder="Please select a section" style={{ width: '136px', height: '42px' }}>
+                                    <Option value="renew">Renew</Option>
+                                    <Option value="3D">3D</Option>
+                                    <Option value="classic">Classic</Option>
+                                </Select> */}
                             </div>
 
                         </Form.Item>
@@ -242,16 +260,10 @@ class UploadForm1 extends Component {
 
                         <Form.Item
                             name="description"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input the title',
-                                },
-                            ]}
                         >
                             <div className='item'>
-                                <label for='description' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Description</label>
-                                <TextArea id='description' maxlength='100' placeholder="100/100" cols='30' rows='8'></TextArea>
+                                <label htmlFor='description' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Description</label>
+                                <textarea id='description' form='upload_form' style={{ width: '925px', height: '255px', boxSizing: 'border-box', border: '1px solid #ABABAB', borderRadius: '8px', marginTop: '16px', padding: '8px' }}></textarea>
                             </div>
 
 
@@ -263,7 +275,7 @@ class UploadForm1 extends Component {
                         <Form.Item
 
                         >
-                            <Button type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit" style={{ backgroundColor: '#5B28FF', width: '98px', height: '37px', border: '0px' }}>
                                 Submit
                             </Button>
                         </Form.Item>
