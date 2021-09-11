@@ -4,7 +4,7 @@
  * @modify date 2021-07-24 21:14:19
  */
 
-import { Popover, Button } from 'antd';
+import { Popover, Button, Input} from 'antd';
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Row, Col } from 'reactstrap';
@@ -16,6 +16,7 @@ import { toggleLanguage } from '../../../redux/actions/creators/LocalizationActi
 import { headerRightBtnInfos } from '../../../data/public_related/HeaderRightContentPath'
 import { headerState } from '../../../data/constants/HeaderState'
 import './HeaderFirstLayer.scss'
+import LoginForm from '../../login_components/LoginForm';
 
 const mapDispatchToProps = dispatch => ({
     toggleLanguage: (lang) => dispatch(toggleLanguage(lang)),
@@ -72,10 +73,13 @@ class HeaderFirstLayer extends Component {
                                 }
                                 content={
                                     <ul style={{textAlign:'left', padding: 0, margin: 0}}>
-                                        <li><a href="/login">Login</a></li>
-                                        <li><a href="/signup">Sign-up</a></li>
-                                        {/* <Button type="primary"> Login  </Button> <br></br> */}
-                                        {/* <Button type="primary"> Sign-up </Button> */}
+                                        {/* <li><a href="/login">Login</a></li> */}
+                                        {/* <li><a href="/signup">Sign-up</a></li> */}
+                                        <h3> Welcome </h3>
+                                        Account:  <Input/> <br/>
+                                        Password: <Input/>
+                                        <li><a href="/signup">if you don't have an account</a></li> <br />
+                                        <Button> Login </Button>
                                     </ul>
                                 }
                                 key={btnInfo[0]}

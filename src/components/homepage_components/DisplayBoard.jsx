@@ -108,13 +108,15 @@ const DisplayBoard = (props) => {
 
             LoopContent={({ index }) => {
                 const first_top_margin = index === 0 ? homepageSpacing.top_margin : homepageSpacing.up_content_padding
-                return (<Flex key={index} pt={[first_top_margin, first_top_margin, index === 0 ? '0px' : homepageSpacing.up_content_padding]} pl={homepageSpacing.up_left_padding} >
-                    <Box width={0.5} >
-                        <img className='Home-Rank-img' src={imgUrl} />
-                        {/* <Image className='Home-Rank-img' src={imgUrl} /> */}
-                    </Box>
-                    <RankWords styles={{ width: 0.5, pl: homepageSpacing.responsive_rank_words_padding, fontSize: "12px !important" }} words={rankList} />
-                </Flex>)
+                return (
+                    <Flex key={index} pt={[first_top_margin, first_top_margin, index === 0 ? '0px' : homepageSpacing.up_content_padding]} pl={homepageSpacing.up_left_padding} >
+                        <Box width={0.5} >
+                            <img className='Home-Rank-img' src={imgUrl} />
+                            {/* <Image className='Home-Rank-img' src={imgUrl} /> */}
+                        </Box>
+                        <RankWords styles={{ width: 0.5, pl: homepageSpacing.responsive_rank_words_padding, fontSize: "12px !important" }} words={rankList} />
+                    </Flex>
+                )
             }}
 
             PackingContent={({ Output }) =>
