@@ -35,7 +35,7 @@ const DisplayBoard = (props) => {
                 zone: "test",
                 num: 5,
             });
-            console.log(result.List);
+            // console.log(result.List);
             setRankList(result.List);
         }
 
@@ -67,7 +67,7 @@ const DisplayBoard = (props) => {
 
     const RankWords = ({ styles, words = defaultWords }) => {
         const Content = []
-        console.log(words)
+        // console.log(words)
 
         Content.push(
             <>
