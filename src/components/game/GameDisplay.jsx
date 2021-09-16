@@ -10,6 +10,8 @@ import { Flex, Box } from '@rebass/grid'
 import { useHistory } from 'react-router-dom';
 import { ForLoop } from '../helper_components/Helper.jsx'
 import { homepageSpacing, gameDisplaySpacing } from '../../data/constants/Spacing'
+import { Popover, Button, Input } from 'antd';
+import { message } from 'antd';
 import Play from '../Test_Components/PlayComponent.jsx';
 import './GameDisplay.scss'
 import Header from '../header_components/Header.jsx'
@@ -29,9 +31,10 @@ const gameDetail = {
 }
 
 const btnInfos =
-    [['images/header/like.svg', 25, '4']
-        , ['images/header/header_collection_btn.svg', 25, '4']
-        , ['images/header/forward.svg', 25, '4']
+    [
+        ['images/header/like.svg', 25, '4', 'button_like'],
+        ['images/header/header_collection_btn.svg', 25, '4', 'button_fav'],
+        ['images/header/forward.svg', 25, '4', 'button_share']
     ]
 
 const Buttons = () => (btnInfos.map((btnInfo, index) =>
@@ -40,6 +43,46 @@ const Buttons = () => (btnInfos.map((btnInfo, index) =>
         <span>123</span>
     </Box>
 ))
+
+const Buttons_NEW = () => (
+    btnInfos.map(
+        (btnInfo, index) => {
+            if (btnInfo[3] == 'button_share') {
+                const pop_title = "Pass on the passion to your fiends!"
+                const game_link = window.location.href;
+                const handle_copyLink = (e) => {
+                    navigator.clipboard.writeText(game_link);
+                    // message.info("Game link [" + game_link + "] has been copied to your clipboard")
+                    message.info("Game link has been copied to your clipboard")
+                }
+                const content   = (
+                    <div style={{display:"flex"}}>
+                        <Input  placeholder={game_link}/> 
+                        <Button onClick={handle_copyLink}> Copy-Link </Button>
+                    </div>
+                )
+                return (
+                    <Box width={80} type="primary">
+                        <Popover content={content} title={pop_title}>
+                            <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
+                        </Popover>
+                        <span>123</span>
+                    </Box>
+                )
+
+            } else {
+                return (
+                    <Box width={80} type="primary">
+                        <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
+                        <span>123</span>
+                    </Box>
+                )
+            }
+        }
+
+    )
+)
+
 
 const GameDisplay = (props) => {
 
@@ -113,7 +156,8 @@ const GameDisplay = (props) => {
             </Flex>
 
             <Flex className="buttons" mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
-                <Buttons></Buttons>
+                {/* <Buttons></Buttons> */}
+                <Buttons_NEW></Buttons_NEW>
             </Flex>
             <Flex className='description' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
                 {gameDetail.description}
