@@ -17,7 +17,7 @@ import './GameDisplay.scss'
 import Header from '../header_components/Header.jsx'
 import request from 'umi-request';
 
-const API_RANK = "http://106.52.167.166:8084/v1/rank/zone"
+const API_PRODUCT = "http://106.52.167.166:8084/v1/get/product"
 
 const gameDetail = {
     creator: "Creator",
@@ -86,19 +86,18 @@ const Buttons_NEW = () => (
 
 const GameDisplay = (props) => {
 
-    // useEffect(() => {
-    //     const getRanking = async () => {
-    //         const result = await getRankingService({
-    //             zone: "test",
-    //             num: 2,
-    //         });
-    //         console.log(result);
-    //     }
-    //     getRanking();
-    // })
+    useEffect(() => {
+        const getProductInfo = async () => {
+            const result = await getProductInfoService({
+                pid: 123456
+            });
+            console.log(result);
+        }
+        getProductInfo();
+    })
 
-    const getRankingService = (params) => {
-        return request(`${API_RANK}`, { params });
+    const getProductInfoService = (params) => {
+        return request(`${API_PRODUCT}`, { params });
     }
 
     const RecommendContent = ({ index }) => {
