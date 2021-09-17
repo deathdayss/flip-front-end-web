@@ -199,8 +199,8 @@ const GameDisplay = (props) => {
             </Flex>
 
             <Flex className="buttons" mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
-                <Buttons></Buttons>
-                {/* <Buttons_NEW></Buttons_NEW> */}
+                {/* <Buttons></Buttons> */}
+                <Buttons_NEW></Buttons_NEW>
             </Flex>
             <Flex className='description' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
                 {gameDetail.description}
