@@ -26,7 +26,7 @@
      backgroundColor: '#fff'
    },
    multiple: false,
-   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+   action: 'https://68f8d248-d179-4ceb-9469-79555efa3395.mock.pstmn.io',
    onChange(info) {
      const { status } = info.file;
      if (status !== 'uploading') {
@@ -60,7 +60,7 @@
        <div>
          <Header />
          <div style={style}>
-         <Dragger {...props} directory>
+         <Dragger {...props}>
            <p className="ant-upload-drag-icon">
             <img src='images/content/UploadSimple.svg' height='90' width='90' />
            </p>
