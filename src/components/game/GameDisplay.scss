@@ -38,7 +38,7 @@
 
 .description {
     border-top: 1px solid #CECECE;
-    height: 120px;
+    // height: 120px;
     border-bottom: 1px solid #CECECE;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -67,4 +67,9 @@
 
 .game-frame {
     background-color: #000000;
+}
+
+.like-icon {
+    margin-right: 5px;
+    font-size: 28px;
 }

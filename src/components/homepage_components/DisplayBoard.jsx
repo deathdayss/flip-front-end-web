@@ -5,7 +5,7 @@
  */
 
 import React, { useState, useEffect } from 'react'
-import { Image } from 'antd'
+import { Image, Carousel } from 'antd'
 import { Flex, Box } from '@rebass/grid'
 import { useHistory } from 'react-router-dom';
 import { ForLoop } from '../helper_components/Helper.jsx'
@@ -22,11 +22,12 @@ const API_IMG = `${DOMAIN}/v1/download/img`
 const rankLabels = ["Daily", "Weekly", "Monthly"];
 
 const DisplayBoard = (props) => {
-    const { ContentWords, words } = props;
-    const [rank, setRank] = useState("Daily");
-    const [rankList, setRankList] = useState([]);
-    const [imgUrl, setImgUrl] = useState("");
-    const history = useHistory();
+    const { ContentWords, } = props
+    const defaultWords = props.words
+    const [rank, setRank] = useState("Daily")
+    const [rankList, setRankList] = useState([])
+    const [imgUrl, setImgUrl] = useState("")
+    const history = useHistory()
 
     useEffect(() => {
         const getRank = async () => {
@@ -34,21 +35,12 @@ const DisplayBoard = (props) => {
                 zone: "test",
                 num: 5,
             });
-            console.log(result.List);
-            setRankList(result.List[0]);
+            // console.log(result.List);
+            setRankList(result.List);
         }
 
         getRank();
-
-        const getImg = async () => {
-            const result = await getImgService({
-                img_name: "1.jpg"
-            });
-            console.log(result);
-
-        }
         setImgUrl(`${API_IMG}?img_name=1.jpg`);
-        // getImg();
     }, [])
 
     const getRankService = (params) => {
@@ -64,7 +56,7 @@ const DisplayBoard = (props) => {
 
             LoopContent={() =>
                 <Box width={0.5} px={homepageSpacing.responsive_content_padding}>
-                    <img className='Home-Content-img' src='fake_data/work_cover.jpg' />
+                    <img className='Home-Content-img' src='fake_data/work_cover.jpg' onClick={enterGame} />
                 </Box>}
 
             PackingContent={({ Output }) =>
@@ -73,9 +65,9 @@ const DisplayBoard = (props) => {
                 </Flex>} />
     }
 
-    const RankWords = ({ styles, words }) => {
+    const RankWords = ({ styles, words = defaultWords }) => {
         const Content = []
-        // const { author, commentNum, }
+        // console.log(words)
 
         Content.push(
             <>
@@ -110,10 +102,10 @@ const DisplayBoard = (props) => {
                 const first_top_margin = index === 0 ? homepageSpacing.top_margin : homepageSpacing.up_content_padding
                 return (<Flex key={index} pt={[first_top_margin, first_top_margin, index === 0 ? '0px' : homepageSpacing.up_content_padding]} pl={homepageSpacing.up_left_padding} >
                     <Box width={0.5} >
-                        <img className='Home-Rank-img' src={imgUrl} />
+                        <img className='Home-Rank-img' src={`${API_IMG}?img_name=${rankList[index]?.img}`} />
                         {/* <Image className='Home-Rank-img' src={imgUrl} /> */}
                     </Box>
-                    <RankWords styles={{ width: 0.5, pl: homepageSpacing.responsive_rank_words_padding, fontSize: "12px !important" }} words={rankList} />
+                    <RankWords styles={{ width: 0.5, pl: homepageSpacing.responsive_rank_words_padding, fontSize: "12px !important" }} words={rankList[index]} />
                 </Flex>)
             }}
 
@@ -134,6 +126,18 @@ const DisplayBoard = (props) => {
             </Box>)
     }
 
+    const contentStyle = {
+        height: '300px',
+        color: '#fff',
+        lineHeight: '160px',
+        textAlign: 'center',
+        background: '#364d79',
+    };
+
+    const onChange = (a, b, c) => {
+        console.log(a, b, c);
+    }
+
 
     const enterGame = () => {
         history.push('/gameDisplay')
@@ -150,7 +154,20 @@ const DisplayBoard = (props) => {
                         <Box width={[1, 0.5, 0.4]} >
                             <Flex>
                                 <Box width={1} px={homepageSpacing.responsive_show_padding}>
-                                    <img className='Home-Show-img' src='fake_data/advertise.png' onClick={enterGame} />
+                                    <Carousel afterChange={onChange}>
+                                        <div>
+                                            <img className='Home-Show-img' src={imgUrl} />
+                                        </div>
+                                        <div>
+                                            <img className='Home-Show-img' src='fake_data/advertise.png' />
+                                        </div>
+                                        <div>
+                                            <img className='Home-Show-img' src={imgUrl} />
+                                        </div>
+                                        <div>
+                                            <img className='Home-Show-img' src={imgUrl} />
+                                        </div>
+                                    </Carousel>
                                 </Box>
                             </Flex>
                             <TopHalfSmallContent />
