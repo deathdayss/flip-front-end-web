@@ -16,6 +16,9 @@ import { Layout, Input, Form, Select, Modal, Button, Upload } from 'antd';
 
 import { PlusOutlined } from '@ant-design/icons';
 
+import { message } from 'antd';
+import request from 'umi-request';
+
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -30,8 +33,8 @@ const formItemLayout = {
 
 const normFile = (e) => {
     console.log('Upload event:', e);
-    const formData = new FormData();
-    formData.append('file', e);
+    // const formData = new FormData();
+    // formData.append('file', e);
     if (Array.isArray(e)) {
         return e;
     }
@@ -44,9 +47,6 @@ const beforeUpload = ({ fileList }) => {
 }
 
 
-const handleUploadRequest = (values) => {
-    console.log("Form submitted", values);
-}
 
 //Miniature display
 function getBase64(file) {
@@ -80,7 +80,10 @@ class PicturesWall extends Component {
         });
     };
 
-    handleChange = ({ fileList }) => this.setState({ fileList });
+    handleChange = ({ fileList }) => {
+        this.setState({ fileList });
+        
+    };
 
     render() {
         const { previewVisible, previewImage, fileList, previewTitle } = this.state;
@@ -113,35 +116,29 @@ class PicturesWall extends Component {
     }
 }
 
-//  const handleUploadRequest = (history) => {
-//      const url = "http://192.168.1.13:5000/login";
-//      console.log("HTTP request made towards: " + url);
-//      // 第一个参数是提交的地址
-//      try {
-//          $.post(url,
-//              {
-//                  email: val_email,
-//                  password: val_passw
-//              },
-//              function (data, status) {
-//                  console.log(data);
-//                  var dataObj = eval("(" + data + ")");//转换为json对象 
-//                  if (dataObj.code === 200) {
-//                      console.log("LOGIN SUCCESS")
-//                      history.push('/');
-//                      return;
-//                  } else {
-//                      console.log("LOGIN FAILURE")
-//                      alert(dataObj.msg)
-//                      message.warn('Either your <email> or <password> is incorrect', 0.6);
-//                      return;
-//                  }
-//              }
-//          ).fail(function(){message.warn('Connection to server is a failure', 0.6); if(fail_forward){history.push('/')} }); 
-//      } catch (e) {
-//          message.warn('Connection to server is a failure', 0.6);
-//      }
-//  }
+const DOMAIN = "http://106.52.167.166:8084";
+const API_LOGIN = `${DOMAIN}`;
+const url = "https://68f8d248-d179-4ceb-9469-79555efa3395.mock.pstmn.io";
+
+const handleSubmitRequest = (values) => {
+    console.log(values);
+    const submit = getSubmitService(values);
+    submit.then(
+        function(value){
+            message.info('Submit Successful', 2.0);
+        },
+        function(value){
+            message.warn('Submit Failed', 2.0);
+        }
+    )
+}
+const getSubmitService = (params) => {
+    return request(`${url}`, {
+        method: "post",
+        data: params,
+        requestType: "form"
+    });
+}
 
 
 const style = {
@@ -153,7 +150,7 @@ const style = {
 
 }
 
-class UploadForm1 extends Component {
+class UploadForm1 extends Component {   
     render() {
         return (
             <div>
@@ -161,9 +158,9 @@ class UploadForm1 extends Component {
 
                 <div style={style}>
                     <Form
-                        name="validate_other"
+                        name="game_info_upload"
                         id="upload_form"
-                        onFinish={handleUploadRequest}
+                        onFinish={handleSubmitRequest}
                     >
                         <Form.Item
                             name="file_name"
@@ -189,7 +186,7 @@ class UploadForm1 extends Component {
                             name="cover_upload"
                             valuePropName="fileList"
                             getValueFromEvent={normFile}
-                            extra=""
+                        
                         >
                             <div className='item'>
                                 <label htmlFor='covers' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Cover Picture</label>
@@ -228,7 +225,7 @@ class UploadForm1 extends Component {
                         </Form.Item>
 
                         <Form.Item
-                            name="select"
+                            name="category"
 
                             rules={[
                                 {
@@ -236,6 +233,7 @@ class UploadForm1 extends Component {
                                     message: 'Please select the section!',
                                 },
                             ]}
+                            initialValue="renew"
                             wrapperCol={{
                                 span: 2,
 
@@ -281,7 +279,7 @@ class UploadForm1 extends Component {
                         </Form.Item>
                     </Form>
                 </div>
-            </div >
+            </div>
 
 
         )
