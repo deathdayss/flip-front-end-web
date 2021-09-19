@@ -19,7 +19,8 @@ import request from 'umi-request';
 import Icon from '@ant-design/icons';
 import "../../scss/Spacing.scss";
 
-const API_PRODUCT = "http://106.52.167.166:8084/v1/get/product"
+// const API_PRODUCT = "http://106.52.167.166:8084/v1/get/product"
+const API_PRODUCT = "http://rinato.ticp.vip/v1/get/product"
 
 const gameDetail = {
     creator: "Creator",
@@ -199,8 +200,8 @@ const GameDisplay = (props) => {
             </Flex>
 
             <Flex className="buttons" mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
-                {/* <Buttons></Buttons> */}
-                <Buttons_NEW></Buttons_NEW>
+                <Buttons></Buttons>
+                {/* <Buttons_NEW></Buttons_NEW> */}
             </Flex>
             <Flex className='description' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
                 {gameDetail.description}

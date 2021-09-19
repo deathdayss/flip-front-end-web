@@ -16,6 +16,7 @@ import request from 'umi-request';
 const DOMAIN = "http://106.52.167.166:8084"
 const API_RANK = `${DOMAIN}/v1/rank/zone`
 const API_IMG = `${DOMAIN}/v1/download/img`
+const API_RANK_DOWNLOAD = `${DOMAIN}/v1/rank/download`
 // const RANK_PICTURE = `https://${DOMAIN}/static/public/rank_picture/`;
 // const IMG_URL = "https://flip.com/static/public/rank_picture/35b8314884294aacb76bcad057c7c4e7.jpeg"
 
@@ -26,6 +27,7 @@ const DisplayBoard = (props) => {
     const defaultWords = props.words
     const [rank, setRank] = useState("Daily")
     const [rankList, setRankList] = useState([])
+    const [downloadList, setDownloadList] = useState([])
     const [imgUrl, setImgUrl] = useState("")
     const history = useHistory()
 
@@ -35,11 +37,19 @@ const DisplayBoard = (props) => {
                 zone: "test",
                 num: 5,
             });
-            // console.log(result.List);
             setRankList(result.List);
         }
-
         getRank();
+
+        const getDownload = async () => {
+            const result = await getDownloadService({
+                zone: "test",
+                num: 10,
+            });
+            console.log(result.List)
+            setDownloadList(result.List);
+        }
+        getDownload();
         setImgUrl(`${API_IMG}?img_name=1.jpg`);
     }, [])
 
@@ -47,16 +57,18 @@ const DisplayBoard = (props) => {
         return request(`${API_RANK}`, { params });
     }
 
-    const getImgService = (params) => {
-        return request(`${API_IMG}`, { params });
+    const getDownloadService = (params) => {
+        return request(`${API_RANK_DOWNLOAD}`, { params });
     }
 
-    const TopHalfSmallContent = ({ index }) => {
+    const TopHalfSmallContent = ({ index = 1 }) => {
         return <ForLoop index={index} loopNum={2}
 
             LoopContent={() =>
                 <Box width={0.5} px={homepageSpacing.responsive_content_padding}>
-                    <img className='Home-Content-img' src='fake_data/work_cover.jpg' onClick={enterGame} />
+                    <div style={{ backgroundColor: "#000", height: 0, paddingBottom: "62.5%", overflow: "hidden" }}>
+                        <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList[index]?.img}`} onClick={() => { enterGame(downloadList[index]?.GID) }} />
+                    </div>
                 </Box>}
 
             PackingContent={({ Output }) =>
@@ -115,6 +127,19 @@ const DisplayBoard = (props) => {
                 </div>} />
     }
 
+    const CarouselContent = () => {
+        const CAROUSEL_NUM = 4
+        const numbers = [...Array(CAROUSEL_NUM).keys()]
+        return <Carousel afterChange={onChange}>
+            {numbers.map(i =>
+                <div key={`carousel${i}`}>
+                    <div style={{ backgroundColor: "#000", height: 0, paddingBottom: "62.5%", overflow: "hidden" }}>
+                        <img className='Home-Show-img' src={`${API_IMG}?img_name=${rankList[i]?.img}`} />
+                    </div>
+                </div>)}
+        </Carousel>
+    }
+
     const Buttons = () => {
         const Buttons = rankLabels.map(label => <button id='' className='rank-time-btn'
             onClick={() => setRank(label)} style={{ backgroundColor: (rank == label) ? '#DACEFF' : '#BDBBC5' }}>
@@ -139,8 +164,8 @@ const DisplayBoard = (props) => {
     }
 
 
-    const enterGame = () => {
-        history.push('/gameDisplay')
+    const enterGame = (pid) => {
+        history.push(`/gameDisplay?pid=${pid}`)
     }
 
     return (
@@ -154,7 +179,7 @@ const DisplayBoard = (props) => {
                         <Box width={[1, 0.5, 0.4]} >
                             <Flex>
                                 <Box width={1} px={homepageSpacing.responsive_show_padding}>
-                                    <Carousel afterChange={onChange}>
+                                    {/* <Carousel afterChange={onChange}>
                                         <div>
                                             <img className='Home-Show-img' src={imgUrl} />
                                         </div>
@@ -167,7 +192,9 @@ const DisplayBoard = (props) => {
                                         <div>
                                             <img className='Home-Show-img' src={imgUrl} />
                                         </div>
-                                    </Carousel>
+                                    </Carousel> */}
+                                    <CarouselContent />
+
                                 </Box>
                             </Flex>
                             <TopHalfSmallContent />
