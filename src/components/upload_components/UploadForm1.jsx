@@ -81,8 +81,7 @@ class PicturesWall extends Component {
     };
 
     handleChange = ({ fileList }) => {
-        this.setState({ fileList });
-        
+        this.setState({ fileList });        
     };
 
     render() {
@@ -152,6 +151,9 @@ const style = {
 
 class UploadForm1 extends Component {   
     render() {
+        const handleChange = ({ fileList }) => {
+                this.setState({ fileList });
+        }
         return (
             <div>
                 <Header />
@@ -192,8 +194,8 @@ class UploadForm1 extends Component {
                                 <label htmlFor='covers' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Cover Picture</label>
                                 <div className='covers'>
                                     <div className='cover'>
-                                        <PicturesWall style={{ float: 'left', }} />
-                                        <div style={{ width: '185px', height: '128px', float: 'left' }}>
+                                        <PicturesWall style={{ float: 'left', }} onChange={handleChange}/>
+                                        <div style={{ width: '185px', height: '128px', float: 'left',marginRight: '100px'}}>
                                             <p>xxxxxx</p>
                                         </div>
                                     </div>
