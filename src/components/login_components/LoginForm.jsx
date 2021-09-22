@@ -24,6 +24,7 @@ const LoginForm = (props) => {
     const handle_loginRequest = (history) => {
         // console.log("Attempting to login via: " + val_email + " " + val_passw);
         const loginPormise = getLoginService({email: val_email, password: val_passw});
+        console.log(loginPormise);
         loginPormise.then(
             function(value){
                 // console.log('Login success');

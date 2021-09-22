@@ -4,7 +4,7 @@
  * @modify date 2021-07-24 21:14:19
  */
 
-import { Popover, Button, Input} from 'antd';
+import { Popover, Button, Input, message} from 'antd';
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Row, Col } from 'reactstrap';
@@ -17,6 +17,7 @@ import { headerRightBtnInfos } from '../../../data/public_related/HeaderRightCon
 import { headerState } from '../../../data/constants/HeaderState'
 import './HeaderFirstLayer.scss'
 import LoginForm from '../../login_components/LoginForm';
+import request from 'umi-request';
 
 const mapDispatchToProps = dispatch => ({
     toggleLanguage: (lang) => dispatch(toggleLanguage(lang)),
@@ -43,6 +44,37 @@ const mapStateToProps = state => {
 //     }
 // }
 
+// ==========================================================================================
+// Login service
+const DOMAIN = "http://106.52.167.166:8084" 
+const API_LOGIN = `${DOMAIN}/v1/user/login`
+const handle_loginRequest = (act, pwd) => {
+    // console.log("Attempting to login via: " + val_email + " " + val_passw);
+    const loginPormise = getLoginService({email: act, password: pwd});
+    console.log("=================================================================");
+    console.log(loginPormise);
+    loginPormise.then(
+        function(value){
+            // console.log('Login success');
+            message.info('Login Successful', 2.0);
+            // setTimeout(function(){history.push('/');message.info('Welcome '+val_email + ' !', 2.0);}, 2000);
+        },
+        function(value){
+            // console.log('Login failture');
+            message.warn('Either your <email> or <password> is incorrect', 2.0);
+        }
+    )
+}
+const getLoginService = (params) => {
+    return request(`${API_LOGIN}`, {
+        method: "post",
+        data: params,
+        requestType: "form"
+    });
+}
+
+// ==========================================================================================
+// Main component
 class HeaderFirstLayer extends Component {
 
     handleRankBtn = () => { }
@@ -72,14 +104,22 @@ class HeaderFirstLayer extends Component {
                                     ""
                                 }
                                 content={
-                                    <ul style={{textAlign:'left', padding: 0, margin: 0}}>
+                                    <ul id="mainMenuPopup" style={{textAlign:'left', padding: 0, margin: 0}}>
                                         {/* <li><a href="/login">Login</a></li> */}
                                         {/* <li><a href="/signup">Sign-up</a></li> */}
                                         <h3> Welcome </h3>
                                         Account:  <Input id="mainMenuLogin_name"/> <br/>
                                         Password: <Input id="mainMenuLogin_pass"/>
-                                        <li><a href="/signup">if you don't have an account</a></li> <br />
-                                        <Button> Login </Button>
+                                        <li><a 
+                                            href="/signup"
+                                        >if you don't have an account</a></li> <br />
+                                        <Button onClick={
+                                            () => {
+                                                const account = document.getElementById("mainMenuLogin_name");
+                                                const passwrd = document.getElementById("mainMenuLogin_pass");
+                                                handle_loginRequest(account.value, passwrd.value)
+                                            }
+                                        }> Login </Button>
                                     </ul>
                                 }
                                 key={btnInfo[0]}
