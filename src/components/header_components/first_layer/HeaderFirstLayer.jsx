@@ -76,8 +76,8 @@ class HeaderFirstLayer extends Component {
                                         {/* <li><a href="/login">Login</a></li> */}
                                         {/* <li><a href="/signup">Sign-up</a></li> */}
                                         <h3> Welcome </h3>
-                                        Account:  <Input/> <br/>
-                                        Password: <Input/>
+                                        Account:  <Input id="mainMenuLogin_name"/> <br/>
+                                        Password: <Input id="mainMenuLogin_pass"/>
                                         <li><a href="/signup">if you don't have an account</a></li> <br />
                                         <Button> Login </Button>
                                     </ul>
