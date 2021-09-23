@@ -10,9 +10,6 @@ const UploadForm = () => {
     // ==============================================================
 
     const [form] = Form.useForm();
-    const submitGameInfo = (values) => {
-        console.log("Form submitted");
-    }
     const formItemLayout = {
         labelCol:   { xs: { span: 24, }, sm: { span: 8, }, },
         wrapperCol: { xs: { span: 24, }, sm: { span: 16, }, },
@@ -21,7 +18,10 @@ const UploadForm = () => {
     const [title,    updateTitle]    = useState("");
     const [category, updateCategory] = useState("");
     const [folder,   updateFolder]   = useState("1");
-    
+    const submitGameInfo = (values) => {
+        console.log("Title: " + title);
+        console.log("Form submitted");
+    }
     
     // ==============================================================
     
