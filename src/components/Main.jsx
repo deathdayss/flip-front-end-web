@@ -71,7 +71,7 @@ class Main extends Component {
                         <Route exact path='/' component={Homepage} />
                         <Route path='/user' component={UserContent} />
                         <Route path='/upload_work' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}
-                        <Route path='/upload_form' component={UploadForm} /> {/* TODO: Make a content for the upload form page*/}
+                        <Route path='/upload_form/:id' component={UploadForm} /> {/* TODO: Make a content for the upload form page*/}
                         <Route path='/gameDisplay' component={GameDisplay} />
                     </Route>
                 </Switch>
