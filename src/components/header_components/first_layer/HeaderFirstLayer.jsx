@@ -47,24 +47,39 @@ const mapStateToProps = state => {
 
 // ==========================================================================================
 // Login service
-const DOMAIN = "http://106.52.167.166:8084"
-const API_LOGIN = `${DOMAIN}/v1/user/login`
-const API_SINGUP = `${DOMAIN}/v1/user/register`
+const DOMAIN = "http://106.52.167.166:8084";
+const API_LOGIN = `${DOMAIN}/v1/user/login`;
+const API_SIGNUP = `${DOMAIN}/v1/user/register`;
+const API_VERIFICATION_CODE = "https://68f8d248-d179-4ceb-9469-79555efa3395.mock.pstmn.io";
 
-const handle_loginRequest = (act, pwd) => {
-    // console.log("Attempting to login via: " + val_email + " " + val_passw);
-    const loginPormise = getLoginService({ email: act, password: pwd });
-    loginPormise.then(
-        function (value) {
-            // console.log('Login success');
-            message.info('Login Successful', 2.0);
-            // setTimeout(function(){history.push('/');message.info('Welcome '+val_email + ' !', 2.0);}, 2000);
-        },
-        function (value) {
-            // console.log('Login failture');
-            message.warn('Either your <email> or <password> is incorrect', 2.0);
-        }
-    )
+let verificationCode;
+let verificationImageURL;
+let verificationFailureWarning = "";
+
+
+const handle_loginRequest = (act, pwd, veri) => {
+    if (veri === verificationCode) {
+        console.log('Verification success!');
+        verificationFailureWarning = "";
+        // console.log("Attempting to login via: " + val_email + " " + val_passw);
+        verificationFailureWarning = "Fuck you";
+        const loginPormise = getLoginService({ email: act, password: pwd });
+        loginPormise.then(
+            function (value) {
+                // console.log('Login success');
+                message.info('Login Successful', 2.0);
+                // setTimeout(function(){history.push('/');message.info('Welcome '+val_email + ' !', 2.0);}, 2000);
+            },
+            function (value) {
+                // console.log('Login failture');
+                message.warn('Either your <email> or <password> is incorrect', 2.0);
+            }
+        )
+    }
+    else {
+        console.log('Verification Failed!');
+        verificationFailureWarning = "Verification Failed";
+    }
 }
 const getLoginService = (params) => {
     return request(`${API_LOGIN}`, {
@@ -73,12 +88,14 @@ const getLoginService = (params) => {
         requestType: "form"
     });
 }
-const handle_signupRequest = (mail, name, pwd) => {
+const handle_signupRequest = (mail, name, pwd, veri) => {
+    // if (veri === verificationCode) {
+    //     verificationFailureWarning = "";
     // console.log("Attempting to signup via: " + email + " " + nickname + " " + password);
     const signupPormise = getSignupSerive({ email: mail, nickname: name, password: pwd });
     signupPormise.then(
         function (value) {
-            console.log('Singup success');
+            console.log('Signup success');
             message.info('Signup Successful', 2.0);
             // setTimeout(function () { history.push('/'); message.info('Welcome ' + val_email + ' !', 2.0); }, 2000);
         },
@@ -87,12 +104,44 @@ const handle_signupRequest = (mail, name, pwd) => {
             message.warn('The email you used is already registered', 2.0);
         }
     )
+    // }
+    // else{
+    //     verificationFailureWarning = "Verification Failed";
+    // }
+
 }
 const getSignupSerive = (params) => {
-    return request(`${API_SINGUP}`, {
+    return request(`${API_SIGNUP}`, {
         method: "post",
         data: params,
         requestType: "form"
+    });
+}
+
+
+const handle_getVerificationCode = () => {
+    const verificationPromise = requestVerificationCode({ getCode: 123 });
+    verificationPromise.then(
+        function (value) {
+            console.log('Request veri code success');
+            // console.log(JSON.stringify(value));
+            verificationCode = value.Content;
+            verificationImageURL = value.URL;
+            console.log(verificationCode);
+            console.log(verificationImageURL);
+        },
+        function (value) {
+            console.log('Request veri code failture');
+            message.warn('Something wrong just happened', 2.0);
+        }
+    )
+
+}
+const requestVerificationCode = (params) => {
+    return request(`${API_VERIFICATION_CODE}`, {
+        method: "get",
+        data: params,
+        requestType: "json"
     });
 }
 
@@ -104,6 +153,10 @@ class HeaderFirstLayer extends Component {
     // TODO: press the search button
     headerSearch = value => { this.props.toggleLanguage(this.props.localization.lang) }
     componentDidMount() { }
+
+    componentWillMount() {
+        handle_getVerificationCode();
+    }
 
     render() {
 
@@ -126,9 +179,12 @@ class HeaderFirstLayer extends Component {
                                     {/* <li><a href="/login">Login</a></li> */}
                                     {/* <li><a href="/signup">Sign-up</a></li> */}
                                     <h3> Signup </h3>
-                                    Email:      <Input id="mainMenuSignup_mail" type="email"/> <br />
+                                    Email:      <Input id="mainMenuSignup_mail" type="email" /> <br />
                                     Nickname:   <Input id="mainMenuSignup_nick" /> <br />
-                                    Password:   <Input id="mainMenuSignup_pass" type="password"/>
+                                    Password:   <Input id="mainMenuSignup_pass" type="password" /> <br />
+                                    Verification Code: <Input id="mainMenuSignup_veri" type="text" />
+                                    <img src={verificationImageURL} height='50px' width='100px' />
+                                    <p className="veri-failed-warning">{verificationFailureWarning}</p>
                                     {/* <li><a
                                         href="/"
                                         // style={{
@@ -146,10 +202,13 @@ class HeaderFirstLayer extends Component {
                                     <li>-</li>
                                     <Button onClick={
                                         () => {
+                                            console.log("CLICK!!!!!");
                                             const account = document.getElementById("mainMenuSignup_mail");
                                             const nickname = document.getElementById("mainMenuSignup_nick");
                                             const password = document.getElementById("mainMenuSignup_pass");
-                                            handle_signupRequest(account.value, nickname.value, password.value)
+                                            const veriCode = document.getElementById("mainMenuSignup_veri");
+                                            console.log(`veriCode: ${veriCode.value}`);
+                                            handle_signupRequest(account.value, nickname.value, password.value, veriCode.value);
                                         }
                                     }> Continue </Button>
                                 </ul>
@@ -161,8 +220,11 @@ class HeaderFirstLayer extends Component {
                                     {/* <li><a href="/login">Login</a></li> */}
                                     {/* <li><a href="/signup">Sign-up</a></li> */}
                                     <h3> Welcome </h3>
-                                    Account:  <Input id="mainMenuLogin_name" type="email"/> <br />
-                                    Password: <Input id="mainMenuLogin_pass" type="password"/>
+                                    Account:  <Input id="mainMenuLogin_name" type="email" /> <br />
+                                    Password: <Input id="mainMenuLogin_pass" type="password" /> <br />
+                                    Verification Code: <Input id="mainMenuLogin_veri" type="text" />
+                                    <img src={verificationImageURL} height='50px' width='100px' />
+                                    <p className="veri-failed-warning">{verificationFailureWarning}</p>
                                     <li><a
                                         // href="/signup"
                                         style={{
@@ -172,15 +234,18 @@ class HeaderFirstLayer extends Component {
                                         onClick={
                                             () => {
                                                 const temp = document.getElementById("mainMenuPopup");
-                                                temp.innerHTML = renderToString(<SignupComponent_content/>);
+                                                temp.innerHTML = renderToString(<SignupComponent_content />);
                                             }
                                         }
                                     >if you don't have an account</a></li> <br />
                                     <Button onClick={
                                         () => {
+
                                             const account = document.getElementById("mainMenuLogin_name");
                                             const passwrd = document.getElementById("mainMenuLogin_pass");
-                                            handle_loginRequest(account.value, passwrd.value)
+                                            const veriCode = document.getElementById("mainMenuLogin_veri");
+
+                                            handle_loginRequest(account.value, passwrd.value, veriCode.value);
                                         }
                                     }> Login </Button>
                                 </ul>
