@@ -48,21 +48,21 @@ const mapStateToProps = state => {
 // ==========================================================================================
 // Login service
 const DOMAIN = "http://106.52.167.166:8084";
-const API_LOGIN = `${DOMAIN}/v1/user/login`;
+const API_LOGIN = "https://68f8d248-d179-4ceb-9469-79555efa3395.mock.pstmn.io";//`${DOMAIN}/v1/user/login`;
 const API_SIGNUP = `${DOMAIN}/v1/user/register`;
 const API_VERIFICATION_CODE = "https://68f8d248-d179-4ceb-9469-79555efa3395.mock.pstmn.io";
 
 let verificationCode;
 let verificationImageURL;
-let verificationFailureWarning = "";
+// let verificationFailureWarning = "";
 
 
 const handle_loginRequest = (act, pwd, veri) => {
     if (veri === verificationCode) {
         console.log('Verification success!');
-        verificationFailureWarning = "";
+        // verificationFailureWarning = "";
         // console.log("Attempting to login via: " + val_email + " " + val_passw);
-        verificationFailureWarning = "Fuck you";
+        // verificationFailureWarning = "Fuck you";
         const loginPormise = getLoginService({ email: act, password: pwd });
         loginPormise.then(
             function (value) {
@@ -78,7 +78,7 @@ const handle_loginRequest = (act, pwd, veri) => {
     }
     else {
         console.log('Verification Failed!');
-        verificationFailureWarning = "Verification Failed";
+        // verificationFailureWarning = "Verification Failed";
     }
 }
 const getLoginService = (params) => {
@@ -149,9 +149,25 @@ const requestVerificationCode = (params) => {
 // Main component
 class HeaderFirstLayer extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            verificationFailureWarning: "",
+        }
+    }
+
     handleRankBtn = () => { }
     // TODO: press the search button
     headerSearch = value => { this.props.toggleLanguage(this.props.localization.lang) }
+
+    handleVeriWarningChange = (command) => {
+        if(command===0){
+            this.setState({verificationFailureWarning: ""});
+        }
+        if(command===1){
+            this.setState({verificationFailureWarning: "Fuck you"});
+        }
+    }
     componentDidMount() { }
 
     componentWillMount() {
@@ -184,7 +200,7 @@ class HeaderFirstLayer extends Component {
                                     Password:   <Input id="mainMenuSignup_pass" type="password" /> <br />
                                     Verification Code: <Input id="mainMenuSignup_veri" type="text" />
                                     <img src={verificationImageURL} height='50px' width='100px' />
-                                    <p className="veri-failed-warning">{verificationFailureWarning}</p>
+                                    {/* <p className="veri-failed-warning">{verificationFailureWarning}</p> */}
                                     {/* <li><a
                                         href="/"
                                         // style={{
@@ -192,7 +208,7 @@ class HeaderFirstLayer extends Component {
                                         //     color: 'blue'
                                         // }}
                                         // onClick={
-                                        //     () => {
+                                         //     () => {
                                         //         const temp = document.getElementById("mainMenuPopup");
                                         //         // temp.innerHTML = renderToString(<LoginComponent_content/>);
                                         //         History.replaceState('/');
@@ -202,7 +218,6 @@ class HeaderFirstLayer extends Component {
                                     <li>-</li>
                                     <Button onClick={
                                         () => {
-                                            console.log("CLICK!!!!!");
                                             const account = document.getElementById("mainMenuSignup_mail");
                                             const nickname = document.getElementById("mainMenuSignup_nick");
                                             const password = document.getElementById("mainMenuSignup_pass");
@@ -224,7 +239,7 @@ class HeaderFirstLayer extends Component {
                                     Password: <Input id="mainMenuLogin_pass" type="password" /> <br />
                                     Verification Code: <Input id="mainMenuLogin_veri" type="text" />
                                     <img src={verificationImageURL} height='50px' width='100px' />
-                                    <p className="veri-failed-warning">{verificationFailureWarning}</p>
+                                    <p className="veri-failed-warning">{this.state.verificationFailureWarning}</p>
                                     <li><a
                                         // href="/signup"
                                         style={{
