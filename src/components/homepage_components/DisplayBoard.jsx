@@ -1,7 +1,7 @@
 /**
- * @author Zhicheng Wang
+ * @author Huiying Hu
  * @create date 2021-07-23 20:33:26
- * @modify date 2021-07-24 21:15:44
+ * @modify date 2021-09-24 11:31:34
  */
 
 import React, { useState, useEffect } from 'react'
@@ -12,13 +12,8 @@ import { ForLoop } from '../helper_components/Helper.jsx'
 import { homepageSpacing } from '../../data/constants/Spacing'
 import './DisplayBoard.scss'
 import request from 'umi-request';
+import { API_RANK, API_IMG, API_RANK_DOWNLOAD } from '../../Config.js';
 
-const DOMAIN = "http://106.52.167.166:8084"
-const API_RANK = `${DOMAIN}/v1/rank/zone`
-const API_IMG = `${DOMAIN}/v1/download/img`
-const API_RANK_DOWNLOAD = `${DOMAIN}/v1/rank/download`
-// const RANK_PICTURE = `https://${DOMAIN}/static/public/rank_picture/`;
-// const IMG_URL = "https://flip.com/static/public/rank_picture/35b8314884294aacb76bcad057c7c4e7.jpeg"
 
 const rankLabels = ["Daily", "Weekly", "Monthly"];
 
@@ -114,7 +109,7 @@ const DisplayBoard = (props) => {
                 const first_top_margin = index === 0 ? homepageSpacing.top_margin : homepageSpacing.up_content_padding
                 return (<Flex key={index} pt={[first_top_margin, first_top_margin, index === 0 ? '0px' : homepageSpacing.up_content_padding]} pl={homepageSpacing.up_left_padding} >
                     <Box width={0.5} >
-                        <img className='Home-Rank-img' src={`${API_IMG}?img_name=${rankList[index]?.img}`} />
+                        <img className='Home-Rank-img' src={`${API_IMG}?img_name=${rankList[index]?.img}`} onClick={() => { enterGame(rankList[index]?.GID) }} />
                         {/* <Image className='Home-Rank-img' src={imgUrl} /> */}
                     </Box>
                     <RankWords styles={{ width: 0.5, pl: homepageSpacing.responsive_rank_words_padding, fontSize: "12px !important" }} words={rankList[index]} />
@@ -210,10 +205,10 @@ const DisplayBoard = (props) => {
                              Ranking
                          </Flex> */}
                     <Flex mt={homepageSpacing.top_margin} id='rank-btns-left' >
-                        <Box width={0.2} className='section-heading'>
+                        <Box width={0.3} className='section-heading'>
                             Ranking
                         </Box>
-                        <Box width={0.7} className='text-center'>
+                        <Box width={0.5} className='text-center'>
                             <Flex>
                                 <Buttons />
                             </Flex>
