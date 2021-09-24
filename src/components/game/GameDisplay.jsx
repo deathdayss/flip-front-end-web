@@ -5,9 +5,9 @@
  */
 
 import React, { useState, useEffect } from 'react'
+import { connect } from "react-redux";
 import { Avatar } from 'antd';
 import { Flex, Box } from '@rebass/grid'
-import { useHistory } from 'react-router-dom';
 import { ForLoop } from '../helper_components/Helper.jsx'
 import { homepageSpacing, gameDisplaySpacing } from '../../data/constants/Spacing'
 import { Popover, Button, Input } from 'antd';
@@ -18,9 +18,8 @@ import Header from '../header_components/Header.jsx'
 import request from 'umi-request';
 import Icon from '@ant-design/icons';
 import "../../scss/Spacing.scss";
+import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_CHECK, API_RANK_DOWNLOAD, API_IMG } from "../../Config.js";
 
-// const API_PRODUCT = "http://106.52.167.166:8084/v1/get/product"
-const API_PRODUCT = "http://rinato.ticp.vip/v1/get/product"
 
 const gameDetail = {
     creator: "Creator",
@@ -108,27 +107,84 @@ const ForwardSvg = () =>
         <path d="M35.586 10.2057L23.1518 0.580698C22.8358 0.335698 22.3633 0.266865 21.961 0.402198C21.5558 0.539865 21.291 0.857198 21.291 1.20836V6.16903C9.9642 6.32537 0.811157 13.722 0.811157 22.7917C0.811157 23.1907 1.1637 23.5174 1.64791 23.6177C1.73421 23.6352 1.82052 23.6434 1.90683 23.6434C2.30765 23.6434 2.69823 23.4602 2.89864 23.172C6.18274 18.44 12.4349 15.5 19.2167 15.5H21.291V20.4584C21.291 20.8095 21.5558 21.1269 21.961 21.2645C22.3618 21.3999 22.8373 21.331 23.1518 21.086L35.586 11.461C35.7996 11.2965 35.9195 11.0702 35.9195 10.8334C35.9195 10.5965 35.7996 10.3702 35.586 10.2057Z" />
     </svg>
 
-
 const ForwardIcon = props => <Icon component={ForwardSvg} {...props} />;
 
+const mapStateToProps = state => {
+    return {
+        localization: state.localization,
+    }
+}
+
 const GameDisplay = (props) => {
+    const defaultWords = props.localization.words.homepage.contentWords
     const [like, setLike] = useState(false)
     const [collect, setCollect] = useState(false)
     const [forward, setForward] = useState(false)
+    const [downloadList, setDownloadList] = useState([])
+
+
+
     useEffect(() => {
         const getProductInfo = async () => {
             const result = await getProductInfoService({
-                pid: 123456
+                gid: 123456
             });
             console.log(result);
         }
         getProductInfo();
-    })
+
+        const getLikeCheck = async () => {
+            const result = await getLikeCheckService({
+                GID: 1,
+                UID: 1,
+            });
+            setLike(result.msg);
+        }
+        getLikeCheck();
+
+        const getDownload = async () => {
+            const result = await getDownloadService({
+                zone: "test",
+                num: 10,
+            });
+            console.log(result.List)
+            setDownloadList(result.List);
+        }
+        getDownload();
+
+    }, [])
+
+    const getDownloadService = (params) => {
+        return request(`${API_RANK_DOWNLOAD}`, { params });
+    }
+
+    const getLikeCheckService = (params) => {
+        return request(`${API_LIKE_CHECK}`, { params });
+    }
+
+    const getLikeClickService = (params) => {
+        return request(`${API_LIKE_CLICK}`, { params });
+    }
+
+    const getProductInfoService = (params) => {
+        return request(`${API_PRODUCT}`, { params });
+    }
+
+    const likeClick = () => {
+        setLike(!like);
+        const getLikeClick = async () => {
+            const result = await getLikeClickService({
+                GID: 1,
+                UID: 1,
+            });
+        }
+        getLikeClick();
+    }
 
     const Buttons = () => (
         <>
             <Box width={80}>
-                <LikeIcon className="like-icon" onClick={() => { setLike(!like) }} style={{ color: like ? "#5B28FF" : "#727272", }} />
+                <LikeIcon className="like-icon" onClick={likeClick} style={{ color: like ? "#5B28FF" : "#727272", }} />
                 <span>123</span>
             </Box>
             <Box width={80}>
@@ -141,22 +197,52 @@ const GameDisplay = (props) => {
             </Box>
         </>)
 
-    const getProductInfoService = (params) => {
-        return request(`${API_PRODUCT}`, { params });
+    const RecommendWords = ({ styles, words = defaultWords }) => {
+        const Content = []
+        // console.log(words)
+
+        Content.push(
+            <>
+                <Flex>
+                    <Box width={1}>
+                        {words.game_name}
+                    </Box>
+                </Flex>
+                <Flex>
+                    <Box width={1}>
+                        {words.DownloadNum} play · {words.like_num} like
+                    </Box>
+                </Flex>
+                <Flex>
+                    <Box width={1}>
+                        {words.AuthorName}
+                    </Box>
+                </Flex>
+            </>);
+        return (
+            <Box {...styles}>
+                {Content}
+            </Box>
+        )
     }
 
-    const RecommendContent = ({ index }) => {
-        return <ForLoop index={index} loopNum={7}
+    const RecommendContent = ({ colNum }) => {
+        return <ForLoop loopNum={colNum}
 
-            LoopContent={() =>
-                <Box width={0.14} px={homepageSpacing.responsive_content_padding}>
-                    <img className='Home-Content-img' src='fake_data/work_cover.jpg' />
-                </Box>}
+            LoopContent={({ index }) =>
+                <Box width={1 / colNum} px={homepageSpacing.responsive_content_padding}>
+                    <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList[index]?.img}`} />
+                    <Flex className='text-start'>
+                        <RecommendWords styles={{ pl: '2px' }} words={downloadList[index]} />
+                    </Flex>
+                </Box>
+            }
 
-            PackingContent={({ Output }) =>
-                <Flex pt={index === 0 ? '' : homepageSpacing.up_content_padding} flexWrap='wrap'>
-                    {Output}
-                </Flex>} />
+        // PackingContent={({ Output }) =>
+        //     <Flex pt={index === 0 ? '' : homepageSpacing.up_content_padding} flexWrap='wrap'>
+        //         {Output}
+        //     </Flex>} 
+        />
     }
 
     return (
@@ -173,7 +259,7 @@ const GameDisplay = (props) => {
                             </a>
                         </Box>
                         <Box ml={gameDisplaySpacing.span_margin_left} className='creator'>
-                            <span style={{ fontSize: '14px' }}>{gameDetail.creator}</span>
+                            <span style={{ fontSize: '14px', display: "block" }}>{gameDetail.creator}</span>
                             <button className="follow-btn">{gameDetail.subscribe}</button>
                         </Box>
                         <Box ml={gameDisplaySpacing.span_margin_left} className='subscribers'>
@@ -193,20 +279,24 @@ const GameDisplay = (props) => {
                     {/* <img className="Home-Content-img" src="fake_data/work_cover.jpg" /> */}
                 </Box>
             </Flex>
-            <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]} mt={gameDisplaySpacing.recommendation_margin_top}>
-                <Box width={1}>
-                    <ForLoop loopNum={1} LoopContent={RecommendContent} />
-                </Box>
-            </Flex>
 
             <Flex className="buttons" mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
                 <Buttons></Buttons>
+                <Box style={{ flexGrow: 1 }}>
+                    <div id="unity-fullscreen-button"></div>
+                </Box>
                 {/* <Buttons_NEW></Buttons_NEW> */}
             </Flex>
             <Flex className='description' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
                 {gameDetail.description}
             </Flex>
-            <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
+
+            <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]} mt={gameDisplaySpacing.recommendation_margin_top}>
+
+                <RecommendContent colNum={7} />
+
+            </Flex>
+            <Flex className='comments' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
                 <Box width={1}>
                     {gameDetail.comments}
                 </Box>
@@ -216,4 +306,4 @@ const GameDisplay = (props) => {
         </>)
 }
 
-export default GameDisplay
+export default connect(mapStateToProps)(GameDisplay)

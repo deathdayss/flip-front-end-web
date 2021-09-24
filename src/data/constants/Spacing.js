@@ -19,7 +19,7 @@ export const homepageSpacing = {
 }
 
 export const gameDisplaySpacing = {
-    main_margin: '100px',
+    main_margin: '200px',
     main_margin_mobile: '10px',
     top_margin: '20px',
     span_margin_left: '8px',

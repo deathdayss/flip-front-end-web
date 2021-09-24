@@ -11,9 +11,9 @@
 //      font-size: 10px !important;
 //  }
  
-//  .section-heading {
-//      font-size: 0.8rem !important;
-//  }
+ .section-heading {
+     font-size: 0.8rem !important;
+ }
  
  .rank-time-btn {
      @include default-btn-setup();

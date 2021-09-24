@@ -40,9 +40,13 @@
     border-top: 1px solid #CECECE;
     // height: 120px;
     border-bottom: 1px solid #CECECE;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 5px
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+.comments {
+    // font-size: 14px;
+    margin: 10px 0;
 }
 
 .unity-container {
@@ -52,21 +56,23 @@
 
 .subscribers {
     color: $dark-grey;
-    min-Width: 100px;
+    flex-grow: 1;
+    text-align: left;
 }
 
 .creator { 
-    width: 95px;
+    // min-width: 70px;
+    // max-width: 95px;
 }
 
 .buttons {
     display: flex;
     align-items: flex-end;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .game-frame {
-    background-color: #000000;
+    // background-color: #000000;
 }
 
 .like-icon {
