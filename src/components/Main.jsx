@@ -32,7 +32,7 @@ import GameDisplay from './game/GameDisplay';
 import SignUpForm from './signup_components/SignUpForm.jsx'
 import LoginForm from './login_components/LoginForm.jsx'
 import './Main.scss'
-
+import { useHistory } from 'react-router-dom'
 
 const mapStateToProps = state => { return { localization: state.localization } }
 const mapDispatchToProps = dispatch => ({ useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang)) })

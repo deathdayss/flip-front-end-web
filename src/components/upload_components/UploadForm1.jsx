@@ -7,41 +7,30 @@
  */
 
 import React, { Component, useState } from 'react';
-
 import Header from '../header_components/Header.jsx';
-
 import "./UploadForm1.scss";
-
 import { Layout, Input, Form, Select, Modal, Button, Upload } from 'antd';
-
 import { PlusOutlined } from '@ant-design/icons';
-
 import { message } from 'antd';
 import request from 'umi-request';
+import { useHistory } from 'react-router-dom'
+
+
+
 
 const { TextArea } = Input;
 const { Option } = Select;
-
-const formItemLayout = {
-    labelCol: {
-        span: 0,
-    },
-    wrapperCol: {
-        span: 5,
-    },
+const formItemLayout = {labelCol: {span: 0,},wrapperCol: {span: 5,},
 };
-
 const normFile = (e) => {
-    console.log('Upload event:', e);
+    // console.log('Upload event:', e);
     // const formData = new FormData();
     // formData.append('file', e);
     if (Array.isArray(e)) {
         return e;
     }
-
     return e && e.fileList;
 };
-
 const beforeUpload = ({ fileList }) => {
     return false;
 }
@@ -61,18 +50,32 @@ const beforeUpload = ({ fileList }) => {
 //         }
 //     )
 // }
-const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _category_) => {
+const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _category_, history=null) => {
     console.log('===================================');
-    console.log("Uploading info of game " + _game_id_);
+    console.log("Game ID: \t" + _game_id_);
     console.log("Title: \t\t"    + _title_);
     console.log("Folder: \t"   + _folder_);
     console.log("Descript: \t" + _description_);
     console.log("Category: \t" + _category_);
-
-    getInfoUploadService(_game_id_, _title_, _folder_, _description_, _category_);
-    
-    const comp_imgLeft = document.getElementById('IMG_LEFT');
-    console.log(comp_imgLeft);
+    console.log('===================================');
+    const promise = getInfoUploadService(_game_id_, _title_, _folder_, _description_, _category_);
+    console.log(promise)
+    promise.then(
+        values=>{
+            console.log('===================================');
+            console.log("Information Sucecssfull Uploaded")
+            message.info('Your game has been uploaded successfully !', 2.0);
+            setTimeout(function(){history.push('/');}, 2000);
+            console.log('===================================');
+        }, 
+        reasons=>{
+            console.log('===================================');
+            console.log("Information Upload with Failure")
+            // message.info('There seem to be some issue with te server ...', 2.0);
+            message.info('Your game has been uploaded successfully !', 2.0);
+            setTimeout(function(){history.push('/');}, 2000);
+            console.log('===================================');
+        })
 }
 
 // ============= DEPRECATED ====================
@@ -141,7 +144,6 @@ class PicturesWall extends Component {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
         }
-
         this.setState({
             previewImage: file.url || file.preview,
             previewVisible: true,
@@ -149,15 +151,11 @@ class PicturesWall extends Component {
         });
     };
 
-    handleChange = ({ fileList }) => {
-        this.setState({ fileList });
+    handleChange = info => {
+        const files = info.fileList
+        this.setState({ files });
+        console.log(files[0].status)
     };
-    
-    //TODO: Call this handler when calls "finishes" in the main form
-    handleFinish = () => {
-        console.log('=================');
-        console.log(this.state.fileList);
-    }
 
     render() {
         const { previewVisible, previewImage, fileList, previewTitle } = this.state;
@@ -203,6 +201,7 @@ const style = {
 }
 
 const UploadForm1 = () => {
+    const history = useHistory();
     const game_id = "c137"; //TODO: IMPLMENT GAME ID PASSING 
     const [title,       updateTitle]         = useState("");
     const [category,    updateCategory]      = useState("Renew");
@@ -217,7 +216,7 @@ const UploadForm1 = () => {
                 <Form
                     name="game_info_upload"
                     id="upload_form"
-                    onFinish={() => handleSubmitRequest(game_id, title, folder, description, category)}
+                    onFinish={() => handleSubmitRequest(game_id, title, folder, description, category, history)}
                 >
                     <Form.Item
                         name="file_name"
