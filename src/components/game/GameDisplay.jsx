@@ -6,7 +6,8 @@
 
 import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
-import { Avatar } from 'antd';
+import { Avatar, Comment, Tooltip, List } from 'antd';
+import moment from 'moment';
 import { Flex, Box } from '@rebass/grid'
 import { ForLoop } from '../helper_components/Helper.jsx'
 import { homepageSpacing, gameDisplaySpacing } from '../../data/constants/Spacing'
@@ -20,6 +21,42 @@ import Icon from '@ant-design/icons';
 import "../../scss/Spacing.scss";
 import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_CHECK, API_RANK_DOWNLOAD, API_IMG } from "../../Config.js";
 
+const data = [
+    {
+        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
+        author: 'Han Solo',
+        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+        content: (
+            <p>
+                We supply a series of design principles, practical patterns and high quality design
+                resources (Sketch and Axure), to help people create their product prototypes beautifully and
+                efficiently.
+            </p>
+        ),
+        datetime: (
+            <Tooltip title={moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')}>
+                <span>{moment().subtract(1, 'days').fromNow()}</span>
+            </Tooltip>
+        ),
+    },
+    {
+        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
+        author: 'Han Solo',
+        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+        content: (
+            <p>
+                We supply a series of design principles, practical patterns and high quality design
+                resources (Sketch and Axure), to help people create their product prototypes beautifully and
+                efficiently.
+            </p>
+        ),
+        datetime: (
+            <Tooltip title={moment().subtract(2, 'days').format('YYYY-MM-DD HH:mm:ss')}>
+                <span>{moment().subtract(2, 'days').fromNow()}</span>
+            </Tooltip>
+        ),
+    },
+];
 
 const gameDetail = {
     creator: "Creator",
@@ -296,10 +333,29 @@ const GameDisplay = (props) => {
                 <RecommendContent colNum={7} />
 
             </Flex>
-            <Flex className='comments' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
+            {/* <Flex className='comments' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
                 <Box width={1}>
                     {gameDetail.comments}
                 </Box>
+            </Flex> */}
+            <Flex className='comments' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
+                <List
+                    className="comment-list"
+                    header={`${data.length} comments`}
+                    itemLayout="horizontal"
+                    dataSource={data}
+                    renderItem={item => (
+                        <li>
+                            <Comment
+                                actions={item.actions}
+                                author={item.author}
+                                avatar={item.avatar}
+                                content={item.content}
+                                datetime={item.datetime}
+                            />
+                        </li>
+                    )}
+                />
             </Flex>
 
 

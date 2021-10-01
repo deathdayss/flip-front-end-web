@@ -5,7 +5,7 @@
  */
 
 import React, { useState, useEffect } from 'react'
-import { Image, Carousel } from 'antd'
+import { Image, Carousel, } from 'antd'
 import { Flex, Box } from '@rebass/grid'
 import { useHistory } from 'react-router-dom';
 import { ForLoop } from '../helper_components/Helper.jsx'
@@ -16,6 +16,7 @@ import { API_RANK, API_IMG, API_RANK_DOWNLOAD } from '../../Config.js';
 
 
 const rankLabels = ["Daily", "Weekly", "Monthly"];
+const aspectRatio = `${(9 * 100 / 16)}%` //"62.5%"
 
 const DisplayBoard = (props) => {
     const { ContentWords, } = props
@@ -61,7 +62,7 @@ const DisplayBoard = (props) => {
 
             LoopContent={() =>
                 <Box width={0.5} px={homepageSpacing.responsive_content_padding}>
-                    <div style={{ backgroundColor: "#000", height: 0, paddingBottom: "62.5%", overflow: "hidden" }}>
+                    <div style={{ backgroundColor: "#000", height: 0, paddingBottom: aspectRatio, overflow: "hidden" }}>
                         <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList[index]?.img}`} onClick={() => { enterGame(downloadList[index]?.GID) }} />
                     </div>
                 </Box>}
@@ -128,7 +129,7 @@ const DisplayBoard = (props) => {
         return <Carousel afterChange={onChange}>
             {numbers.map(i =>
                 <div key={`carousel${i}`}>
-                    <div style={{ backgroundColor: "#000", height: 0, paddingBottom: "62.5%", overflow: "hidden" }}>
+                    <div style={{ backgroundColor: "#000", height: 0, paddingBottom: aspectRatio, overflow: "hidden" }}>
                         <img className='Home-Show-img' src={`${API_IMG}?img_name=${rankList[i]?.img}`} />
                     </div>
                 </div>)}
