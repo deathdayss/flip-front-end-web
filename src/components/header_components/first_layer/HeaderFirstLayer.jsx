@@ -189,46 +189,46 @@ class HeaderFirstLayer extends Component {
                         )
                     }
                     else {
-                        const SignupComponent_content = () => {
-                            return (
-                                <ul style={{ textAlign: 'left', padding: 0, margin: 0 }}>
-                                    {/* <li><a href="/login">Login</a></li> */}
-                                    {/* <li><a href="/signup">Sign-up</a></li> */}
-                                    <h3> Signup </h3>
-                                    Email:      <Input id="mainMenuSignup_mail" type="email" /> <br />
-                                    Nickname:   <Input id="mainMenuSignup_nick" /> <br />
-                                    Password:   <Input id="mainMenuSignup_pass" type="password" /> <br />
-                                    Verification Code: <Input id="mainMenuSignup_veri" type="text" />
-                                    <img src={verificationImageURL} height='50px' width='100px' />
-                                    {/* <p className="veri-failed-warning">{verificationFailureWarning}</p> */}
-                                    {/* <li><a
-                                        href="/"
-                                        // style={{
-                                        //     textDecoration: 'underline',
-                                        //     color: 'blue'
-                                        // }}
-                                        // onClick={
-                                         //     () => {
-                                        //         const temp = document.getElementById("mainMenuPopup");
-                                        //         // temp.innerHTML = renderToString(<LoginComponent_content/>);
-                                        //         History.replaceState('/');
-                                        //     }
-                                        // }
-                                    >if you already have an account</a></li> <br /> */}
-                                    <li>-</li>
-                                    <Button onClick={
-                                        () => {
-                                            const account = document.getElementById("mainMenuSignup_mail");
-                                            const nickname = document.getElementById("mainMenuSignup_nick");
-                                            const password = document.getElementById("mainMenuSignup_pass");
-                                            const veriCode = document.getElementById("mainMenuSignup_veri");
-                                            console.log(`veriCode: ${veriCode.value}`);
-                                            handle_signupRequest(account.value, nickname.value, password.value, veriCode.value);
-                                        }
-                                    }> Continue </Button>
-                                </ul>
-                            )
-                        }
+                        // const SignupComponent_content = () => {
+                        //     return (
+                        //         <ul style={{ textAlign: 'left', padding: 0, margin: 0 }}>
+                        //             {/* <li><a href="/login">Login</a></li> */}
+                        //             {/* <li><a href="/signup">Sign-up</a></li> */}
+                        //             <h3> Signup </h3>
+                        //             Email:      <Input id="mainMenuSignup_mail" type="email" /> <br />
+                        //             Nickname:   <Input id="mainMenuSignup_nick" /> <br />
+                        //             Password:   <Input id="mainMenuSignup_pass" type="password" /> <br />
+                        //             Verification Code: <Input id="mainMenuSignup_veri" type="text" />
+                        //             <img src={verificationImageURL} height='50px' width='100px' />
+                        //             {/* <p className="veri-failed-warning">{verificationFailureWarning}</p> */}
+                        //             {/* <li><a
+                        //                 href="/"
+                        //                 // style={{
+                        //                 //     textDecoration: 'underline',
+                        //                 //     color: 'blue'
+                        //                 // }}
+                        //                 // onClick={
+                        //                  //     () => {
+                        //                 //         const temp = document.getElementById("mainMenuPopup");
+                        //                 //         // temp.innerHTML = renderToString(<LoginComponent_content/>);
+                        //                 //         History.replaceState('/');
+                        //                 //     }
+                        //                 // }
+                        //             >if you already have an account</a></li> <br /> */}
+                        //             <li>-</li>
+                        //             <Button onClick={
+                        //                 () => {
+                        //                     const account = document.getElementById("mainMenuSignup_mail");
+                        //                     const nickname = document.getElementById("mainMenuSignup_nick");
+                        //                     const password = document.getElementById("mainMenuSignup_pass");
+                        //                     const veriCode = document.getElementById("mainMenuSignup_veri");
+                        //                     console.log(`veriCode: ${veriCode.value}`);
+                        //                     handle_signupRequest(account.value, nickname.value, password.value, veriCode.value);
+                        //                 }
+                        //             }> Continue </Button>
+                        //         </ul>
+                        //     )
+                        // }
                         const LoginComponent_content = () => {
                             return (
                                 <ul style={{ textAlign: 'left', padding: 0, margin: 0 }}>
@@ -241,17 +241,17 @@ class HeaderFirstLayer extends Component {
                                     <img src={verificationImageURL} height='50px' width='100px' />
                                     <p className="veri-failed-warning">{this.state.verificationFailureWarning}</p>
                                     <li><a
-                                        // href="/signup"
-                                        style={{
-                                            textDecoration: 'underline',
-                                            color: 'blue'
-                                        }}
-                                        onClick={
-                                            () => {
-                                                const temp = document.getElementById("mainMenuPopup");
-                                                temp.innerHTML = renderToString(<SignupComponent_content />);
-                                            }
-                                        }
+                                        href="/signup"
+                                        // style={{
+                                        //     textDecoration: 'underline',
+                                        //     color: 'blue'
+                                        // }}
+                                        // onClick={
+                                        //     () => {
+                                        //         const temp = document.getElementById("mainMenuPopup");
+                                        //         temp.innerHTML = renderToString(<SignupComponent_content />);
+                                        //     }
+                                        // }
                                     >if you don't have an account</a></li> <br />
                                     <Button onClick={
                                         () => {
