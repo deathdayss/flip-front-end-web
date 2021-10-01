@@ -6,7 +6,7 @@
  * @desc [description]
  */
 
-import React, { Component, useState, useEffect} from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import Header from '../header_components/Header.jsx';
 import "./UploadForm1.scss";
 import { Layout, Input, Form, Select, Modal, Button, Upload } from 'antd';
@@ -21,7 +21,8 @@ import { string } from 'prop-types';
 
 const { TextArea } = Input;
 const { Option } = Select;
-const formItemLayout = {labelCol: {span: 0,},wrapperCol: {span: 5,},
+const formItemLayout = {
+    labelCol: { span: 0, }, wrapperCol: { span: 5, },
 };
 const normFile = (e) => {
     // console.log('Upload event:', e);
@@ -51,33 +52,39 @@ const beforeUpload = ({ fileList }) => {
 //         }
 //     )
 // }
-const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _category_, history=null) => {
+const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _category_, history = null) => {
     console.log('===================================');
     console.log("Game ID: \t" + _game_id_);
-    console.log("Title: \t\t"    + _title_);
-    console.log("Folder: \t"   + _folder_);
+    console.log("Title: \t\t" + _title_);
+    console.log("Folder: \t" + _folder_);
     console.log("Descript: \t" + _description_);
     console.log("Category: \t" + _category_);
     console.log('===================================');
 
-    const promise = getInfoUploadService(_game_id_, _title_, _folder_, _description_, _category_);
-    console.log(promise)
-    promise.then(
-        values=>{
-            console.log('===================================');
-            console.log("Information Sucecssfull Uploaded")
-            message.info('Your game has been uploaded successfully ! GID:'+_game_id_, 2.0);
-            setTimeout(function(){history.push('/');}, 2000);
-            console.log('===================================');
-        }, 
-        reasons=>{
-            console.log('===================================');
-            console.log("Information Upload with Failure")
-            // message.info('There seem to be some issue with te server ...', 2.0);
-            message.info('Your game has been uploaded successfully ! GID:'+_game_id_, 2.0);
-            setTimeout(function(){history.push('/');}, 2000);
-            console.log('===================================');
-        })
+    if      (_title_.length == 0)    { message.warn("The game title cannot be empty.",2.0);      }
+    else if (_folder_.length == 0)   { message.warn("A folder is necessary for your game.",2.0); }
+    else if (_category_.length == 0) { message.warn("You must pick a genre for your game.",2.0); }
+    else if (_description_.length == 0) { message.warn("Have some description will bring you more notice.",2.0); }
+    else {
+        const promise = getInfoUploadService(_game_id_, _title_, _folder_, _description_, _category_);
+        console.log(promise)
+        promise.then(
+            values => {
+                console.log('===================================');
+                console.log("Information Sucecssfull Uploaded")
+                message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
+                setTimeout(function () { history.push('/'); }, 2000);
+                console.log('===================================');
+            },
+            reasons => {
+                console.log('===================================');
+                console.log("Information Upload with Failure")
+                // message.warn('There seem to be some issue with te server ...', 2.0);
+                message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
+                setTimeout(function () { history.push('/'); }, 2000);
+                console.log('===================================');
+            })
+    }
 }
 
 // ============= DEPRECATED ====================
@@ -90,18 +97,18 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
 //         requestType: "form"
 //     });
 // }
-const DOMAIN   = "http://106.52.167.166:8084";
-const API_IMG  = `${DOMAIN}/upload/img`
+const DOMAIN = "http://106.52.167.166:8084";
+const API_IMG = `${DOMAIN}/upload/img`
 const API_INFO = `${DOMAIN}/upload/`
 
 const getImageUploadService = (_img_s_) => {
     // Notice this will return a LIST of promise
     const rtn_s = []
-    for (const img in _img_s_){
+    for (const img in _img_s_) {
         rtn_s.push(
             request(API_IMG, {
-                method     : "post",
-                data       : {"img" : "123"}, //TODO: REPLACE THIS WITH THE REAL IMAGE
+                method: "post",
+                data: { "img": "123" }, //TODO: REPLACE THIS WITH THE REAL IMAGE
                 requestType: "form"
             }
             )
@@ -112,11 +119,11 @@ const getInfoUploadService = (_game_id_, _title_, _folder_, _description_, _cate
     return request(API_INFO, {
         method: "post",
         data: {
-            "gid"      : _game_id_,
-            "title"    : _title_,
-            "folder"   : _folder_,
-            "description" : _description_,
-            "category" : _category_
+            "gid": _game_id_,
+            "title": _title_,
+            "folder": _folder_,
+            "description": _description_,
+            "category": _category_
         },
         requestType: "form"
     });
@@ -204,11 +211,11 @@ const style = {
 
 const UploadForm1 = (props) => {
     const history = useHistory();
-    const game_id = props.match.params["id"]; 
-    const [title,       updateTitle]         = useState("");
-    const [category,    updateCategory]      = useState("Renew");
-    const [folder,      updateFolder]        = useState("GAME"+game_id);
-    const [description, updateDescription]   = useState("");
+    const game_id = props.match.params["id"];
+    const [title, updateTitle] = useState("");
+    const [category, updateCategory] = useState("3D");
+    const [folder, updateFolder] = useState("GAME" + game_id);
+    const [description, updateDescription] = useState("");
 
     return (
         <div>
@@ -258,7 +265,7 @@ const UploadForm1 = (props) => {
 
                                 {/* --------------------------------------------------------------------------------------------------------- */}
                                 <div className='cover'>
-                                    <PicturesWall id="IMG_LEFT" style={{ float: 'left', }}/>
+                                    <PicturesWall id="IMG_LEFT" style={{ float: 'left', }} />
                                     <div style={{ width: '185px', height: '128px', float: 'left', marginRight: '100px' }}><p>Cover Image</p></div>
                                 </div>
                                 <div className='cover'>
@@ -274,10 +281,10 @@ const UploadForm1 = (props) => {
                     <Form.Item
                         name="title"
                         rules={[
-                            {
-                                required: true,
-                                message: 'Please input the title',
-                            },
+                            // {
+                            //     required: true,
+                            //     message: 'Please input the title',
+                            // },
                         ]}
                     >
                         <div className='item'>
@@ -297,10 +304,10 @@ const UploadForm1 = (props) => {
                         name="category"
 
                         rules={[
-                            {
-                                required: true,
-                                message: 'Please select the section!',
-                            },
+                            // {
+                            //     required: true,
+                            //     message: 'Please select the section!',
+                            // },
                         ]}
                         initialValue="renew"
                         wrapperCol={{
@@ -315,7 +322,7 @@ const UploadForm1 = (props) => {
                                 value={category}
                                 onChange={
                                     (e) => {
-                                        const val = e.target.value; 
+                                        const val = e.target.value;
                                         updateCategory(val);
                                         // console.log("Category changed:" + category);
                                         // const result = document.querySelector('.result');
@@ -344,9 +351,9 @@ const UploadForm1 = (props) => {
                     >
                         <div className='item'>
                             <label htmlFor='description' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Description</label>
-                            <textarea 
-                                value = {description}
-                                onChange = { 
+                            <textarea
+                                value={description}
+                                onChange={
                                     (e) => {
                                         updateDescription(e.target.value);
                                         // console.log("Description changed: " + description);
