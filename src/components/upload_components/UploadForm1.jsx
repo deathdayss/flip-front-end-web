@@ -6,7 +6,7 @@
  * @desc [description]
  */
 
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect} from 'react';
 import Header from '../header_components/Header.jsx';
 import "./UploadForm1.scss";
 import { Layout, Input, Form, Select, Modal, Button, Upload } from 'antd';
@@ -14,6 +14,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import request from 'umi-request';
 import { useHistory } from 'react-router-dom'
+import { string } from 'prop-types';
 
 
 
@@ -58,13 +59,14 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
     console.log("Descript: \t" + _description_);
     console.log("Category: \t" + _category_);
     console.log('===================================');
+
     const promise = getInfoUploadService(_game_id_, _title_, _folder_, _description_, _category_);
     console.log(promise)
     promise.then(
         values=>{
             console.log('===================================');
             console.log("Information Sucecssfull Uploaded")
-            message.info('Your game has been uploaded successfully !', 2.0);
+            message.info('Your game has been uploaded successfully ! GID:'+_game_id_, 2.0);
             setTimeout(function(){history.push('/');}, 2000);
             console.log('===================================');
         }, 
@@ -72,7 +74,7 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
             console.log('===================================');
             console.log("Information Upload with Failure")
             // message.info('There seem to be some issue with te server ...', 2.0);
-            message.info('Your game has been uploaded successfully !', 2.0);
+            message.info('Your game has been uploaded successfully ! GID:'+_game_id_, 2.0);
             setTimeout(function(){history.push('/');}, 2000);
             console.log('===================================');
         })
@@ -200,12 +202,12 @@ const style = {
 
 }
 
-const UploadForm1 = () => {
+const UploadForm1 = (props) => {
     const history = useHistory();
-    const game_id = "c137"; //TODO: IMPLMENT GAME ID PASSING 
+    const game_id = props.match.params["id"]; 
     const [title,       updateTitle]         = useState("");
     const [category,    updateCategory]      = useState("Renew");
-    const [folder,      updateFolder]        = useState("");
+    const [folder,      updateFolder]        = useState("GAME"+game_id);
     const [description, updateDescription]   = useState("");
 
     return (
@@ -226,8 +228,8 @@ const UploadForm1 = () => {
                         rules={
                             [
                                 {
-                                    required: true,
-                                    message: 'Please input the file name',
+                                    // required: true,
+                                    // message:'File Name Please',
                                 },
                             ]
                         }
@@ -257,11 +259,11 @@ const UploadForm1 = () => {
                                 {/* --------------------------------------------------------------------------------------------------------- */}
                                 <div className='cover'>
                                     <PicturesWall id="IMG_LEFT" style={{ float: 'left', }}/>
-                                    <div style={{ width: '185px', height: '128px', float: 'left', marginRight: '100px' }}><p>xxxxxx</p></div>
+                                    <div style={{ width: '185px', height: '128px', float: 'left', marginRight: '100px' }}><p>Cover Image</p></div>
                                 </div>
                                 <div className='cover'>
                                     <PicturesWall id="IMG_RIGHT" style={{ float: 'left', }} />
-                                    <div style={{ width: '185px', height: '128px', float: 'left' }}><p>xxxxxx</p></div>
+                                    <div style={{ width: '185px', height: '128px', float: 'left' }}><p>Thumnails</p></div>
                                 </div>
                                 {/* --------------------------------------------------------------------------------------------------------- */}
 
