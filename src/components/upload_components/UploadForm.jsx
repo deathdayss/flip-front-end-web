@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // import React from 'react'
 // import "./UploadForm.scss"
 // import { Form, Input, Select, Row, Col, Checkbox, Button } from 'antd'

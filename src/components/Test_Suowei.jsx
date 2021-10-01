@@ -11,6 +11,8 @@
  * @modify date 2021-08-13 11:58:17
  */
 
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import { Redirect, Switch, Route, withRouter, Link } from 'react-router-dom';
 import { connect } from "react-redux";

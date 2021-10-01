@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createForms, modelReducer, formReducer } from 'react-redux-form';
 import thunk from 'redux-thunk'

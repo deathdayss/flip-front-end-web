@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * @author Suowei Hu, Robert Zhao
  * @email suowei.h@gmail.com, vibrantrobert@gmail.com

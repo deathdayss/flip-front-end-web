@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import './SignUpForm.scss'
 
 import React, { useState } from 'react';

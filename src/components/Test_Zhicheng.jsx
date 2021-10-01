@@ -4,6 +4,8 @@
  * @modify date 2021-07-24 21:16:47
  */
 
+/* eslint-disable */
+
 import { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';

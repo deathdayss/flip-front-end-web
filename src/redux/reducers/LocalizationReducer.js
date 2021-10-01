@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { localizationTypes } from '../actions/types/LocalizationTypes';
 import { english } from '../../data/words/English';
 import storage from 'redux-persist/lib/storage'

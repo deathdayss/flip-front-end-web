@@ -6,6 +6,9 @@
  * @desc [description]
  */
 
+
+/* eslint-disable */
+
 import React, { Component, useState, useEffect } from 'react';
 import Header from '../header_components/Header.jsx';
 import "./UploadForm1.scss";
