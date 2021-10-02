@@ -13,7 +13,12 @@ import React, { Component } from 'react'
 import Header from '../header_components/Header.jsx';
 import { Upload, message } from 'antd';
 
-import {Redirect} from "react-router-dom";
+import {createBrowserHistory} from 'history';
+
+const history = createBrowserHistory({
+    basename: '',
+    forceRefresh: true
+});
 
 const { Dragger } = Upload;
 
@@ -32,6 +37,8 @@ const props = {
     }
     if (status === 'done') {
       message.success(`${info.file.name} file uploaded successfully.`);
+      history.push('/upload_form',{id: '123'});
+
     } else if (status === 'error') {
       message.error(`${info.file.name} file upload failed.`);
     }
@@ -55,14 +62,8 @@ const style = {
 class DragUpload extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      uploadFlag: false
-    };
   }
   render() {
-    if(this.state.uploadFlag){
-      return <Redirect to='/upload_form/id=1' />;
-  }
     return (
       <div>
         <Header />
