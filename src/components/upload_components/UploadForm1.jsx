@@ -18,7 +18,7 @@ import { message } from 'antd';
 import request from 'umi-request';
 import { useHistory } from 'react-router-dom'
 import { string } from 'prop-types';
-import Avatar from "./PictureWall"
+// import Avatar from "./PictureWall"
 
 
 
@@ -134,71 +134,71 @@ const getInfoUploadService = (_game_id_, _title_, _folder_, _description_, _cate
 
 // // =========================================================================================
 // //Miniature display
-// function getBase64(file) {
-//     return new Promise((resolve, reject) => {
-//         const reader = new FileReader();
-//         reader.readAsDataURL(file);
-//         reader.onload = () => resolve(reader.result);
-//         reader.onerror = error => reject(error);
-//     });
-// }
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
 
-// class PicturesWall extends Component {
-//     state = {
-//         previewVisible: false,
-//         previewImage: '',
-//         previewTitle: '',
-//         fileList: [],
-//     };
+class PicturesWall extends Component {
+    state = {
+        previewVisible: false,
+        previewImage: '',
+        previewTitle: '',
+        fileList: [],
+    };
 
-//     handleCancel = () => this.setState({ previewVisible: false });
-//     handlePreview = async file => {
-//         if (!file.url && !file.preview) {
-//             file.preview = await getBase64(file.originFileObj);
-//         }
-//         this.setState({
-//             previewImage: file.url || file.preview,
-//             previewVisible: true,
-//             previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
-//         });
-//     };
+    handleCancel = () => this.setState({ previewVisible: false });
+    handlePreview = async file => {
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj);
+        }
+        this.setState({
+            previewImage: file.url || file.preview,
+            previewVisible: true,
+            previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
+        });
+    };
 
-//     handleChange = info => {
-//         const files = info.fileList
-//         this.setState({ files });
-//         console.log(files[0].status)
-//     };
+    handleChange = info => {
+        const files = info.fileList
+        this.setState({ files });
+        console.log(files[0].status)
+    };
 
-//     render() {
-//         const { previewVisible, previewImage, fileList, previewTitle } = this.state;
-//         const uploadButton = (
-//             <div>
-//                 <PlusOutlined />
-//                 <div style={{ marginTop: 8 }}>Upload</div>
-//             </div>
-//         );
-//         return (
-//             <div style={{ float: 'left', marginRight: '26px' }}>
-//                 <Upload
-//                     listType="picture-card"
-//                     fileList={fileList}
-//                     onPreview={this.handlePreview}
-//                     onChange={this.handleChange}
-//                     beforeUpload={beforeUpload}
-//                 >
-//                     {fileList.length >= 1 ? null : uploadButton}
-//                 </Upload>
-//                 <Modal
-//                     visible={previewVisible}
-//                     title={previewTitle}
-//                     footer={null}
-//                     onCancel={this.handleCancel}
-//                 >
-//                 </Modal>
-//             </div>
-//         );
-//     }
-// }
+    render() {
+        const { previewVisible, previewImage, fileList, previewTitle } = this.state;
+        const uploadButton = (
+            <div>
+                <PlusOutlined />
+                <div style={{ marginTop: 8 }}>Upload</div>
+            </div>
+        );
+        return (
+            <div style={{ float: 'left', marginRight: '26px' }}>
+                <Upload
+                    listType="picture-card"
+                    fileList={fileList}
+                    onPreview={this.handlePreview}
+                    onChange={this.handleChange}
+                    beforeUpload={beforeUpload}
+                >
+                    {fileList.length >= 1 ? null : uploadButton}
+                </Upload>
+                <Modal
+                    visible={previewVisible}
+                    title={previewTitle}
+                    footer={null}
+                    onCancel={this.handleCancel}
+                >
+                </Modal>
+            </div>
+        );
+    }
+}
 
 // =========================================================================================
 // FORM ELEMENT
@@ -267,14 +267,23 @@ const UploadForm1 = (props) => {
                             <div className='covers'>
 
                                 {/* --------------------------------------------------------------------------------------------------------- */}
-                                <div className='cover'>
+                                {/* <div className='cover'>
                                     <Avatar id="IMG_LEFT" style={{ float: 'left', width:'128px', height:'128px'}} />
                                     <div style={{ width: '185px', height: '0px', float: 'left', marginRight: '100px' }}><p>Cover Image</p></div>
                                 </div>
-                                {/* <div className='cover'>
+                                <div className='cover'>
                                     <Avatar id="IMG_RIGHT" style={{ float: 'left', width:'128px', height:'128px'}} />
                                     <div style={{ width: '185px', height: '128px', float: 'left' }}><p>Thumnails</p></div>
                                 </div> */}
+                                {/* --------------------------------------------------------------------------------------------------------- */}
+                                <div className='cover'>
+                                    <PicturesWall id="IMG_LEFT" />
+                                    <div style={{ width: '185px', height: '0px', float: 'left', marginRight: '100px' }}><p>Cover Image</p></div>
+                                </div>
+                                <div className='cover'>
+                                    <PicturesWall id="IMG_RIGHT" />
+                                    <div style={{ width: '185px', height: '128px', float: 'left' }}><p>Thumnails</p></div>
+                                </div>
                                 {/* --------------------------------------------------------------------------------------------------------- */}
 
                             </div>
