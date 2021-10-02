@@ -185,7 +185,7 @@ class HeaderFirstLayer extends Component {
                 return btnsInfo.map((btnInfo, index) => {
                     if (index != btnsInfo.length - 1) {
                         return (
-                            <Link to='/TobeChanged1' key={btnInfo[0]} className={'my-link me-' + btnInfo[2]}>
+                            <Link to='/upload_work' key={btnInfo[0]} className={'my-link me-' + btnInfo[2]}>
                                 <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
                             </Link>
                         )
