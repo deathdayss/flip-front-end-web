@@ -56,6 +56,7 @@ const beforeUpload = ({ fileList }) => {
 //     )
 // }
 const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _category_, history = null) => {
+
     console.log('===================================');
     console.log("Game ID: \t" + _game_id_);
     console.log("Title: \t\t" + _title_);
@@ -64,28 +65,28 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
     console.log("Category: \t" + _category_);
     console.log('===================================');
 
-    if      (_title_.length == 0)    { message.warn("The game title cannot be empty.",2.0);      }
-    else if (_folder_.length == 0)   { message.warn("A folder is necessary for your game.",2.0); }
-    else if (_category_.length == 0) { message.warn("You must pick a genre for your game.",2.0); }
+    if      (_title_.length == 0)       { message.warn("The game title cannot be empty.",2.0);      }
+    else if (_folder_.length == 0)      { message.warn("A folder is necessary for your game.",2.0); }
+    else if (_category_.length == 0)    { message.warn("You must pick a genre for your game.",2.0); }
     else if (_description_.length == 0) { message.warn("Have some description will bring you more notice.",2.0); }
     else {
         const promise = getInfoUploadService(_game_id_, _title_, _folder_, _description_, _category_);
         console.log(promise)
         promise.then(
             values => {
-                console.log('===================================');
-                console.log("Information Sucecssfull Uploaded")
+                // console.log('===================================');
+                // console.log("Information Sucecssfull Uploaded")
                 message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
                 setTimeout(function () { history.push('/'); }, 2000);
-                console.log('===================================');
+                // console.log('===================================');
             },
             reasons => {
-                console.log('===================================');
-                console.log("Information Upload with Failure")
+                // console.log('===================================');
+                // console.log("Information Upload with Failure")
                 // message.warn('There seem to be some issue with te server ...', 2.0);
                 message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
                 setTimeout(function () { history.push('/'); }, 2000);
-                console.log('===================================');
+                // console.log('===================================');
             })
     }
 }
@@ -214,10 +215,15 @@ const style = {
 
 const UploadForm1 = (props) => {
     const history = useHistory();
-    const game_id = props.match.params["id"];
+
+    const _path_ = props.location.pathname;
+    const _gid_  = _path_.split('/')[2]
+    console.log(_gid_)
+
     const [title, updateTitle] = useState("");
     const [category, updateCategory] = useState("3D");
-    const [folder, updateFolder] = useState("GAME" + game_id);
+    const [folder, updateFolder] = useState("GAME" + _gid_);
+    const [game_id, updateGameID] = useState(_gid_);
     const [description, updateDescription] = useState("");
 
     return (

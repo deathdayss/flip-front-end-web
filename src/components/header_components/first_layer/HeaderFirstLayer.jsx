@@ -133,8 +133,8 @@ const handle_getVerificationCode = () => {
             console.log(verificationImageURL);
         },
         function (value) {
-            console.log('Request veri code failture');
-            message.warn('Something wrong just happened', 2.0);
+            // console.log('Request veri code failture');
+            // message.warn('Something wrong just happened', 2.0);
         }
     )
 
