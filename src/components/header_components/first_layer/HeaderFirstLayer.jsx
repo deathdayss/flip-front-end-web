@@ -50,9 +50,9 @@ const mapStateToProps = state => {
 // ==========================================================================================
 // Login service
 const DOMAIN = "http://106.52.167.166:8084";
-const API_LOGIN = "https://68f8d248-d179-4ceb-9469-79555efa3395.mock.pstmn.io";//`${DOMAIN}/v1/user/login`;
+const API_LOGIN = `${DOMAIN}/v1/user/login`;
 const API_SIGNUP = `${DOMAIN}/v1/user/register`;
-const API_VERIFICATION_CODE = "https://68f8d248-d179-4ceb-9469-79555efa3395.mock.pstmn.io";
+const API_VERIFICATION_CODE = "http://rinato.ticp.vip/v1/verification/code?getCode=123";
 
 let verificationCode;
 let verificationImageURL;
@@ -60,7 +60,7 @@ let verificationImageURL;
 
 
 const handle_loginRequest = (act, pwd, veri) => {
-    if (veri === verificationCode) {
+    if (veri.toUpperCase() === verificationCode.toUpperCase()) {
         console.log('Verification success!');
         // verificationFailureWarning = "";
         // console.log("Attempting to login via: " + val_email + " " + val_passw);
@@ -79,7 +79,7 @@ const handle_loginRequest = (act, pwd, veri) => {
         )
     }
     else {
-        console.log('Verification Failed!');
+        message.warn('Verification Failed!',2.0);
         // verificationFailureWarning = "Verification Failed";
     }
 }
@@ -167,7 +167,7 @@ class HeaderFirstLayer extends Component {
             this.setState({verificationFailureWarning: ""});
         }
         if(command===1){
-            this.setState({verificationFailureWarning: "Fuck you"});
+            this.setState({verificationFailureWarning: ""});
         }
     }
     componentDidMount() { }
