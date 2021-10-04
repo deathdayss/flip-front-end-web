@@ -217,8 +217,8 @@ const UploadForm1 = (props) => {
     const history = useHistory();
 
     const _path_ = props.location.pathname;
-    const _gid_  = _path_.split('/')[2]
-    console.log(_gid_)
+    const _gid_  = props.location.search.split("=")[1];//_path_.split('/')[1];
+    console.log(_gid_);
 
     const [title, updateTitle] = useState("");
     const [category, updateCategory] = useState("3D");

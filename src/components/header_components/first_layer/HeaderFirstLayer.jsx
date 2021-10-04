@@ -52,7 +52,7 @@ const mapStateToProps = state => {
 const DOMAIN = "http://106.52.167.166:8084";
 const API_LOGIN = `${DOMAIN}/v1/user/login`;
 // const API_SIGNUP = `${DOMAIN}/v1/user/register`;
-const API_VERIFICATION_CODE = "http://rinato.ticp.vip/v1/verification/code?getCode=123";
+const API_VERIFICATION_CODE = "http://rinato.ticp.vip/v1/verification/code";
 
 
 // const handle_signupRequest = (mail, name, pwd, veri) => {
@@ -216,7 +216,7 @@ class HeaderFirstLayer extends Component {
                             const requestVerificationCode = (params) => {
                                 return request(`${API_VERIFICATION_CODE}`, {
                                     method: "get",
-                                    data: params,
+                                    params: params,
                                     requestType: "json"
                                 });
                             }
