@@ -21,7 +21,9 @@ import Header from '../header_components/Header.jsx'
 import request from 'umi-request';
 import Icon from '@ant-design/icons';
 import "../../scss/Spacing.scss";
-import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_CHECK, API_RANK_DOWNLOAD, API_IMG } from "../../Config.js";
+import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_NUM, API_LIKE_CHECK, API_RANK_DOWNLOAD, API_IMG } from "../../Config.js";
+
+//http://106.52.167.166:8084/v1/like/num?GID=1&UID=1
 
 const data = [
     {
@@ -157,6 +159,7 @@ const mapStateToProps = state => {
 const GameDisplay = (props) => {
     const defaultWords = props.localization.words.homepage.contentWords
     const [like, setLike] = useState(false)
+    const [likeNum, setLikeNum] = useState(false)
     const [collect, setCollect] = useState(false)
     const [forward, setForward] = useState(false)
     const [downloadList, setDownloadList] = useState([])
@@ -181,6 +184,8 @@ const GameDisplay = (props) => {
         }
         getLikeCheck();
 
+        getLikeNum();
+
         const getDownload = async () => {
             const result = await getDownloadService({
                 zone: "test",
@@ -193,6 +198,19 @@ const GameDisplay = (props) => {
 
     }, [])
 
+    useEffect(() => {
+        getLikeNum();
+    }, [like])
+
+    const getLikeNum = async () => {
+        const result = await getLikeNumService({
+            GID: 1,
+            UID: 1,
+        });
+        setLikeNum(result.count);
+        console.log(likeNum)
+    }
+
     const getDownloadService = (params) => {
         return request(`${API_RANK_DOWNLOAD}`, { params });
     }
@@ -203,6 +221,10 @@ const GameDisplay = (props) => {
 
     const getLikeClickService = (params) => {
         return request(`${API_LIKE_CLICK}`, { params });
+    }
+
+    const getLikeNumService = (params) => {
+        return request(`${API_LIKE_NUM}`, { params });
     }
 
     const getProductInfoService = (params) => {
@@ -224,7 +246,7 @@ const GameDisplay = (props) => {
         <>
             <Box width={80}>
                 <LikeIcon className="like-icon" onClick={likeClick} style={{ color: like ? "#5B28FF" : "#727272", }} />
-                <span>123</span>
+                <span>{likeNum}</span>
             </Box>
             <Box width={80}>
                 <CollectIcon className="like-icon" onClick={() => { setCollect(!collect) }} style={{ color: collect ? "#5B28FF" : "#727272", }} />
@@ -315,12 +337,24 @@ const GameDisplay = (props) => {
             <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
                 <Box width={1} className="game-frame">
                     <Play></Play>
-                    {/* <img className="Home-Content-img" src="fake_data/work_cover.jpg" /> */}
                 </Box>
             </Flex>
 
             <Flex className="buttons" mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
-                <Buttons></Buttons>
+                {/* <Buttons></Buttons> */}
+                <Box width={80}>
+                    <LikeIcon className="like-icon" onClick={likeClick} style={{ color: like ? "#5B28FF" : "#727272", }} />
+                    <span>{likeNum}</span>
+                </Box>
+                <Box width={80}>
+                    <CollectIcon className="like-icon" onClick={() => { setCollect(!collect) }} style={{ color: collect ? "#5B28FF" : "#727272", }} />
+                    <span>123</span>
+                </Box>
+                <Box width={80}>
+                    <ForwardIcon className="like-icon" onClick={() => { setForward(!forward) }} style={{ color: forward ? "#5B28FF" : "#727272", }} />
+                    <span>123</span>
+                </Box>
+
                 <Box style={{ flexGrow: 1 }}>
                     <div id="unity-fullscreen-button"></div>
                 </Box>
@@ -359,8 +393,6 @@ const GameDisplay = (props) => {
                     )}
                 />
             </Flex>
-
-
         </>)
 }
 
