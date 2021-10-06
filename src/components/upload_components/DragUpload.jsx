@@ -27,24 +27,24 @@ const { Dragger } = Upload;
 const API_UPLOAD = "http://106.52.167.166:8084/v1/upload/game";//"https://68f8d248-d179-4ceb-9469-79555efa3395.mock.pstmn.io";//
 
 const handle_uploadRequest = (options) => {
-  const {onSuccess, onError, file, onProgress} = options;
+  const { onSuccess, onError, file, onProgress } = options;
   console.log(file);
   let formData = new FormData();
-  formData.append('email',"my_name_is_noBody@example.com");
-  formData.append('password',"123");
-  formData.append('file_body',file);
+  formData.append('email', "my_name_is_noBody@example.com");
+  formData.append('password', "123");
+  formData.append('file_body', file);
 
   const uploadPromise = getUploadSerive(formData);//{ email: "my_name_is_noBody@example.com",password: "123",file_body: file}
   uploadPromise.then(
     function (value) {
       message.success(`${file.name} uploaded successfully.`);
       console.log(JSON.stringify(value));
-      onSuccess(value.status,file);
+      onSuccess(value.status, file);
       history.push(`/upload_form?id=${value.ID}`);
     },
     function (value) {
-      console.log('Signup failture');
-      message.warn('The email you used is already registered', 2.0);
+      console.log('Upload failture');
+      message.warn('Check your network and try again', 2.0);
     }
   )
 }
@@ -85,14 +85,23 @@ const props = {
   },
 };
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  margin: '-336px 0 0 -519px',
-  boxSizing: 'inner-box',
+const styleInner = {
+  // position: 'absolute',
+  // top: '50%',
+  // left: '50%',
+  // margin: '-336px 0 0 -519px',
+  // // boxSizing: 'inner-box',
   height: '672px',
-  width: '1038px',
+  margin: '160px 441px'
+  // // maxHeight: '672px',
+  // width: '1038px',
+  // maxWidth: '1038px',
+
+}
+
+const styleOuter = {
+  // height: '100%',
+  // position: 'absolute',
 }
 
 
@@ -102,14 +111,16 @@ const DragUpload = () => {
   return (
     <div>
       <Header />
-      <div style={style}>
-        <Dragger {...props}>
-          <p className="ant-upload-drag-icon">
-            <img src='images/content/UploadSimple.svg' height='90' width='90' />
-          </p>
-          <p className="ant-upload-text">Click or drag WebGL folder to this area to upload</p>
+      <div style={styleOuter}>
+        <div style={styleInner}>
+          <Dragger {...props}>
+            <p className="ant-upload-drag-icon">
+              <img src='images/content/UploadSimple.svg' height='90' width='90' />
+            </p>
+            <p className="ant-upload-text">Click or drag WebGL compressed file(.zip) to this area to upload</p>
 
-        </Dragger>
+          </Dragger>
+        </div>
       </div>
     </div>
   )

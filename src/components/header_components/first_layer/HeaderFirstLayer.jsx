@@ -229,8 +229,8 @@ class HeaderFirstLayer extends Component {
                                     Account:  <Input id="mainMenuLogin_name" type="email" /> <br />
                                     Password: <Input id="mainMenuLogin_pass" type="password" /> <br />
                                     Verification Code: <div style={{border: `${val_borderWidth}px solid red`}}><Input id="mainMenuLogin_veri" type="text" /></div>
-                                    <img style={{marginTop:"5px"}} src={val_veriImageURL} height='50px' width='100px' />
                                     <p className="veri-failed-warning">{val_veriFailWarning}</p>
+                                    <img style={{marginTop:"5px"}} src={val_veriImageURL} height='50px' width='100px' />
                                     <li><a
                                         href="/signup"
                                     // style={{

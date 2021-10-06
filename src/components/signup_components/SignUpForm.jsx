@@ -240,8 +240,8 @@ const RegistrationForm = () => {
                 label=" "
                 colon={false}
             >
-                <img src={val_veriImageURL} height='50px' width='100px' />
                 <p className="veri-failed-warning">{val_veriFailWarning}</p>
+                <img src={val_veriImageURL} height='50px' width='100px' />
             </Form.Item>
 
 
