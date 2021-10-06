@@ -157,8 +157,8 @@ const LastestRecommand = () => {
         const { game_name, like_num, DownloadNum, AuthorName } = packed_data
         return [
             game_name,
-            "二行",
-            DownloadNum + "游玩 - " + like_num + "点赞",
+            "   ",
+            DownloadNum + "Plays - " + like_num + "Likes",
             AuthorName
         ]
     }

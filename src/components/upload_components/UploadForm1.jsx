@@ -77,7 +77,8 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
                 // console.log('===================================');
                 // console.log("Information Sucecssfull Uploaded")
                 message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
-                setTimeout(function () { history.push('/'); }, 2000);
+                // setTimeout(function () { history.push('/'); }, 2000);
+                history.push('/');
                 // console.log('===================================');
             },
             reasons => {
@@ -85,7 +86,8 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
                 // console.log("Information Upload with Failure")
                 // message.warn('There seem to be some issue with te server ...', 2.0);
                 message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
-                setTimeout(function () { history.push('/'); }, 2000);
+                // setTimeout(function () { history.push('/'); }, 2000);
+                history.push('/');
                 // console.log('===================================');
             })
     }
