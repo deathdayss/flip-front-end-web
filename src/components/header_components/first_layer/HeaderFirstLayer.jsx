@@ -7,7 +7,7 @@
  */
 
 import { Popover, Button, Input, message } from 'antd';
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import { Row, Col } from 'reactstrap';
 import { Control, Form } from 'react-redux-form';
@@ -51,130 +51,54 @@ const mapStateToProps = state => {
 // Login service
 const DOMAIN = "http://106.52.167.166:8084";
 const API_LOGIN = `${DOMAIN}/v1/user/login`;
-const API_SIGNUP = `${DOMAIN}/v1/user/register`;
-const API_VERIFICATION_CODE = "http://rinato.ticp.vip/v1/verification/code?getCode=123";
-
-let verificationCode;
-let verificationImageURL;
-// let verificationFailureWarning = "";
+// const API_SIGNUP = `${DOMAIN}/v1/user/register`;
+const API_VERIFICATION_CODE = "http://rinato.ticp.vip/v1/verification/code";
 
 
-const handle_loginRequest = (act, pwd, veri) => {
-    if (veri.toUpperCase() === verificationCode.toUpperCase()) {
-        console.log('Verification success!');
-        // verificationFailureWarning = "";
-        // console.log("Attempting to login via: " + val_email + " " + val_passw);
-        // verificationFailureWarning = "Fuck you";
-        const loginPormise = getLoginService({ email: act, password: pwd });
-        loginPormise.then(
-            function (value) {
-                // console.log('Login success');
-                message.info('Login Successful', 2.0);
-                // setTimeout(function(){history.push('/');message.info('Welcome '+val_email + ' !', 2.0);}, 2000);
-            },
-            function (value) {
-                // console.log('Login failture');
-                message.warn('Either your <email> or <password> is incorrect', 2.0);
-            }
-        )
-    }
-    else {
-        message.warn('Verification Failed!',2.0);
-        // verificationFailureWarning = "Verification Failed";
-    }
-}
-const getLoginService = (params) => {
-    return request(`${API_LOGIN}`, {
-        method: "post",
-        data: params,
-        requestType: "form"
-    });
-}
-const handle_signupRequest = (mail, name, pwd, veri) => {
-    // if (veri === verificationCode) {
-    //     verificationFailureWarning = "";
-    // console.log("Attempting to signup via: " + email + " " + nickname + " " + password);
-    const signupPormise = getSignupSerive({ email: mail, nickname: name, password: pwd });
-    signupPormise.then(
-        function (value) {
-            console.log('Signup success');
-            message.info('Signup Successful', 2.0);
-            // setTimeout(function () { history.push('/'); message.info('Welcome ' + val_email + ' !', 2.0); }, 2000);
-        },
-        function (value) {
-            console.log('Signup failture');
-            message.warn('The email you used is already registered', 2.0);
-        }
-    )
-    // }
-    // else{
-    //     verificationFailureWarning = "Verification Failed";
-    // }
+// const handle_signupRequest = (mail, name, pwd, veri) => {
+//     // if (veri === verificationCode) {
+//     //     verificationFailureWarning = "";
+//     // console.log("Attempting to signup via: " + email + " " + nickname + " " + password);
+//     const signupPormise = getSignupSerive({ email: mail, nickname: name, password: pwd });
+//     signupPormise.then(
+//         function (value) {
+//             console.log('Signup success');
+//             message.info('Signup Successful', 2.0);
+//             // setTimeout(function () { history.push('/'); message.info('Welcome ' + val_email + ' !', 2.0); }, 2000);
+//         },
+//         function (value) {
+//             console.log('Signup failture');
+//             message.warn('The email you used is already registered', 2.0);
+//         }
+//     )
+//     // }
+//     // else{
+//     //     verificationFailureWarning = "Verification Failed";
+//     // }
 
-}
-const getSignupSerive = (params) => {
-    return request(`${API_SIGNUP}`, {
-        method: "post",
-        data: params,
-        requestType: "form"
-    });
-}
+// }
+// const getSignupSerive = (params) => {
+//     return request(`${API_SIGNUP}`, {
+//         method: "post",
+//         data: params,
+//         requestType: "form"
+//     });
+// }
 
-
-const handle_getVerificationCode = () => {
-    const verificationPromise = requestVerificationCode({ getCode: 123 });
-    verificationPromise.then(
-        function (value) {
-            console.log('Request veri code success');
-            // console.log(JSON.stringify(value));
-            verificationCode = value.Content;
-            verificationImageURL = value.URL;
-            console.log(verificationCode);
-            console.log(verificationImageURL);
-        },
-        function (value) {
-            // console.log('Request veri code failture');
-            // message.warn('Something wrong just happened', 2.0);
-        }
-    )
-
-}
-const requestVerificationCode = (params) => {
-    return request(`${API_VERIFICATION_CODE}`, {
-        method: "get",
-        data: params,
-        requestType: "json"
-    });
-}
 
 // ==========================================================================================
 // Main component
 class HeaderFirstLayer extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            verificationFailureWarning: "",
-        }
-    }
 
     handleRankBtn = () => { }
     // TODO: press the search button
     headerSearch = value => { this.props.toggleLanguage(this.props.localization.lang) }
 
-    handleVeriWarningChange = (command) => {
-        if(command===0){
-            this.setState({verificationFailureWarning: ""});
-        }
-        if(command===1){
-            this.setState({verificationFailureWarning: ""});
-        }
-    }
+
     componentDidMount() { }
 
-    componentWillMount() {
-        handle_getVerificationCode();
-    }
+    
 
     render() {
 
@@ -232,6 +156,71 @@ class HeaderFirstLayer extends Component {
                         //     )
                         // }
                         const LoginComponent_content = () => {
+
+                            const [val_veriCodeResponse, set_ValVeriCodeResponse] = useState("");
+                            const [val_veriImageURL, set_ValVeriImageURL] = useState("");
+                            const [val_veriFailWarning, set_ValVeriFailWarning] = useState("");
+                            const [val_borderWidth, set_ValBorderWidth] = useState("0");
+
+                            const handle_loginRequest = (act, pwd, veri) => {
+                                set_ValVeriFailWarning("");
+                                set_ValBorderWidth("0");
+                                if (veri.toUpperCase() === val_veriCodeResponse.toUpperCase()) {
+                                    console.log('Verification success!');
+                                    // verificationFailureWarning = "";
+                                    // console.log("Attempting to login via: " + val_email + " " + val_passw);
+                                    // verificationFailureWarning = "Fuck you";
+                                    const loginPormise = getLoginService({ email: act, password: pwd });
+                                    loginPormise.then(
+                                        function (value) {
+                                            // console.log('Login success');
+                                            message.info('Login Successful', 2.0);
+                                            // setTimeout(function(){history.push('/');message.info('Welcome '+val_email + ' !', 2.0);}, 2000);
+                                        },
+                                        function (value) {
+                                            // console.log('Login failture');
+                                            message.warn('Either your <email> or <password> is incorrect', 2.0);
+                                        }
+                                    )
+                                }
+                                else {
+                                    message.warn('Verification Failed!', 2.0);
+                                    set_ValVeriFailWarning("Verification Failed");
+                                    set_ValBorderWidth("1");
+                                }
+                            }
+                            const getLoginService = (params) => {
+                                return request(`${API_LOGIN}`, {
+                                    method: "post",
+                                    data: params,
+                                    requestType: "form"
+                                });
+                            }
+
+                            const handle_getVerificationCode = () => {
+                                const verificationPromise = requestVerificationCode({ getCode: 123 });
+                                verificationPromise.then(
+                                    function (value) {
+                                        console.log('Request veri code success');
+                                        // console.log(JSON.stringify(value));
+                                        set_ValVeriCodeResponse(value.Content);
+                                        set_ValVeriImageURL(value.URL);
+                                    },
+                                    function (value) {
+                                        console.log('Request veri code failture');
+                                        message.warn('Something wrong just happened', 2.0);
+                                    }
+                                )
+
+                            }
+                            const requestVerificationCode = (params) => {
+                                return request(`${API_VERIFICATION_CODE}`, {
+                                    method: "get",
+                                    params: params,
+                                    requestType: "json"
+                                });
+                            }
+                            useEffect(handle_getVerificationCode, []);
                             return (
                                 <ul style={{ textAlign: 'left', padding: 0, margin: 0 }}>
                                     {/* <li><a href="/login">Login</a></li> */}
@@ -239,21 +228,21 @@ class HeaderFirstLayer extends Component {
                                     <h3> Welcome </h3>
                                     Account:  <Input id="mainMenuLogin_name" type="email" /> <br />
                                     Password: <Input id="mainMenuLogin_pass" type="password" /> <br />
-                                    Verification Code: <Input id="mainMenuLogin_veri" type="text" />
-                                    <img src={verificationImageURL} height='50px' width='100px' />
-                                    <p className="veri-failed-warning">{this.state.verificationFailureWarning}</p>
+                                    Verification Code: <div style={{border: `${val_borderWidth}px solid red`}}><Input id="mainMenuLogin_veri" type="text" /></div>
+                                    <p className="veri-failed-warning">{val_veriFailWarning}</p>
+                                    <img style={{marginTop:"5px"}} src={val_veriImageURL} height='50px' width='100px' />
                                     <li><a
                                         href="/signup"
-                                        // style={{
-                                        //     textDecoration: 'underline',
-                                        //     color: 'blue'
-                                        // }}
-                                        // onClick={
-                                        //     () => {
-                                        //         const temp = document.getElementById("mainMenuPopup");
-                                        //         temp.innerHTML = renderToString(<SignupComponent_content />);
-                                        //     }
-                                        // }
+                                    // style={{
+                                    //     textDecoration: 'underline',
+                                    //     color: 'blue'
+                                    // }}
+                                    // onClick={
+                                    //     () => {
+                                    //         const temp = document.getElementById("mainMenuPopup");
+                                    //         temp.innerHTML = renderToString(<SignupComponent_content />);
+                                    //     }
+                                    // }
                                     >if you don't have an account</a></li> <br />
                                     <Button onClick={
                                         () => {

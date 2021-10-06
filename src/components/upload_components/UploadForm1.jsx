@@ -17,13 +17,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import request from 'umi-request';
 import { useHistory } from 'react-router-dom'
-import { string } from 'prop-types';
-// import Avatar from "./PictureWall"
 
-
-
-const { TextArea } = Input;
-const { Option } = Select;
 const formItemLayout = {
     labelCol: { span: 0, }, wrapperCol: { span: 5, },
 };
@@ -36,9 +30,8 @@ const normFile = (e) => {
     }
     return e && e.fileList;
 };
-const beforeUpload = ({ fileList }) => {
-    return false;
-}
+
+const imageList = [];
 // =========================================================================================
 // Form Upload Logic
 
@@ -59,19 +52,28 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
 
     console.log('===================================');
     console.log("Game ID: \t" + _game_id_);
+    console.log("thumbnail: \t" + JSON.stringify(imageList[0]));
     console.log("Title: \t\t" + _title_);
     console.log("Folder: \t" + _folder_);
     console.log("Descript: \t" + _description_);
     console.log("Category: \t" + _category_);
     console.log('===================================');
 
-    if      (_title_.length == 0)       { message.warn("The game title cannot be empty.",2.0);      }
-    else if (_folder_.length == 0)      { message.warn("A folder is necessary for your game.",2.0); }
-    else if (_category_.length == 0)    { message.warn("You must pick a genre for your game.",2.0); }
-    else if (_description_.length == 0) { message.warn("Have some description will bring you more notice.",2.0); }
+    if (_title_.length == 0) { message.warn("The game title cannot be empty.", 2.0); }
+    else if (_folder_.length == 0) { message.warn("A folder is necessary for your game.", 2.0); }
+    else if (_category_.length == 0) { message.warn("You must pick a genre for your game.", 2.0); }
+    else if (_description_.length == 0) { message.warn("Have some description will bring you more notice.", 2.0); }
     else {
-        const promise = getInfoUploadService(_game_id_, _title_, _folder_, _description_, _category_);
-        console.log(promise)
+        const formData = new FormData();
+        formData.append('file_body', imageList[0]);
+        formData.append('email', 'my_name_is_noBody@example.com');
+        formData.append('password', '123');
+        formData.append('game_id', _game_id_);
+        formData.append('game_name', _title_);
+        formData.append('zone', _category_);
+        formData.append('description', _description_);
+        const promise = getInfoUploadService(formData);
+        // console.log(promise)
         promise.then(
             values => {
                 // console.log('===================================');
@@ -104,34 +106,15 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
 //     });
 // }
 const DOMAIN = "http://106.52.167.166:8084";
-const API_IMG = `${DOMAIN}/upload/img`
-const API_INFO = `${DOMAIN}/upload/`
+// const API_IMG = `${DOMAIN}/upload/img`
+const API_INFO = "http://106.52.167.166:8084/v1/upload/info";//`${DOMAIN}/v1/upload/info`;
 
-const getImageUploadService = (_img_s_) => {
-    // Notice this will return a LIST of promise
-    const rtn_s = []
-    for (const img in _img_s_) {
-        rtn_s.push(
-            request(API_IMG, {
-                method: "post",
-                data: { "img": "123" }, //TODO: REPLACE THIS WITH THE REAL IMAGE
-                requestType: "form"
-            }
-            )
-        );
-    }
-}
-const getInfoUploadService = (_game_id_, _title_, _folder_, _description_, _category_) => {
+
+const getInfoUploadService = (formData) => {
     return request(API_INFO, {
         method: "post",
-        data: {
-            "gid": _game_id_,
-            "title": _title_,
-            "folder": _folder_,
-            "description": _description_,
-            "category": _category_
-        },
-        requestType: "form"
+        data: formData,
+        requestType: "form",
     });
 }
 
@@ -165,12 +148,43 @@ class PicturesWall extends Component {
             previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
         });
     };
+    handleChange = ({ fileList, file }) => {
+        imageList.push(file);
+        // console.log(file);
+        this.setState({ fileList });
+    }
 
-    handleChange = info => {
-        const files = info.fileList
-        this.setState({ files });
-        console.log(files[0].status)
+    beforeUpload = (file) => {
+        return false;
+        return new Promise((resolve, reject) => {
+            let reader = new FileReader();
+            reader.addEventListener(
+                'load',
+                () => {
+                    let img = new Image();
+                    img.src = reader.result;
+                    img.onload = () => {
+                        if (img.width / 16 !== img.height / 9) {
+                            reject(new Error('The ratio of thumbnail is not 16:9!'));
+                        } else {
+                            resolve();
+                        }
+                    };
+                },
+                false
+            );
+            reader.readAsDataURL(file);
+        }).then(() => {
+            console.log("Good!!!");
+          })
+          .catch(() => {
+            Modal.error({
+              title: "The ratio of thumbnail is not 16:9!"
+            });
+          });
     };
+
+
 
     render() {
         const { previewVisible, previewImage, fileList, previewTitle } = this.state;
@@ -187,7 +201,7 @@ class PicturesWall extends Component {
                     fileList={fileList}
                     onPreview={this.handlePreview}
                     onChange={this.handleChange}
-                    beforeUpload={beforeUpload}
+                    beforeUpload={this.beforeUpload}
                 >
                     {fileList.length >= 1 ? null : uploadButton}
                 </Upload>
@@ -218,9 +232,9 @@ const style = {
 const UploadForm1 = (props) => {
     const history = useHistory();
 
-    const _path_ = props.location.pathname;
-    const _gid_  = _path_.split('/')[2]
-    console.log(_gid_)
+    // const _path_ = props.location.pathname;
+    const _gid_ = props.location.search.split("=")[1];//_path_.split('/')[1];
+    // console.log(_gid_);
 
     const [title, updateTitle] = useState("");
     const [category, updateCategory] = useState("3D");
@@ -288,10 +302,10 @@ const UploadForm1 = (props) => {
                                     <PicturesWall id="IMG_LEFT" />
                                     <div style={{ width: '185px', height: '0px', float: 'left', marginRight: '100px' }}><p>Cover Image</p></div>
                                 </div>
-                                <div className='cover'>
+                                {/* <div className='cover'>
                                     <PicturesWall id="IMG_RIGHT" />
                                     <div style={{ width: '185px', height: '128px', float: 'left' }}><p>Thumnails</p></div>
-                                </div>
+                                </div> */}
                                 {/* --------------------------------------------------------------------------------------------------------- */}
 
                             </div>

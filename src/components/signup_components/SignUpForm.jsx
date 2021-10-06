@@ -2,7 +2,7 @@
 
 import './SignUpForm.scss'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
 import { message } from 'antd';
 import $ from 'jquery'
@@ -13,8 +13,9 @@ import request from 'umi-request';
 
 const formItemLayout = { labelCol: { xs: { span: 24, }, sm: { span: 8, }, }, wrapperCol: { xs: { span: 24, }, sm: { span: 16, }, }, };
 const tailFormItemLayout = { wrapperCol: { xs: { span: 24, offset: 0, }, sm: { span: 16, offset: 8, }, }, };
-const DOMAIN = "http://106.52.167.166:8084"
-const API_SINGUP = `${DOMAIN}/v1/user/register`
+const DOMAIN = "http://106.52.167.166:8084";
+const API_SINGUP = `${DOMAIN}/v1/user/register`;
+const API_VERIFICATION_CODE = "http://rinato.ticp.vip/v1/verification/code";
 
 const RegistrationForm = () => {
     const [form] = Form.useForm();
@@ -25,25 +26,41 @@ const RegistrationForm = () => {
     const [val_nickn, set_ValNickn] = useState("");
     const [val_passw, set_ValPassw] = useState("");
     const [val_p_ver, set_ValPVeri] = useState("");
+    const [val_veri, set_ValVeri] = useState("");
+    const [val_veriCodeResponse, set_ValVeriCodeResponse] = useState("");
+    const [val_veriImageURL, set_ValVeriImageURL] = useState("");
+    const [val_veriFailWarning, set_ValVeriFailWarning] = useState("");
+    const [val_borderWidth, set_ValBorderWidth] = useState("0");
     const handle_emailChange = (e) => { console.log("set_ValEmail: " + val_email); set_ValEmail(e.target.value); }
     const handle_nickNChange = (e) => { console.log("set_ValNickn: " + val_nickn); set_ValNickn(e.target.value); }
     const handle_passwChange = (e) => { console.log("set_ValPassw: " + val_passw); set_ValPassw(e.target.value); }
     const handle_p_verChange = (e) => { console.log("set_ValPVeri: " + val_p_ver); set_ValPVeri(e.target.value); }
+    const handle_veriChange = (e) => { console.log("set_Veri: " + val_veri); set_ValVeri(e.target.value); }
+
 
     const handle_signupRequest = (history) => {
-        // console.log("Attempting to signup via: " + email + " " + nickname + " " + password);
-        const signupPormise = getSignupSerive({ email: val_email, nickname: val_nickn, password: val_passw });
-        signupPormise.then(
-            function (value) {
-                console.log('Singup success');
-                message.info('Signup Successful', 2.0);
-                setTimeout(function () { history.push('/'); message.info('Welcome ' + val_email + ' !', 2.0); }, 2000);
-            },
-            function (value) {
-                console.log('Signup failture');
-                message.warn('The email you used is already registered', 2.0);
-            }
-        )
+        set_ValVeriFailWarning("");
+        set_ValBorderWidth("0");
+        if (val_veri.toUpperCase() === val_veriCodeResponse.toUpperCase()) {
+            // console.log("Attempting to signup via: " + email + " " + nickname + " " + password);
+            const signupPormise = getSignupSerive({ email: val_email, nickname: val_nickn, password: val_passw });
+            signupPormise.then(
+                function (value) {
+                    console.log('Singup success');
+                    message.info('Signup Successful', 2.0);
+                    setTimeout(function () { history.push('/'); message.info('Welcome ' + val_email + ' !', 2.0); }, 2000);
+                },
+                function (value) {
+                    console.log('Signup failture');
+                    message.warn('The email you used is already registered', 2.0);
+                }
+            )
+        }
+        else {
+            message.warn('Verification Failed!', 2.0);
+            set_ValBorderWidth("1");
+            set_ValVeriFailWarning("Verification Failed");
+        }
     }
 
     const getSignupSerive = (params) => {
@@ -54,6 +71,30 @@ const RegistrationForm = () => {
         });
     }
 
+    const handle_getVerificationCode = () => {
+        const verificationPromise = requestVerificationCode({ getCode: 123 });
+        verificationPromise.then(
+            function (value) {
+                console.log('Request veri code success');
+                // console.log(JSON.stringify(value));
+                set_ValVeriCodeResponse(value.Content);
+                set_ValVeriImageURL(value.URL);
+            },
+            function (value) {
+                // console.log('Request veri code failture');
+                // message.warn('Something wrong just happened', 2.0);
+            }
+        )
+
+    }
+    const requestVerificationCode = (params) => {
+        return request(`${API_VERIFICATION_CODE}`, {
+            method: "get",
+            params: params,
+            requestType: "json"
+        });
+    }
+    useEffect(handle_getVerificationCode, []);
     // DEPRECATED 
     // (handle login request using the ajax method)
     //
@@ -181,6 +222,27 @@ const RegistrationForm = () => {
                 <Input.Password value={val_p_ver} onChange={handle_p_verChange} />
             </Form.Item>
 
+            <Form.Item
+                className="Flip_SignupForm_Item"
+                name="verification"
+                label="Verification Code"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input the code!',
+                    },
+                ]}
+            >
+                <div style={{ border: `${val_borderWidth}px solid red` }}><Input value={val_veri} onChange={handle_veriChange} /></div>
+            </Form.Item>
+            <Form.Item
+                className="Flip_SignupForm_Item"
+                label=" "
+                colon={false}
+            >
+                <p className="veri-failed-warning">{val_veriFailWarning}</p>
+                <img src={val_veriImageURL} height='50px' width='100px' />
+            </Form.Item>
 
 
             <Form.Item
