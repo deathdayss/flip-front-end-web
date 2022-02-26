@@ -21,7 +21,7 @@ import Header from '../header_components/Header.jsx'
 import request from 'umi-request';
 import Icon from '@ant-design/icons';
 import "../../scss/Spacing.scss";
-import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_NUM, API_LIKE_CHECK, API_RANK_DOWNLOAD, API_IMG } from "../../Config.js";
+import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_NUM, API_LIKE_CHECK, API_RANK_DOWNLOAD, API_IMG, DOWNLOAD_GAME } from "../../Config.js";
 
 //http://106.52.167.166:8084/v1/like/num?GID=1&UID=1
 
@@ -164,14 +164,42 @@ const GameDisplay = (props) => {
     const [forward, setForward] = useState(false)
     const [downloadList, setDownloadList] = useState([])
 
+    // useEffect(() => {
+    //     const getGame = async () => {
+    //         const result = await getGameService({
+    //             game_id: 1
+    //         })
+    //         console.log(result)
+    //         var blob = result;
+    //         var new_zip = new JSZip();
+    //         new_zip.loadAsync(blob)
+    //             .then(function (file) {
+    //                 var files = file.files;
+    //                 for (let f in files) {
+    //                     console.log("\nf: \n", f)
+    //                     // var zipobj = files[f];
+    //                     // if (!zipobj.dir) {
+    //                     //     new_zip.file(f).async("blob")
+    //                     //         .then(function (blob) {
+    //                     //             //获取blob对象地址，并把值赋给容器
+    //                     //             var mp3url = URL.createObjectURL(blob);
+    //                     //             $("#MP3Play").attr("src", mp3url);
+    //                     //             //setTimeout("revokeUrl('" + mp3url + "')", "2000");
+    //                     //         });
+    //                     // }
+    //                 }
+    //             });
 
+    //     }
+    //     getGame()
+    // }, [])
 
     useEffect(() => {
         const getProductInfo = async () => {
             const result = await getProductInfoService({
                 gid: 123456
             });
-            console.log(result);
+            // console.log(result);
         }
         getProductInfo();
 
@@ -191,7 +219,7 @@ const GameDisplay = (props) => {
                 zone: "test",
                 num: 10,
             });
-            console.log(result.List)
+            // console.log(result.List)
             setDownloadList(result.List);
         }
         getDownload();
@@ -208,7 +236,7 @@ const GameDisplay = (props) => {
             UID: 1,
         });
         setLikeNum(result.count);
-        console.log(likeNum)
+        // console.log(likeNum)
     }
 
     const getDownloadService = (params) => {
@@ -229,6 +257,13 @@ const GameDisplay = (props) => {
 
     const getProductInfoService = (params) => {
         return request(`${API_PRODUCT}`, { params });
+    }
+
+    const getGameService = (params) => {
+        return request(`${DOWNLOAD_GAME}`, {
+            responseType: 'blob',
+            params
+        });
     }
 
     const likeClick = () => {

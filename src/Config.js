@@ -14,3 +14,4 @@ export const API_PRODUCT = `${API_WT}/v1/get/product`
 export const API_LIKE_CLICK = `${API_URL}/v1/like/click`
 export const API_LIKE_CHECK = `${API_URL}/v1/like/check`
 export const API_LIKE_NUM = `${API_URL}/v1/like/num`
+export const DOWNLOAD_GAME = `${API_URL}/v1/download/game`
