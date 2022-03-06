@@ -63,16 +63,16 @@ const DisplayBoard = (props) => {
         return <ForLoop index={index} loopNum={2}
 
             LoopContent={() =>
-                <Box width={0.5} px={homepageSpacing.responsive_content_padding}>
+                <div class="carousel-below-content">
                     <div style={{ backgroundColor: "#000", height: 0, paddingBottom: aspectRatio, overflow: "hidden" }}>
                         <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList[index]?.img}`} onClick={() => { enterGame(downloadList[index]?.GID) }} />
                     </div>
-                </Box>}
+                </div>}
 
             PackingContent={({ Output }) =>
-                <Flex pt={index === 0 ? '' : homepageSpacing.up_content_padding} flexWrap='wrap'>
+                <div class={`carousel-below-packing ${index === 0 ? '' : 'has-top-padding'}`} flexWrap='wrap'>
                     {Output}
-                </Flex>} />
+                </div>} />
     }
 
     const RankWords = ({ styles, words = defaultWords }) => {
@@ -132,7 +132,7 @@ const DisplayBoard = (props) => {
             {numbers.map(i =>
                 <div key={`carousel${i}`}>
                     <div style={{ backgroundColor: "#000", height: 0, paddingBottom: aspectRatio, overflow: "hidden" }}>
-                        <img className='Home-Show-img' src={`${API_IMG}?img_name=${rankList[i]?.img}`} />
+                        <img className='Home-Show-img' src={`${API_IMG}?img_name=${rankList[i]?.img}`} onClick={() => { enterGame(rankList[i]?.GID) }} />
                     </div>
                 </div>)}
         </Carousel>
@@ -174,31 +174,19 @@ const DisplayBoard = (props) => {
                         Daily Pick
                     </Flex>
                     <Flex mt={homepageSpacing.top_margin} className='text-center' flexWrap='wrap'>
-                        <Box width={[1, 0.5, 0.4]} >
-                            <Flex>
-                                <Box width={1} px={homepageSpacing.responsive_show_padding}>
-                                    {/* <Carousel afterChange={onChange}>
-                                        <div>
-                                            <img className='Home-Show-img' src={imgUrl} />
-                                        </div>
-                                        <div>
-                                            <img className='Home-Show-img' src='fake_data/advertise.png' />
-                                        </div>
-                                        <div>
-                                            <img className='Home-Show-img' src={imgUrl} />
-                                        </div>
-                                        <div>
-                                            <img className='Home-Show-img' src={imgUrl} />
-                                        </div>
-                                    </Carousel> */}
-                                    <CarouselContent />
 
-                                </Box>
-                            </Flex>
+                        {/* <Box width={[1, 0.5, 0.4]} > */}
+                        <div class="dailypick-wrapper">
+                            <div class="caurousel-wrapper">
+                                <CarouselContent />
+                            </div>
                             <TopHalfSmallContent />
-                        </Box>
+                        </div>
+                        {/* </Box> */}
                         <Box width={[1, 0.5, 0.4]} pt={[homepageSpacing.up_content_padding, '0px', '0px', '0px']} >
+
                             <ForLoop loopNum={3} LoopContent={TopHalfSmallContent} />
+
                         </Box >
 
                     </Flex>

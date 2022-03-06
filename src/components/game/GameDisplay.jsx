@@ -223,12 +223,65 @@ const GameDisplay = (props) => {
             setDownloadList(result.List);
         }
         getDownload();
-
+        //initialize the unity game, reload script
+        initializeGame();
     }, [])
 
     useEffect(() => {
         getLikeNum();
     }, [like])
+
+    const initializeGame = () => {
+
+        var buildUrl = "Build";
+        var loaderUrl = buildUrl + "/Webgl-Eng.loader.js";
+        var config = {
+            dataUrl: buildUrl + "/Webgl-Eng.data.unityweb",
+            frameworkUrl: buildUrl + "/Webgl-Eng.framework.js.unityweb",
+            codeUrl: buildUrl + "/Webgl-Eng.wasm.unityweb",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "DefaultCompany",
+            productName: "XiaochuanJ_Bird_Project",
+            productVersion: "1.0",
+        };
+
+        var container = document.querySelector("#unity-container");
+        var canvas = document.querySelector("#unity-canvas");
+        var loadingBar = document.querySelector("#unity-loading-bar");
+        var progressBarFull = document.querySelector("#unity-progress-bar-full");
+        var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+        var mobileWarning = document.querySelector("#unity-mobile-warning");
+
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            container.className = "unity-mobile";
+            config.devicePixelRatio = 1;
+            mobileWarning.style.display = "block";
+            setTimeout(() => {
+                mobileWarning.style.display = "none";
+            }, 5000);
+        } else {
+            canvas.style.width = "960px";
+            canvas.style.height = "600px";
+        }
+        loadingBar.style.display = "block";
+
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+            createUnityInstance(canvas, config, (progress) => {
+                progressBarFull.style.width = 100 * progress + "%";
+            }).then((unityInstance) => {
+                loadingBar.style.display = "none";
+                fullscreenButton.onclick = () => {
+                    unityInstance.SetFullscreen(1);
+                };
+            }).catch((message) => {
+                alert(message);
+            });
+        };
+        document.body.appendChild(script);
+
+    }
 
     const getLikeNum = async () => {
         const result = await getLikeNumService({

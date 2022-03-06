@@ -14,12 +14,10 @@ import { homepageSpacing } from '../../data/constants/Spacing'
 import './LastestRecommand.scss'
 import request from 'umi-request'
 import { useForm } from 'antd/es/form/Form'
+import { API_RANK, API_IMG } from '../../Config'
 
-
-const DOMAIN = "http://106.52.167.166:8084"
-const API_RECOMM = `${DOMAIN}/v1/rank/zone`   //TODO: = `${DOMAIN}/v1/recommendation/zone`
-const API_LATEST = `${DOMAIN}/v1/rank/zone`   //TODO: = `${DOMAIN}/v1/latest/zone`
-const API_IMG = `${DOMAIN}/v1/download/img`
+const API_RECOMM = API_RANK   //TODO: = `${DOMAIN}/v1/recommendation/zone`
+const API_LATEST = API_RANK   //TODO: = `${DOMAIN}/v1/latest/zone`
 const getRecommService = (params) => { return request(`${API_RECOMM}`, { params }); }
 const getLatestService = (params) => { return request(`${API_LATEST}`, { params }); }
 
@@ -40,12 +38,12 @@ const LastestRecommand = () => {
                     // [ FAKE ] =================================================================
                     const fake_data = [
                         {
-                            "GID": 10,
+                            "GID": 1,
                             "game_name": "FIFA",
                             "like_num": 22,
                             "DownloadNum": 10,
                             "CommentNum": 12,
-                            "img": "10.jpeg",
+                            "img": "1.jpg",
                             "AuthorName": "anonymity"
                         },
                         {
@@ -54,7 +52,7 @@ const LastestRecommand = () => {
                             "like_num": 20,
                             "DownloadNum": 10,
                             "CommentNum": 10,
-                            "img": "6.jpeg",
+                            "img": "2.jpg",
                             "AuthorName": "\"123\""
                         },
                         {
@@ -63,7 +61,7 @@ const LastestRecommand = () => {
                             "like_num": 18,
                             "DownloadNum": 13,
                             "CommentNum": 16,
-                            "img": "4.jpg",
+                            "img": "3.jpg",
                             "AuthorName": "123"
                         },
                         {
@@ -72,7 +70,7 @@ const LastestRecommand = () => {
                             "like_num": 16,
                             "DownloadNum": 8,
                             "CommentNum": 15,
-                            "img": "5.png",
+                            "img": "4.jpg",
                             "AuthorName": "123"
                         },
                         {
@@ -81,7 +79,7 @@ const LastestRecommand = () => {
                             "like_num": 15,
                             "DownloadNum": 15,
                             "CommentNum": 12,
-                            "img": "7.jpeg",
+                            "img": "5.png",
                             "AuthorName": "\"123\""
                         },
                         {
@@ -195,7 +193,7 @@ const LastestRecommand = () => {
                             className='Home-Content-img'
                             // TODO: When image is done, change this image link back to the normal ones read from data
                             src={`${API_IMG}?img_name=${game_data.img}`}
-                            // src={"https://tva1.sinaimg.cn/large/008i3skNly1guco1lvt96j61h90u0qbq02.jpg"}
+                        // src={"https://tva1.sinaimg.cn/large/008i3skNly1guco1lvt96j61h90u0qbq02.jpg"}
                         />
                         <Flex className='text-start' >
                             <DataToHtml

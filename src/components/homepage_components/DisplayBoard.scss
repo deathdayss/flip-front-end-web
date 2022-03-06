@@ -41,3 +41,28 @@
          // display: none;
      }
  }
+
+.dailypick-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    width: 50%;
+}
+
+ .caurousel-wrapper {
+    padding: 0 5px;
+ }
+
+ .carousel-below-content {
+     flex: 1;
+     padding: 0 5px;
+ }
+
+ .carousel-below-packing {
+     display: flex;
+ }
+
+ .has-top-padding {
+    padding: 16px 0 0 0;
+ }
+

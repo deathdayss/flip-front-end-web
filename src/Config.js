@@ -5,7 +5,7 @@
  */
 
 // export const serverUrl = 'http://localhost:3001/'
-const API_URL = "http://106.52.167.166:8084"
+const API_URL = "http://175.178.159.131:8084"
 const API_WT = "http://rinato.ticp.vip"
 export const API_RANK = `${API_URL}/v1/rank/zone`
 export const API_IMG = `${API_URL}/v1/download/img`
