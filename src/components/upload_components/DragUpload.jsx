@@ -24,14 +24,14 @@ const history = createBrowserHistory({
 
 const { Dragger } = Upload;
 
-const API_UPLOAD = "http://106.52.167.166:8084/v1/upload/game";//"https://68f8d248-d179-4ceb-9469-79555efa3395.mock.pstmn.io";//
+const API_UPLOAD = "http://175.178.159.131:8084/v1/upload/game";//"https://68f8d248-d179-4ceb-9469-79555efa3395.mock.pstmn.io";//
 
 const handle_uploadRequest = (options) => {
   const { onSuccess, onError, file, onProgress } = options;
   console.log(file);
   let formData = new FormData();
-  formData.append('email', "my_name_is_noBody@example.com");
-  formData.append('password', "123");
+  formData.append('email', "audit1@anu.com");
+  formData.append('password', "123456");
   formData.append('file_body', file);
 
   const uploadPromise = getUploadSerive(formData);//{ email: "my_name_is_noBody@example.com",password: "123",file_body: file}

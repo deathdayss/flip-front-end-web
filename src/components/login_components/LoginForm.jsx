@@ -12,7 +12,7 @@ import request from 'umi-request';
 const tailFormItemLayout = { wrapperCol: { xs: { span: 24, offset: 0, }, sm: { span: 16, offset: 8, }, }, };
 const formItemLayout = { labelCol: { xs: { span: 24, }, sm: { span: 8, }, }, wrapperCol: { xs: { span: 24, }, sm: { span: 16, }, }, };
 
-const DOMAIN = "http://106.52.167.166:8084" 
+const DOMAIN = "http://175.178.159.131:8084" 
 const API_LOGIN = `${DOMAIN}/v1/user/login`
 
 const LoginForm = (props) => {

@@ -49,10 +49,10 @@ const mapStateToProps = state => {
 
 // ==========================================================================================
 // Login service
-const DOMAIN = "http://106.52.167.166:8084";
+const DOMAIN = "http://175.178.159.131:8084";
 const API_LOGIN = `${DOMAIN}/v1/user/login`;
 // const API_SIGNUP = `${DOMAIN}/v1/user/register`;
-const API_VERIFICATION_CODE = "http://rinato.ticp.vip/v1/verification/code";
+const API_VERIFICATION_CODE = "http://rinato.ticp.vip:80/v1/verification/code"//"http://175.178.159.131:8084/v1/verification/code";
 
 
 // const handle_signupRequest = (mail, name, pwd, veri) => {
@@ -208,7 +208,7 @@ class HeaderFirstLayer extends Component {
                                     },
                                     function (value) {
                                         console.log('Request veri code failture');
-                                        message.warn('Something wrong just happened', 2.0);
+                                        message.warn('No CAPTCHA response', 2.0);
                                     }
                                 )
 

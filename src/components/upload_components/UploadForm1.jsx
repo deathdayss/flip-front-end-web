@@ -78,7 +78,7 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
             values => {
                 // console.log('===================================');
                 // console.log("Information Sucecssfull Uploaded")
-                message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
+                message.info('Your game has been uploaded successfully !', 2.0);
                 // setTimeout(function () { history.push('/'); }, 2000);
                 history.push('/');
                 // console.log('===================================');
@@ -86,10 +86,10 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
             reasons => {
                 // console.log('===================================');
                 // console.log("Information Upload with Failure")
-                // message.warn('There seem to be some issue with te server ...', 2.0);
-                message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
+                message.warn('Upload failed, please try again', 2.0);
+                // message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
                 // setTimeout(function () { history.push('/'); }, 2000);
-                history.push('/');
+                // history.push('/');
                 // console.log('===================================');
             })
     }
@@ -105,9 +105,9 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
 //         requestType: "form"
 //     });
 // }
-const DOMAIN = "http://106.52.167.166:8084";
+const DOMAIN = "http://175.178.159.131:8084";
 // const API_IMG = `${DOMAIN}/upload/img`
-const API_INFO = "http://106.52.167.166:8084/v1/upload/info";//`${DOMAIN}/v1/upload/info`;
+const API_INFO = "http://175.178.159.131:8084/v1/upload/info";//`${DOMAIN}/v1/upload/info`;
 
 
 const getInfoUploadService = (formData) => {

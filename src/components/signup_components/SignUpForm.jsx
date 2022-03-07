@@ -13,9 +13,9 @@ import request from 'umi-request';
 
 const formItemLayout = { labelCol: { xs: { span: 24, }, sm: { span: 8, }, }, wrapperCol: { xs: { span: 24, }, sm: { span: 16, }, }, };
 const tailFormItemLayout = { wrapperCol: { xs: { span: 24, offset: 0, }, sm: { span: 16, offset: 8, }, }, };
-const DOMAIN = "http://106.52.167.166:8084";
+const DOMAIN = "http://175.178.159.131:8084";
 const API_SINGUP = `${DOMAIN}/v1/user/register`;
-const API_VERIFICATION_CODE = "http://rinato.ticp.vip/v1/verification/code";
+const API_VERIFICATION_CODE = "http://rinato.ticp.vip:80/v1/verification/code";
 
 const RegistrationForm = () => {
     const [form] = Form.useForm();
