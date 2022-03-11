@@ -30,7 +30,7 @@ const handle_uploadRequest = (options) => {
   const { onSuccess, onError, file, onProgress } = options;
   console.log(file);
   let formData = new FormData();
-  formData.append('email', "audit1@anu.com");
+  formData.append('email', "audit1@anu.edu.au");
   formData.append('password', "123456");
   formData.append('file_body', file);
 

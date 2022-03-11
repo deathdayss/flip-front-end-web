@@ -66,8 +66,8 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
     else {
         const formData = new FormData();
         formData.append('file_body', imageList[0]);
-        formData.append('email', 'my_name_is_noBody@example.com');
-        formData.append('password', '123');
+        formData.append('email', 'audit1@anu.edu.au');
+        formData.append('password', '123456');
         formData.append('game_id', _game_id_);
         formData.append('game_name', _title_);
         formData.append('zone', _category_);
@@ -86,7 +86,7 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
             reasons => {
                 // console.log('===================================');
                 // console.log("Information Upload with Failure")
-                message.warn('Upload failed, please try again', 2.0);
+                message.warn(`Upload failed due to ${reasons.message} , please try again`, 2.0);
                 // message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
                 // setTimeout(function () { history.push('/'); }, 2000);
                 // history.push('/');
