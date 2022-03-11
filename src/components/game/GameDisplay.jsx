@@ -21,7 +21,7 @@ import Header from '../header_components/Header.jsx'
 import request from 'umi-request';
 import Icon from '@ant-design/icons';
 import "../../scss/Spacing.scss";
-import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_NUM, API_LIKE_CHECK, API_RANK_DOWNLOAD, API_IMG, DOWNLOAD_GAME } from "../../Config.js";
+import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_NUM, API_LIKE_CHECK, API_COLLECT_CLICK, API_COLLECT_NUM, API_COLLECT_CHECK, API_RANK_DOWNLOAD, API_IMG, DOWNLOAD_GAME } from "../../Config.js";
 
 //http://106.52.167.166:8084/v1/like/num?GID=1&UID=1
 
@@ -159,40 +159,42 @@ const mapStateToProps = state => {
 const GameDisplay = (props) => {
     const defaultWords = props.localization.words.homepage.contentWords
     const [like, setLike] = useState(false)
-    const [likeNum, setLikeNum] = useState(false)
+    const [likeNum, setLikeNum] = useState(0)
     const [collect, setCollect] = useState(false)
+    const [collectNum, setCollectNum] = useState(0)
     const [forward, setForward] = useState(false)
     const [downloadList, setDownloadList] = useState([])
+    var JSZip = require("jszip");
 
-    // useEffect(() => {
-    //     const getGame = async () => {
-    //         const result = await getGameService({
-    //             game_id: 1
-    //         })
-    //         console.log(result)
-    //         var blob = result;
-    //         var new_zip = new JSZip();
-    //         new_zip.loadAsync(blob)
-    //             .then(function (file) {
-    //                 var files = file.files;
-    //                 for (let f in files) {
-    //                     console.log("\nf: \n", f)
-    //                     // var zipobj = files[f];
-    //                     // if (!zipobj.dir) {
-    //                     //     new_zip.file(f).async("blob")
-    //                     //         .then(function (blob) {
-    //                     //             //获取blob对象地址，并把值赋给容器
-    //                     //             var mp3url = URL.createObjectURL(blob);
-    //                     //             $("#MP3Play").attr("src", mp3url);
-    //                     //             //setTimeout("revokeUrl('" + mp3url + "')", "2000");
-    //                     //         });
-    //                     // }
-    //                 }
-    //             });
+    useEffect(() => {
+        const getGame = async () => {
+            const result = await getGameService({
+                game_id: 1
+            })
+            console.log(result)
+            var blob = result;
+            var new_zip = new JSZip();
+            new_zip.loadAsync(blob)
+                .then(function (file) {
+                    var files = file.files;
+                    for (let f in files) {
+                        console.log("\nf: \n", f)
+                        // var zipobj = files[f];
+                        // if (!zipobj.dir) {
+                        //     new_zip.file(f).async("blob")
+                        //         .then(function (blob) {
+                        //             //获取blob对象地址，并把值赋给容器
+                        //             var mp3url = URL.createObjectURL(blob);
+                        //             $("#MP3Play").attr("src", mp3url);
+                        //             //setTimeout("revokeUrl('" + mp3url + "')", "2000");
+                        //         });
+                        // }
+                    }
+                });
 
-    //     }
-    //     getGame()
-    // }, [])
+        }
+        getGame()
+    }, [])
 
     useEffect(() => {
         const getProductInfo = async () => {
@@ -211,8 +213,18 @@ const GameDisplay = (props) => {
             setLike(result.msg);
         }
         getLikeCheck();
+        const getCollectCheck = async () => {
+            const result = await getCollectCheckService({
+                GID: 1,
+                UID: 1,
+            });
+            setCollect(result.msg);
+        }
+        getCollectCheck();
+
 
         getLikeNum();
+        getCollectNum();
 
         const getDownload = async () => {
             const result = await getDownloadService({
@@ -230,6 +242,10 @@ const GameDisplay = (props) => {
     useEffect(() => {
         getLikeNum();
     }, [like])
+
+    useEffect(() => {
+        getCollectNum();
+    }, [collect])
 
     const initializeGame = () => {
 
@@ -292,6 +308,15 @@ const GameDisplay = (props) => {
         // console.log(likeNum)
     }
 
+    const getCollectNum = async () => {
+        const result = await getCollectNumService({
+            GID: 1,
+            UID: 1,
+        });
+        setCollectNum(result.count);
+        // console.log(collectNum)
+    }
+
     const getDownloadService = (params) => {
         return request(`${API_RANK_DOWNLOAD}`, { params });
     }
@@ -306,6 +331,18 @@ const GameDisplay = (props) => {
 
     const getLikeNumService = (params) => {
         return request(`${API_LIKE_NUM}`, { params });
+    }
+
+    const getCollectNumService = (params) => {
+        return request(`${API_COLLECT_NUM}`, { params });
+    }
+
+    const getCollectClickService = (params) => {
+        return request(`${API_COLLECT_CLICK}`, { params });
+    }
+
+    const getCollectCheckService = (params) => {
+        return request(`${API_COLLECT_CHECK}`, { params });
     }
 
     const getProductInfoService = (params) => {
@@ -330,21 +367,32 @@ const GameDisplay = (props) => {
         getLikeClick();
     }
 
-    const Buttons = () => (
-        <>
-            <Box width={80}>
-                <LikeIcon className="like-icon" onClick={likeClick} style={{ color: like ? "#5B28FF" : "#727272", }} />
-                <span>{likeNum}</span>
-            </Box>
-            <Box width={80}>
-                <CollectIcon className="like-icon" onClick={() => { setCollect(!collect) }} style={{ color: collect ? "#5B28FF" : "#727272", }} />
-                <span>123</span>
-            </Box>
-            <Box width={80}>
-                <ForwardIcon className="like-icon" onClick={() => { setForward(!forward) }} style={{ color: forward ? "#5B28FF" : "#727272", }} />
-                <span>123</span>
-            </Box>
-        </>)
+    const collectClick = () => {
+        setCollect(!collect);
+        const getCollectClick = async () => {
+            const result = await getCollectClickService({
+                GID: 1,
+                UID: 1,
+            });
+        }
+        getCollectClick();
+    }
+
+    // const Buttons = () => (
+    //     <>
+    //         <Box width={80}>
+    //             <LikeIcon className="like-icon" onClick={likeClick} style={{ color: like ? "#5B28FF" : "#727272", }} />
+    //             <span>{likeNum}</span>
+    //         </Box>
+    //         <Box width={80}>
+    //             <CollectIcon className="like-icon" onClick={collectClick} style={{ color: collect ? "#5B28FF" : "#727272", }} />
+    //             <span>{collectNum}</span>
+    //         </Box>
+    //         <Box width={80}>
+    //             <ForwardIcon className="like-icon" onClick={() => { setForward(!forward) }} style={{ color: forward ? "#5B28FF" : "#727272", }} />
+    //             <span>123</span>
+    //         </Box>
+    //     </>)
 
     const RecommendWords = ({ styles, words = defaultWords }) => {
         const Content = []
@@ -435,8 +483,8 @@ const GameDisplay = (props) => {
                     <span>{likeNum}</span>
                 </Box>
                 <Box width={80}>
-                    <CollectIcon className="like-icon" onClick={() => { setCollect(!collect) }} style={{ color: collect ? "#5B28FF" : "#727272", }} />
-                    <span>123</span>
+                    <CollectIcon className="like-icon" onClick={collectClick} style={{ color: collect ? "#5B28FF" : "#727272", }} />
+                    <span>{collectNum}</span>
                 </Box>
                 <Box width={80}>
                     <ForwardIcon className="like-icon" onClick={() => { setForward(!forward) }} style={{ color: forward ? "#5B28FF" : "#727272", }} />
