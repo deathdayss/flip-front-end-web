@@ -63,24 +63,21 @@ const DisplayBoard = (props) => {
         return <ForLoop index={index} loopNum={2}
 
             LoopContent={() =>
-                <div class="carousel-below-content">
+                <div className="carousel-below-content">
                     <div style={{ backgroundColor: "#000", height: 0, paddingBottom: aspectRatio, overflow: "hidden" }}>
                         <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList[index]?.img}`} onClick={() => { enterGame(downloadList[index]?.GID) }} />
                     </div>
                 </div>}
 
             PackingContent={({ Output }) =>
-                <div class={`carousel-below-packing ${index === 0 ? '' : 'has-top-padding'}`} flexWrap='wrap'>
+                <div className={`carousel-below-packing ${index === 0 ? '' : 'has-top-padding'}`}>
                     {Output}
                 </div>} />
     }
 
     const RankWords = ({ styles, words = defaultWords }) => {
-        const Content = []
-        // console.log(words)
-
-        Content.push(
-            <>
+        return (
+            <Box {...styles}>
                 <Flex>
                     <Box width={1}>
                         {words.game_name}
@@ -96,10 +93,6 @@ const DisplayBoard = (props) => {
                         {words.AuthorName}
                     </Box>
                 </Flex>
-            </>);
-        return (
-            <Box {...styles}>
-                {Content}
             </Box>
         )
     }
@@ -139,12 +132,12 @@ const DisplayBoard = (props) => {
     }
 
     const Buttons = () => {
-        const Buttons = rankLabels.map(label => <button id='' className='rank-time-btn'
+        const Buttons = rankLabels.map(label => <button key={label} id='' className='rank-time-btn'
             onClick={() => setRank(label)} style={{ backgroundColor: (rank == label) ? '#DACEFF' : '#BDBBC5' }}>
             {label}
         </button>)
-        return Buttons.map(button =>
-            <Box width={1 / 3} px={3}>
+        return Buttons.map((button, index) =>
+            <Box key={index} width={1 / 3} px={3}>
                 {button}
             </Box>)
     }
@@ -168,21 +161,18 @@ const DisplayBoard = (props) => {
 
     return (
         <>
-            <Flex mx={[homepageSpacing.main_margin_mobile, homepageSpacing.main_margin]}>
+            <Flex>
                 <Box width={0.8}>
-                    <Flex mt={homepageSpacing.top_margin} className='section-heading'>
+                    <Flex className='section-heading'>
                         Daily Pick
                     </Flex>
                     <Flex mt={homepageSpacing.top_margin} className='text-center' flexWrap='wrap'>
-
-                        {/* <Box width={[1, 0.5, 0.4]} > */}
-                        <div class="dailypick-wrapper">
-                            <div class="caurousel-wrapper">
+                        <div className="dailypick-wrapper">
+                            <div className="caurousel-wrapper">
                                 <CarouselContent />
                             </div>
                             <TopHalfSmallContent />
                         </div>
-                        {/* </Box> */}
                         <Box width={[1, 0.5, 0.4]} pt={[homepageSpacing.up_content_padding, '0px', '0px', '0px']} >
 
                             <ForLoop loopNum={3} LoopContent={TopHalfSmallContent} />
