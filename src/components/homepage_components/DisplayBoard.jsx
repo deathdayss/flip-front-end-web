@@ -18,12 +18,14 @@ import { API_RANK, API_IMG, API_RANK_DOWNLOAD } from '../../Config.js';
 
 
 const rankLabels = ["Daily", "Weekly", "Monthly"];
+const categoryLabels = ["Fanmade", "Real World", "Traditional"]
 const aspectRatio = `${(9 * 100 / 16)}%` //"62.5%"
 
 const DisplayBoard = (props) => {
     const { ContentWords, } = props
     const defaultWords = props.words
-    const [rank, setRank] = useState("Daily")
+    const [rank, setRank] = useState(rankLabels[0])
+    const [category, setCategory] = useState(categoryLabels[0])
     const [rankList, setRankList] = useState([])
     const [downloadList, setDownloadList] = useState([])
     const [imgUrl, setImgUrl] = useState("")
@@ -60,7 +62,7 @@ const DisplayBoard = (props) => {
     }
 
     const TopHalfSmallContent = ({ index = 1 }) => {
-        return <ForLoop index={index} loopNum={2}
+        return <ForLoop index={index} loopNum={1}
 
             LoopContent={() =>
                 <div className="carousel-below-content">
@@ -125,13 +127,14 @@ const DisplayBoard = (props) => {
             {numbers.map(i =>
                 <div key={`carousel${i}`}>
                     <div style={{ backgroundColor: "#000", height: 0, paddingBottom: aspectRatio, overflow: "hidden" }}>
-                        <img className='Home-Show-img' src={`${API_IMG}?img_name=${rankList[i]?.img}`} onClick={() => { enterGame(rankList[i]?.GID) }} />
+                        <img className='Home-Show-img' src={`${API_IMG}?img_name=${rankList[i]?.img}`} />
+                        {/* onClick={() => { enterGame(rankList[i]?.GID) }} */}
                     </div>
                 </div>)}
         </Carousel>
     }
 
-    const Buttons = () => {
+    const RankButtons = () => {
         const Buttons = rankLabels.map(label => <button key={label} id='' className='rank-time-btn'
             onClick={() => setRank(label)} style={{ backgroundColor: (rank == label) ? '#DACEFF' : '#BDBBC5' }}>
             {label}
@@ -140,6 +143,19 @@ const DisplayBoard = (props) => {
             <Box key={index} width={1 / 3} px={3}>
                 {button}
             </Box>)
+    }
+
+    const CategoryButtons = () => {
+        const Buttons = categoryLabels.map(label => <button key={label} id='' className='category-btn'
+            onClick={() => setCategory(label)} style={{ backgroundColor: (category == label) ? '#DACEFF' : 'rgba(0, 0, 0, 0.05);' }}>
+            {label}
+        </button>)
+        return (<div class="category-wrapper">
+            {Buttons.map((button, index) =>
+                <div key={index} class="category-btn-wrapper">
+                    {button}
+                </div>)}
+        </div>)
     }
 
     const contentStyle = {
@@ -161,37 +177,36 @@ const DisplayBoard = (props) => {
 
     return (
         <>
-            <Flex>
-                <Box width={0.8}>
-                    <Flex className='section-heading'>
+            <CategoryButtons />
+            <div class="display-board">
+                <div class="daily-pick-container">
+                    {/* <Flex className='section-heading'>
                         Daily Pick
-                    </Flex>
-                    <Flex mt={homepageSpacing.top_margin} className='text-center' flexWrap='wrap'>
-                        <div className="dailypick-wrapper">
+                    </Flex> */}
+                    <Flex className='text-center' flexWrap='wrap'>
+                        <div className="daily-pick-wrapper">
                             <div className="caurousel-wrapper">
                                 <CarouselContent />
                             </div>
-                            <TopHalfSmallContent />
+                            {/* <TopHalfSmallContent /> */}
                         </div>
-                        <Box width={[1, 0.5, 0.4]} pt={[homepageSpacing.up_content_padding, '0px', '0px', '0px']} >
+                        <Box className="small-content" width={[1, 0.25, 0.4]} pt={[homepageSpacing.up_content_padding, '0px', '0px', '0px']} >
 
                             <ForLoop loopNum={3} LoopContent={TopHalfSmallContent} />
 
                         </Box >
 
                     </Flex>
-                </Box>
+                </div>
+                {/* rank section
                 <Box width={0.2}>
-                    {/* <Flex mt={homepageSpacing.top_margin}>
-                             Ranking
-                         </Flex> */}
                     <Flex mt={homepageSpacing.top_margin} id='rank-btns-left' >
                         <Box width={0.3} className='section-heading'>
                             Ranking
                         </Box>
                         <Box width={0.5} className='text-center'>
                             <Flex>
-                                <Buttons />
+                                <RankButtons />
                             </Flex>
                         </Box>
                     </Flex>
@@ -203,8 +218,20 @@ const DisplayBoard = (props) => {
                             <button className='more-btn'>More</button>
                         </Box>
                     </Flex>
-                </Box>
-            </Flex>
+                </Box> */}
+                <div class="join-container">
+                    <div class="join-wrapper" >
+                        <img class="join-img" src="images/joinUs/background.png" />
+                        <div class="join-btn-group">
+                            <img class="join-logo" src="images/joinUs/logo.png" />
+                            <button class="join-btn">Upload a Game</button>
+                            <button class="join-btn">How to Video</button>
+                        </div>
+                    </div>
+                    <img class="ad" src="images/joinUs/ad.png"></img>
+                </div>
+
+            </div>
 
 
         </>
