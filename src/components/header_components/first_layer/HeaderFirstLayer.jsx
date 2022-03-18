@@ -52,7 +52,7 @@ const mapStateToProps = state => {
 const DOMAIN = "http://175.178.159.131:8084";
 const API_LOGIN = `${DOMAIN}/v1/user/login`;
 // const API_SIGNUP = `${DOMAIN}/v1/user/register`;
-const API_VERIFICATION_CODE = "http://rinato.ticp.vip:80/v1/verification/code"//"http://175.178.159.131:8084/v1/verification/code";
+const API_VERIFICATION_CODE = `${DOMAIN}/v1/verification/code`;//"http://175.178.159.131:8084/v1/verification/code";
 
 
 // const handle_signupRequest = (mail, name, pwd, veri) => {
@@ -98,7 +98,7 @@ class HeaderFirstLayer extends Component {
 
     componentDidMount() { }
 
-    
+
 
     render() {
 
@@ -161,6 +161,7 @@ class HeaderFirstLayer extends Component {
                             const [val_veriImageURL, set_ValVeriImageURL] = useState("");
                             const [val_veriFailWarning, set_ValVeriFailWarning] = useState("");
                             const [val_borderWidth, set_ValBorderWidth] = useState("0");
+                            const [isLoggedIn, set_IsLoggedIn] = useState(false);
 
                             const handle_loginRequest = (act, pwd, veri) => {
                                 set_ValVeriFailWarning("");
@@ -170,11 +171,17 @@ class HeaderFirstLayer extends Component {
                                     // verificationFailureWarning = "";
                                     // console.log("Attempting to login via: " + val_email + " " + val_passw);
                                     // verificationFailureWarning = "Fuck you";
-                                    const loginPormise = getLoginService({ email: act, password: pwd });
-                                    loginPormise.then(
+                                    const loginPromise = getLoginService({ email: act, password: pwd });
+                                    loginPromise.then(
                                         function (value) {
                                             // console.log('Login success');
                                             message.info('Login Successful', 2.0);
+                                            console.log();
+                                            localStorage.setItem('user', JSON.stringify({
+                                                email: act,
+                                                password: pwd
+                                            }));
+                                            set_IsLoggedIn(true);
                                             // setTimeout(function(){history.push('/');message.info('Welcome '+val_email + ' !', 2.0);}, 2000);
                                         },
                                         function (value) {
@@ -188,6 +195,11 @@ class HeaderFirstLayer extends Component {
                                     set_ValVeriFailWarning("Verification Failed");
                                     set_ValBorderWidth("1");
                                 }
+                            }
+
+                            const handle_logoutRequest = ()=>{
+                                localStorage.removeItem('user');
+                                set_IsLoggedIn(false);
                             }
                             const getLoginService = (params) => {
                                 return request(`${API_LOGIN}`, {
@@ -222,39 +234,50 @@ class HeaderFirstLayer extends Component {
                             }
                             useEffect(handle_getVerificationCode, []);
                             return (
-                                <ul style={{ textAlign: 'left', padding: 0, margin: 0 }}>
-                                    {/* <li><a href="/login">Login</a></li> */}
-                                    {/* <li><a href="/signup">Sign-up</a></li> */}
-                                    <h3> Welcome </h3>
-                                    Account:  <Input id="mainMenuLogin_name" type="email" /> <br />
-                                    Password: <Input id="mainMenuLogin_pass" type="password" /> <br />
-                                    Verification Code: <div style={{border: `${val_borderWidth}px solid red`}}><Input id="mainMenuLogin_veri" type="text" /></div>
-                                    <p className="veri-failed-warning">{val_veriFailWarning}</p>
-                                    <img style={{marginTop:"5px"}} src={val_veriImageURL} height='50px' width='100px' />
-                                    <li><a
-                                        href="/signup"
-                                    // style={{
-                                    //     textDecoration: 'underline',
-                                    //     color: 'blue'
-                                    // }}
-                                    // onClick={
-                                    //     () => {
-                                    //         const temp = document.getElementById("mainMenuPopup");
-                                    //         temp.innerHTML = renderToString(<SignupComponent_content />);
-                                    //     }
-                                    // }
-                                    >if you don't have an account</a></li> <br />
-                                    <Button onClick={
-                                        () => {
+                                <div>
+                                    {!isLoggedIn ?
+                                        (
+                                            <ul style={{ textAlign: 'left', padding: 0, margin: 0 }}>
+                                                {/* <li><a href="/login">Login</a></li> */}
+                                                {/* <li><a href="/signup">Sign-up</a></li> */}
+                                                <h3> Welcome </h3>
+                                                Account:  <Input id="mainMenuLogin_name" type="email" /> <br />
+                                                Password: <Input id="mainMenuLogin_pass" type="password" /> <br />
+                                                Verification Code: <div style={{ border: `${val_borderWidth}px solid red` }}><Input id="mainMenuLogin_veri" type="text" /></div>
+                                                <p className="veri-failed-warning">{val_veriFailWarning}</p>
+                                                <img style={{ marginTop: "5px" }} src={val_veriImageURL} height='50px' width='100px' />
+                                                <li><a
+                                                    href="/signup"
+                                                // style={{
+                                                //     textDecoration: 'underline',
+                                                //     color: 'blue'
+                                                // }}
+                                                // onClick={
+                                                //     () => {
+                                                //         const temp = document.getElementById("mainMenuPopup");
+                                                //         temp.innerHTML = renderToString(<SignupComponent_content />);
+                                                //     }
+                                                // }
+                                                >if you don't have an account</a></li> <br />
+                                                <Button onClick={
+                                                    () => {
 
-                                            const account = document.getElementById("mainMenuLogin_name");
-                                            const passwrd = document.getElementById("mainMenuLogin_pass");
-                                            const veriCode = document.getElementById("mainMenuLogin_veri");
+                                                        const account = document.getElementById("mainMenuLogin_name");
+                                                        const passwrd = document.getElementById("mainMenuLogin_pass");
+                                                        const veriCode = document.getElementById("mainMenuLogin_veri");
 
-                                            handle_loginRequest(account.value, passwrd.value, veriCode.value);
-                                        }
-                                    }> Login </Button>
-                                </ul>
+                                                        handle_loginRequest(account.value, passwrd.value, veriCode.value);
+                                                    }
+                                                }> Login </Button>
+                                            </ul>
+                                        ) :
+                                        (<ul>
+                                            <h3> Welcome </h3>
+                                            <p>{JSON.parse(localStorage.getItem("user")).email}</p>
+                                            <Button onClick={handle_logoutRequest}>Log out</Button>
+                                        </ul>
+                                        )}
+                                </div>
                             )
                         }
                         return (
