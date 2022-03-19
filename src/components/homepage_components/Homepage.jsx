@@ -49,8 +49,10 @@ class Homepage extends Component {
         return (
             <>
                 <ThemeProvider theme={homepageTheme}>
-                    <DisplayBoard ContentWords={ContentWords} words={this.props.localization.words.homepage.contentWords} />
-                    <LastestRecommand ContentWords={ContentWords} words={this.props.localization.words.homepage.contentWords} />
+                    <div className='homepage-content-container'>
+                        <DisplayBoard ContentWords={ContentWords} words={this.props.localization.words.homepage.contentWords} />
+                        <LastestRecommand ContentWords={ContentWords} words={this.props.localization.words.homepage.contentWords} />
+                    </div>
                 </ThemeProvider>
             </>
         )
