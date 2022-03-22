@@ -7,10 +7,10 @@
  @import "../../scss/Spacing.scss";
  @import '../../scss/Button.scss';
  
-//  body {
-//      font-size: 10px !important;
-//  }
- 
+.display-board {
+    display: flex;
+}
+
  .section-heading {
      font-size: 0.8rem !important;
  }
@@ -42,15 +42,23 @@
      }
  }
 
-.dailypick-wrapper {
+.daily-pick-container {
+    width: 80%;
+}
+
+.daily-pick-wrapper {
     display: flex;
     flex-direction: column;
     justify-content:space-between;
-    width: 50%;
+    width: 75%;
+}
+
+.small-content {
+    padding-left: 10px;
 }
 
  .caurousel-wrapper {
-    padding: 0 5px;
+    // padding: 0 5px;
  }
 
  .carousel-below-content {
@@ -66,3 +74,59 @@
     padding: 16px 0 0 0;
  }
 
+ .category-wrapper {
+     display: flex;   
+    //  border-top: 1px solid rgba(0, 0, 0, 0.1); 
+    // background-color: rgba(33, 33, 33, 0.7);
+     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+     margin-bottom: 10px;
+     padding: 5px;
+     .category-btn-wrapper {
+        
+        .category-btn {
+            @include default-btn-setup();
+            height: 32px;
+            border-radius: 16px;
+            padding: 4px 10px;
+            margin: 5px;
+        }
+    }
+ }
+
+.join-container {
+    width: 20%;
+    margin-left: 10px;
+}
+
+.join-wrapper {
+    position: relative;
+    margin-bottom: 10px;
+    .join-img{
+        width: 100%;
+    }
+
+    .join-logo {
+        width: 100%;
+    }
+
+    .join-btn-group {
+        position: absolute;
+        width: 70%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .join-btn {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.7);//C4C4C4
+        border: 1px solid #333333;
+        font-size: 18px;
+        margin-bottom: 10px;
+    
+    }
+}
+
+.ad {
+    width: 100%;
+}
