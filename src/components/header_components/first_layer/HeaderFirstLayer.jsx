@@ -197,7 +197,7 @@ class HeaderFirstLayer extends Component {
                                 }
                             }
 
-                            const handle_logoutRequest = ()=>{
+                            const handle_logoutRequest = () => {
                                 localStorage.removeItem('user');
                                 set_IsLoggedIn(false);
                             }
@@ -330,7 +330,7 @@ class HeaderFirstLayer extends Component {
                     </Link>
                 </Col>
                 <Col xs='auto' md='5' lg='7' xl={{ size: '6', offset: '1' }} className='my-auto text-end'>
-                    <Link to='/' id='rank-btn' className='my-link' onClick={this.handleRankBtn}>
+                    <Link to='/rank' id='rank-btn' className='my-link' onClick={this.handleRankBtn}>
                         <img src='images/header/header_rank_btn.svg' height='28' width='28' />
                     </Link>
                     <Form model='headerSearchBar' onSubmit={this.headerSearch}

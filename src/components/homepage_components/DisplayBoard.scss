@@ -15,32 +15,7 @@
      font-size: 0.8rem !important;
  }
  
- .rank-time-btn {
-     @include default-btn-setup();
-    //  background-color: #BDBBC5;
-     font-size: 12px;
-     padding: 0 5px;
-     // opacity: 0.5;
- }
 
- .more-btn {
-    @include default-btn-setup();
-    background-color: #E8E8E8;
-    font-size: 12px;
-     padding: 0 40px;
- }
- 
- @media screen and (max-width: '1808px') {
-     #rank-btns-left {
-         // display: none;
-     }
-     #more-btn {
-         // display: none;
-     }
-     #rank-content {
-         // display: none;
-     }
- }
 
 .daily-pick-container {
     width: 80%;
@@ -118,12 +93,14 @@
     }
 
     .join-btn {
+        border-radius: 2px;
         width: 100%;
-        background-color: rgba(255, 255, 255, 0.7);//C4C4C4
-        border: 1px solid #333333;
-        font-size: 18px;
+        background-color: rgba(#606060, 0.93);
+        border: none;
+        color: #e9e9e9;
+        font-size: 16px;
         margin-bottom: 10px;
-    
+        height: 36px;
     }
 }
 

@@ -1,0 +1,33 @@
+@import "../../scss/Spacing.scss";
+@import '../../scss/Button.scss';
+
+.rank-time-btn {
+    @include default-btn-setup();
+   //  background-color: #BDBBC5;
+    font-size: 12px;
+    padding: 0 5px;
+    // opacity: 0.5;
+}
+
+.more-btn {
+   @include default-btn-setup();
+   background-color: #E8E8E8;
+   font-size: 12px;
+    padding: 0 40px;
+}
+
+@media screen and (max-width: '1808px') {
+    #rank-btns-left {
+        // display: none;
+    }
+    #more-btn {
+        // display: none;
+    }
+    #rank-content {
+        // display: none;
+    }
+}
+
+.rank-container {
+    margin: 0 400px;
+}
