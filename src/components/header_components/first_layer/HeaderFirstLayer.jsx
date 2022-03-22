@@ -161,7 +161,7 @@ class HeaderFirstLayer extends Component {
                             const [val_veriImageURL, set_ValVeriImageURL] = useState("");
                             const [val_veriFailWarning, set_ValVeriFailWarning] = useState("");
                             const [val_borderWidth, set_ValBorderWidth] = useState("0");
-                            const [isLoggedIn, set_IsLoggedIn] = useState(false);
+                            const [isLoggedIn, set_IsLoggedIn] = useState(JSON.parse(localStorage.getItem('user'))?true:false);
 
                             const handle_loginRequest = (act, pwd, veri) => {
                                 set_ValVeriFailWarning("");
