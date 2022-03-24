@@ -21,8 +21,6 @@ const categoryLabels = ["Fanmade", "Real World", "Traditional"]
 const aspectRatio = `${(9 * 100 / 16)}%` //"62.5%"
 
 const DisplayBoard = () => {
-    // const { ContentWords, } = props
-    // const defaultWords = props.words
     const [rankList, setRankList] = useState([])
     const [category, setCategory] = useState(categoryLabels[0])
     const [downloadList, setDownloadList] = useState([])
@@ -132,35 +130,34 @@ const DisplayBoard = () => {
             <CategoryButtons />
             <div className="display-board">
                 <div className="daily-pick-container">
-                    {/* <Flex className='section-heading'>
-                        Daily Pick
-                    </Flex> */}
-                    <Flex className='text-center' flexWrap='wrap'>
+                    <div className='top-content-left-container'>
                         <div className="daily-pick-wrapper">
                             <div className="caurousel-wrapper">
                                 <CarouselContent />
                             </div>
-                            {/* <TopHalfSmallContent /> */}
                         </div>
-                        <Box className="small-content" width={[1, 0.25, 0.4]} pt={[homepageSpacing.up_content_padding, '0px', '0px', '0px']} >
-
+                        <div className='top-small-content'>
                             <ForLoop loopNum={3} LoopContent={TopHalfSmallContent} />
+                        </div>
 
-                        </Box >
-
-                    </Flex>
+                    </div>
                 </div>
 
                 <div className="join-container">
                     <div className="join-wrapper" >
-                        <img className="join-img" src="images/joinUs/background.png" />
-                        <div className="join-btn-group">
-                            <img className="join-logo" src="images/joinUs/logo.png" />
-                            <button className="join-btn" onClick={() => upload()}>Upload a Game</button>
-                            <button className="join-btn">How to Video</button>
+                        <div className='join-wrapper-content'>
+                            <img className="join-img" src="images/joinUs/background.png" />
+                            <div className="join-btn-group">
+                                <img className="join-logo" src="images/joinUs/logo.png" />
+                                <button className="join-btn" onClick={() => upload()}>Upload a Game</button>
+                                <button className="join-btn">How to Video</button>
+                            </div>
                         </div>
                     </div>
-                    <img className="ad" src="images/joinUs/ad.png"></img>
+                    <div className='ad'>
+                        <img className="ad-img" src="images/joinUs/ad.png"></img>
+                    </div>
+                    {/* <img className="ad" src="images/joinUs/ad.png"></img> */}
                 </div>
 
             </div>
