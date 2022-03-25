@@ -18,7 +18,7 @@ class Header extends Component {
       <div id='header-border'>
         <Container fluid >
           <HeaderFirstLayer />
-          < HeaderSecondLayer />
+          <HeaderSecondLayer />
         </Container>
       </div>
     )

@@ -38,3 +38,62 @@ html, body, #root, .App, .ant-layout, .ant-form{
     box-sizing: border-box;
     flex-direction: column;
 }
+
+.login-mask{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    // background-color: rgba(0,0,0,.5);
+    z-index: 10;
+}
+
+.login-window{
+    position: absolute;
+    box-sizing: border-box;
+    background-color: #FEFEFE;
+    width: 400px;
+    height: 600px;
+    border: 0 solid #FEFEFE;
+    border-radius: 20px;
+    z-index: 11;
+    overflow: hidden;
+    box-shadow: 0 0 5px 5px rgba(0,0,0,.3);
+}
+.login-header{
+    position: relative;
+}
+.login-form-area{
+    text-align: center;
+    clear: both;
+    padding: 20px 70px;
+}
+.login-form-area-center {
+    text-align: left;
+}
+
+.login-form-area label{
+    margin-left: 5px;
+}
+.login-footer{
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    background-color: #C4C4C4;
+    bottom: 0;
+    text-align: center;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.login-footer div{
+    margin-top: -10px;
+    width: 50px;
+    color: red;
+    cursor: pointer;
+}
