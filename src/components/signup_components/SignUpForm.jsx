@@ -14,10 +14,10 @@ import request from 'umi-request';
 const formItemLayout = { labelCol: { xs: { span: 24, }, sm: { span: 8, }, }, wrapperCol: { xs: { span: 24, }, sm: { span: 16, }, }, };
 const tailFormItemLayout = { wrapperCol: { xs: { span: 24, offset: 0, }, sm: { span: 16, offset: 8, }, }, };
 const DOMAIN = "http://175.178.159.131:8084";
-const API_SINGUP = `${DOMAIN}/v1/user/register`;
+const API_SIGNUP = `${DOMAIN}/v1/user/register`;
 const API_VERIFICATION_CODE = `${DOMAIN}/v1/verification/code`;
 
-const RegistrationForm = () => {
+const SignUpForm = (props) => {
     const [form] = Form.useForm();
     const [autoCompleteResult, setAutoCompleteResult] = useState([]);
     let history = useHistory();
@@ -31,11 +31,11 @@ const RegistrationForm = () => {
     const [val_veriImageURL, set_ValVeriImageURL] = useState("");
     const [val_veriFailWarning, set_ValVeriFailWarning] = useState("");
     const [val_borderWidth, set_ValBorderWidth] = useState("0");
-    const handle_emailChange = (e) => { console.log("set_ValEmail: " + val_email); set_ValEmail(e.target.value); }
-    const handle_nickNChange = (e) => { console.log("set_ValNickn: " + val_nickn); set_ValNickn(e.target.value); }
-    const handle_passwChange = (e) => { console.log("set_ValPassw: " + val_passw); set_ValPassw(e.target.value); }
-    const handle_p_verChange = (e) => { console.log("set_ValPVeri: " + val_p_ver); set_ValPVeri(e.target.value); }
-    const handle_veriChange = (e) => { console.log("set_Veri: " + val_veri); set_ValVeri(e.target.value); }
+    const handle_emailChange = (e) => { set_ValEmail(e.target.value); }
+    const handle_nickNChange = (e) => { set_ValNickn(e.target.value); }
+    const handle_passwChange = (e) => { set_ValPassw(e.target.value); }
+    const handle_p_verChange = (e) => { set_ValPVeri(e.target.value); }
+    const handle_veriChange = (e) => { set_ValVeri(e.target.value); }
 
 
     const handle_signupRequest = (history) => {
@@ -46,9 +46,14 @@ const RegistrationForm = () => {
             const signupPormise = getSignupSerive({ email: val_email, nickname: val_nickn, password: val_passw });
             signupPormise.then(
                 function (value) {
-                    console.log('Singup success');
                     message.info('Signup Successful', 2.0);
-                    setTimeout(function () { history.push('/'); message.info('Welcome ' + val_email + ' !', 2.0); }, 2000);
+                    localStorage.setItem('user', JSON.stringify({
+                        email: val_email,
+                        password: val_passw
+                    }));
+                    props.set_IsLoggedIn(true);
+                    props.closeSignup();
+                    setTimeout(function () {message.info('Welcome ' + val_email + ' !', 2.0); }, 2000);
                 },
                 function (value) {
                     console.log('Signup failture');
@@ -64,7 +69,7 @@ const RegistrationForm = () => {
     }
 
     const getSignupSerive = (params) => {
-        return request(`${API_SINGUP}`, {
+        return request(`${API_SIGNUP}`, {
             method: "post",
             data: params,
             requestType: "form"
@@ -136,147 +141,159 @@ const RegistrationForm = () => {
         value: website,
     }));
     return (
-        <Form
-            {...formItemLayout}
-            className="Flip_SignupForm"
-            form={form}
-            name="register"
-            onFinish={() => handle_signupRequest(history)}
-            initialValues={{
-                residence: ['zhejiang', 'hangzhou', 'xihu'],
-                prefix: '86',
-            }}
-            scrollToFirstError
-        >
-            <Form.Item
-                className="Flip_SignupForm_Item"
-                name="email"
-                label="E-mail"
-                rules={[
-                    {
-                        type: 'email',
-                        message: 'The input is not valid E-mail!',
-                    },
-                    {
-                        required: true,
-                        message: 'Please input your E-mail!',
-                    },
-                ]}
-            >
-                <Input value={val_email} onChange={handle_emailChange} />
-            </Form.Item>
+        <div className="signup-mask">
+            <div className="signup-window">
+                <div className="signup-header">
+                    <div className="btn-close" style={{ padding: '30px', float: 'left', cursor: 'pointer' }} onClick={function () { props.closeSignup() }} ></div>
+                    <img src="images/header/logo.svg" width="60px" style={{ float: 'right', padding: '20px' }}></img>
+                </div>
+                <div className="signup-form-area">
+                    <div className="signup-form-area-title">
+                        <h3> Sign Up for Flip </h3>
+                        <p>Create your profile. Follow your favorite creator. Make your own game and more</p>
+                    </div>
+                    <Form
+                        {...formItemLayout}
+                        className="Flip_SignupForm"
+                        form={form}
+                        name="register"
+                        onFinish={() => handle_signupRequest(history)}
+                        initialValues={{
+                            residence: ['zhejiang', 'hangzhou', 'xihu'],
+                            prefix: '86',
+                        }}
+                        scrollToFirstError
+                    >
+                        Enter your Email
+                        <Form.Item
+                            className="Flip_SignupForm_Item"
+                            name="email"
+                            rules={[
+                                {
+                                    type: 'email',
+                                    message: 'The input is not valid E-mail!',
+                                },
+                                {
+                                    required: true,
+                                    message: 'Please input your E-mail!',
+                                },
+                            ]}
+                            
+                        >
+                            <Input value={val_email} onChange={handle_emailChange} />
+                        </Form.Item>
 
-            <Form.Item
-                className="Flip_SignupForm_Item"
-                name="nickname"
-                label="Nickname"
-                tooltip="What do you want others to call you?"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your nickname!',
-                        whitespace: true,
-                    },
-                ]}
-            >
-                <Input value={val_nickn} onChange={handle_nickNChange} />
-            </Form.Item>
+                        Create your user name
+                        <Form.Item
+                            className="Flip_SignupForm_Item"
+                            name="nickname"
+                            tooltip="What do you want others to call you?"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your user name!',
+                                    whitespace: true,
+                                },
+                            ]}
+                        >
+                            <Input value={val_nickn} onChange={handle_nickNChange} />
+                        </Form.Item>
 
-            <Form.Item
-                className="Flip_SignupForm_Item"
-                name="password"
-                label="Password"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your password!',
-                    },
-                ]}
-                hasFeedback
-            >
-                <Input.Password value={val_passw} onChange={handle_passwChange} />
-            </Form.Item>
+                        Creat your password
+                        <Form.Item
+                            className="Flip_SignupForm_Item"
+                            name="password"
 
-            <Form.Item
-                className="Flip_SignupForm_Item"
-                name="confirm"
-                label="Confirm Password"
-                dependencies={['password']}
-                hasFeedback
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please confirm your password!',
-                    },
-                    ({ getFieldValue }) => ({
-                        validator(_, value) {
-                            if (!value || getFieldValue('password') === value) {
-                                return Promise.resolve();
-                            }
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your password!',
+                                },
+                            ]}
+                            hasFeedback
+                        >
+                            <Input.Password value={val_passw} onChange={handle_passwChange} />
+                        </Form.Item>
 
-                            return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                        },
-                    }),
-                ]}
-            >
-                <Input.Password value={val_p_ver} onChange={handle_p_verChange} />
-            </Form.Item>
+                        Confirm your password
+                        <Form.Item
+                            className="Flip_SignupForm_Item"
+                            name="confirm"
 
-            <Form.Item
-                className="Flip_SignupForm_Item"
-                name="verification"
-                label="Verification Code"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input the code!',
-                    },
-                ]}
-            >
-                <div style={{ border: `${val_borderWidth}px solid red` }}><Input value={val_veri} onChange={handle_veriChange} /></div>
-            </Form.Item>
-            <Form.Item
-                className="Flip_SignupForm_Item"
-                label=" "
-                colon={false}
-            >
-                <p className="veri-failed-warning">{val_veriFailWarning}</p>
-                <img src={val_veriImageURL} height='50px' width='100px' />
-            </Form.Item>
+                            dependencies={['password']}
+                            hasFeedback
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please confirm your password!',
+                                },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue('password') === value) {
+                                            return Promise.resolve();
+                                        }
 
+                                        return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                                    },
+                                }),
+                            ]}
+                        >
+                            <Input.Password value={val_p_ver} onChange={handle_p_verChange} />
+                        </Form.Item>
 
-            <Form.Item
-                className="Flip_SignupForm_Item"
-                name="agreement"
-                valuePropName="checked"
-                rules={[
-                    {
-                        validator: (_, value) =>
-                            value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-                    },
-                ]}
-                {...tailFormItemLayout}
-            >
-                <Checkbox>
-                    I have read the <a href="">agreement</a>
-                </Checkbox>
+                        Verification Code
+                        <Form.Item
+                            className="Flip_SignupForm_Item"
+                            name="verification"
 
-            </Form.Item>
-            <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">Register</Button>
-            </Form.Item>
-        </Form>
-    );
-};
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input the code!',
+                                },
+                            ]}
+                        >
+                            <div style={{ border: `${val_borderWidth}px solid red` }}><Input value={val_veri} onChange={handle_veriChange} /></div>
+                        </Form.Item>
+                        <Form.Item
+                            className="Flip_SignupForm_Item"
+                            label=" "
+                            colon={false}
+                        >
+                            <p className="veri-failed-warning">{val_veriFailWarning}</p>
+                            <img src={val_veriImageURL} height='50px' width='100px' />
+                        </Form.Item>
 
 
-const SignUpForm = () => {
-    return (
-        <div className="SignupForm-container">
-            <h1 style={{ textAlign: 'center' }}>Start your jounery...</h1>
-            <RegistrationForm />
+                        <Form.Item
+                            className="Flip_SignupForm_Item"
+                            name="agreement"
+                            valuePropName="checked"
+                            rules={[
+                                {
+                                    validator: (_, value) =>
+                                        value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+                                },
+                            ]}
+                            {...tailFormItemLayout}
+                        >
+                            <Checkbox>
+                                I have read the <a href="">agreement</a>
+                            </Checkbox>
+
+                        </Form.Item>
+                        <Form.Item {...tailFormItemLayout}>
+                            <Button type="primary" htmlType="submit" style={{backgroundColor:"#5B28FF",width:"150px",borderRadius:"10px"}}>Register</Button>
+                        </Form.Item>
+                    </Form>
+                </div>
+                <div className="signup-footer">
+                    <p>Already have an account?</p>
+                    <div style={{cursor:"pointer"}} onClick={props.switchToLogin}>Log in</div>
+                </div>
+            </div>
         </div>
     );
-}
+};
 
 export default SignUpForm;

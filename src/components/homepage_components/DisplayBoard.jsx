@@ -64,7 +64,7 @@ const DisplayBoard = () => {
             LoopContent={() =>
                 <div className="carousel-below-content">
                     <div style={{ backgroundColor: "#000", height: 0, paddingBottom: aspectRatio, overflow: "hidden" }}>
-                        <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList[index]?.img}`} onClick={() => { enterGame(downloadList[index]?.GID) }} />
+                        <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList?.[index]?.img}`} onClick={() => { enterGame(downloadList?.[index]?.GID) }} />
                     </div>
                 </div>}
 
@@ -82,7 +82,7 @@ const DisplayBoard = () => {
         const numbers = [...Array(CAROUSEL_NUM).keys()]
         return <Carousel afterChange={onChange}>
             {numbers.map(i =>
-                <img key={`carousel${i}`} className='Home-Show-img' src={`${API_IMG}?img_name=${rankList[i]?.img}`} />
+                <img key={`carousel${i}`} className='Home-Show-img' src={`${API_IMG}?img_name=${rankList?.[i]?.img}`} />
             )}
         </Carousel>
     }
