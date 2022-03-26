@@ -143,18 +143,20 @@ const HeaderFirstLayer = function (props) {
                             <div id="mainMenuPopup" >
                                 {!isLoggedIn ?
                                     (
-                                        <ul style={{ textAlign: 'left', padding: 0, margin: 0 }}>
+                                        <div style={{ position: 'relative',textAlign: 'center', padding: '10px', margin: 0 }}>
                                             <h3> Welcome </h3>
                                             <Button onClick={openLogin}>Log in</Button>
-                                            <p>Don't have an account?</p>
-                                            <div style={{ cursor: 'pointer' }} onClick={openSignup}>Sign up</div>
-                                        </ul>
+                                            <div style={{}}>
+                                                <p>Don't have an account?</p>
+                                                <div style={{ color: 'red', cursor: 'pointer' }} onClick={openSignup}>Sign up</div>
+                                            </div>
+                                        </div>
                                     ) :
-                                    (<ul style={{ textAlign: 'left', padding: 0, margin: 0 }}>
+                                    (<div style={{ textAlign: 'center', padding: '10px', margin: 0 }}>
                                         <h3> Welcome </h3>
                                         <p>{JSON.parse(localStorage.getItem("user")).email}</p>
                                         <Button onClick={handle_logoutRequest}>Log out</Button>
-                                    </ul>
+                                    </div>
                                     )}
                             </div>
                         }
