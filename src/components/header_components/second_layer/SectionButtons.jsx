@@ -35,7 +35,7 @@ class SectionButtons extends Component {
         const SectionButtons = ({ sectionKeyWords, search }) => {
             return Object.keys(sectionKeyWords).map((key) => {
                 return (
-                    <Link key ={key} to={'/?section=' + key} className={'my-link me-2 ms-2'}>
+                    <Link key={key} to={'/?section=' + key} className={'my-link me-2 ms-2'}>
                         <span className={'section-link ' + (key === searchToObj(search).section ? 'header-section-underline' : '')} >
                             {sectionKeyWords[key]}
                         </span>
@@ -46,9 +46,9 @@ class SectionButtons extends Component {
 
         return (
             <Row id='header-second-line-section'>
-                <Col className='my-auto text-center'>
+                {/* <Col className='my-auto text-center'>
                     <SectionButtons sectionKeyWords = {this.props.localization.words.header.section} search = {this.props.location.search}/>
-                </Col>
+                </Col> */}
             </Row>
         )
     }

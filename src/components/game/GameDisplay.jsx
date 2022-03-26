@@ -6,12 +6,12 @@
  * @modify date 2021-08-20 11:46:28
  */
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { connect } from "react-redux";
 import { Avatar, Comment, Tooltip, List } from 'antd';
 import moment from 'moment';
 import { Flex, Box } from '@rebass/grid'
-import { ForLoop } from '../helper_components/Helper.jsx'
+// import { ForLoop } from '../helper_components/Helper.jsx'
 import { homepageSpacing, gameDisplaySpacing } from '../../data/constants/Spacing'
 import { Popover, Button, Input } from 'antd';
 import { message } from 'antd';
@@ -23,8 +23,8 @@ import Icon from '@ant-design/icons';
 import "../../scss/Spacing.scss";
 import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_NUM, API_LIKE_CHECK, API_COLLECT_CLICK, API_COLLECT_NUM, API_COLLECT_CHECK, API_RANK_DOWNLOAD, API_IMG, DOWNLOAD_GAME } from "../../Config.js";
 
-//http://106.52.167.166:8084/v1/like/num?GID=1&UID=1
-
+const colNum = 7
+const LOOP_ARR = [1, 2, 3, 4, 5, 6, 7]
 const data = [
     {
         actions: [<span key="comment-list-reply-to-0">Reply to</span>],
@@ -93,44 +93,44 @@ const LikeSvg = () =>
         </defs>
     </svg>
 
-const Buttons_NEW = () => (
-    btnInfos.map(
-        (btnInfo, index) => {
-            if (btnInfo[3] == 'button_share') {
-                const pop_title = "Pass on the passion to your fiends!"
-                const game_link = window.location.href;
-                const handle_copyLink = (e) => {
-                    navigator.clipboard.writeText(game_link);
-                    // message.info("Game link [" + game_link + "] has been copied to your clipboard")
-                    message.info("Game link has been copied to your clipboard")
-                }
-                const content = (
-                    <div style={{ display: "flex" }}>
-                        <Input placeholder={game_link} />
-                        <Button onClick={handle_copyLink}> Copy-Link </Button>
-                    </div>
-                )
-                return (
-                    <Box width={80} type="primary">
-                        <Popover content={content} title={pop_title}>
-                            <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
-                        </Popover>
-                        <span>123</span>
-                    </Box>
-                )
+// const Buttons_NEW = () => (
+//     btnInfos.map(
+//         (btnInfo, index) => {
+//             if (btnInfo[3] == 'button_share') {
+//                 const pop_title = "Pass on the passion to your fiends!"
+//                 const game_link = window.location.href;
+//                 const handle_copyLink = (e) => {
+//                     navigator.clipboard.writeText(game_link);
+//                     // message.info("Game link [" + game_link + "] has been copied to your clipboard")
+//                     message.info("Game link has been copied to your clipboard")
+//                 }
+//                 const content = (
+//                     <div style={{ display: "flex" }}>
+//                         <Input placeholder={game_link} />
+//                         <Button onClick={handle_copyLink}> Copy-Link </Button>
+//                     </div>
+//                 )
+//                 return (
+//                     <Box width={80} type="primary">
+//                         <Popover content={content} title={pop_title}>
+//                             <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
+//                         </Popover>
+//                         <span>123</span>
+//                     </Box>
+//                 )
 
-            } else {
-                return (
-                    <Box width={80} type="primary">
-                        <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
-                        <span>123</span>
-                    </Box>
-                )
-            }
-        }
+//             } else {
+//                 return (
+//                     <Box width={80} type="primary">
+//                         <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
+//                         <span>123</span>
+//                     </Box>
+//                 )
+//             }
+//         }
 
-    )
-)
+//     )
+// )
 
 const LikeIcon = props => <Icon component={LikeSvg} {...props} />;
 
@@ -178,7 +178,7 @@ const GameDisplay = (props) => {
                 .then(function (file) {
                     var files = file.files;
                     for (let f in files) {
-                        console.log("\nf: \n", f)
+                        // console.log("\nf: \n", f)
                         // var zipobj = files[f];
                         // if (!zipobj.dir) {
                         //     new_zip.file(f).async("blob")
@@ -197,13 +197,13 @@ const GameDisplay = (props) => {
     }, [])
 
     useEffect(() => {
-        const getProductInfo = async () => {
-            const result = await getProductInfoService({
-                gid: 123456
-            });
-            // console.log(result);
-        }
-        getProductInfo();
+        // const getProductInfo = async () => {
+        //     const result = await getProductInfoService({
+        //         gid: 123456
+        //     });
+        //     // console.log(result);
+        // }
+        // getProductInfo();
 
         const getLikeCheck = async () => {
             const result = await getLikeCheckService({
@@ -238,14 +238,6 @@ const GameDisplay = (props) => {
         //initialize the unity game, reload script
         initializeGame();
     }, [])
-
-    useEffect(() => {
-        getLikeNum();
-    }, [like])
-
-    useEffect(() => {
-        getCollectNum();
-    }, [collect])
 
     const initializeGame = () => {
 
@@ -363,8 +355,10 @@ const GameDisplay = (props) => {
                 GID: 1,
                 UID: 1,
             });
+            getLikeNum();
         }
         getLikeClick();
+
     }
 
     const collectClick = () => {
@@ -374,25 +368,42 @@ const GameDisplay = (props) => {
                 GID: 1,
                 UID: 1,
             });
+            getCollectNum();
         }
         getCollectClick();
     }
 
-    // const Buttons = () => (
-    //     <>
-    //         <Box width={80}>
-    //             <LikeIcon className="like-icon" onClick={likeClick} style={{ color: like ? "#5B28FF" : "#727272", }} />
-    //             <span>{likeNum}</span>
-    //         </Box>
-    //         <Box width={80}>
-    //             <CollectIcon className="like-icon" onClick={collectClick} style={{ color: collect ? "#5B28FF" : "#727272", }} />
-    //             <span>{collectNum}</span>
-    //         </Box>
-    //         <Box width={80}>
-    //             <ForwardIcon className="like-icon" onClick={() => { setForward(!forward) }} style={{ color: forward ? "#5B28FF" : "#727272", }} />
-    //             <span>123</span>
-    //         </Box>
-    //     </>)
+    const ShareButton = () => {
+        const pop_title = "Pass on the passion to your fiends!"
+        const game_link = window.location.href;
+        const handle_copyLink = (e) => {
+            navigator.clipboard.writeText(game_link);
+            // message.info("Game link [" + game_link + "] has been copied to your clipboard")
+            message.info("Game link has been copied to your clipboard")
+        }
+        const content = (
+            <div style={{ display: "flex" }}>
+                <Input placeholder={game_link} />
+                <Button onClick={handle_copyLink}> Copy-Link </Button>
+            </div>
+        )
+        return (
+            // <Box width={80} type="primary">
+            //     <Popover content={content} title={pop_title}>
+            //         <img src={btnInfos[2][0]} height={btnInfos[2][1]} width={btnInfos[2][1]} />
+            //     </Popover>
+            //     <span>123</span>
+            // </Box>
+
+            <Box width={80}>
+                <Popover content={content} title={pop_title}>
+
+                    <ForwardIcon className="like-icon" onClick={() => { setForward(!forward) }} style={{ color: forward ? "#5B28FF" : "#727272", }} />
+                </Popover>
+                <span className="btn-text">123</span>
+            </Box>
+        )
+    }
 
     const RecommendWords = ({ styles, words = defaultWords }) => {
         const Content = []
@@ -423,30 +434,11 @@ const GameDisplay = (props) => {
         )
     }
 
-    const RecommendContent = ({ colNum }) => {
-        return <ForLoop loopNum={colNum}
-
-            LoopContent={({ index }) =>
-                <Box width={1 / colNum} px={homepageSpacing.responsive_content_padding}>
-                    <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList[index]?.img}`} />
-                    <Flex className='text-start'>
-                        <RecommendWords styles={{ pl: '2px' }} words={downloadList[index]} />
-                    </Flex>
-                </Box>
-            }
-
-        // PackingContent={({ Output }) =>
-        //     <Flex pt={index === 0 ? '' : homepageSpacing.up_content_padding} flexWrap='wrap'>
-        //         {Output}
-        //     </Flex>} 
-        />
-    }
-
     return (
         <>
             <Header></Header>
             <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]} mt={gameDisplaySpacing.top_margin}>
-                <Box width={0.2}>
+                <Box className="header-left-wrapper" width={0.2}>
                     <Flex className="header-left">
                         <Box>
                             <a href="">
@@ -463,6 +455,7 @@ const GameDisplay = (props) => {
                             <span>{gameDetail.subscribers}</span>
                         </Box>
                     </Flex>
+                    <div>This is the world of ELDEN RING. </div>
                 </Box>
                 <Box width={0.6} className="title">{gameDetail.title}</Box>
                 <Box width={0.2} className="header-right">
@@ -477,19 +470,19 @@ const GameDisplay = (props) => {
             </Flex>
 
             <Flex className="buttons" mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
-                {/* <Buttons></Buttons> */}
                 <Box width={80}>
                     <LikeIcon className="like-icon" onClick={likeClick} style={{ color: like ? "#5B28FF" : "#727272", }} />
-                    <span>{likeNum}</span>
+                    <span className="btn-text">{likeNum}</span>
                 </Box>
                 <Box width={80}>
                     <CollectIcon className="like-icon" onClick={collectClick} style={{ color: collect ? "#5B28FF" : "#727272", }} />
-                    <span>{collectNum}</span>
+                    <span className="btn-text">{collectNum}</span>
                 </Box>
-                <Box width={80}>
+                {/* <Box width={80}>
                     <ForwardIcon className="like-icon" onClick={() => { setForward(!forward) }} style={{ color: forward ? "#5B28FF" : "#727272", }} />
-                    <span>123</span>
-                </Box>
+                    <span className="btn-text">123</span>
+                </Box> */}
+                <ShareButton />
 
                 <Box style={{ flexGrow: 1 }}>
                     <div id="unity-fullscreen-button"></div>
@@ -502,7 +495,15 @@ const GameDisplay = (props) => {
 
             <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]} mt={gameDisplaySpacing.recommendation_margin_top}>
 
-                <RecommendContent colNum={7} />
+                {/* <RecommendContent /> */}
+                {LOOP_ARR.map((i) =>
+                    <Box key={i} index={i} width={1 / 7} px={homepageSpacing.responsive_content_padding}>
+                        <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList[i]?.img}`} />
+                        <Flex className='text-start'>
+                            <RecommendWords styles={{ pl: '2px' }} words={downloadList[i]} />
+                        </Flex>
+                    </Box>
+                )}
 
             </Flex>
             {/* <Flex className='comments' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>

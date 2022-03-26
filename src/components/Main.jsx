@@ -33,6 +33,7 @@ import Test_Zhicheng from './Test_Zhicheng'
 import GameDisplay from './game/GameDisplay';
 import SignUpForm from './signup_components/SignUpForm.jsx'
 import LoginForm from './login_components/LoginForm.jsx'
+import Rank from './rank/Rank'
 import './Main.scss'
 import { useHistory } from 'react-router-dom'
 
@@ -75,6 +76,7 @@ class Main extends Component {
                         <Route path='/upload_work' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}
                         <Route path='/upload_form' component={UploadForm} /> {/* TODO: Make a content for the upload form page*/}
                         <Route path='/gameDisplay' component={GameDisplay} />
+                        <Route path='/rank' component={Rank} />
                     </Route>
                 </Switch>
             </Layout>

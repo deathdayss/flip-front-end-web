@@ -113,16 +113,16 @@ const HeaderFirstLayer = function (props) {
         localStorage.removeItem('user');
         set_IsLoggedIn(false);
     }
-    
+
 
     const handleRankBtn = () => { }
     // TODO: press the search button
-    const headerSearch = value => { props.toggleLanguage(props.localization.lang) }   
+    const headerSearch = value => { props.toggleLanguage(props.localization.lang) }
 
 
     const HeaderRightContent = ({ btnsInfo }) => {
 
-        
+
 
 
         return btnsInfo.map((btnInfo, index) => {
@@ -147,7 +147,7 @@ const HeaderFirstLayer = function (props) {
                                             <h3> Welcome </h3>
                                             <Button onClick={openLogin}>Log in</Button>
                                             <p>Don't have an account?</p>
-                                            <div style={{cursor: 'pointer'}} onClick={openSignup}>Sign up</div>
+                                            <div style={{ cursor: 'pointer' }} onClick={openSignup}>Sign up</div>
                                         </ul>
                                     ) :
                                     (<ul style={{ textAlign: 'left', padding: 0, margin: 0 }}>
@@ -185,7 +185,7 @@ const HeaderFirstLayer = function (props) {
                     </Link>
                 </Col>
                 <Col xs='auto' md='5' lg='7' xl={{ size: '6', offset: '1' }} className='my-auto text-end'>
-                    <Link to='/' id='rank-btn' className='my-link' onClick={handleRankBtn}>
+                    <Link to='/rank' id='rank-btn' className='my-link' onClick={handleRankBtn}>
                         <img src='images/header/header_rank_btn.svg' height='28' width='28' />
                     </Link>
                     <Form model='headerSearchBar' onSubmit={headerSearch}
@@ -202,8 +202,8 @@ const HeaderFirstLayer = function (props) {
                     <HeaderRightContent btnsInfo={headerRightBtnInfos} />
                 </Col>
             </Row>
-            {shouldLoginDisplay && (<LoginForm set_IsLoggedIn={set_IsLoggedIn} closeLogin={closeLogin} switchToSignup={openSignup}/>)}
-            {shouldSignupDisplay && (<SignUpForm set_IsLoggedIn={set_IsLoggedIn} closeSignup={closeSignup} switchToLogin={openLogin}/>)}
+            {shouldLoginDisplay && (<LoginForm set_IsLoggedIn={set_IsLoggedIn} closeLogin={closeLogin} switchToSignup={openSignup} />)}
+            {shouldSignupDisplay && (<SignUpForm set_IsLoggedIn={set_IsLoggedIn} closeSignup={closeSignup} switchToLogin={openLogin} />)}
         </div>
     );
 

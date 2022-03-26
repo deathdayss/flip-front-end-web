@@ -12,18 +12,17 @@
 
 .cover-block-grid {
     .cover-block-row {
-        display: flex;
-        justify-content: space-between;
         margin-bottom: 10px;
         .cover-block-item {
-            flex: 1;
+            display: inline-block;
+            width: 20%;
         }
         .cover-block > img {
             width: 100%;
         }
     }
-    .cover-block-row > .cover-block-item:not(:last-child) {
-        margin-right: 10px;
+    .cover-block-row > .cover-block-item {
+        padding: 0 5px;
     }
 }
 
@@ -51,4 +50,10 @@ div.bottom-row-2 {
     div.bottom-row-2 {
         display: flex;
     }
+}
+
+.page-wrapper {
+    display: flex;
+    margin: 20px 0;
+    justify-content: center;
 }

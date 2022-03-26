@@ -13,11 +13,16 @@
      text-align: center;
  }
  
+.header-left-wrapper {
+    margin-bottom: 5px;
+}
+
 .header-left {
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
     font-size: 10px !important;
+    margin-bottom: 5px;
 }
 
 .header-right {
@@ -69,6 +74,10 @@
     display: flex;
     align-items: flex-end;
     margin-top: 15px;
+}
+
+.btn-text {
+    user-select: none;
 }
 
 .game-frame {
