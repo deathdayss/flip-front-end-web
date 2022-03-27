@@ -8,7 +8,7 @@
  * @desc [description]
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 
 import Header from '../header_components/Header.jsx';
 import { Upload, message } from 'antd';
@@ -30,8 +30,9 @@ const handle_uploadRequest = (options) => {
   const { onSuccess, onError, file, onProgress } = options;
   console.log(file);
   let formData = new FormData();
-  formData.append('email', "audit1@anu.edu.au");
-  formData.append('password', "123456");
+  const user = JSON.parse(localStorage.getItem('user'));
+  formData.append('email', user.email);
+  formData.append('password', user.password);
   formData.append('file_body', file);
 
   const uploadPromise = getUploadSerive(formData);//{ email: "my_name_is_noBody@example.com",password: "123",file_body: file}

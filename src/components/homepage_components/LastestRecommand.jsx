@@ -7,6 +7,7 @@
  */
 
 import React, { useState, useEffect } from 'react'
+import { Pagination } from 'antd'
 import './LastestRecommand.scss'
 import { API_RANK, API_IMG } from '../../Config'
 import { getRecommendationList, getLatestList } from '../../service/lastestRecommand';
@@ -64,6 +65,16 @@ const BlockGrid = ({ colNum, data, dataToItem, itemClass, rowClass, gridClass, i
     </div>
 }
 
+function itemRender(current, type, originalElement) {
+    if (type === 'prev') {
+        return <a>Previous</a>;
+    }
+    if (type === 'next') {
+        return <a>Next</a>;
+    }
+    return originalElement;
+}
+
 const LastestRecommand = () => {
     const [val_listContent, set_listContent] = useState([]);
     const [val_showOption, set_showOption] = useState(true);
@@ -78,7 +89,7 @@ const LastestRecommand = () => {
                 getLatestList().then(res => set_listContent(res))
             }
         }, []);
-        
+
     return (
         <div className='section-recommendation-latest'>
             <div className='recommendation-latest-title'>
@@ -94,6 +105,9 @@ const LastestRecommand = () => {
                 rowClass='cover-block-row'
                 itemClass='cover-block-item'
             />
+            <div className="page-wrapper">
+                <Pagination total={500} itemRender={itemRender} className="page" />
+            </div>
         </div>
     )
 }
