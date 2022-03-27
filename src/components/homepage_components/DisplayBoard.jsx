@@ -145,19 +145,23 @@ const DisplayBoard = () => {
 
                 <div className="join-container">
                     <div className="join-wrapper" >
-                        <div className='join-wrapper-content'>
-                            <img className="join-img" src="images/joinUs/background.png" />
-                            <div className="join-btn-group">
-                                <img className="join-logo" src="images/joinUs/logo.png" />
-                                <button className="join-btn" onClick={() => upload()}>Upload a Game</button>
-                                <button className="join-btn">How to Video</button>
+                        <div className='join-wrapper-content-padding' >
+                            <div className='join-wrapper-content'>
+                                <img className="join-img" src="images/joinUs/background.png" />
+                                <div className="join-btn-group">
+                                    <img className="join-logo" src="images/joinUs/logo.png" />
+                                    <button className="join-btn" onClick={() => upload()}>Upload a Game</button>
+                                    <button className="join-btn">How to Video</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div className='ad'>
-                        <img className="ad-img" src="images/joinUs/ad.png"></img>
+                        <div className='ad-padding-container'>
+                            <img className="ad-img" src="images/joinUs/ad.png"></img>
+                        </div>
                     </div>
-                    {/* <img className="ad" src="images/joinUs/ad.png"></img> */}
                 </div>
 
             </div>
