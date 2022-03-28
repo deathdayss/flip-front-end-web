@@ -82,12 +82,8 @@ const DisplayBoard = () => {
         const numbers = [...Array(CAROUSEL_NUM).keys()]
         return <Carousel afterChange={onChange}>
             {numbers.map(i =>
-                <div key={`carousel${i}`}>
-                    <div style={{ backgroundColor: "#000", height: 0, paddingBottom: aspectRatio, overflow: "hidden" }}>
-                        <img className='Home-Show-img' src={`${API_IMG}?img_name=${rankList[i]?.img}`} />
-                        {/* onClick={() => { enterGame(rankList[i]?.GID) }} */}
-                    </div>
-                </div>)}
+                <img key={`carousel${i}`} className='Home-Show-img' src={`${API_IMG}?img_name=${rankList[i]?.img}`} />
+            )}
         </Carousel>
     }
 

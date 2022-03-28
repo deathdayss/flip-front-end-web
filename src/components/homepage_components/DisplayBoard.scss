@@ -9,19 +9,18 @@
 
 .top-content-left-container {
     display: flex;
-    // height: 100%;
     .top-small-content {
         display: flex;
         flex-direction: column;
-        // justify-content: space-between;
+        width: 25%;
         .carousel-below-packing {
             display: flex;
             padding: 5px 5px;
             height: 33.33%;
-        }
-
-        .has-top-padding {
-            // padding: 16px 0 0 0;
+            width: 100%;
+            .carousel-below-content {
+                width: 100%;
+            }
         }
     }
 }
@@ -33,7 +32,7 @@
     }
     .join-container {
         width: 20%;
-        padding-left: 5px;
+        padding: 0 5px;
         display: flex;
         flex-direction: column;
         .join-wrapper {
@@ -83,9 +82,11 @@
             overflow: hidden;
             .ad-padding-container {
                 padding: 5px 0;
+                height: 100%;
                 .ad-img {
                     display: block;
                     width: 100%;
+                    height: 100%;
                 }
             }
         }
@@ -101,14 +102,35 @@
     flex-direction: column;
     justify-content: space-between;
     width: 75%;
+    .caurousel-wrapper {
+        padding: 5px 5px;
+        height: 100%;
+        .ant-carousel {
+            height: 100%;
+            .slick-slider {
+                height: 100%;
+                .slick-list {
+                    height: 100%;
+                    .slick-track {
+                        height: 100%;
+                        .slick-slide > div {
+                            height: 100%;
+                            img {
+                                height: 100%;
+                            }
+                        }
+                    }
+                }
+                .slick-dots.slick-dots-bottom {
+                    bottom: 0;
+                }
+            }
+        }
+    }
 }
 
 .small-content {
     padding-left: 10px;
-}
-
-.caurousel-wrapper {
-    padding: 5px 5px;
 }
 
 .category-wrapper {
