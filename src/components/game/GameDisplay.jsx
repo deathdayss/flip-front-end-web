@@ -178,7 +178,7 @@ const GameDisplay = (props) => {
                 .then(function (file) {
                     var files = file.files;
                     for (let f in files) {
-                        // console.log("\nf: \n", f)
+                        console.log("\nf: \n", f)
                         // var zipobj = files[f];
                         // if (!zipobj.dir) {
                         //     new_zip.file(f).async("blob")
