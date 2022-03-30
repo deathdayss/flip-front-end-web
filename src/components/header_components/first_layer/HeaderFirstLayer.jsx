@@ -143,7 +143,7 @@ const HeaderFirstLayer = function (props) {
                             <div id="mainMenuPopup" >
                                 {!isLoggedIn ?
                                     (
-                                        <div style={{ position: 'relative',textAlign: 'center', padding: '10px', margin: 0 }}>
+                                        <div style={{ position: 'relative', textAlign: 'center', padding: '10px', margin: 0 }}>
                                             <h3> Welcome </h3>
                                             <Button onClick={openLogin}>Log in</Button>
                                             <div style={{}}>

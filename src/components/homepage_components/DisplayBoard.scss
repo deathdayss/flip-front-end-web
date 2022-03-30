@@ -9,19 +9,18 @@
 
 .top-content-left-container {
     display: flex;
-    // height: 100%;
     .top-small-content {
         display: flex;
         flex-direction: column;
-        // justify-content: space-between;
+        width: 25%;
         .carousel-below-packing {
             display: flex;
             padding: 5px 5px;
             height: 33.33%;
-        }
-
-        .has-top-padding {
-            // padding: 16px 0 0 0;
+            width: 100%;
+            .carousel-below-content {
+                width: 100%;
+            }
         }
     }
 }
@@ -33,63 +32,64 @@
     }
     .join-container {
         width: 20%;
-        padding-left: 5px;
+        padding: 0 5px;
+        display: flex;
+        flex-direction: column;
         .join-wrapper {
-            padding: 5px 0;
             position: relative;
-            height: 66.67%;
-            .join-wrapper-content {
+            flex-grow: 2;
+            flex-basis: 0px;
+            overflow: hidden;
+            .join-wrapper-content-padding {
+                padding: 5px 0;
                 height: 100%;
-                overflow: hidden;
-                .join-img {
-                    width: 100%;
-                }
+                .join-wrapper-content {
+                    height: inherit;
+                    overflow: hidden;
+                    .join-img {
+                        width: 100%;
+                    }
 
-                .join-logo {
-                    width: 100%;
-                }
+                    .join-logo {
+                        width: 100%;
+                    }
 
-                .join-btn-group {
-                    position: absolute;
-                    width: 70%;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
+                    .join-btn-group {
+                        position: absolute;
+                        width: 70%;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
 
-                .join-btn {
-                    border-radius: 2px;
-                    width: 100%;
-                    background-color: rgba(#606060, 0.93);
-                    border: none;
-                    color: #e9e9e9;
-                    font-size: 16px;
-                    margin-bottom: 10px;
-                    height: 36px;
+                    .join-btn {
+                        border-radius: 2px;
+                        width: 100%;
+                        background-color: rgba(#606060, 0.93);
+                        border: none;
+                        color: #e9e9e9;
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                        height: 36px;
+                    }
                 }
             }
         }
 
         // TODO: modify the image so that the heigth of its parent container does not change
         .ad {
-            height: 33.33%;
-            padding: 5px 0;
-            .ad-img {
-                display: inline;
-                // display: none;
-                width: 100%;
+            flex: 1 1 0;
+            overflow: hidden;
+            .ad-padding-container {
+                padding: 5px 0;
                 height: 100%;
-                // height: 50%;
+                .ad-img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
             }
         }
-        // .ad {
-        //     display: block;
-        //     // display: none;
-            
-        //     width: 100%;
-        //     // flex: 1 1 66.67%;
-        //     height: 33.33%;
-        // }
     }
 }
 
@@ -102,14 +102,35 @@
     flex-direction: column;
     justify-content: space-between;
     width: 75%;
+    .caurousel-wrapper {
+        padding: 5px 5px;
+        height: 100%;
+        .ant-carousel {
+            height: 100%;
+            .slick-slider {
+                height: 100%;
+                .slick-list {
+                    height: 100%;
+                    .slick-track {
+                        height: 100%;
+                        .slick-slide > div {
+                            height: 100%;
+                            img {
+                                height: 100%;
+                            }
+                        }
+                    }
+                }
+                .slick-dots.slick-dots-bottom {
+                    bottom: 0;
+                }
+            }
+        }
+    }
 }
 
 .small-content {
     padding-left: 10px;
-}
-
-.caurousel-wrapper {
-    padding: 5px 5px;
 }
 
 .category-wrapper {

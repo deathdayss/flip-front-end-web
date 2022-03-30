@@ -64,7 +64,7 @@ const DisplayBoard = () => {
             LoopContent={() =>
                 <div className="carousel-below-content">
                     <div style={{ backgroundColor: "#000", height: 0, paddingBottom: aspectRatio, overflow: "hidden" }}>
-                        <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList[index]?.img}`} onClick={() => { enterGame(downloadList[index]?.GID) }} />
+                        <img className='Home-Content-img' src={`${API_IMG}?img_name=${downloadList?.[index]?.img}`} onClick={() => { enterGame(downloadList?.[index]?.GID) }} />
                     </div>
                 </div>}
 
@@ -82,12 +82,8 @@ const DisplayBoard = () => {
         const numbers = [...Array(CAROUSEL_NUM).keys()]
         return <Carousel afterChange={onChange}>
             {numbers.map(i =>
-                <div key={`carousel${i}`}>
-                    <div style={{ backgroundColor: "#000", height: 0, paddingBottom: aspectRatio, overflow: "hidden" }}>
-                        <img className='Home-Show-img' src={`${API_IMG}?img_name=${rankList[i]?.img}`} />
-                        {/* onClick={() => { enterGame(rankList[i]?.GID) }} */}
-                    </div>
-                </div>)}
+                <img key={`carousel${i}`} className='Home-Show-img' src={`${API_IMG}?img_name=${rankList?.[i]?.img}`} />
+            )}
         </Carousel>
     }
 
@@ -145,19 +141,23 @@ const DisplayBoard = () => {
 
                 <div className="join-container">
                     <div className="join-wrapper" >
-                        <div className='join-wrapper-content'>
-                            <img className="join-img" src="images/joinUs/background.png" />
-                            <div className="join-btn-group">
-                                <img className="join-logo" src="images/joinUs/logo.png" />
-                                <button className="join-btn" onClick={() => upload()}>Upload a Game</button>
-                                <button className="join-btn">How to Video</button>
+                        <div className='join-wrapper-content-padding' >
+                            <div className='join-wrapper-content'>
+                                <img className="join-img" src="images/joinUs/background.png" />
+                                <div className="join-btn-group">
+                                    <img className="join-logo" src="images/joinUs/logo.png" />
+                                    <button className="join-btn" onClick={() => upload()}>Upload a Game</button>
+                                    <button className="join-btn">How to Video</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div className='ad'>
-                        <img className="ad-img" src="images/joinUs/ad.png"></img>
+                        <div className='ad-padding-container'>
+                            <img className="ad-img" src="images/joinUs/ad.png"></img>
+                        </div>
                     </div>
-                    {/* <img className="ad" src="images/joinUs/ad.png"></img> */}
                 </div>
 
             </div>
