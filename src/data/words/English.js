@@ -17,7 +17,11 @@ export const english = {
             traditional: "Traditional"
         }
     },
-
+    common: {
+        play: 'play',
+        like: 'like',
+        subscribe: 'subscribe'
+    },
     homepage: {
         contentWords: [
             "Title title title title title",
@@ -25,5 +29,5 @@ export const english = {
             "1000 play · 1000 like",
             "Creator"
         ]
-    }
+    },
 }

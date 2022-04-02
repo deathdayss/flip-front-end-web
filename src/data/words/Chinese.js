@@ -17,7 +17,11 @@ export const chinese = {
             traditional: "传统"
         }
     },
-
+    common: {
+        play: '游玩',
+        like: '点赞',
+        subscribe: '关注'
+    },
     homepage: {
         contentWords: [
             "作品名",
