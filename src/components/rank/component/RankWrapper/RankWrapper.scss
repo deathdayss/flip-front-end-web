@@ -9,6 +9,6 @@
     }
 }
 
-.rank-content-container {
+.rank-block-container > .rank-content-container:not(:last-child) {
     margin-bottom: 20px;
 }
