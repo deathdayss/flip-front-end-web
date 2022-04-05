@@ -49,39 +49,36 @@ class Main extends Component {
 
 	render() {
 		return (
-			<Layout className="layout_root main_page_layout" style={{ backgroundColor: 'white' }}>
-				{/* INDEX/HOME */}
-				<Switch>
-					<Route path='/devs'>
-						<Route path='/devs/suowei'><Test_Suowei /></Route>
-						<Route path='/devs/zhichent'><Test_Zhicheng /></Route>
-					</Route>
+			<Switch>
+				<Route path='/devs'>
+					<Route path='/devs/suowei'><Test_Suowei /></Route>
+					<Route path='/devs/zhichent'><Test_Zhicheng /></Route>
+				</Route>
 
-					<Route path='/login' component={LoginForm} />
-					<Route path='/signup' component={SignUpForm} />
-					<Route path='/register' component={SignUpForm} />
+				<Route path='/login' component={LoginForm} />
+				<Route path='/signup' component={SignUpForm} />
+				<Route path='/register' component={SignUpForm} />
 
-					<Route path='/'>
-						{/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/}
-						{/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
-						{/* HEADERS */}
-						<Switch>
-							<Route exact path='/' component={Header} />             {/* TODO: Make a header for the main page */}
-							<Route path='/user' component={UserHeader} />
-							<Route path='/upload' component={Header} />         {/* TODO: Make a header for the  page */}
-							<Route path='/play' component={Play} />
-						</Switch>
-						{/* CONTENT */}
-						<Route exact path='/' component={Homepage} />
-						<Route path='/user' component={UserContent} />
-						<Route path='/upload_work' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}
-						<Route path='/upload_form' component={UploadForm} /> {/* TODO: Make a content for the upload form page*/}
-						<Route path='/gameDisplay' component={GameDisplay} />
-						<Route path='/rank' component={Rank} />
-						<Route path='/personal_centre_page' component={UpdateForm} />
-					</Route>
-				</Switch>
-			</Layout>
+				<Route path='/'>
+					{/* <Route exact path="/"> <Redirect to="/home" /> </Route>          */} {/* TODO: Perform login check (SEE NEXT LINE)*/}
+					{/* {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />} */}
+					{/* HEADERS */}
+					<Switch>
+						<Route exact path='/' component={Header} />             {/* TODO: Make a header for the main page */}
+						<Route path='/user' component={UserHeader} />
+						<Route path='/upload' component={Header} />         {/* TODO: Make a header for the  page */}
+						<Route path='/play' component={Play} />
+					</Switch>
+					{/* CONTENT */}
+					<Route exact path='/' component={Homepage} />
+					<Route path='/user' component={UserContent} />
+					<Route path='/upload_work' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}
+					<Route path='/upload_form' component={UploadForm} /> {/* TODO: Make a content for the upload form page*/}
+					<Route path='/gameDisplay' component={GameDisplay} />
+					<Route path='/rank' component={Rank} />
+					<Route path='/personal_centre_page' component={UpdateForm} />
+				</Route>
+			</Switch>
 		);
 	}
 }
