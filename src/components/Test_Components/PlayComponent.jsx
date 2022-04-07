@@ -4,11 +4,8 @@
  * @modify date 2021-08-14 15:43:22
  */
 import React from 'react';
-// import React, { Component } from 'react';
-// import { useEffect } from 'react';
 
 const Play = (props) => {
-
 
     return (
         <div id="unity-container" class="unity-desktop">

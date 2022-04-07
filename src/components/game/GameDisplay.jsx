@@ -15,13 +15,14 @@ import { Flex, Box } from '@rebass/grid'
 import { homepageSpacing, gameDisplaySpacing } from '../../data/constants/Spacing'
 import { Popover, Button, Input } from 'antd';
 import { message } from 'antd';
-import Play from '../Test_Components/PlayComponent.jsx';
+import GameTest from '../Test_Components/GameTest'
 import './GameDisplay.scss'
 import Header from '../header_components/Header.jsx'
 import request from 'umi-request';
 import Icon from '@ant-design/icons';
 import "../../scss/Spacing.scss";
 import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_NUM, API_LIKE_CHECK, API_COLLECT_CLICK, API_COLLECT_NUM, API_COLLECT_CHECK, API_RANK_DOWNLOAD, API_IMG, DOWNLOAD_GAME } from "../../Config.js";
+
 
 const colNum = 7
 const LOOP_ARR = [1, 2, 3, 4, 5, 6, 7]
@@ -164,37 +165,6 @@ const GameDisplay = (props) => {
     const [collectNum, setCollectNum] = useState(0)
     const [forward, setForward] = useState(false)
     const [downloadList, setDownloadList] = useState([])
-    var JSZip = require("jszip");
-
-    useEffect(() => {
-        const getGame = async () => {
-            const result = await getGameService({
-                game_id: 1
-            })
-            console.log(result)
-            var blob = result;
-            var new_zip = new JSZip();
-            new_zip.loadAsync(blob)
-                .then(function (file) {
-                    var files = file.files;
-                    for (let f in files) {
-                        console.log("\nf: \n", f)
-                        // var zipobj = files[f];
-                        // if (!zipobj.dir) {
-                        //     new_zip.file(f).async("blob")
-                        //         .then(function (blob) {
-                        //             //获取blob对象地址，并把值赋给容器
-                        //             var mp3url = URL.createObjectURL(blob);
-                        //             $("#MP3Play").attr("src", mp3url);
-                        //             //setTimeout("revokeUrl('" + mp3url + "')", "2000");
-                        //         });
-                        // }
-                    }
-                });
-
-        }
-        getGame()
-    }, [])
 
     useEffect(() => {
         // const getProductInfo = async () => {
@@ -236,7 +206,7 @@ const GameDisplay = (props) => {
         }
         getDownload();
         //initialize the unity game, reload script
-        initializeGame();
+        // initializeGame();
     }, [])
 
     const initializeGame = () => {
@@ -341,12 +311,7 @@ const GameDisplay = (props) => {
         return request(`${API_PRODUCT}`, { params });
     }
 
-    const getGameService = (params) => {
-        return request(`${DOWNLOAD_GAME}`, {
-            responseType: 'blob',
-            params
-        });
-    }
+
 
     const likeClick = () => {
         setLike(!like);
@@ -465,7 +430,7 @@ const GameDisplay = (props) => {
             </Flex>
             <Flex mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
                 <Box width={1} className="game-frame">
-                    <Play></Play>
+                    <GameTest></GameTest>
                 </Box>
             </Flex>
 

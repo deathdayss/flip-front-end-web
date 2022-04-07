@@ -37,6 +37,7 @@ import Rank from './rank/Rank'
 import UpdateForm from './personal_centre_page_components/UpdateForm.jsx'
 import './Main.scss'
 import { useHistory } from 'react-router-dom'
+import PersonalPage from './personal_page/PersonalPage.jsx'
 
 const mapStateToProps = state => { return { localization: state.localization } }
 const mapDispatchToProps = dispatch => ({ useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang)) })
@@ -79,6 +80,7 @@ class Main extends Component {
 						<Route path='/gameDisplay' component={GameDisplay} />
 						<Route path='/rank' component={Rank} />
 						<Route path='/personal_centre_page' component={UpdateForm} />
+						<Route path='/personal_page' component={PersonalPage} />
 					</Route>
 				</Switch>
 			</Layout>
