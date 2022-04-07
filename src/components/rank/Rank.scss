@@ -1,22 +1,39 @@
 @import "../../scss/Spacing.scss";
-@import '../../scss/Button.scss';
+@import "../../scss/Button.scss";
 
 .rank-time-btn {
     @include default-btn-setup();
-   //  background-color: #BDBBC5;
+    //  background-color: #BDBBC5;
     font-size: 12px;
     padding: 0 5px;
     // opacity: 0.5;
 }
 
+.rank-content-container {
+    display: flex;
+    .rank-block-container {
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+    .break-line {
+        width: 1px;
+        background-color: #d8d8d8;
+    }
+    .rank-uploader-container {
+        flex-grow: 1;
+        flex-basis: 0;
+        align-self: flex-end;
+    }
+}
+
 .more-btn {
-   @include default-btn-setup();
-   background-color: #E8E8E8;
-   font-size: 12px;
+    @include default-btn-setup();
+    background-color: #e8e8e8;
+    font-size: 12px;
     padding: 0 40px;
 }
 
-@media screen and (max-width: '1808px') {
+@media screen and (max-width: "1808px") {
     #rank-btns-left {
         // display: none;
     }
@@ -29,8 +46,8 @@
 }
 
 .rank-container {
-    margin: 0 400px;
-
+    padding: 0 300px;
+    min-width: 1000px;
     img.Home-Rank-img {
         max-width: 100%;
         height: auto;

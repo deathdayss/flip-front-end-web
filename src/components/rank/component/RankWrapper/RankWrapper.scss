@@ -1,0 +1,14 @@
+.rank-content-container {
+    display: flex;
+    flex-direction: row;
+    .rank-number {
+        width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.rank-block-container > .rank-content-container:not(:last-child) {
+    margin-bottom: 20px;
+}

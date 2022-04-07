@@ -1,16 +1,37 @@
-/**
- * @author Zhicheng Wang
- * @create date 2021-07-23 20:33:16
- * @modify date 2021-07-23 20:33:16
- */
- 
 @import "../../scss/Spacing.scss";
+@import "../../scss/Button.scss";
 
-#header-border {
+.header-border {
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-bottom-color: $default-border-color;
-    margin: 0;
-    padding: 0;
+    min-width: 1000px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    align-items: center;
+    display: flex;
+    .search-bar-container {
+        display: flex;
+        justify-content: center;
+        .search-outer-div {
+            margin-left: 10px;
+            // TODO: search button style problem
+            .ant-input-search-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
 
+    .user-buttons-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.header-border > div {
+    flex-basis: 0;
+    flex-grow: 1;
 }
