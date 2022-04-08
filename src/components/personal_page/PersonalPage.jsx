@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Avatar, } from 'antd'
+import { connect } from "react-redux";
+import { Avatar } from 'antd'
 import "./PersonalPage.scss"
 import Header from '../header_components/Header.jsx'
 import RankWrapper from '../rank/component/RankWrapper/RankWrapper';
 import RankBlock from '../rank/component/RankBlock/RankBlock';
 import { getRankList } from '../../service/Rank'
 import { API_IMG } from '../../Config.js';
+import CoverBlock from '../commonComponent/CoverBlock/CoverBlock';
 
 
 const gameDetail = {
@@ -21,17 +23,27 @@ const gameDetail = {
 
 const menuLabels = ["HOME", "GAMES", "POSTS", "FOLLOWING", "SETTINGS"]
 
-const CoverBlock = ({ game_name, like_num, playCount, AuthorName, img }) => {
-    return <div className='cover-block'>
-        <img src={`${API_IMG}?img_name=${img}`} />
-        <div>{game_name}</div>
-        <div>{`${playCount} played · ${like_num} liked`}</div>
-        <div>{AuthorName}</div>
-    </div>
+const mapStateToProps = state => {
+    return {
+        localization: state.localization
+    }
 }
+
+const PinnedGame = ({ rankList }) => <div className='pinned-game'>
+    {rankList.slice(0, 1).map((data, index) =>
+        <div key={data.GID} className='pinned-game-wrapper'>
+            <CoverBlock playCount={data.playCount}
+                AuthorName={data.AuthorName}
+                img={data.img}
+                like_num={data.like_num}
+                game_name={data.game_name} />
+        </div>
+    )}
+</div>
 
 const PersonalPage = (props) => {
     const [rankList, setRankList] = useState([])
+    const [showPinnedGame, setShowPinnedGame] = useState(true);
     useEffect(() => {
         const getRank = async () => {
             const result = await getRankList({
@@ -56,26 +68,15 @@ const PersonalPage = (props) => {
                         </div>
                         <div className="creator-right">
                             <span style={{ fontSize: '18px', display: "block" }}>{gameDetail.creator}</span>
-                            <span>{gameDetail.subscribers}</span>
+                            <span className='subscribe-count'>{gameDetail.subscribers}</span>
                         </div>
                     </div>
                     <div className="menu">
-                        {menuLabels.map(label => (<div className='menu-tab'>{label}</div>))}
+                        {menuLabels.map(label => (<div key={label} className='menu-tab'>{label}</div>))}
                     </div>
                 </div>
                 <div className='content'>
-                    <div className='pinned-game'>
-                        {rankList.slice(0, 1).map((data, index) =>
-                            <div className='pinned-game-wrapper'>
-                                <CoverBlock playCount={data.playCount}
-                                    AuthorName={data.AuthorName}
-                                    img={data.img}
-                                    like_num={data.like_num}
-                                    game_name={data.game_name} />
-                            </div>
-                        )}
-                    </div>
-
+                    {showPinnedGame && <PinnedGame rankList={rankList} />}
                     <div className='works'>
                         <div>
                             <span className='works-header'>Games</span>
@@ -83,7 +84,7 @@ const PersonalPage = (props) => {
                         </div>
                         <div className='cover-block-row'>
                             {rankList.map((data, index) =>
-                                <div className='cover-block-item'>
+                                <div key={data.GID} className='cover-block-item'>
                                     <CoverBlock playCount={data.playCount}
                                         AuthorName={data.AuthorName}
                                         img={data.img}
@@ -99,4 +100,4 @@ const PersonalPage = (props) => {
     )
 }
 
-export default PersonalPage
+export default connect(mapStateToProps)(PersonalPage);
