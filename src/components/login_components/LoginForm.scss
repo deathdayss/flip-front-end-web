@@ -41,12 +41,14 @@ html, body, #root, .App, .ant-layout, .ant-form{
 
 .login-mask{
     position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
-    // background-color: rgba(0,0,0,.5);
+    background-color: rgba(0,0,0,.5);
     z-index: 10;
 }
 
@@ -60,7 +62,7 @@ html, body, #root, .App, .ant-layout, .ant-form{
     border-radius: 20px;
     z-index: 11;
     overflow: hidden;
-    box-shadow: 0 0 5px 5px rgba(0,0,0,.3);
+    // box-shadow: 0 0 5px 5px rgba(0,0,0,.3);
 }
 .login-header{
     position: relative;

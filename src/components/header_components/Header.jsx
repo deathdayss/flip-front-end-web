@@ -120,11 +120,21 @@ const Header = function (props) {
   // TODO: press the search button
   const headerSearch = value => { props.toggleLanguage(props.localization.lang) }
 
+  const PersonalSocialInfo = (props) =>{
+    return (
+      <div style={{width: '80px', height:'80px', display:'flex',flexDirection:'column',justifyContent: 'center'}}>
+        <p>{props.name}</p>
+        <p style={{fontWeight: 'bold'}}>{props.value}</p>
+      </div>
+    );
+  }
 
   const HeaderRightContent = ({ btnsInfo }) => {
 
+
+
     return btnsInfo.map((btnInfo, index) => {
-      if (index != btnsInfo.length - 1) {
+      if (index != 0) {
         return (
           <Link to='/upload_work' key={btnInfo[0]} className={'my-link me-' + btnInfo[2]}>
             <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
@@ -138,22 +148,27 @@ const Header = function (props) {
               ""
             }
             content={
-              <div id="mainMenuPopup" >
+              <div className="main-menu-popup" >
                 {!isLoggedIn ?
                   (
-                    <div style={{ position: 'relative', textAlign: 'center', padding: '10px', margin: 0 }}>
-                      <h3> Welcome </h3>
+                    <div>
+                      <div> Welcome </div>
                       <Button onClick={openLogin}>Log in</Button>
-                      <div style={{}}>
+                      <div>
                         <p>Don't have an account?</p>
                         <div style={{ color: 'red', cursor: 'pointer' }} onClick={openSignup}>Sign up</div>
                       </div>
                     </div>
                   ) :
-                  (<div style={{ textAlign: 'center', padding: '10px', margin: 0 }}>
-                    <h3> Welcome </h3>
-                    <p>{JSON.parse(localStorage.getItem("user")).email}</p>
-                    <Button onClick={handle_logoutRequest}>Log out</Button>
+                  (<div>
+                    <div className='main-menu-popup-item' style={{fontSize: '20px'}}> game point: 9000 </div>
+                    <div className="personal-social-info-groups main-menu-popup-item">
+                      <PersonalSocialInfo name='Following' value='33' />
+                      <PersonalSocialInfo name='Followed' value='5' />
+                      <PersonalSocialInfo name='XXX' value='2' />
+                    </div>
+                    <div className='main-menu-popup-item' style={{backgroundColor: '#EEE'}}>Personal Center</div>
+                    <div className='main-menu-popup-item' style={{backgroundColor: '#F6EAFF', fontWeight:'bold', cursor: 'pointer'}} onClick={handle_logoutRequest}>Log out</div>
                   </div>
                   )}
               </div>
@@ -161,14 +176,18 @@ const Header = function (props) {
             key={btnInfo[0]}
             className={'my-link me-lg-4 me-xl-5'}
             trigger='hover'
-            placement="leftTop"
+            placement="bottom"
           >
-            <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
+            <div style={{ display: 'inline-block', position: 'relative' }}>
+              <img className="personal-icon" src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
+            </div>
           </Popover>
+
         )
       }
     })
   }
+
 
   const onSearch = (value) => console.log(props.localization)
 
@@ -184,7 +203,7 @@ const Header = function (props) {
           <img src='images/header/header_rank_btn.svg' height='28' width='28' />
         </Link>
         <div className='search-outer-div'>
-          <Search placeholder={props.localization.words.header.headerSearchbarHolder} onSearch={onSearch} style={{width: '400px'}} />
+          <Search placeholder={props.localization.words.header.headerSearchbarHolder} onSearch={onSearch} style={{ width: '400px' }} />
         </div>
       </div>
       <div className='user-buttons-container'>
