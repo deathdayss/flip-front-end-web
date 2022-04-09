@@ -108,7 +108,7 @@ const LoginForm = (props) => {
                         <p className="veri-failed-warning">{val_veriFailWarning}</p>
                     </div>
 
-                    <input type="checkbox" id="mainMenuLogin_keepLoggedIn" type="checkbox" />
+                    <input type="checkbox" id="mainMenuLogin_keepLoggedIn" />
                     <label>Keep me log in</label><br />
                     <Button style={{marginTop: "10px", backgroundColor:'#5B28FF', color: '#FFF', width: '120px',borderRadius:'10px'}} onClick={
                         () => {
