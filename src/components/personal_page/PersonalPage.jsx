@@ -32,7 +32,7 @@ const mapStateToProps = state => {
 const PinnedGame = ({ rankList }) => <div className='pinned-game'>
     {rankList.slice(0, 1).map((data, index) =>
         <div key={data.GID} className='pinned-game-wrapper'>
-            <CoverBlock playCount={data.playCount}
+            <CoverBlock playCount={data.DownloadNum}
                 AuthorName={data.AuthorName}
                 img={data.img}
                 like_num={data.like_num}
@@ -43,7 +43,9 @@ const PinnedGame = ({ rankList }) => <div className='pinned-game'>
 
 const PersonalPage = (props) => {
     const [rankList, setRankList] = useState([])
-    const [showPinnedGame, setShowPinnedGame] = useState(true);
+    const [showPinnedGame, setShowPinnedGame] = useState(true)
+    const [menu, setMenu] = useState(menuLabels[0])
+
     useEffect(() => {
         const getRank = async () => {
             const result = await getRankList({
@@ -72,7 +74,9 @@ const PersonalPage = (props) => {
                         </div>
                     </div>
                     <div className="menu">
-                        {menuLabels.map(label => (<div key={label} className='menu-tab'>{label}</div>))}
+                        {menuLabels.map(label => (<div key={label} className='menu-tab'>
+                            <button className={menu === label ? 'menu-btn active' : 'menu-btn'} onClick={() => setMenu(label)}>{label}</button>
+                        </div>))}
                     </div>
                 </div>
                 <div className='content'>
@@ -85,7 +89,7 @@ const PersonalPage = (props) => {
                         <div className='cover-block-row'>
                             {rankList.map((data, index) =>
                                 <div key={data.GID} className='cover-block-item'>
-                                    <CoverBlock playCount={data.playCount}
+                                    <CoverBlock playCount={data.DownloadNum}
                                         AuthorName={data.AuthorName}
                                         img={data.img}
                                         like_num={data.like_num}

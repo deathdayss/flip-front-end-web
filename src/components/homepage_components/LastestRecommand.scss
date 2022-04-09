@@ -3,8 +3,7 @@
  * @create date 2021-07-23 20:33:50
  * @modify date 2021-07-23 20:33:50
  */
-.section-recommendation-latest {
-}
+.section-recommendation-latest {}
 
 .recommendation-latest-title {
     margin-bottom: 10px;
@@ -13,15 +12,18 @@
 .cover-block-grid {
     .cover-block-row {
         margin-bottom: 10px;
+
         .cover-block-item {
             display: inline-block;
             width: 20%;
         }
-        .cover-block > img {
+
+        .cover-block>img {
             width: 100%;
         }
     }
-    .cover-block-row > .cover-block-item {
+
+    .cover-block-row>.cover-block-item {
         padding: 0 5px;
     }
 }
@@ -38,6 +40,7 @@ div.bottom-row-2 {
     div.bottom-row-5 {
         display: none;
     }
+
     div.bottom-row-4 {
         display: flex;
     }
@@ -47,6 +50,7 @@ div.bottom-row-2 {
     div.bottom-row-4 {
         display: none;
     }
+
     div.bottom-row-2 {
         display: flex;
     }
@@ -54,6 +58,6 @@ div.bottom-row-2 {
 
 .page-wrapper {
     display: flex;
-    margin: 20px 0;
+    padding: 10px 0;
     justify-content: center;
 }

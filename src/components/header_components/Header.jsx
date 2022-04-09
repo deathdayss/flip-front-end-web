@@ -120,11 +120,11 @@ const Header = function (props) {
   // TODO: press the search button
   const headerSearch = value => { props.toggleLanguage(props.localization.lang) }
 
-  const PersonalSocialInfo = (props) =>{
+  const PersonalSocialInfo = (props) => {
     return (
-      <div style={{width: '80px', height:'80px', display:'flex',flexDirection:'column',justifyContent: 'center'}}>
+      <div style={{ width: '80px', height: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <p>{props.name}</p>
-        <p style={{fontWeight: 'bold'}}>{props.value}</p>
+        <p style={{ fontWeight: 'bold' }}>{props.value}</p>
       </div>
     );
   }
@@ -161,14 +161,14 @@ const Header = function (props) {
                     </div>
                   ) :
                   (<div>
-                    <div className='main-menu-popup-item' style={{fontSize: '20px'}}> game point: 9000 </div>
+                    <div className='main-menu-popup-item' style={{ fontSize: '20px' }}> game point: 9000 </div>
                     <div className="personal-social-info-groups main-menu-popup-item">
                       <PersonalSocialInfo name='Following' value='33' />
                       <PersonalSocialInfo name='Followed' value='5' />
                       <PersonalSocialInfo name='XXX' value='2' />
                     </div>
-                    <div className='main-menu-popup-item' style={{backgroundColor: '#EEE'}}>Personal Center</div>
-                    <div className='main-menu-popup-item' style={{backgroundColor: '#F6EAFF', fontWeight:'bold', cursor: 'pointer'}} onClick={handle_logoutRequest}>Log out</div>
+                    <div className='main-menu-popup-item' style={{ backgroundColor: '#EEE' }}>Personal Center</div>
+                    <div className='main-menu-popup-item' style={{ backgroundColor: '#F6EAFF', fontWeight: 'bold', cursor: 'pointer' }} onClick={handle_logoutRequest}>Log out</div>
                   </div>
                   )}
               </div>
@@ -195,11 +195,11 @@ const Header = function (props) {
     <div className="header-border">
       <div className='logo-container'>
         <Link to='/' className='my-link' onClick={handleRankBtn}>
-          <img src='images/header/logo.svg' />
+          <img className='logo' src='images/header/logo-purple.jpg' />
         </Link>
       </div>
       <div className='search-bar-container'>
-        <Link to='/TobeChanged3' id='rank-btn-hide' className='my-link' onClick={handleRankBtn}>
+        <Link to='/rank' id='rank-btn-hide' className='my-link' onClick={handleRankBtn}>
           <img src='images/header/header_rank_btn.svg' height='28' width='28' />
         </Link>
         <div className='search-outer-div'>

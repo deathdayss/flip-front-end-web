@@ -5,7 +5,7 @@ import { homepageSpacing } from '../../data/constants/Spacing'
 import Header from '../header_components/Header'
 import { ForLoop } from '../helper_components/Helper.jsx'
 import { API_IMG } from '../../Config.js';
-import { getRankList } from '../../service/Rank'
+import { getRankList, getAuthorList } from '../../service/Rank'
 import RankWrapper from './component/RankWrapper/RankWrapper';
 import RankUploader from './component/RankUploader/RankUploader';
 import RankBlock from './component/RankBlock/RankBlock';
@@ -39,13 +39,14 @@ const RankButtons = () => {
         {label}
     </button>)
     return Buttons.map((button, index) =>
-        <Box key={index} width={1 / 3} px={3}>
+        <div key={index} className='time-btn-wrapper'>
             {button}
-        </Box>)
+        </div>)
 }
 
 const RankContent = () => {
     const [rankList, setRankList] = useState([])
+    const [authorList, setAuthorList] = useState([])
 
     useEffect(() => {
         const getRank = async () => {
@@ -56,6 +57,16 @@ const RankContent = () => {
             setRankList(result.List);
         }
         getRank();
+        const getAuthor = async () => {
+            const result = await getAuthorList({
+                zone: "test",
+                num: 5,
+            });
+            console.log(result.List);
+            setAuthorList(result.List);
+        }
+        getAuthor();
+
     }, [])
 
     return <div className='rank-content-container'>
@@ -66,7 +77,7 @@ const RankContent = () => {
                 rankColor={getColorByIndex(index)}
                 rankBody={<RankBlock imgUrl={`${API_IMG}?img_name=${dataObj.img}`}
                     title={dataObj.game_name}
-                    // TODO: playCount={}
+                    playCount={dataObj.DownloadNum}
                     likeCount={dataObj.like_num}
                     uploaderName={dataObj.AuthorName}
                 />}
@@ -85,17 +96,10 @@ const Rank = (props) => {
 
     return (<>
         <Header />
-        <div class="rank-container">
-            <Flex mt={homepageSpacing.top_margin} id='rank-btns-left' >
-                <Box width={0.3} className='section-heading'>
-                    Ranking
-                </Box>
-                <Box width={0.5} className='text-center'>
-                    <Flex>
-                        <RankButtons />
-                    </Flex>
-                </Box>
-            </Flex>
+        <div className="rank-container">
+            <div className='time-btns'>
+                <RankButtons />
+            </div>
             <div >
                 <RankContent />
             </div>

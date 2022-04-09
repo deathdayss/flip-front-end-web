@@ -14,49 +14,53 @@ import { ForLoop } from '../helper_components/Helper.jsx'
 import { homepageSpacing } from '../../data/constants/Spacing'
 import './DisplayBoard.scss'
 import request from 'umi-request';
-import { API_RANK, API_IMG, API_RANK_DOWNLOAD } from '../../Config.js'
+import { API_IMG } from '../../Config.js'
+import { getRankService, getDownloadService, getMultiZoneService } from '../../service/displayBoard'
 
-
-const categoryLabels = ["Fanmade", "Real World", "Traditional"]
+const categoryLabels = [
+    {
+        key: "rpg",
+        label: "Rpg"
+    }
+    , {
+        key: "action",
+        label: "Action"
+    },
+    {
+        key: "3D",
+        label: "3D"
+    }]
 const aspectRatio = `${(9 * 100 / 16)}%` //"62.5%"
 
 const DisplayBoard = () => {
-    const [rankList, setRankList] = useState([])
-    const [category, setCategory] = useState(categoryLabels[0])
+    const [carouselList, setCarouselList] = useState([])
+    const [category, setCategory] = useState(categoryLabels[0]["key"])
     const [downloadList, setDownloadList] = useState([])
-    const [imgUrl, setImgUrl] = useState("")
     const history = useHistory()
 
     useEffect(() => {
-        const getRank = async () => {
-            const result = await getRankService({
-                zone: "test",
+        const getCarousel = async () => {
+            const result = await getMultiZoneService({
+                zone: category,
                 num: 5,
             });
-            setRankList(result.List);
+            // console.log(result.List)
+            setCarouselList(result.List);
         }
-        getRank();
+        getCarousel();
 
 
         const getDownload = async () => {
-            const result = await getDownloadService({
-                zone: "test",
-                num: 10,
+            const result = await getMultiZoneService({
+                zone: category,
+                num: 5,
             });
-            console.log(result.List)
+            // console.log(result.List)
             setDownloadList(result.List);
         }
         getDownload();
-        setImgUrl(`${API_IMG}?img_name=1.jpg`);
+
     }, [])
-
-    const getRankService = (params) => {
-        return request(`${API_RANK}`, { params });
-    }
-
-    const getDownloadService = (params) => {
-        return request(`${API_RANK_DOWNLOAD}`, { params });
-    }
 
     const TopHalfSmallContent = ({ index = 1 }) => {
         return <ForLoop index={index} loopNum={1}
@@ -74,22 +78,19 @@ const DisplayBoard = () => {
                 </div>} />
     }
 
-
-
-
     const CarouselContent = () => {
         const CAROUSEL_NUM = 4
         const numbers = [...Array(CAROUSEL_NUM).keys()]
         return <Carousel afterChange={onChange}>
             {numbers.map(i =>
-                <img key={`carousel${i}`} className='Home-Show-img' src={`${API_IMG}?img_name=${rankList?.[i]?.img}`} />
+                <img key={`carousel${i}`} className='Home-Show-img' src={`${API_IMG}?img_name=${carouselList?.[i]?.img}`} />
             )}
         </Carousel>
     }
 
     const CategoryButtons = () => {
-        const Buttons = categoryLabels.map(label => <button key={label} id='' className='category-btn'
-            onClick={() => setCategory(label)} style={{ backgroundColor: (category == label) ? '#DACEFF' : 'rgba(0, 0, 0, 0.05)' }}>
+        const Buttons = categoryLabels.map(({ key, label }) => <button key={key} id='' className='category-btn'
+            onClick={() => changeCategory(key)} style={{ backgroundColor: (category == key) ? '#DACEFF' : 'rgba(0, 0, 0, 0.05)' }}>
             {label}
         </button>)
         return (<div className="category-wrapper">
@@ -98,6 +99,19 @@ const DisplayBoard = () => {
                     {button}
                 </div>)}
         </div>)
+    }
+    const getMultiZone = async (key) => {
+        const result = await getMultiZoneService({
+            zone: key,
+            num: 5,
+        });
+        console.log(result.List)
+        setCarouselList(result.List)
+        setDownloadList(result.List)
+    }
+    const changeCategory = (key) => {
+        setCategory(key)
+        getMultiZone(key)
     }
 
     const contentStyle = {
@@ -109,7 +123,7 @@ const DisplayBoard = () => {
     };
 
     const onChange = (a, b, c) => {
-        console.log(a, b, c);
+        // console.log(a, b, c);
     }
 
 

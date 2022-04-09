@@ -1,23 +1,39 @@
+@import '../../scss/Spacing.scss';
+
 .personal-page-container {
 
     .header {
         background-color: #F4F4F4;
         padding: 0 200px;
+
         .creator {
             display: flex;
             padding: 20px 0;
+
             .creator-right {
                 margin-left: 10px;
+
                 .subscribe-count {
                     color: #616161;
                 }
             }
         }
+
         .menu {
             display: flex;
 
             .menu-tab {
                 margin-right: 30px;
+
+                .menu-btn {
+                    padding: 0 5px;
+                    background: none;
+                    border: none;
+                }
+
+                .active {
+                    border-bottom: 3px solid $theme-color-0;
+                }
             }
         }
 
@@ -29,6 +45,7 @@
 
     .pinned-game {
         margin-top: 20px;
+
         .pinned-game-wrapper {
             width: 30%;
 
@@ -40,6 +57,7 @@
 
     .works {
         margin-top: 20px;
+
         .works-header {
             font-size: 18px;
             margin-right: 30px;

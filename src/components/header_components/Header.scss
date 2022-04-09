@@ -16,11 +16,14 @@
     height: 50px;
     align-items: center;
     display: flex;
+
     .search-bar-container {
         display: flex;
         justify-content: center;
+
         .search-outer-div {
             margin-left: 10px;
+
             // TODO: search button style problem
             .ant-input-search-button {
                 display: flex;
@@ -36,23 +39,23 @@
     }
 }
 
-.header-border > div {
+.header-border>div {
     flex-basis: 0;
     flex-grow: 1;
 }
 
 
-.personal-icon{
+.personal-icon {
     transition: transform .2s;
 }
 
-.personal-icon:hover{
+.personal-icon:hover {
     // transform: scale(2.5);
-    transform: matrix(2.5,0,0,2.5,0,12);
-    
+    transform: matrix(2.5, 0, 0, 2.5, 0, 12);
+
 }
 
-.main-menu-popup{
+.main-menu-popup {
     // position: relative;
     width: 300px;
     height: 300px;
@@ -63,7 +66,7 @@
     // align-items: center;
 }
 
-.main-menu-popup-item{
+.main-menu-popup-item {
     // width: 300px;
     height: 60px;
     display: flex;
@@ -71,12 +74,17 @@
     align-items: center;
     // margin-bottom: 30px;
     // line-height: 80px;
-    border-bottom: 2px solid rgba(195,195,195,.5);
+    border-bottom: 2px solid rgba(195, 195, 195, .5);
 }
 
-.personal-social-info-groups{
+.personal-social-info-groups {
     display: flex;
     justify-content: space-around;
     height: 100px;
     align-items: center;
+}
+
+.logo {
+    width: 70px;
+    height: 50px;
 }

@@ -13,7 +13,7 @@ const CoverBlock = ({ localization, game_name, like_num, playCount, AuthorName, 
     return <div className='cover-block'>
         <img src={`${API_IMG}?img_name=${img}`} />
         <div>{game_name}</div>
-        <div>{`${playCount} ${commonWords.play} · ${commonWords.like} liked`}</div>
+        <div>{`${playCount} ${commonWords.play} · ${like_num} ${commonWords.like}`}</div>
         <div>{AuthorName}</div>
     </div>
 }
