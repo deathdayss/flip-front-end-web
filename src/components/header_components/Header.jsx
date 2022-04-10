@@ -195,7 +195,7 @@ const Header = function (props) {
     <div className="header-border">
       <div className='logo-container'>
         <Link to='/' className='my-link' onClick={handleRankBtn}>
-          <img className='logo' src='images/header/logo-purple.jpg' />
+          <img src='images/header/logo.svg' />
         </Link>
       </div>
       <div className='search-bar-container'>
