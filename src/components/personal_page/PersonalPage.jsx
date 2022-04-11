@@ -8,6 +8,7 @@ import RankBlock from '../rank/component/RankBlock/RankBlock';
 import { getRankList } from '../../service/Rank'
 import { API_IMG } from '../../Config.js';
 import CoverBlock from '../commonComponent/CoverBlock/CoverBlock';
+import { mapLocalizationToProps } from '../../redux/helper/mapProps'
 
 
 const gameDetail = {
@@ -21,25 +22,29 @@ const gameDetail = {
     comments: "2342 comments"
 }
 
-const menuLabels = ["HOME", "GAMES", "POSTS", "FOLLOWING", "SETTINGS"]
-
-const mapStateToProps = state => {
-    return {
-        localization: state.localization
-    }
+const pinnedGameInfo = {
+    name: 'Pinned Game Name',
+    coverUrl: '5.png',
+    playCount: 100,
+    likeCount: 100,
+    description: 'The description about the game'
 }
 
-const PinnedGame = ({ rankList }) => <div className='pinned-game'>
-    {rankList.slice(0, 1).map((data, index) =>
-        <div key={data.GID} className='pinned-game-wrapper'>
-            <CoverBlock playCount={data.DownloadNum}
-                AuthorName={data.AuthorName}
-                img={data.img}
-                like_num={data.like_num}
-                game_name={data.game_name} />
+const menuLabels = ["HOME", "GAMES", "POSTS", "FOLLOWING", "SETTINGS"]
+
+const PinnedGame = connect(mapLocalizationToProps)(({ localization, coverUrl, playCount, likeCount, description }) => {
+    const commonWords = localization.words.common;
+    return <div className='pinned-game'>
+        <div className='pinned-game-img-container'>
+            <img className='pinned-game-img' src={`${API_IMG}?img_name=${coverUrl}`} alt='invalid img link' />
         </div>
-    )}
-</div>
+        <div className='pinned-game-introduction'>
+            <div>{pinnedGameInfo.name}</div>
+            <div>{`${playCount} ${commonWords.play} · ${likeCount} ${commonWords.like}`}</div>
+            <div>{description}</div>
+        </div>
+    </div>
+})
 
 const PersonalPage = (props) => {
     const [rankList, setRankList] = useState([])
@@ -59,7 +64,7 @@ const PersonalPage = (props) => {
 
     return (
         <>
-            <Header></Header>
+            <Header />
             <div className="personal-page-container">
                 <div className="header">
                     <div className="creator">
@@ -80,7 +85,10 @@ const PersonalPage = (props) => {
                     </div>
                 </div>
                 <div className='content'>
-                    {showPinnedGame && <PinnedGame rankList={rankList} />}
+                    {showPinnedGame && <PinnedGame coverUrl={pinnedGameInfo.coverUrl}
+                        playCount={pinnedGameInfo.playCount}
+                        likeCount={pinnedGameInfo.likeCount}
+                        description={pinnedGameInfo.description} />}
                     <div className='works'>
                         <div>
                             <span className='works-header'>Games</span>
@@ -90,10 +98,10 @@ const PersonalPage = (props) => {
                             {rankList.map((data, index) =>
                                 <div key={data.GID} className='cover-block-item'>
                                     <CoverBlock playCount={data.DownloadNum}
-                                        AuthorName={data.AuthorName}
+                                        publishDate={'2020-01-22'}
                                         img={data.img}
-                                        like_num={data.like_num}
-                                        game_name={data.game_name} />
+                                        likeCount={data.like_num}
+                                        gameName={data.game_name} />
                                 </div>
                             )}
                         </div>
@@ -104,4 +112,4 @@ const PersonalPage = (props) => {
     )
 }
 
-export default connect(mapStateToProps)(PersonalPage);
+export default connect(mapLocalizationToProps)(PersonalPage);

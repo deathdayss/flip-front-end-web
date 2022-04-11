@@ -8,13 +8,13 @@ const mapStateToProps = state => {
     }
 }
 
-const CoverBlock = ({ localization, game_name, like_num, playCount, AuthorName, img }) => {
+const CoverBlock = ({ localization, gameName, likeCount, playCount, AuthorName, img, publishDate }) => {
     const commonWords = localization.words.common;
     return <div className='cover-block'>
         <img src={`${API_IMG}?img_name=${img}`} />
-        <div>{game_name}</div>
-        <div>{`${playCount} ${commonWords.play} · ${like_num} ${commonWords.like}`}</div>
-        <div>{AuthorName}</div>
+        <div>{gameName}</div>
+        <div>{`${playCount} ${commonWords.play} · ${likeCount} ${commonWords.like}`}</div>
+        <div>{AuthorName ? AuthorName : publishDate}</div>
     </div>
 }
 
