@@ -1,12 +1,7 @@
 import React from "react";
 import { API_IMG } from '../../../Config'
 import { connect } from "react-redux";
-
-const mapStateToProps = state => {
-    return {
-        localization: state.localization
-    }
-}
+import { mapLocalizationToProps } from '../../../redux/helper/mapProps'
 
 const CoverBlock = ({ localization, gameName, likeCount, playCount, AuthorName, img, publishDate }) => {
     const commonWords = localization.words.common;
@@ -18,4 +13,4 @@ const CoverBlock = ({ localization, gameName, likeCount, playCount, AuthorName, 
     </div>
 }
 
-export default connect(mapStateToProps)(CoverBlock);
+export default connect(mapLocalizationToProps)(CoverBlock);

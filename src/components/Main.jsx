@@ -38,8 +38,8 @@ import UpdateForm from './personal_centre_page_components/UpdateForm.jsx'
 import './Main.scss'
 import { useHistory } from 'react-router-dom'
 import PersonalPage from './personal_page/PersonalPage.jsx'
+import { mapLocalizationToProps } from '../redux/helper/mapProps'
 
-const mapStateToProps = state => { return { localization: state.localization } }
 const mapDispatchToProps = dispatch => ({ useLangToChangeWords: (lang) => dispatch(useLangToChangeWords(lang)) })
 class Main extends Component {
 	componentDidMount() {
@@ -85,4 +85,4 @@ class Main extends Component {
 	}
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main))
+export default withRouter(connect(mapLocalizationToProps, mapDispatchToProps)(Main))

@@ -1,12 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import './RankBlock.scss';
-
-const mapStateToProps = state => {
-    return {
-        localization: state.localization,
-    }
-}
+import { mapLocalizationToProps } from '../../../../redux/helper/mapProps' 
 
 const RankBlock = ({ localization, imgUrl, clickUrl, title, playCount, likeCount, uploaderName }) => {
     const commonWords = localization.words.common;
@@ -20,4 +15,4 @@ const RankBlock = ({ localization, imgUrl, clickUrl, title, playCount, likeCount
     </div>
 }
 
-export default connect(mapStateToProps)(RankBlock)
+export default connect(mapLocalizationToProps)(RankBlock)

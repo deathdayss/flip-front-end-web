@@ -10,14 +10,9 @@ import RankWrapper from './component/RankWrapper/RankWrapper';
 import RankUploader from './component/RankUploader/RankUploader';
 import RankBlock from './component/RankBlock/RankBlock';
 import './Rank.scss'
+import { mapLocalizationToProps } from '../../redux/helper/mapProps'
 
 const rankLabels = ["Daily", "Weekly", "Monthly"];
-
-const mapStateToProps = state => {
-    return {
-        localization: state.localization,
-    }
-}
 
 const getColorByIndex = (index) => {
     switch (index) {
@@ -113,4 +108,4 @@ const Rank = (props) => {
     </>)
 }
 
-export default connect(mapStateToProps)(Rank)
+export default connect(mapLocalizationToProps)(Rank)

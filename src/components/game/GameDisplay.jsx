@@ -22,7 +22,7 @@ import request from 'umi-request';
 import Icon from '@ant-design/icons';
 import "../../scss/Spacing.scss";
 import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_NUM, API_LIKE_CHECK, API_COLLECT_CLICK, API_COLLECT_NUM, API_COLLECT_CHECK, API_RANK_DOWNLOAD, API_IMG, DOWNLOAD_GAME } from "../../Config.js";
-
+import { mapLocalizationToProps } from '../../redux/helper/mapProps'
 
 const colNum = 7
 const LOOP_ARR = [1, 2, 3, 4, 5, 6, 7]
@@ -150,12 +150,6 @@ const ForwardSvg = () =>
     </svg>
 
 const ForwardIcon = props => <Icon component={ForwardSvg} {...props} />;
-
-const mapStateToProps = state => {
-    return {
-        localization: state.localization,
-    }
-}
 
 const GameDisplay = (props) => {
     const defaultWords = props.localization.words.homepage.contentWords
@@ -498,4 +492,4 @@ const GameDisplay = (props) => {
         </>)
 }
 
-export default connect(mapStateToProps)(GameDisplay)
+export default connect(mapLocalizationToProps)(GameDisplay)
