@@ -21,4 +21,8 @@ export const API_COLLECT_CHECK = `${DOMAIN}/v1/collect/check`
 export const API_COLLECT_NUM = `${DOMAIN}/v1/collect/num`
 export const DOWNLOAD_GAME = `${DOMAIN}/v1/download/game`
 
+// Personal Centre URLs
+export const API_USER_DETAIL = `${DOMAIN}/v1/user/detail`
+export const API_UPDATE_GAME = `${DOMAIN}/v1/update/game`
+
 //Login URLs, etc.

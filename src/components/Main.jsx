@@ -34,7 +34,9 @@ import GameDisplay from './game/GameDisplay';
 import SignUpForm from './signup_components/SignUpForm.jsx'
 import LoginForm from './login_components/LoginForm.jsx'
 import Rank from './rank/Rank'
-import UpdateForm from './personal_centre_page_components/UpdateForm.jsx'
+import UpdateForm from './personal_centre_components/UpdateForm.jsx'
+import CreationManagement from './personal_centre_components/CreationManagement.jsx'
+import DragUpload1 from './personal_centre_components/DragUpload1.jsx'
 import './Main.scss'
 import { useHistory } from 'react-router-dom'
 import PersonalPage from './personal_page/PersonalPage.jsx'
@@ -77,7 +79,9 @@ class Main extends Component {
 					<Route path='/upload_form' component={UploadForm} /> {/* TODO: Make a content for the upload form page*/}
 					<Route path='/gameDisplay' component={GameDisplay} />
 					<Route path='/rank' component={Rank} />
-					<Route path='/personal_centre_page' component={UpdateForm} />
+					<Route path='/personal_centre' component={UpdateForm} />
+					<Route path='/my_game' component={CreationManagement} />
+					<Route path='/update_game' component={DragUpload1} />
 					<Route path='/personal_page' component={PersonalPage} />
 				</Route>
 			</Switch>

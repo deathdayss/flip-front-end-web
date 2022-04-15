@@ -4,15 +4,21 @@
     list-style: none;
 }
 
-.title{
+.title {
     font-size: 20px;
 }
 
-.item{
+.item {
     margin-bottom: 36px;
 }
 
-.covers{
+.covers {
     overflow: hidden;
     margin-top: 10px;
 }
+
+.ant-tag-checkable-checked {
+    background-color: #5B28FF !important;
+}
+
+

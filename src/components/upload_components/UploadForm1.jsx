@@ -19,23 +19,24 @@ import { useHistory } from 'react-router-dom'
 const { CheckableTag } = Tag;
 
 const tagsData = [
-	'Action', 
-	'Adventure', 
-	'Board', 
-	'Card', 
-	'Family', 
-	'Music', 
-	'Puzzle', 
-	'Racing', 
-	'Role Playing', 
-	'Simulation', 
-	'Sports', 
+	'Action',
+	'Adventure',
+	'Board',
+	'Card',
+	'Family',
+	'Music',
+	'Puzzle',
+	'Racing',
+	'Role Playing',
+	'Simulation',
+	'Sports',
 	'Strategy'
 ];
 
 const formItemLayout = {
 	labelCol: { span: 0, }, wrapperCol: { span: 5, },
 };
+
 const normFile = (e) => {
 	if (Array.isArray(e)) {
 		return e;
@@ -184,8 +185,6 @@ const UploadForm1 = (props) => {
 
 	const [title, updateTitle] = useState("");
 	const [category, updateCategory] = useState("");
-	const [tColor, updateTextColor] = useState("black");
-	const [bgColor, updateBgColor] = useState("white");
 	const [folder, updateFolder] = useState("GAME" + _gid_);
 	const [game_id, updateGameID] = useState(_gid_);
 	const [description, updateDescription] = useState("");
@@ -268,17 +267,18 @@ const UploadForm1 = (props) => {
 						<div className='item'>
 							<label htmlFor='category' style={{ fontSize: '20px', fontFamily: 'Arial' }}>Category</label>
 							<p></p>
-							{tagsData.map(tag => (
-								<CheckableTag
-									key={tag}
-									checked={category.indexOf(tag) > -1}
-									style={{ fontSize: '15px' }}
-									onChange={checked => handleChange(tag, checked)}
-								>
-									{tag}
-								</CheckableTag>
-
-							))}
+							<div style={{ display: 'flex', flexWrap: 'nowrap', marginLeft: '-7px' }}>
+								{tagsData.map(tag => (
+									<CheckableTag
+										key={tag}
+										checked={category.indexOf(tag) > -1}
+										style={{ fontSize: '15px' }}
+										onChange={checked => handleChange(tag, checked)}
+									>
+										{tag}
+									</CheckableTag>
+								))}
+							</div>
 						</div>
 					</Form.Item>
 
