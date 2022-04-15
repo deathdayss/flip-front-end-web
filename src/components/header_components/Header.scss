@@ -50,7 +50,23 @@
     flex-grow: 1;
 }
 
+<<<<<<< HEAD
 .main-menu-popup {
+=======
+
+.personal-icon{
+    transition: transform .2s;
+    cursor: pointer;
+}
+
+.personal-icon:hover{
+    // transform: scale(2.5);
+    transform: matrix(2.5,0,0,2.5,0,12);
+    
+}
+
+.main-menu-popup{
+>>>>>>> dev-robert
     // position: relative;
     width: 300px;
     height: 300px;
