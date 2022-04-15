@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Avatar } from 'antd';
 import { Flex, Box } from '@rebass/grid'
 import { connect } from "react-redux";
 import { homepageSpacing } from '../../data/constants/Spacing'
@@ -55,7 +56,7 @@ const RankContent = () => {
         const getAuthor = async () => {
             const result = await getAuthorList({
                 zone: "test",
-                num: 5,
+                num: 1,
             });
             console.log(result.List);
             setAuthorList(result.List);
@@ -82,8 +83,31 @@ const RankContent = () => {
         {/* TODO: need uploader interface from the backend */}
         <div className='rank-uploader-container'>
             <div className='align-right-float'>
+                <div className='rank-block-container'>
+                    {rankList.map((dataObj, index) => <RankWrapper
+                        key={dataObj.GID}
+                        rankNumber={index + 1}
+                        rankColor={getColorByIndex(index)}
+                        rankBody={<UploaderItem
+                        />}
+
+                    />)}
+                </div>
             </div>
         </div>
+    </div>
+}
+
+const UploaderItem = () => {
+    return <div className='uploader-item-wrapper'>
+        <div>
+            <a href="">
+                <Avatar size={36} src="images/header/header_avatar_btn.svg"></Avatar>
+            </a>
+        </div>
+        <div>Creator</div>
+        <div>451 follow</div>
+        <div><button className='follow-btn'>subscribe</button></div>
     </div>
 }
 

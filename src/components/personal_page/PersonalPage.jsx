@@ -106,6 +106,23 @@ const PersonalPage = (props) => {
                             )}
                         </div>
                     </div>
+                    <div className='works'>
+                        <div>
+                            <span className='works-header'>Collection</span>
+                            <a>View All</a>
+                        </div>
+                        <div className='cover-block-row'>
+                            {rankList.map((data, index) =>
+                                <div key={data.GID} className='cover-block-item'>
+                                    <CoverBlock playCount={data.DownloadNum}
+                                        publishDate={'2020-01-22'}
+                                        img={data.img}
+                                        likeCount={data.like_num}
+                                        gameName={data.game_name} />
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

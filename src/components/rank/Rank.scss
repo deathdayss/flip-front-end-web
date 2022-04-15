@@ -70,3 +70,15 @@
         text-align: center;
     }
 }
+
+.uploader-item-wrapper {
+    text-align: center;
+    margin-right: 100px;
+
+    .follow-btn {
+        @include default-btn-setup();
+        background-color: $theme-color-0;
+        color: #ffffff;
+        padding: 0 5px;
+    }
+}

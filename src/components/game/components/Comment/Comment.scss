@@ -1,0 +1,37 @@
+@import '../../../../scss/Spacing.scss';
+@import "../../../../scss/Button.scss";
+
+.comment {
+    margin: 20px 200px;
+}
+
+.comment-action {
+    padding-left: 8px;
+    cursor: 'auto';
+}
+
+[class*='-col-rtl'] .comment-action {
+    padding-right: 8px;
+    padding-left: 0;
+}
+
+
+
+.editor {
+    display: flex;
+    margin-top: 15px;
+
+    .textarea {
+        flex: 1;
+        height: 50px;
+        margin-left: 10px;
+    }
+
+    .submit-btn {
+        @include default-btn-setup();
+        background-color: $theme-color-0;
+        color: #fff;
+        width: 100px;
+        margin-left: 10px;
+    }
+}
