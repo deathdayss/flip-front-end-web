@@ -1,12 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import './RankUploader.scss';
-
-const mapStateToProps = state => {
-    return {
-        localization: state.localization,
-    }
-}
+import { mapLocalizationToProps } from '../../../../redux/helper/mapProps'
 
 const RankUploader = ({localization, avatarUrl, uploaderName, subscribeCount}) => {
     const commonWords = localization.words.common;
@@ -18,4 +13,4 @@ const RankUploader = ({localization, avatarUrl, uploaderName, subscribeCount}) =
     </div>
 }
 
-export default connect(mapStateToProps)(RankUploader)
+export default connect(mapLocalizationToProps)(RankUploader)

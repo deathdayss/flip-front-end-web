@@ -1,11 +1,9 @@
+@import "../../scss/Spacing.scss";
+
 .personal-page-container {
-
     .header {
-        background-color: #F4F4F4;
+        background-color: #f4f4f4;
         padding: 0 200px;
-
-
-
 
         .creator {
             display: flex;
@@ -13,6 +11,10 @@
 
             .creator-right {
                 margin-left: 10px;
+
+                .subscribe-count {
+                    color: #616161;
+                }
             }
         }
 
@@ -21,26 +23,50 @@
 
             .menu-tab {
                 margin-right: 30px;
+
+                .menu-btn {
+                    padding: 0 5px;
+                    background: none;
+                    border: none;
+                }
+
+                .active {
+                    border-bottom: 3px solid $theme-color-0;
+                }
             }
         }
-
     }
 
     .content {
         padding: 0 200px;
-    }
+        .pinned-game {
+            margin-top: 20px;
+            display: flex;
+            .pinned-game-img-container {
+                display: inline-block;
+                width: 30%;
+                padding: 0 5px;
+                img {
+                    width: 100%;
+                }
+            }
+            .pinned-game-introduction {
+                display: inline-block;
+                width: 25%;
+                padding: 0 5px;
+            }
+            .pinned-game-wrapper {
+                width: 30%;
 
-    .pinned-game {
-        .pinned-game-wrapper {
-            width: 30%;
-
-            .cover-block>img {
-                width: 100%;
+                .cover-block > img {
+                    width: 100%;
+                }
             }
         }
     }
 
     .works {
+        margin-top: 20px;
 
         .works-header {
             font-size: 18px;
@@ -61,11 +87,9 @@
                 }
             }
 
-            .cover-block>img {
+            .cover-block > img {
                 width: 100%;
             }
         }
-
-
     }
 }

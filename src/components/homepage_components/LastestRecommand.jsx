@@ -9,20 +9,12 @@
 import React, { useState, useEffect } from 'react'
 import { Pagination } from 'antd'
 import './LastestRecommand.scss'
-import { API_RANK, API_IMG } from '../../Config'
+import { API_RANK } from '../../Config'
 import { getRecommendationList, getLatestList } from '../../service/lastestRecommand';
+import CoverBlock from '../commonComponent/CoverBlock/CoverBlock';
 
 const API_RECOMM = API_RANK   //TODO: = `${DOMAIN}/v1/recommendation/zone`
 const API_LATEST = API_RANK   //TODO: = `${DOMAIN}/v1/latest/zone`
-
-const CoverBlock = ({ game_name, like_num, playCount, AuthorName, img }) => {
-    return <div className='cover-block'>
-        <img src={`${API_IMG}?img_name=${img}`} />
-        <div>{game_name}</div>
-        <div>{`${playCount} played · ${like_num} liked`}</div>
-        <div>{AuthorName}</div>
-    </div>
-}
 
 const BlockGrid = ({ colNum, data, dataToItem, itemClass, rowClass, gridClass, idProperty }) => {
     if (!data || data.length === 0) {

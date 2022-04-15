@@ -16,7 +16,7 @@ import { renderToString } from 'react-dom/server'
 
 import { fetchHeaderSearch } from '../../redux/actions/creators/SearchAction'
 import { toggleLanguage } from '../../redux/actions/creators/LocalizationAction'
-import { headerRightBtnInfos } from '../../data/public_related/HeaderRightContentPath'
+import { headerRightBtnInfos } from './initData'
 import { headerState } from '../../data/constants/HeaderState'
 import './Header.scss'
 import LoginForm from '../login_components/LoginForm';
@@ -120,33 +120,29 @@ const Header = function (props) {
   // TODO: press the search button
   const headerSearch = value => { props.toggleLanguage(props.localization.lang) }
 
-  const PersonalSocialInfo = (props) =>{
+  const PersonalSocialInfo = (props) => {
     return (
-      <div style={{width: '80px', height:'80px', display:'flex',flexDirection:'column',justifyContent: 'center'}}>
+      <div style={{ width: '80px', height: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <p>{props.name}</p>
-        <p style={{fontWeight: 'bold'}}>{props.value}</p>
+        <p style={{ fontWeight: 'bold' }}>{props.value}</p>
       </div>
     );
   }
 
   const HeaderRightContent = ({ btnsInfo }) => {
 
-
-
     return btnsInfo.map((btnInfo, index) => {
+      const IconBlock = ({...props}) => <Link {...props} to={btnInfo.clickLink} key={btnInfo.imgPath} className={btnInfo.className}>
+        <img src={btnInfo.imgPath} height={btnInfo.width} width={btnInfo.width} />
+      </Link>
       if (index != 0) {
-        return (
-          <Link to='/upload_work' key={btnInfo[0]} className={'my-link me-' + btnInfo[2]}>
-            <img src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
-          </Link>
-        )
+        return <IconBlock key={btnInfo.imgPath} />
+
       }
       else {
         return (
           <Popover
-            title={
-              ""
-            }
+            title=''
             content={
               <div className="main-menu-popup" >
                 {!isLoggedIn ?
@@ -161,28 +157,23 @@ const Header = function (props) {
                     </div>
                   ) :
                   (<div>
-                    <div className='main-menu-popup-item' style={{fontSize: '20px'}}> game point: 9000 </div>
+                    <div className='main-menu-popup-item' style={{ fontSize: '20px' }}> game point: 9000 </div>
                     <div className="personal-social-info-groups main-menu-popup-item">
                       <PersonalSocialInfo name='Following' value='33' />
                       <PersonalSocialInfo name='Followed' value='5' />
                       <PersonalSocialInfo name='XXX' value='2' />
                     </div>
-                    <div className='main-menu-popup-item' style={{backgroundColor: '#EEE'}}>Personal Center</div>
-                    <div className='main-menu-popup-item' style={{backgroundColor: '#F6EAFF', fontWeight:'bold', cursor: 'pointer'}} onClick={handle_logoutRequest}>Log out</div>
+                    <div className='main-menu-popup-item' style={{ backgroundColor: '#EEE' }}>Personal Center</div>
+                    <div className='main-menu-popup-item' style={{ backgroundColor: '#F6EAFF', fontWeight: 'bold', cursor: 'pointer' }} onClick={handle_logoutRequest}>Log out</div>
                   </div>
                   )}
               </div>
             }
-            key={btnInfo[0]}
-            className={'my-link me-lg-4 me-xl-5'}
-            trigger='hover'
+            key={btnInfo.imgPath}
             placement="bottom"
           >
-            <div style={{ display: 'inline-block', position: 'relative' }}>
-              <img className="personal-icon" src={btnInfo[0]} height={btnInfo[1]} width={btnInfo[1]} />
-            </div>
+            <IconBlock />
           </Popover>
-
         )
       }
     })
@@ -199,7 +190,7 @@ const Header = function (props) {
         </Link>
       </div>
       <div className='search-bar-container'>
-        <Link to='/TobeChanged3' id='rank-btn-hide' className='my-link' onClick={handleRankBtn}>
+        <Link to='/rank' id='rank-btn-hide' className='my-link' onClick={handleRankBtn}>
           <img src='images/header/header_rank_btn.svg' height='28' width='28' />
         </Link>
         <div className='search-outer-div'>

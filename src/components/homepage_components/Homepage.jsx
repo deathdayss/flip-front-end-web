@@ -15,15 +15,9 @@ import DisplayBoard from './DisplayBoard.jsx'
 import LastestRecommand from './LastestRecommand.jsx'
 import { homepageTheme } from '../../data/constants/Theme'
 import './Homepage.scss'
+import { mapLocalizationToProps } from '../../redux/helper/mapProps'
 
 var qs = require('qs')
-
-const mapStateToProps = state => {
-    return {
-        localization: state.localization,
-    }
-}
-
 class Homepage extends Component {
     componentDidMount() {
 
@@ -59,4 +53,4 @@ class Homepage extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Homepage)
+export default connect(mapLocalizationToProps)(Homepage)

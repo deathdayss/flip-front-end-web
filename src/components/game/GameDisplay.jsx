@@ -6,62 +6,26 @@
  * @modify date 2021-08-20 11:46:28
  */
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
-import { Avatar, Comment, Tooltip, List } from 'antd';
-import moment from 'moment';
+import { Avatar, } from 'antd';
 import { Flex, Box } from '@rebass/grid'
 // import { ForLoop } from '../helper_components/Helper.jsx'
 import { homepageSpacing, gameDisplaySpacing } from '../../data/constants/Spacing'
 import { Popover, Button, Input } from 'antd';
 import { message } from 'antd';
 import GameTest from '../Test_Components/GameTest'
+import Comment from './components/Comment/Comment'
 import './GameDisplay.scss'
 import Header from '../header_components/Header.jsx'
 import request from 'umi-request';
 import Icon from '@ant-design/icons';
 import "../../scss/Spacing.scss";
 import { API_PRODUCT, API_LIKE_CLICK, API_LIKE_NUM, API_LIKE_CHECK, API_COLLECT_CLICK, API_COLLECT_NUM, API_COLLECT_CHECK, API_RANK_DOWNLOAD, API_IMG, DOWNLOAD_GAME } from "../../Config.js";
+import { mapLocalizationToProps } from '../../redux/helper/mapProps'
 
-
-const colNum = 7
 const LOOP_ARR = [1, 2, 3, 4, 5, 6, 7]
-const data = [
-    {
-        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-        author: 'Han Solo',
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        content: (
-            <p>
-                We supply a series of design principles, practical patterns and high quality design
-                resources (Sketch and Axure), to help people create their product prototypes beautifully and
-                efficiently.
-            </p>
-        ),
-        datetime: (
-            <Tooltip title={moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')}>
-                <span>{moment().subtract(1, 'days').fromNow()}</span>
-            </Tooltip>
-        ),
-    },
-    {
-        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-        author: 'Han Solo',
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        content: (
-            <p>
-                We supply a series of design principles, practical patterns and high quality design
-                resources (Sketch and Axure), to help people create their product prototypes beautifully and
-                efficiently.
-            </p>
-        ),
-        datetime: (
-            <Tooltip title={moment().subtract(2, 'days').format('YYYY-MM-DD HH:mm:ss')}>
-                <span>{moment().subtract(2, 'days').fromNow()}</span>
-            </Tooltip>
-        ),
-    },
-];
+
 
 const gameDetail = {
     creator: "Creator",
@@ -150,12 +114,6 @@ const ForwardSvg = () =>
     </svg>
 
 const ForwardIcon = props => <Icon component={ForwardSvg} {...props} />;
-
-const mapStateToProps = state => {
-    return {
-        localization: state.localization,
-    }
-}
 
 const GameDisplay = (props) => {
     const defaultWords = props.localization.words.homepage.contentWords
@@ -471,31 +429,9 @@ const GameDisplay = (props) => {
                 )}
 
             </Flex>
-            {/* <Flex className='comments' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
-                <Box width={1}>
-                    {gameDetail.comments}
-                </Box>
-            </Flex> */}
-            <Flex className='comments' mx={[gameDisplaySpacing.main_margin_mobile, gameDisplaySpacing.main_margin]}>
-                <List
-                    className="comment-list"
-                    header={`${data.length} comments`}
-                    itemLayout="horizontal"
-                    dataSource={data}
-                    renderItem={item => (
-                        <li>
-                            <Comment
-                                actions={item.actions}
-                                author={item.author}
-                                avatar={item.avatar}
-                                content={item.content}
-                                datetime={item.datetime}
-                            />
-                        </li>
-                    )}
-                />
-            </Flex>
+            <Comment />
+
         </>)
 }
 
-export default connect(mapStateToProps)(GameDisplay)
+export default connect(mapLocalizationToProps)(GameDisplay)
