@@ -25,7 +25,12 @@
     .rank-uploader-container {
         flex-grow: 1;
         flex-basis: 0;
-        align-self: flex-end;
+        .rank-uploader-content {
+            padding-left: 248px;
+        }
+        .rank-uploader-content > .rank-content-container:not(:last-child) {
+            margin-bottom: 20px;
+        }
     }
 }
 
