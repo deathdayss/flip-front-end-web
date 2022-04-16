@@ -8,15 +8,14 @@
 /* eslint-disable */
 
 import React, { Component, useEffect, useState } from 'react';
-import moment from 'moment';
-import { Button, Col, DatePicker, Form, Input, message, Modal, Radio, Space, Row, Upload } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
+import { Avatar, Button, Col, DatePicker, Form, Input, message, Modal, Radio, Space, Row, Upload } from 'antd';
 import { LineOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 import request from 'umi-request';
-import { useHistory } from 'react-router-dom';
+import moment from 'moment';
 
-import Header from '../header_components/Header.jsx';
 import "./UpdateForm.scss";
+import Header from '../header_components/Header.jsx';
 import { API_USER_DETAIL } from '../../Config.js';
 
 const normFile = e => {
@@ -382,6 +381,11 @@ const UpdateForm = (props) => {
 										getValueFromEvent={normFile}
 									>
 										<UpdateAvatar id="IMG_LEFT" />
+									</Form.Item>
+
+									<Form.Item>
+										<Avatar size={64} icon={<UserOutlined />} />
+										<p style={{ fontSize: '12px'}} >Current Avatar</p>
 									</Form.Item>
 
 									<p style={{ fontSize: '12px', color: '#6c757d' }}>Select an image from your local file. Size: 180 * 180 px. Compatible image types: .jpg, .png, etc. Maximum image size: 2MB. </p>

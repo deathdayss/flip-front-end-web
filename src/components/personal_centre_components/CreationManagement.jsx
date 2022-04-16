@@ -7,12 +7,12 @@
 /* eslint-disable */
 
 import React, { Component, useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { Button, Col, Form, Pagination, Radio, Row, Space, message } from 'antd';
 import request from 'umi-request';
-import { useHistory } from 'react-router-dom';
 
-import Header from '../header_components/Header.jsx';
 import "./CreationManagement.scss";
+import Header from '../header_components/Header.jsx';
 import { API_IMG } from '../../Config.js';
 import { getRecommendationList, getLatestList } from '../../service/lastestRecommand';
 
@@ -62,7 +62,9 @@ const CoverBlock = ({ game_name, like_num, playCount, authorName, img }) => {
 			<div>{`${like_num} Liked · ${playCount} Commented · ${like_num} Collected `}</div>
 		</div>
 		<div className='buttom-group'>
-			<button className='btn1'>Edit</button>
+			<Link src='./update_form'>
+				<button className='btn1'>Edit</button>
+			</Link>
 			<button className='btn2'>Delete</button>
 		</div>
 	</div >
@@ -144,7 +146,7 @@ const CreationManagement = (props) => {
 		<div>
 			<Header />
 			<div style={style}>
-				<Form
+				<Form className='cm1'
 					onFinish={() => handleGameChangeRequest(gid, nickname, signature, gender, date, history)}
 				>
 					<Row>
