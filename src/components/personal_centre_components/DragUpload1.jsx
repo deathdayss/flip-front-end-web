@@ -7,12 +7,12 @@
  */
 import React from 'react'
 import { Button, Form, Upload, message } from 'antd';
+import { useHistory } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import request from 'umi-request';
-import { useHistory } from 'react-router-dom';
 
-import Header from '../header_components/Header.jsx';
 import './DragUpload1.scss';
+import Header from '../header_components/Header.jsx';
 import { API_UPDATE_GAME } from '../../Config.js';
 
 const history = createBrowserHistory({
