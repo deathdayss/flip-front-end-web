@@ -21,6 +21,7 @@ import { headerState } from '../../data/constants/HeaderState'
 import './Header.scss'
 import LoginForm from '../login_components/LoginForm';
 import SignUpForm from '../signup_components/SignUpForm';
+import { useHistory } from 'react-router-dom';
 
 const { Search } = Input;
 
@@ -95,6 +96,7 @@ const Header = function (props) {
   const [isLoggedIn, set_IsLoggedIn] = useState(JSON.parse(localStorage.getItem('user')) ? true : false);
   const [shouldLoginDisplay, set_LoginDisplay] = useState(false);
   const [shouldSignupDisplay, set_SignupDisplay] = useState(false);
+  const history = useHistory();
 
   const openLogin = () => {
     set_SignupDisplay(false);
@@ -132,7 +134,7 @@ const Header = function (props) {
   const HeaderRightContent = ({ btnsInfo }) => {
 
     return btnsInfo.map((btnInfo, index) => {
-      const IconBlock = ({...props}) => <Link {...props} to={btnInfo.clickLink} key={btnInfo.imgPath} className={btnInfo.className}>
+      const IconBlock = ({ ...props }) => <Link {...props} to={btnInfo.clickLink} key={btnInfo.imgPath} className={btnInfo.className}>
         <img src={btnInfo.imgPath} height={btnInfo.width} width={btnInfo.width} />
       </Link>
       if (index != 0) {
@@ -180,7 +182,19 @@ const Header = function (props) {
   }
 
 
-  const onSearch = (value) => console.log(props.localization)
+  const onSearch = (value) => {
+    let search = `?words=${value}`;
+    let rankMethod = 'default';
+    let category = 'all';
+    if (props.rankMethod) {
+      rankMethod = props.rankMethod;
+    }
+    if (props.category) {
+      category = props.category;
+    }
+    search += `&rankMethod=${rankMethod}&category=${category}`;
+    history.push({ pathname: '/search', search });
+  }
 
   return (
     <div className="header-border">
