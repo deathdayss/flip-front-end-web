@@ -42,7 +42,8 @@ const LoginForm = (props) => {
                     message.info('Login Successful', 2.0);
                     localStorage.setItem('user', JSON.stringify({
                         email: act,
-                        password: pwd
+                        password: pwd,
+                        token: value.token
                     }));
                     props.set_IsLoggedIn(true);
                     props.closeLogin();
