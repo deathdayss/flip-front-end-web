@@ -123,21 +123,20 @@ const SignUpForm = (props) => {
     }
 
     const handle_getVerificationCode = () => {
-        set_ValVeriCodeResponse("abcd");
-        // const verificationPromise = requestVerificationCode({ getCode: 123 });TODO:Change it back after API is repaired
-        // verificationPromise.then(
-        //     function (value) {
-        //         console.log('Request veri code success');
-        //         // console.log(JSON.stringify(value));
-        //         set_ValVeriCodeResponse(value.Content);
-        //         set_ValVeriImageURL(value.URL);
-        //     },
-        //     function (value) {
-        //         set_ValVeriCodeResponse("abcd");
-        //         // console.log('Request veri code failture');
-        //         // message.warn('Something wrong just happened', 2.0);
-        //     }
-        // )
+        const verificationPromise = requestVerificationCode({ getCode: 123 });
+        verificationPromise.then(
+            function (value) {
+                console.log('Request veri code success');
+                // console.log(JSON.stringify(value));
+                set_ValVeriCodeResponse(value.Content);
+                set_ValVeriImageURL(value.URL);
+            },
+            function (value) {
+                set_ValVeriCodeResponse("abcd");
+                // console.log('Request veri code failture');
+                // message.warn('Something wrong just happened', 2.0);
+            }
+        )
 
     }
     const requestVerificationCode = (params) => {
