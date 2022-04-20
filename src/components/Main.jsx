@@ -35,6 +35,7 @@ import SignUpForm from './signup_components/SignUpForm.jsx'
 import LoginForm from './login_components/LoginForm.jsx'
 import Rank from './rank/Rank'
 import UpdateForm from './personal_centre_page_components/UpdateForm.jsx'
+import Search from './Search/Search';
 import './Main.scss'
 import { useHistory } from 'react-router-dom'
 import PersonalPage from './personal_page/PersonalPage.jsx'
@@ -79,6 +80,7 @@ class Main extends Component {
 					<Route path='/rank' component={Rank} />
 					<Route path='/personal_centre_page' component={UpdateForm} />
 					<Route path='/personal_page' component={PersonalPage} />
+					<Route path='/search' component={Search} />
 				</Route>
 			</Switch>
 		);

@@ -12,50 +12,10 @@ import './LastestRecommand.scss'
 import { API_RANK } from '../../Config'
 import { getRecommendationList, getLatestList } from '../../service/lastestRecommand';
 import CoverBlock from '../commonComponent/CoverBlock/CoverBlock';
+import BlockGrid from '../commonComponent/BlockGrid/BlockGrid';
 
 const API_RECOMM = API_RANK   //TODO: = `${DOMAIN}/v1/recommendation/zone`
 const API_LATEST = API_RANK   //TODO: = `${DOMAIN}/v1/latest/zone`
-
-const BlockGrid = ({ colNum, data, dataToItem, itemClass, rowClass, gridClass, idProperty }) => {
-    if (!data || data.length === 0) {
-        return null;
-    }
-    let rowArray = []
-    let gridArray = []
-    let nextRowKey = idProperty ? data[0].GID : 0
-    for (let i = 0; i < data.length; ++i) {
-        rowArray.push(
-            <div key={idProperty ? data[i][idProperty] : i} className={itemClass}>
-                {dataToItem(data[i])}
-            </div>)
-        if (rowArray.length === colNum) {
-            gridArray.push(
-                <div key={nextRowKey} className={rowClass}>
-                    {rowArray}
-                </div>
-            )
-            rowArray = []
-            if (i + 1 < data.length) {
-                nextRowKey = idProperty ? data[i + 1][idProperty] : i + 1
-            }
-        }
-    }
-    if (rowArray.length > 0 && rowArray.length < colNum) {
-        for (let i = rowArray.length; i < colNum; ++i) {
-            rowArray.push(
-                <div key={i} className={itemClass}></div>
-            )
-        }
-        gridArray.push(
-            <div key={nextRowKey} className={rowClass}>
-                {rowArray}
-            </div>
-        )
-    }
-    return <div className={gridClass}>
-        {gridArray}
-    </div>
-}
 
 function itemRender(current, type, originalElement) {
     if (type === 'prev') {
@@ -72,6 +32,7 @@ const LastestRecommand = () => {
     const [val_showOption, set_showOption] = useState(true);
     useEffect(
         () => {
+            // TODO: change the fake service to the real one
             if (val_showOption) {
                 getRecommendationList().then(res => {
                     set_listContent(res)
