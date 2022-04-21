@@ -17,6 +17,21 @@ export const chinese = {
             traditional: "传统"
         }
     },
+    search: {
+        filter: {
+            comprehensive: '综合排序',
+            mostPlay: '最多游玩',
+            mostCollect: '最多收藏',
+            mostLike: '最多点击',
+            latest: '最新发布'
+        }
+    },
+    gameCategory: {
+        all: '全部',
+        rpg: '角色扮演',
+        action: '动作',
+        threeDimension: '3d'
+    },
     common: {
         play: '游玩',
         like: '点赞',
