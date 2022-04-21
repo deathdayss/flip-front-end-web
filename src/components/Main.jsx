@@ -35,7 +35,8 @@ import SignUpForm from './signup_components/SignUpForm.jsx'
 import LoginForm from './login_components/LoginForm.jsx'
 import Rank from './rank/Rank'
 import UpdateForm from './personal_centre_page_components/UpdateForm.jsx'
-import Search from './Search/Search';
+import Category from './category/Category';
+import Search from './search/Search';
 import './Main.scss'
 import { useHistory } from 'react-router-dom'
 import PersonalPage from './personal_page/PersonalPage.jsx'
@@ -72,6 +73,7 @@ class Main extends Component {
 						<Route path='/play' component={Play} />
 					</Switch>
 					{/* CONTENT */}
+					<Route path='/category' component={Category} />
 					<Route exact path='/' component={Homepage} />
 					<Route path='/user' component={UserContent} />
 					<Route path='/upload_work' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}

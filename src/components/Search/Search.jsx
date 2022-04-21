@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom'
-import QueryString from "qs";
+import { useParams } from '../../hooks/routeHooks';
 import './Search.scss'
 import BlockGrid from '../commonComponent/BlockGrid/BlockGrid';
 import Header from '../header_components/Header';
@@ -19,7 +18,15 @@ const Search = (props) => {
         category: 'all'
     });
     const [searchResults, setSearchResults] = useState([]);
-    const { search } = useLocation();
+    useParams((routeParams) => {
+        delete routeParams.words;
+        setSearchConditions(routeParams);
+    });
+
+    // TODO: change the fake service to the real one
+    useEffect(() => {
+        getRecommendationList().then((res) => setSearchResults(res));
+    }, []);
 
     const handleRankMethod = (value) => {
         setSearchConditions({
@@ -33,13 +40,6 @@ const Search = (props) => {
             category: value,
         });
     }
-    // TODO: change the fake service to the real one
-    useEffect(() => {
-        const routeParams = QueryString.parse(search.substring(1));
-        delete routeParams.words;
-        setSearchConditions(routeParams);
-        getRecommendationList().then((res) => setSearchResults(res));
-    }, []);
     return <>
         <Header rankMethod={searchConditions.rankMethod} category={searchConditions.category} />
         <div className="search-container">
