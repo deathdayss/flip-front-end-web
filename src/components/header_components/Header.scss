@@ -51,24 +51,19 @@
 }
 
 .main-menu-popup {
-    // position: relative;
     width: 300px;
     height: 300px;
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: space-around;
-    // align-items: center;
 }
 
 .main-menu-popup-item {
-    // width: 300px;
     height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
-    // margin-bottom: 30px;
-    // line-height: 80px;
     border-bottom: 2px solid rgba(195, 195, 195, 0.5);
 }
 
