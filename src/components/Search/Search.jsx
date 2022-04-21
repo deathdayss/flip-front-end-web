@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom'
+import QueryString from "qs";
 import './Search.scss'
 import BlockGrid from '../commonComponent/BlockGrid/BlockGrid';
 import Header from '../header_components/Header';
@@ -12,34 +14,39 @@ import { Pagination } from 'antd'
 const Search = (props) => {
     const filterLabels = props.localization.words.search.filter;
     const gameCategoryLabels = props.localization.words.gameCategory;
-    const [filterConditions, setFilterConditions] = useState({
+    const [searchConditions, setSearchConditions] = useState({
         rankMethod: 'comprehensive',
         category: 'all'
     });
     const [searchResults, setSearchResults] = useState([]);
+    const location = useLocation();
+
     const handleRankMethod = (value) => {
-        setFilterConditions({
-            ...filterConditions,
+        setSearchConditions({
+            ...searchConditions,
             rankMethod: value,
-        })
+        });
     }
     const handleGameCategory = (value) => {
-        setFilterConditions({
-            ...filterConditions,
+        setSearchConditions({
+            ...searchConditions,
             category: value,
-        })
+        });
     }
     // TODO: change the fake service to the real one
     useEffect(() => {
+        const routeParams = QueryString.parse(location.search.substring(1));
+        delete routeParams.words;
+        setSearchConditions(routeParams);
         getRecommendationList().then((res) => setSearchResults(res));
     }, []);
     return <>
-        <Header rankMethod={filterConditions.rankMethod} category={filterConditions.rankMethod} />
+        <Header rankMethod={searchConditions.rankMethod} category={searchConditions.category} />
         <div className="search-container">
             <div className="search-filter-container">
                 <div className="search-filter-rank-method">
                     {rankMethods.map(filterKey => <div key={filterKey}
-                        className={'rank-method ' + (filterKey === filterConditions.rankMethod ? 'checked-rank-method' : 'unchecked-rank-method')}
+                        className={'rank-method ' + (filterKey === searchConditions.rankMethod ? 'checked-rank-method' : 'unchecked-rank-method')}
                         onClick={() => handleRankMethod(filterKey)}
                     >
                         {filterLabels[filterKey]}
@@ -47,7 +54,7 @@ const Search = (props) => {
                 </div>
                 <div className="search-filter-game-category">
                     {gameCategories.map(categoryKey => <div key={categoryKey}
-                        className={'game-category ' + (categoryKey === filterConditions.category ? 'checked-game-category' : 'unchecked-game-category')}
+                        className={'game-category ' + (categoryKey === searchConditions.category ? 'checked-game-category' : 'unchecked-game-category')}
                         onClick={() => handleGameCategory(categoryKey)}
                     >
                         {gameCategoryLabels[categoryKey]}

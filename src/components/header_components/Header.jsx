@@ -22,6 +22,7 @@ import './Header.scss'
 import LoginForm from '../login_components/LoginForm';
 import SignUpForm from '../signup_components/SignUpForm';
 import { useHistory } from 'react-router-dom';
+import QueryString from 'qs';
 
 const { Search } = Input;
 
@@ -96,7 +97,15 @@ const Header = function (props) {
   const [isLoggedIn, set_IsLoggedIn] = useState(JSON.parse(localStorage.getItem('user')) ? true : false);
   const [shouldLoginDisplay, set_LoginDisplay] = useState(false);
   const [shouldSignupDisplay, set_SignupDisplay] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
   const history = useHistory();
+
+  useEffect(() => {
+    const routeParams = QueryString.parse(history.location.search.substring(1));
+    if (routeParams.words) {
+      setSearchValue(routeParams.words);
+    }
+  }, [])
 
   const openLogin = () => {
     set_SignupDisplay(false);
@@ -184,7 +193,7 @@ const Header = function (props) {
 
   const onSearch = (value) => {
     let search = `?words=${value}`;
-    let rankMethod = 'default';
+    let rankMethod = 'comprehensive';
     let category = 'all';
     if (props.rankMethod) {
       rankMethod = props.rankMethod;
@@ -195,6 +204,10 @@ const Header = function (props) {
     search += `&rankMethod=${rankMethod}&category=${category}`;
     history.push({ pathname: '/search', search });
   }
+
+  const onSearchChange = (e) => {
+    setSearchValue(e.target.value)
+  };
 
   return (
     <div className="header-border">
@@ -208,7 +221,9 @@ const Header = function (props) {
           <img src='images/header/header_rank_btn.svg' height='28' width='28' />
         </Link>
         <div className='search-outer-div'>
-          <Search placeholder={props.localization.words.header.headerSearchbarHolder} onSearch={onSearch} style={{ width: '400px' }} />
+          <Search placeholder={props.localization.words.header.headerSearchbarHolder} onSearch={onSearch} style={{ width: '400px' }}
+            value={searchValue}
+            onChange={onSearchChange} />
         </div>
       </div>
       <div className='user-buttons-container'>
