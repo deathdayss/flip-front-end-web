@@ -11,14 +11,18 @@
     height: 50px;
     align-items: center;
     display: flex;
+
     .logo-container {
         padding-left: 55px;
     }
+
     .search-bar-container {
         display: flex;
         justify-content: center;
+
         .search-outer-div {
             margin-left: 10px;
+
             .ant-input-search-button {
                 display: flex;
                 justify-content: center;
@@ -31,23 +35,38 @@
         display: flex;
         justify-content: flex-end;
         padding-right: 55px;
+
         .right-header-avater {
             img {
                 transition: transform 0.2s;
             }
+
             img:hover {
                 transform: matrix(2.5, 0, 0, 2.5, 0, 12);
             }
         }
+
         .header-right-icon {
             margin-right: 25px;
         }
     }
 }
 
-.header-border > div {
+.header-border>div {
     flex-basis: 0;
     flex-grow: 1;
+}
+
+
+.personal-icon {
+    transition: transform .2s;
+    cursor: pointer;
+}
+
+.personal-icon:hover {
+    // transform: scale(2.5);
+    transform: matrix(2.5, 0, 0, 2.5, 0, 12);
+
 }
 
 .main-menu-popup {

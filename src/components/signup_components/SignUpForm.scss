@@ -79,3 +79,7 @@ html, body, #root, .App, .ant-layout, .ant-form{
     color: red;
 }
 
+input.ant-input{
+    border-width: 0;
+    border-bottom-width: 1px;
+}
