@@ -19,7 +19,7 @@ const Search = (props) => {
         category: 'all'
     });
     const [searchResults, setSearchResults] = useState([]);
-    const location = useLocation();
+    const { search } = useLocation();
 
     const handleRankMethod = (value) => {
         setSearchConditions({
@@ -35,7 +35,7 @@ const Search = (props) => {
     }
     // TODO: change the fake service to the real one
     useEffect(() => {
-        const routeParams = QueryString.parse(location.search.substring(1));
+        const routeParams = QueryString.parse(search.substring(1));
         delete routeParams.words;
         setSearchConditions(routeParams);
         getRecommendationList().then((res) => setSearchResults(res));
