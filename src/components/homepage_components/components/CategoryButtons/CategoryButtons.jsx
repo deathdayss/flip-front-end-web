@@ -6,7 +6,7 @@ import './CategoryButtons.scss'
 const categoryLabels = [
     {
         key: "rpg",
-        label: "Rpg"
+        label: "RPG"
     }
     , {
         key: "action",
@@ -18,14 +18,6 @@ const categoryLabels = [
     }]
 
 const CategoryButtons = (props) => {
-    const [category, setCategory] = useState('rpg')
-    const { history } = props
-
-    const changeCategory = (key) => {
-        setCategory(key)
-        // getMultiZone(key)
-        history.push('./category')
-    }
 
     const getMultiZone = async (key) => {
         const result = await getMultiZoneService({
@@ -39,7 +31,7 @@ const CategoryButtons = (props) => {
 
     const Buttons = categoryLabels.map(({ key, label }) => <Link to={`/category?category=${key}`}>
         <button key={key} id='' className='category-btn'
-            onClick={() => changeCategory(key)} style={{ backgroundColor: (category == key) ? '#DACEFF' : 'rgba(0, 0, 0, 0.05)' }}>
+        >
             {label}
         </button>
     </Link>)
