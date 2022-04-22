@@ -82,17 +82,15 @@ const RankContent = () => {
         <div className='break-line' />
         {/* TODO: need uploader interface from the backend */}
         <div className='rank-uploader-container'>
-            <div className='align-right-float'>
-                <div className='rank-block-container'>
-                    {rankList.map((dataObj, index) => <RankWrapper
-                        key={dataObj.GID}
-                        rankNumber={index + 1}
-                        rankColor={getColorByIndex(index)}
-                        rankBody={<UploaderItem
-                        />}
+            <div className='rank-uploader-content'>
+                {rankList.map((dataObj, index) => <RankWrapper
+                    key={dataObj.GID}
+                    rankNumber={index + 1}
+                    rankColor={getColorByIndex(index)}
+                    rankBody={<UploaderItem
+                    />}
 
-                    />)}
-                </div>
+                />)}
             </div>
         </div>
     </div>

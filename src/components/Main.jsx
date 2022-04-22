@@ -37,6 +37,8 @@ import Rank from './rank/Rank'
 import UpdateForm from './personal_centre_components/UpdateForm.jsx'
 import CreationManagement from './personal_centre_components/CreationManagement.jsx'
 import DragUpload1 from './personal_centre_components/DragUpload1.jsx'
+import Category from './category/Category';
+import Search from './search/Search';
 import './Main.scss'
 import { useHistory } from 'react-router-dom'
 import PersonalPage from './personal_page/PersonalPage.jsx'
@@ -73,6 +75,7 @@ class Main extends Component {
 						<Route path='/play' component={Play} />
 					</Switch>
 					{/* CONTENT */}
+					<Route path='/category' component={Category} />
 					<Route exact path='/' component={Homepage} />
 					<Route path='/user' component={UserContent} />
 					<Route path='/upload_work' component={DragUpload} />   {/* TODO: Fix the formatting of the upload box */}
@@ -83,6 +86,7 @@ class Main extends Component {
 					<Route path='/my_game' component={CreationManagement} />
 					<Route path='/update_game' component={DragUpload1} />
 					<Route path='/personal_page' component={PersonalPage} />
+					<Route path='/search' component={Search} />
 				</Route>
 			</Switch>
 		);

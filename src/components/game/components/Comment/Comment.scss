@@ -21,17 +21,29 @@
     display: flex;
     margin-top: 15px;
 
-    .textarea {
-        flex: 1;
-        height: 50px;
+    .avatar {
+        width: 32px;
+    }
+
+    .textarea-wrapper {
         margin-left: 10px;
+
+
+        .textarea {
+            height: 50px;
+        }
     }
 
     .submit-btn {
-        @include default-btn-setup();
-        background-color: $theme-color-0;
-        color: #fff;
-        width: 100px;
+        // @include default-btn-setup();
+        // background-color: $theme-color-0;
+        // color: #fff;
         margin-left: 10px;
+    }
+
+    .ant-btn-primary {
+        color: #fff;
+        background: $theme-color-0 !important;
+        height: 50px;
     }
 }

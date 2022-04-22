@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createElement } from 'react'
-import { Comment as CommentAntd, List, Form, Input, Avatar } from 'antd'
-import { getCommentList } from '../../../../service/comment';
+import { Comment as CommentAntd, List, Form, Input, Avatar, Button } from 'antd'
+import { getCommentList, addCommentService } from '../../../../service/comment';
 import moment from 'moment';
 import './Comment.scss'
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
@@ -8,6 +8,7 @@ import { LikeOutlined, LikeFilled } from '@ant-design/icons';
 const { TextArea } = Input;
 
 const Comment = () => {
+    const [form] = Form.useForm();
     const [likes, setLikes] = useState(0);
     const [action, setAction] = useState(null);
     const [commentList, setCommentList] = useState([])
@@ -31,7 +32,7 @@ const Comment = () => {
         getComment()
     }, [])
 
-    let data = commentList.map(e =>
+    const data = commentList.map(e =>
     ({
         actions: [
             <span onClick={like}>
@@ -59,12 +60,16 @@ const Comment = () => {
         <>
 
             <div className='editor'>
-                <Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />
-                <TextArea className='textarea' onChange={onChange} />
+                <Avatar className='avatar' src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />
 
-                <button className='submit-btn' htmlType="submit" loading={submitting} onClick={onSubmit}>
-                    Add Comment
-                </button>
+                <Form.Item name="textarea" className='textarea-wrapper'>
+                    <TextArea className='textarea' onChange={onChange} />
+                </Form.Item>
+                <Form.Item className='submit-btn'>
+                    <Button htmlType="submit" loading={submitting} type="primary">
+                        Add Comment
+                    </Button>
+                </Form.Item>
             </div>
 
 
@@ -75,20 +80,39 @@ const Comment = () => {
         console.log(e.target.value)
     }
     const handleSubmit = () => {
+        console.log(comment)
     }
 
-
+    const onFinish = (values) => {
+        console.log('Success:', values);
+        if (!values.textarea) {
+            return;
+        }
+        setSubmitting(true)
+        const addComment = async () => {
+            const result = await addCommentService({
+                game_id: 1,
+                comment: values.textarea,
+            })
+            console.log(result.msg)
+        }
+        addComment()
+    };
 
 
     return (
         <div className='comment'>
             <div>{`${data.length} comments`}</div>
-            <Editor
-                onChange={handleChange}
-                onSubmit={handleSubmit}
-                submitting={submitting}
-                value={comment}
-            />
+            <Form
+                onFinish={onFinish}
+            // layout="inline"
+            >
+                <Editor
+                    onChange={handleChange}
+                    onSubmit={handleSubmit}
+                    submitting={submitting}
+                />
+            </Form>
             <List
                 className="comment-list"
                 itemLayout="horizontal"

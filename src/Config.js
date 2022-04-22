@@ -25,7 +25,9 @@ export const API_COLLECT_CHECK = `${DOMAIN}/v1/collect/check`
 export const API_COLLECT_NUM = `${DOMAIN}/v1/collect/num`
 
 //GameDisplay - comment
-export const API_COMMENT = `${DOMAIN}/v1/rank/comment/time`
+export const API_GET_COMMENT = `${DOMAIN}/v1/rank/comment/time`
+export const API_ADD_COMMENT = `${DOMAIN}/v1/change/comment/add`
+
 
 //Rank
 export const API_RANK_AUTHOR = `${DOMAIN}/v1/rank/author`

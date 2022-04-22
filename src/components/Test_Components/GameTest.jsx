@@ -11,35 +11,38 @@ const GameTest = () => {
 
     useEffect(() => {
         const getGame = async () => {
-            const result = await getGameService({
-                game_id: 1
-            })
-            console.log(result)
-            var blob = result;
-            var new_zip = new JSZip();
-            new_zip.loadAsync(blob)
-                .then(function (file) {
-                    var files = file.files;
-                    for (let f in files) {
-                        // console.log("\nf: \n", f)
-                        var zipobj = files[f];
-                        if (!zipobj.dir && f.indexOf("png") !== -1) {
-                            new_zip.file(f).async("base64")
-                                .then(function (res) {
-                                    //获取blob对象地址，并把值赋给容器
-                                    // var mp3url = URL.createObjectURL(blob);
-                                    // $("#MP3Play").attr("src", mp3url);
-                                    // //setTimeout("revokeUrl('" + mp3url + "')", "2000");
-                                    console.log("\nf: \n", f)
-                                    var fileUrl = `data:image/png;base64,${res}`
-                                    console.log(fileUrl)
-                                    // $("#jszip_utils").append("<image src")
-                                    setFileUrl(fileUrl)
-                                });
-                        }
-                    }
-                });
-
+            try {
+                const result = await getGameService({
+                    game_id: 1
+                })
+                console.log(result)
+                // var blob = result;
+                // var new_zip = new JSZip();
+                // new_zip.loadAsync(blob)
+                //     .then(function (file) {
+                //         var files = file.files;
+                //         for (let f in files) {
+                //             // console.log("\nf: \n", f)
+                //             var zipobj = files[f];
+                //             if (!zipobj.dir && f.indexOf("png") !== -1) {
+                //                 new_zip.file(f).async("base64")
+                //                     .then(function (res) {
+                //                         //获取blob对象地址，并把值赋给容器
+                //                         // var mp3url = URL.createObjectURL(blob);
+                //                         // $("#MP3Play").attr("src", mp3url);
+                //                         // //setTimeout("revokeUrl('" + mp3url + "')", "2000");
+                //                         console.log("\nf: \n", f)
+                //                         var fileUrl = `data:image/png;base64,${res}`
+                //                         console.log(fileUrl)
+                //                         // $("#jszip_utils").append("<image src")
+                //                         setFileUrl(fileUrl)
+                //                     });
+                //             }
+                //         }
+                //     });
+            } catch (error) {
+                console.log(error);
+            }
         }
         getGame()
     }, [])
