@@ -1,0 +1,40 @@
+.category-container {
+    padding: 0 50px;
+    .category-choices {
+        display: flex;
+        padding: 0 5px;
+        margin-top: 10px;
+        .game-category-choice {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .game-category-choice:not(:last-child) {
+            margin-right: 15px;
+        }
+        .checked-game-category-choice {
+            color: #3fa3e6;
+            background-color: #dff6fd;
+            border-radius: 5px;
+        }
+        .unchecked-game-category-choice {
+            color: rgba(0, 0, 0, 0.85);
+        }
+    }
+    .category-bottom-line-container {
+        padding: 0 5px;
+        margin-top: 10px;
+        height: 1px;
+        .category-bottom-line {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        }
+    }
+    .category-cover-content {
+        margin-top: 10px;
+    }
+    .category-pagination-container {
+        display: flex;
+        .category-pagination {
+            margin: 0 auto;
+        }
+    }
+}
