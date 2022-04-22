@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getMultiZoneService } from '../../../service/displayBoard'
+import { getMultiZoneService } from '../../../../service/displayBoard'
 
 const categoryLabels = [
     {
@@ -15,12 +15,14 @@ const categoryLabels = [
         label: "3D"
     }]
 
-const CategoryButtons = () => {
+const CategoryButtons = (props) => {
     const [category, setCategory] = useState(categoryLabels[0]["key"])
+    const { history } = props
 
     const changeCategory = (key) => {
         setCategory(key)
-        getMultiZone(key)
+        // getMultiZone(key)
+        history.push('./category')
     }
 
     const getMultiZone = async (key) => {

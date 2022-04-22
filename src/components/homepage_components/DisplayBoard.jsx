@@ -16,7 +16,7 @@ import './DisplayBoard.scss'
 import request from 'umi-request';
 import { API_IMG } from '../../Config.js'
 import { getRankService, getDownloadService, getMultiZoneService } from '../../service/displayBoard'
-import CategoryButtons from '../commonComponent/CategoryButtons/CategoryButtons'
+import CategoryButtons from './components/CategoryButtons/CategoryButtons'
 
 const aspectRatio = `${(9 * 100 / 16)}%` //"62.5%"
 
@@ -99,7 +99,7 @@ const DisplayBoard = () => {
 
     return (
         <>
-            <CategoryButtons />
+            <CategoryButtons history={history} />
             <div className="display-board">
                 <div className="daily-pick-container">
                     <div className='top-content-left-container'>
