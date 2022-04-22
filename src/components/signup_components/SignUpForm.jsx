@@ -123,21 +123,20 @@ const SignUpForm = (props) => {
     }
 
     const handle_getVerificationCode = () => {
-        set_ValVeriCodeResponse("abcd");
-        // const verificationPromise = requestVerificationCode({ getCode: 123 });TODO:Change it back after API is repaired
-        // verificationPromise.then(
-        //     function (value) {
-        //         console.log('Request veri code success');
-        //         // console.log(JSON.stringify(value));
-        //         set_ValVeriCodeResponse(value.Content);
-        //         set_ValVeriImageURL(value.URL);
-        //     },
-        //     function (value) {
-        //         set_ValVeriCodeResponse("abcd");
-        //         // console.log('Request veri code failture');
-        //         // message.warn('Something wrong just happened', 2.0);
-        //     }
-        // )
+        const verificationPromise = requestVerificationCode({ getCode: 123 });
+        verificationPromise.then(
+            function (value) {
+                console.log('Request veri code success');
+                // console.log(JSON.stringify(value));
+                set_ValVeriCodeResponse(value.Content);
+                set_ValVeriImageURL(value.URL);
+            },
+            function (value) {
+                set_ValVeriCodeResponse("abcd");
+                // console.log('Request veri code failture');
+                // message.warn('Something wrong just happened', 2.0);
+            }
+        )
 
     }
     const requestVerificationCode = (params) => {
@@ -355,7 +354,7 @@ const SignUpForm = (props) => {
                         </div>
                         <div className="signup-form-area">
                             <div className="signup-form-area-title">
-                                <h3> Select safety questions </h3>
+                                <h3> Entre three safety questions: </h3>
                             </div>
                             <Form
                                 {...formItemLayout}
@@ -372,7 +371,7 @@ const SignUpForm = (props) => {
                                 <Form.Item
                                     name="question1">
 
-                                    <Select>
+                                    <Select defaultValue={questionList[0].id}>
                                         {
                                             questionList.map((item) =>
                                                 (<Select.Option value={item.id}>{item.content}</Select.Option>))
@@ -385,7 +384,7 @@ const SignUpForm = (props) => {
                                 </Form.Item>
                                 <Form.Item
                                     name="question2">
-                                    <Select>
+                                    <Select defaultValue={questionList[1].id}>
                                         {
                                             questionList.map((item) =>
                                                 (<Select.Option value={item.id}>{item.content}</Select.Option>))
@@ -398,7 +397,7 @@ const SignUpForm = (props) => {
                                 </Form.Item>
                                 <Form.Item
                                     name="question3">
-                                    <Select>
+                                    <Select defaultValue={questionList[2].id}>
                                         {
                                             questionList.map((item) =>
                                                 (<Select.Option value={item.id}>{item.content}</Select.Option>))
@@ -410,7 +409,12 @@ const SignUpForm = (props) => {
                                     <Input />
                                 </Form.Item>
                                 <Form.Item {...tailFormItemLayout}>
-                                    <Button type="primary" htmlType="submit" style={{ backgroundColor: "#5B28FF", width: "150px", borderRadius: "10px" }}>Register</Button>
+                                    <Button style={{backgroundColor: '#D6D3DE', color: '#FFF', width: '150px', borderRadius: '10px' }} onClick={
+                                        () => {
+                                            set_SignupStep(1);
+                                        }
+                                    }>return</Button>
+                                    <Button type="primary" htmlType="submit" style={{ backgroundColor: "#5B28FF", width: "150px", borderRadius: "10px" }}>Create account</Button>
                                 </Form.Item>
                             </Form>
                         </div>

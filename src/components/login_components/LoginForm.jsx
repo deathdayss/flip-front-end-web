@@ -11,7 +11,7 @@ const tailFormItemLayout = { wrapperCol: { xs: { span: 24, offset: 0, }, sm: { s
 const formItemLayout = { labelCol: { xs: { span: 24, }, sm: { span: 8, }, }, wrapperCol: { xs: { span: 24, }, sm: { span: 16, }, }, };
 
 const DOMAIN = "http://175.178.159.131:8084";
-const API_LOGIN = `${DOMAIN}/v1/user/login`;
+const API_LOGIN = `${DOMAIN}/v1/notoken/login`;
 const API_VERIFICATION_CODE = `${DOMAIN}/v1/verification/code`;
 const API_VERIFYEMAIL = `${DOMAIN}/v1/notoken/change/vertify`;
 const API_VERIFYQUESTION = `${DOMAIN}/v1/notoken/change/answer`;
@@ -42,7 +42,8 @@ const LoginForm = (props) => {
                     message.info('Login Successful', 2.0);
                     localStorage.setItem('user', JSON.stringify({
                         email: act,
-                        password: pwd
+                        password: pwd,
+                        token: value.token
                     }));
                     props.set_IsLoggedIn(true);
                     props.closeLogin();
@@ -103,6 +104,7 @@ const LoginForm = (props) => {
             }).catch((err) => {
                 // message.warn("This email is already registered");
                 console.log(JSON.stringify(err)); //TODO: How to react when verification failed
+                message.warn("This email does not exist!",2.0);
             });
     }
 
@@ -122,6 +124,7 @@ const LoginForm = (props) => {
             }).catch((err) => {
                 // message.warn("This email is already registered");
                 console.log(JSON.stringify(err)); //TODO: How to react when verification failed
+                message.warn("The answer is wrong!",2.0);
             });
     }
 
@@ -191,7 +194,7 @@ const LoginForm = (props) => {
                                     <img style={{ marginTop: '10px' }} src={val_veriImageURL} height='50px' width='100px' /></div>
                                 <p className="veri-failed-warning">{val_veriFailWarning}</p>
                             </div>
-                            <div className="login-forget-password"><span onClick={() => { set_SigninStep(2) }} style={{ cursor: 'pointer' }}>forget password?</span></div>
+                            <div className="login-forget-password"><span onClick={() => { set_SigninStep(2) }} style={{cursor : 'pointer'}}>forget password?</span></div>
                             <input type="checkbox" id="mainMenuLogin_keepLoggedIn" />
                             <label>Keep me log in</label><br />
                             <Button style={{ marginTop: "10px", backgroundColor: '#5B28FF', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={

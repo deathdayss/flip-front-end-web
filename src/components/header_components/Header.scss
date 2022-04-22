@@ -11,18 +11,15 @@
     height: 50px;
     align-items: center;
     display: flex;
-
     .logo-container {
         padding-left: 55px;
     }
-
     .search-bar-container {
         display: flex;
         justify-content: center;
 
         .search-outer-div {
             margin-left: 10px;
-
             .ant-input-search-button {
                 display: flex;
                 justify-content: center;
@@ -35,17 +32,14 @@
         display: flex;
         justify-content: flex-end;
         padding-right: 55px;
-
         .right-header-avater {
             img {
                 transition: transform 0.2s;
             }
-
             img:hover {
                 transform: matrix(2.5, 0, 0, 2.5, 0, 12);
             }
         }
-
         .header-right-icon {
             margin-right: 25px;
         }
@@ -89,6 +83,25 @@
     // margin-bottom: 30px;
     // line-height: 80px;
     border-bottom: 2px solid rgba(195, 195, 195, 0.5);
+}
+
+.main-menu-popup-login{
+    // position: relative;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    // align-items: center;
+}
+
+.main-menu-popup-item-login {
+    // width: 300px;
+    height: 60px;
+    // margin-bottom: 30px;
+    // line-height: 80px;
+    
 }
 
 .personal-social-info-groups {

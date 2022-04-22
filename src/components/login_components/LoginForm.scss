@@ -57,7 +57,7 @@ html, body, #root, .App, .ant-layout, .ant-form{
     box-sizing: border-box;
     background-color: #FEFEFE;
     width: 400px;
-    height: 600px;
+    height: 650px;
     border: 0 solid #FEFEFE;
     border-radius: 20px;
     z-index: 11;
@@ -78,6 +78,11 @@ html, body, #root, .App, .ant-layout, .ant-form{
 
 .login-form-area label{
     margin-left: 5px;
+}
+
+.login-forget-password{
+    margin-bottom: 15px;
+    text-decoration: underline;
 }
 .login-footer{
     position: absolute;

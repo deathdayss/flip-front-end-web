@@ -155,27 +155,29 @@ const Header = function (props) {
           <Popover
             title=''
             content={
-              <div className="main-menu-popup" >
+              <div>
                 {!isLoggedIn ?
                   (
-                    <div>
-                      <div> Welcome </div>
-                      <Button onClick={openLogin}>Log in</Button>
-                      <div>
-                        <p>Don't have an account?</p>
-                        <div style={{ color: 'red', cursor: 'pointer' }} onClick={openSignup}>Sign up</div>
+                    <div className='main-menu-popup-login'>
+                      
+                      <div className='main-menu-popup-item-login' onClick={openLogin} style={{backgroundColor:'#F6EAFF', cursor:'pointer', lineHeight:'60px'}}>Log in</div>
+                      <div className='main-menu-popup-item-login'>
+                        <div>First time using this?<br /> Click to <span style={{ color: '#DC06FF', textDecoration: 'underline', cursor: 'pointer' }} onClick={openSignup}>Sign up</span></div>
                       </div>
                     </div>
                   ) :
-                  (<div>
-                    <div className='main-menu-popup-item' style={{ fontSize: '20px' }}> game point: 9000 </div>
+                  (<div className="main-menu-popup">
+                    <div className='main-menu-popup-item' style={{fontSize: '20px'}}> game point: 9000 </div>
                     <div className="personal-social-info-groups main-menu-popup-item">
                       <PersonalSocialInfo name='Following' value='33' />
                       <PersonalSocialInfo name='Followed' value='5' />
                       <PersonalSocialInfo name='XXX' value='2' />
                     </div>
-                    <div className='main-menu-popup-item' style={{ backgroundColor: '#EEE' }}>Personal Center</div>
-                    <div className='main-menu-popup-item' style={{ backgroundColor: '#F6EAFF', fontWeight: 'bold', cursor: 'pointer' }} onClick={handle_logoutRequest}>Log out</div>
+                    <div className='main-menu-popup-item' style={{backgroundColor: '#EEE'}}>
+                    <img src="images/header/personal_center.svg" height="30px" width="30px" style={{marginRight:"10px"}}></img>
+                    <span>Personal Center</span>
+                    </div>
+                    <div className='main-menu-popup-item' style={{backgroundColor: '#F6EAFF', fontWeight:'bold', cursor: 'pointer'}} onClick={handle_logoutRequest}>Log out</div>
                   </div>
                   )}
               </div>
