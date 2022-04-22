@@ -1,59 +1,68 @@
-*{
+* {
     margin: 0;
     padding: 0;
     list-style: none;
 }
-html, body, #root, .App, .ant-layout, .ant-form{
+html,
+body,
+#root,
+.App,
+.ant-layout,
+.ant-form {
     width: 100%;
     height: 100%;
-    
+
     position: relative;
 }
 
-.signup-mask{
+.signup-mask {
     position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0, 0, 0, 0.5);
     top: 0;
     z-index: 10;
 }
 
-.signup-window{
+.signup-window {
     position: absolute;
     box-sizing: border-box;
-    background-color: #FEFEFE;
+    background-color: #fefefe;
     width: 560px;
     height: 840px;
-    border: 0 solid #FEFEFE;
+    border: 0 solid #fefefe;
     border-radius: 20px;
     z-index: 11;
     overflow: hidden;
+    input.ant-input {
+        border-width: 0;
+        border-bottom-width: 1px;
+    }
     // box-shadow: 0 0 10px 10px rgba(0,0,0,.3);
 }
 
-.signup-form-area{
+.signup-form-area {
     text-align: left;
     clear: both;
     padding: 30px 70px;
 }
 
-.signup-form-area-title{
+.signup-form-area-title {
     text-align: center;
 }
 
-.ant-form-item-control-input{
+.ant-form-item-control-input {
     width: 420px;
 }
 
-.signup-footer{
+.signup-footer {
     position: absolute;
     width: 100%;
     height: 60px;
-    background-color: #C4C4C4;
+    background-color: #c4c4c4;
     bottom: 0;
     text-align: center;
     display: flex;
@@ -62,8 +71,7 @@ html, body, #root, .App, .ant-layout, .ant-form{
     align-items: center;
 }
 
-
-.signup-footer div{
+.signup-footer div {
     margin-top: -10px;
     width: 50px;
     color: red;
@@ -75,11 +83,6 @@ html, body, #root, .App, .ant-layout, .ant-form{
 //     box-sizing: border-box;
 //     flex-direction: column;
 // }
-.veri-failed-warning{
+.veri-failed-warning {
     color: red;
-}
-
-input.ant-input{
-    border-width: 0;
-    border-bottom-width: 1px;
 }
