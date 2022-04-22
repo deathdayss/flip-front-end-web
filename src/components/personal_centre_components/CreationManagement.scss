@@ -1,32 +1,24 @@
-.cm .ant-radio-button-wrapper {
+.cmr .ant-radio-button-wrapper {
   width: 100%;
   color: #000 !important;
   background-color: #fff !important;
   box-shadow: 0 0 0 3px transparent !important;
 }
 
-.cm .ant-radio-checked .ant-radio-inner {
+.cmr .ant-radio-checked .ant-radio-inner {
   border-top: #fff !important;
   border-bottom: #5B28FF !important;
 }
-  
-// .cm .ant-radio-checked .ant-radio-inner:after {
-//   background-color: #5B28FF;
-// }
-  
-// .cm .ant-radio:hover .ant-radio-inner {
-//   border-color: #5B28FF;
-// }
 
-.cm .ant-radio-button-wrapper:hover {
+.cmr .ant-radio-button-wrapper:hover {
   color: #5B28FF !important;
 }
 
-.cm .ant-radio-button-wrapper-checked .ant-radio-button-wrapper-checked:hover {
+.cmr .ant-radio-button-wrapper-checked .ant-radio-button-wrapper-checked:hover {
   color: #000 !important;
 }
 
-.cm1 .cover-block-grid {
+.cm .cover-block-grid {
   .cover-block-row {
     margin-bottom: 10px;
     .cover-block-item {
@@ -48,18 +40,27 @@
       float: right;
     }
     .btn1{
-      border: none;
       margin-right: 10px;
       border-radius: 2px;
-      padding: 1px 4px;
+      padding: 1px 8px;
       justify-content: center;
     }
     .btn2 {
       background-color: #FA8072;
       border: none;
       border-radius: 2px;
-      padding: 1px 4px;
+      padding: 1px 8px;
       justify-content: center;
+    }
+    .btn1:hover {
+      color:#5B28FF !important;
+      border-color: #5B28FF !important;
+    }
+    .btn2:hover {
+      color:#fff !important;
+    }
+    .ant-modal-confirm-body-wrapper .ant-btn:hover{
+      border-color: #5B28FF !important;
     }
   }
   .cover-block-row > .cover-block-item {

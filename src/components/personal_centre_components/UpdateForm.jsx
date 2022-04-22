@@ -9,7 +9,7 @@
 
 import React, { Component, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Avatar, Button, Col, DatePicker, Form, Input, message, Modal, Radio, Space, Row, Upload } from 'antd';
+import { Avatar, Button, Col, DatePicker, Divider, Form, Image, Input, message, Modal, Radio, Space, Row, Upload } from 'antd';
 import { LineOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
 import request from 'umi-request';
 import moment from 'moment';
@@ -375,28 +375,27 @@ const UpdateForm = (props) => {
 							: page == 2 ?
 								<Col>
 									<p style={{ fontSize: '16px' }}>Icon</p>
-									<p style={{ fontSize: '12px' }}>Wanna Change?</p>
-
+									<p style={{ fontSize: '14px' }}>Wanna Change?</p>
 									<Form.Item
 										getValueFromEvent={normFile}
 									>
 										<UpdateAvatar id="IMG_LEFT" />
+										<Divider type="vertical" />
+										<Avatar
+											size={100} style={{ marginLeft: '25px', verticalAlign: 'top' }}
+											src="https://joeschmoe.io/api/v1/random"
+											icon={<UserOutlined />}
+										/>
+										{/* <p style={{ fontSize: '14px' }} >Current Avatar</p> */}
 									</Form.Item>
-
-									<Form.Item>
-										<Avatar size={64} icon={<UserOutlined />} />
-										<p style={{ fontSize: '12px'}} >Current Avatar</p>
-									</Form.Item>
-
 									<p style={{ fontSize: '12px', color: '#6c757d' }}>Select an image from your local file. Size: 180 * 180 px. Compatible image types: .jpg, .png, etc. Maximum image size: 2MB. </p>
-
 									<Form.Item>
 										<Button type="primary" htmlType='submit' style={{ backgroundColor: '#5B28FF', borderColor: '#5B28FF' }} >Update</Button>
 									</Form.Item>
 								</Col>
 								: null
 						}
-					</Row>
+						</Row>
 				</Form>
 			</div>
 		</div >
