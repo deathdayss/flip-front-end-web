@@ -16,25 +16,13 @@ import './DisplayBoard.scss'
 import request from 'umi-request';
 import { API_IMG } from '../../Config.js'
 import { getRankService, getDownloadService, getMultiZoneService } from '../../service/displayBoard'
+import CategoryButtons from '../commonComponent/CategoryButtons/CategoryButtons'
 
-const categoryLabels = [
-    {
-        key: "rpg",
-        label: "Rpg"
-    }
-    , {
-        key: "action",
-        label: "Action"
-    },
-    {
-        key: "3D",
-        label: "3D"
-    }]
 const aspectRatio = `${(9 * 100 / 16)}%` //"62.5%"
 
 const DisplayBoard = () => {
+    const [category, setCategory] = useState("rpg")
     const [carouselList, setCarouselList] = useState([])
-    const [category, setCategory] = useState(categoryLabels[0]["key"])
     const [downloadList, setDownloadList] = useState([])
     const history = useHistory()
 
@@ -86,32 +74,6 @@ const DisplayBoard = () => {
                 <img key={`carousel${i}`} className='Home-Show-img' src={`${API_IMG}?img_name=${carouselList?.[i]?.img}`} />
             )}
         </Carousel>
-    }
-
-    const CategoryButtons = () => {
-        const Buttons = categoryLabels.map(({ key, label }) => <button key={key} id='' className='category-btn'
-            onClick={() => changeCategory(key)} style={{ backgroundColor: (category == key) ? '#DACEFF' : 'rgba(0, 0, 0, 0.05)' }}>
-            {label}
-        </button>)
-        return (<div className="category-wrapper">
-            {Buttons.map((button, index) =>
-                <div key={index} className="category-btn-wrapper">
-                    {button}
-                </div>)}
-        </div>)
-    }
-    const getMultiZone = async (key) => {
-        const result = await getMultiZoneService({
-            zone: key,
-            num: 5,
-        });
-        console.log(result.List)
-        setCarouselList(result.List)
-        setDownloadList(result.List)
-    }
-    const changeCategory = (key) => {
-        setCategory(key)
-        getMultiZone(key)
     }
 
     const contentStyle = {
