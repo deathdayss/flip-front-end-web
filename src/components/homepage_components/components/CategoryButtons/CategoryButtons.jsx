@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { getMultiZoneService } from '../../../../service/displayBoard'
+import './CategoryButtons.scss'
 
 const categoryLabels = [
     {
@@ -11,12 +13,12 @@ const categoryLabels = [
         label: "Action"
     },
     {
-        key: "3D",
+        key: "threeDimension",
         label: "3D"
     }]
 
 const CategoryButtons = (props) => {
-    const [category, setCategory] = useState(categoryLabels[0]["key"])
+    const [category, setCategory] = useState('rpg')
     const { history } = props
 
     const changeCategory = (key) => {
@@ -35,10 +37,12 @@ const CategoryButtons = (props) => {
         // setDownloadList(result.List)
     }
 
-    const Buttons = categoryLabels.map(({ key, label }) => <button key={key} id='' className='category-btn'
-        onClick={() => changeCategory(key)} style={{ backgroundColor: (category == key) ? '#DACEFF' : 'rgba(0, 0, 0, 0.05)' }}>
-        {label}
-    </button>)
+    const Buttons = categoryLabels.map(({ key, label }) => <Link to={`/category?category=${key}`}>
+        <button key={key} id='' className='category-btn'
+            onClick={() => changeCategory(key)} style={{ backgroundColor: (category == key) ? '#DACEFF' : 'rgba(0, 0, 0, 0.05)' }}>
+            {label}
+        </button>
+    </Link>)
 
     return (<div className="category-wrapper">
         {Buttons.map((button, index) =>

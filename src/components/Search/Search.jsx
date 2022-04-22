@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from '../../hooks/routeHooks';
-import './Search.scss'
-import BlockGrid from '../commonComponent/BlockGrid/BlockGrid';
-import Header from '../header_components/Header';
-import CoverBlock from '../commonComponent/CoverBlock/CoverBlock';
-import { rankMethods, gameCategories } from "./initData";
+import { Pagination } from 'antd';
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { mapLocalizationToProps } from '../../redux/helper/mapProps'
+import { useParams } from '../../hooks/routeHooks';
+import { mapLocalizationToProps } from '../../redux/helper/mapProps';
 import { getRecommendationList } from '../../service/lastestRecommand';
-import { Pagination } from 'antd'
+import BlockGrid from '../commonComponent/BlockGrid/BlockGrid';
+import CoverBlock from '../commonComponent/CoverBlock/CoverBlock';
+import Header from '../header_components/Header';
+import { gameCategories, rankMethods } from "./initData";
+import './Search.scss';
 
 const Search = (props) => {
     const filterLabels = props.localization.words.search.filter;
@@ -21,7 +21,7 @@ const Search = (props) => {
     useParams((routeParams) => {
         delete routeParams.words;
         setSearchConditions(routeParams);
-    });
+    }, []);
 
     // TODO: change the fake service to the real one
     useEffect(() => {
@@ -81,4 +81,4 @@ const Search = (props) => {
     </>
 }
 
-export default connect(mapLocalizationToProps)(Search)
+export default connect(mapLocalizationToProps)(Search);
