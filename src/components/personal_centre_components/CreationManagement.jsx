@@ -8,13 +8,16 @@
 
 import React, { Component, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Button, Col, Form, Pagination, Radio, Row, Space, message } from 'antd';
+import { Button, Col, Form, Modal, Pagination, Radio, Row, Space, message } from 'antd';
+import { EditOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import request from 'umi-request';
 
 import "./CreationManagement.scss";
 import Header from '../header_components/Header.jsx';
 import { API_IMG } from '../../Config.js';
 import { getRecommendationList, getLatestList } from '../../service/lastestRecommand';
+
+const { confirm } = Modal;
 
 // =========================================================================================
 // Form Upload Logic
@@ -54,20 +57,53 @@ const style = {
 }
 
 const CoverBlock = ({ game_name, like_num, playCount, authorName, img }) => {
-	return <div className='cover-block'>
-		<img src={`${API_IMG}?img_name=${img}`} />
-		<div className='word-group'>
-			<div>{game_name}</div>
-			<div>22-04-16 10:00:00</div>
-			<div>{`${like_num} Liked · ${playCount} Commented · ${like_num} Collected `}</div>
-		</div>
-		<div className='buttom-group'>
-			<Link src='./update_form'>
-				<button className='btn1'>Edit</button>
-			</Link>
-			<button className='btn2'>Delete</button>
-		</div>
-	</div >
+
+	const showConfirm = () => {
+		confirm({
+			title: 'Do you want to delete this item?',
+			icon: <ExclamationCircleOutlined />,
+			okText: 'Yes',
+			okButtonProps: {
+				style: {
+					backgroundColor: '#5B28FF',
+					border: 'none',
+				}
+			},
+			cancelButtonProps: {
+				type: "text",
+				style: {
+					color: '#5B28FF'
+				}
+			},
+			onOk() {
+				console.log('Ok');
+			},
+			onCancel() {
+				console.log('Cancel');
+			},
+		});
+	}
+
+	return (
+		like_num ? 
+		<div className='cover-block'>
+			<img src={`${API_IMG}?img_name=${img}`} />
+
+			<div className='word-group'>
+				<div style={{ fontSize: '18px'}}>{game_name}</div>
+				<div>22-04-16 10:00:00</div>
+				<div>{`${like_num} liked · ${playCount} commented · ${like_num} collected `}</div>
+			</div>
+
+			<div className='buttom-group' style={{ marginBlock: 'auto'}}>
+				<Link to='./update_game'>
+					<Button className='btn1' icon={<EditOutlined />}>Edit</Button>
+				</Link>
+				<Button className='btn2' onClick={showConfirm}>Delete</Button>
+			</div>
+		</div >
+		: null
+	);
 }
 
 const BlockGrid = ({ colNum, data, dataToItem, itemClass, rowClass, gridClass, idProperty }) => {
@@ -146,8 +182,8 @@ const CreationManagement = (props) => {
 		<div>
 			<Header />
 			<div style={style}>
-				<Form className='cm1'
-					onFinish={() => handleGameChangeRequest(gid, nickname, signature, gender, date, history)}
+				<Form className='cm'
+				// onFinish={() => handleGameChangeRequest(gid, nickname, signature, gender, date, history)}
 				>
 					<Row>
 						<Col span={5}>
@@ -156,7 +192,7 @@ const CreationManagement = (props) => {
 						<Col>
 							<Form.Item name="layout">
 								<Radio.Group
-									className='cm'
+									className='cmr'
 									value={page}
 									buttonStyle="solid"
 									onChange={onChangePage}>
@@ -196,7 +232,7 @@ const CreationManagement = (props) => {
 						</Col>
 
 						<BlockGrid
-							colNum={5}
+							colNum={1}
 							data={valueListContent}
 							dataToItem={(data) =>
 								<CoverBlock playCount={data.playCount}

@@ -190,14 +190,14 @@ const UploadForm1 = (props) => {
 	const [description, updateDescription] = useState("");
 
 	const handleChange = (tag, checked) => {
-		console.log("tag", tag);
-		console.log("checked", checked);
-		console.log("category", category);
+		// console.log("tag", tag);
+		// console.log("checked", checked);
+		// console.log("category", category);
 		const selectedTags = checked ? [...category, tag] : category.filter(t => t !== tag);
-		console.log("selectedTags", selectedTags);
-		// const tagTextColors = checked ? [...category, tag] : category.filter(t => t !== tag);
-		// const tagBgColors = checked ? [...category, tag] : category.filter(t => t !== tag);
-		updateCategory(selectedTags);
+		const tagsStr = selectedTags.join(" ");
+		// console.log("tagsStr", tagsStr);
+		// console.log('type:', typeof(tagsStr));
+		updateCategory(tagsStr);
 	}
 
 	return (
