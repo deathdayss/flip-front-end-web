@@ -17,6 +17,21 @@ export const english = {
             traditional: "Traditional"
         }
     },
+    search: {
+        filter: {
+            comprehensive: 'Comprehensive',
+            mostPlay: 'Play Count',
+            mostCollect: 'Collect Count',
+            mostLike:'Likes Count',
+            latest: 'Latest'
+        }
+    },
+    gameCategory: {
+        all: 'All',
+        rpg: 'RPG',
+        action: 'Action',
+        threeDimension: '3D'
+    },
     common: {
         play: 'play',
         like: 'like',
