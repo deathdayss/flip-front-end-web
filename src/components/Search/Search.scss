@@ -3,41 +3,10 @@
     .search-filter-container {
         padding: 0 5px;
         .search-filter-rank-method {
-            display: flex;
             margin-top: 10px;
-            .rank-method {
-                padding: 5px 10px;
-                cursor: pointer;
-            }
-            .rank-method:not(:last-child) {
-                margin-right: 15px;
-            }
-            .checked-rank-method {
-                color: #3fa3e6;
-                background-color: #DFF6FD;
-                border-radius: 5px;
-            }
-            .unchecked-rank-method {
-            }
         }
         .search-filter-game-category {
-            display: flex;
             margin-top: 10px;
-            .game-category {
-                padding: 5px 10px;
-                cursor: pointer;
-            }
-            .game-category:not(:last-child) {
-                margin-right: 15px;
-            }
-            .checked-game-category {
-                color: #3fa3e6;
-                background-color: #DFF6FD;
-                border-radius: 5px;
-            }
-            .unchecked-game-category {
-                color: rgba(0, 0, 0, 0.85);
-            }
         }
         .search-filter-bottom-line {
             margin-top: 10px;
@@ -46,7 +15,7 @@
         }
     }
     .search-cover-container {
-        margin-top: 10px;
+        margin-top: 15px;
     }
     .search-pagination-container {
         display: flex;

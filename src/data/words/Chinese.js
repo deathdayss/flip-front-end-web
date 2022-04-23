@@ -18,7 +18,7 @@ export const chinese = {
         }
     },
     search: {
-        filter: {
+        rankMethod: {
             comprehensive: '综合排序',
             mostPlay: '最多游玩',
             mostCollect: '最多收藏',

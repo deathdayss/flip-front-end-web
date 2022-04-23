@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useParams } from '../../hooks/routeHooks';
 import Header from '../header_components/Header';
 import { connect } from "react-redux";
@@ -10,17 +10,21 @@ import CoverBlock from '../commonComponent/CoverBlock/CoverBlock';
 import BlockGrid from '../commonComponent/BlockGrid/BlockGrid';
 import { gameCategories } from './initData';
 import './Category.scss';
-import CategoryButtons from "./components/CategoryButtons/CategoryButtons";
+import RadioButtons from "../commonComponent/RadioButtons/RadioButtons";
 
-const Category = (props) => {
-    const gameCategoryLabels = props.localization.words.gameCategory;
+const Category = ({ localization }) => {
     const [categoryContentList, setCategoryContentList] = useState([]);
     const [selectedCateogry, setSelectedCateogry] = useState('');
-    const { search } = useLocation();
+    const history = useHistory();
+
+    const onCheck = (key) => {
+        setSelectedCateogry(key);
+        history.push(`/category?category=${key}`);
+    }
 
     useParams((routeParams) => {
         setSelectedCateogry(routeParams.category);
-    }, [search]);
+    });
     useEffect(() => {
         getRecommendationList().then((res) => setCategoryContentList(res));
     }, [])
@@ -28,15 +32,13 @@ const Category = (props) => {
     return <>
         <Header />
         <div className="category-container">
-            <div className="category-choices">
-                {gameCategories.map(categoryKey =>
-                    <Link key={categoryKey} to={`/category?category=${categoryKey}`}>
-                        <div className={'game-category-choice ' + (categoryKey === selectedCateogry ? 'checked-game-category-choice' : 'unchecked-game-category-choice')}>
-                            {gameCategoryLabels[categoryKey]}
-                        </div>
-                    </Link>)}
-            </div>
-            <div className="category-bottom-line-container">
+            <div className="category-radio-buttons-container">
+                <RadioButtons keys={gameCategories}
+                    keyLabelMap={localization.words.gameCategory}
+                    checkedValue={selectedCateogry}
+                    onCheck={onCheck}
+                    uncheckedClass={'unchecked-category-radio-button'}
+                />
                 <div className="category-bottom-line" />
             </div>
             <div className="category-cover-content">
