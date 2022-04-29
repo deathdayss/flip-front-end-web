@@ -85,24 +85,24 @@ const CoverBlock = ({ game_name, like_num, playCount, authorName, img }) => {
 	}
 
 	return (
-		like_num ? 
-		<div className='cover-block'>
-			<img src={`${API_IMG}?img_name=${img}`} />
+		like_num ?
+			<div className='cover-block'>
+				<img src={`${API_IMG}?img_name=${img}`} />
 
-			<div className='word-group'>
-				<div style={{ fontSize: '18px'}}>{game_name}</div>
-				<div>22-04-16 10:00:00</div>
-				<div>{`${like_num} liked · ${playCount} commented · ${like_num} collected `}</div>
-			</div>
+				<div className='word-group'>
+					<div style={{ fontSize: '18px' }}>{game_name}</div>
+					<div>22-04-16 10:00:00</div>
+					<div>{`${like_num} liked · ${playCount} commented · ${like_num} collected `}</div>
+				</div>
 
-			<div className='buttom-group' style={{ marginBlock: 'auto'}}>
-				<Link to='./update_game'>
-					<Button className='btn1' icon={<EditOutlined />}>Edit</Button>
-				</Link>
-				<Button className='btn2' onClick={showConfirm}>Delete</Button>
-			</div>
-		</div >
-		: null
+				<div className='buttom-group' style={{ marginBlock: 'auto' }}>
+					<Link to='./update_game'>
+						<Button className='btn1' icon={<EditOutlined />}>Edit</Button>
+					</Link>
+					<Button className='btn2' onClick={showConfirm}>Delete</Button>
+				</div>
+			</div >
+			: null
 	);
 }
 
@@ -145,15 +145,15 @@ const BlockGrid = ({ colNum, data, dataToItem, itemClass, rowClass, gridClass, i
 	return <div className={gridClass}>{gridArray}</div>
 }
 
-const itemRender = (current, type, originalElement) => {
-	if (type === 'prev') {
-		return <a>Previous</a>;
-	}
-	if (type === 'next') {
-		return <a>Next</a>;
-	}
-	return originalElement;
-}
+// const itemRender = (current, type, originalElement) => {
+// 	if (type === 'prev') {
+// 		return <a>Previous</a>;
+// 	}
+// 	if (type === 'next') {
+// 		return <a>Next</a>;
+// 	}
+// 	return originalElement;
+// }
 
 const CreationManagement = (props) => {
 	const history = useHistory();
@@ -161,17 +161,16 @@ const CreationManagement = (props) => {
 	const [valueListContent, setListContent] = useState([]);
 	const [valueShowOption, setShowOption] = useState(true);
 
-	useEffect(
-		() => {
-			if (valueShowOption) {
-				getRecommendationList().then(res => {
-					setListContent(res)
-				})
-			}
-			else {
-				getLatestList().then(res => setListContent(res))
-			}
-		}, []);
+	useEffect(() => {
+		if (valueShowOption) {
+			getRecommendationList().then(res => {
+				setListContent(res)
+			})
+		}
+		else {
+			getLatestList().then(res => setListContent(res))
+		}
+	}, []);
 
 	const onChangePage = e => {
 		setPage(e.target.value);

@@ -14,7 +14,7 @@ import { Input, Form, Modal, Button, Upload, Tag } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import request from 'umi-request';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 const { CheckableTag } = Tag;
 
@@ -73,7 +73,7 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
 		formData.append('game_name', _title_);
 		formData.append('zone', categoryStr);
 		formData.append('description', _description_);
-		console.log("zone: ", categoryStr)
+
 		const promise = getInfoUploadService(formData);
 		promise.then(
 			values => {
@@ -88,12 +88,18 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
 	}
 }
 
-const DOMAIN = "http://106.52.167.166:8084";
-const API_INFO = "http://106.52.167.166:8084/v1/upload/info";//`${DOMAIN}/v1/upload/info`;
+// const DOMAIN = "http://106.52.167.166:8084";
+const API_INFO = "http://175.178.159.131:8084/v2/upload/info";//`${DOMAIN}/v1/upload/info`;
 
 const getInfoUploadService = (formData) => {
+	const user = localStorage.getItem('user');
+	const userDetails = JSON.parse(user);
+	const token = userDetails.token;
 	return request(API_INFO, {
 		method: "post",
+		headers: {
+			token: token
+		},
 		data: formData,
 		requestType: "form",
 	});

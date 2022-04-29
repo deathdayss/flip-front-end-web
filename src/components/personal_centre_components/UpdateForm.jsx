@@ -46,32 +46,75 @@ const imageList = [];
 
 // =========================================================================================
 // Form Upload Logic
-const handleInfoChangeRequest = (_email_, _age_, _nickname_, _signature_, _gender_, _birth_, history = null) => {
+const handleInfoChangeRequest = (_nickname_, _signature_, _gender_, _birth_, history = null) => {
+	const user = localStorage.getItem('user');
+	const userDetails = JSON.parse(user);
+	const token = userDetails.token;
 
-	console.log("email", _email_);
-	console.log("age", _age_);
 	console.log("nickname", _nickname_);
 	console.log("signature", _signature_);
 	console.log("gender", _gender_);
 	console.log("birthday", _birth_);
+
+	if (!token) { message.warn("Authentization times out! Please try re-login to continue.", 2.0); }
+	else if (_nickname_.length == 0) { message.warn("Please enter a nickname.", 2.0); }
+	else {
+		const formData = new FormData();
+		formData.append('nickname', _nickname_);
+		formData.append('signature', _signature_);
+		formData.append('gender', _gender_);
+		formData.append('birth', _birth_);
+		const promise = getInfoUpdateService(formData, token);
+		promise.then(
+			values => {
+				message.info('Your game has been uploaded successfully!', 2.0);
+				history.push('/');
+
+			},
+			reasons => {
+				message.info('Your game has been uploaded successfully!', 2.0);
+				history.push('/');
+			})
+	}
 }
 
-const getInfoUploadService = (formData) => {
+const getInfoUpdateService = (formData, token) => {
 	return request(API_USER_DETAIL, {
 		method: "post",
 		data: formData,
 		requestType: "form",
+		headers: {
+			token: token
+		}
 	});
 }
 
 // =========================================================================================
 // Avatar display & upload
 
-const handleAvatarChangeRequest = (_email_, _age_, _icon_, history = null) => {
+const handleAvatarChangeRequest = (_token_, _icon_, history = null) => {
+	const user = localStorage.getItem('user');
+	const userDetails = JSON.parse(user);
+	const token = userDetails.token;
 
-	console.log("email", _email_);
-	console.log("age", _age_);
 	console.log("avatar", imageList[0]);
+
+	if (!token) { message.warn("Authentization times out! Please try re-login to continue.", 2.0); }
+	else {
+		const formData = new FormData();
+		formData.append('file_body', imageList[0]);
+		const promise = getAvatarUploadService(formData, token);
+		promise.then(
+			values => {
+				message.info('Your game has been uploaded successfully!', 2.0);
+				history.push('/');
+
+			},
+			reasons => {
+				message.info('Your game has been uploaded successfully!', 2.0);
+				history.push('/');
+			})
+	}
 }
 
 const getBase64 = file => {
@@ -92,15 +135,16 @@ class UpdateAvatar extends Component {
 	};
 
 	beforeUpload = file => {
-		const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-		if (!isJpgOrPng) {
-			message.error('You can only upload .jpg/.png file!');
-		}
-		const isLt2MB = file.size / 1024 / 1024 < 2;
-		if (!isLt2MB) {
-			message.error('Image must be smaller than 2MB!');
-		}
-		return isJpgOrPng && isLt2MB;
+		// const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+		// if (!isJpgOrPng) {
+		// 	message.error('You can only upload .jpg/.png file!');
+		// }
+		// const isLt2MB = file.size / 1024 / 1024 < 2;
+		// if (!isLt2MB) {
+		// 	message.error('Image must be smaller than 2MB!');
+		// }
+		// return isJpgOrPng && isLt2MB;
+		return false;
 	}
 
 	handleCancel = () => {
@@ -130,7 +174,7 @@ class UpdateAvatar extends Component {
 		const uploadButton = (
 			<div>
 				<PlusOutlined />
-				<div style={{ marginTop: 8 }}>Upload</div>
+				<div style={{ marginTop: 8 }}>Upload a New Image Here</div>
 			</div>
 		);
 
@@ -173,7 +217,6 @@ const UpdateForm = (props) => {
 	const history = useHistory();
 
 	const [email, setEmail] = useState("");
-
 	const [page, setPage] = useState(1);
 	const [age, setAge] = useState(0);
 	const [nickname, setNickname] = useState("");
@@ -183,16 +226,22 @@ const UpdateForm = (props) => {
 
 	const [avatar, setAvatar] = useState();
 
-	// const getUserDetailService = token => {
-	// 	return request(`${API_USER_DETAIL}`, { 
-	// 		method: "get",
-	// 		token: token 
-	// 	});
-	// }
+	const getUserDetailService = token => {
+		return request(`${API_USER_DETAIL}`, {
+			method: "get",
+			headers: {
+				token: token
+			}
+		});
+	}
 
 	const getUserAvatarService = token => {
-		return axios.get(`${API_AVATAR}`, { 
-			headers: {"Authorization" : `${token}`} });
+		return request(`${API_AVATAR}`, {
+			method: "get",
+			headers: {
+				token: token
+			}
+		});
 	}
 
 	useEffect(() => {
@@ -200,26 +249,22 @@ const UpdateForm = (props) => {
 		const userDetails = JSON.parse(user);
 		const token = userDetails.token;
 
-		// const getUserDetails = async () => {
-		// 		const result = await getUserDetailService({
-		// 			token
-		// 		});
-		// 		console.log('result:', result);
-		// 		setEmail(result.email);
-		// 		setNickname(result.nickname);
-		// 		setSignature(result.signature);
-		// 		setGender(result.gender);
-		// 		setBirth(result.birth);
-		// 	}
-		
-		// getUserDetails();
+		const getUserDetails = async () => {
+			if (userDetails != null) {
+				const result = await getUserDetailService(token);
+				console.log('result:', result);
+				// 	setEmail(result.email);
+				// 	setNickname(result.nickname);
+				// 	setSignature(result.signature);
+				// 	setGender(result.gender);
+				// 	setBirth(result.birth);
+			}
+		}
+		getUserDetails();
 
 		const getUserAvatar = async () => {
 			if (userDetails != null) {
 				const result = await getUserAvatarService(token);
-				result.then(res => {
-					console.log(res.data)
-				})
 				// setAvatar(result);
 			}
 		}
