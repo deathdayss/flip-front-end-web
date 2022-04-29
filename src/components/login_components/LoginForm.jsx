@@ -104,7 +104,7 @@ const LoginForm = (props) => {
             }).catch((err) => {
                 // message.warn("This email is already registered");
                 console.log(JSON.stringify(err)); //TODO: How to react when verification failed
-                message.warn("This email does not exist!",2.0);
+                message.warn("This email does not exist!", 2.0);
             });
     }
 
@@ -124,7 +124,7 @@ const LoginForm = (props) => {
             }).catch((err) => {
                 // message.warn("This email is already registered");
                 console.log(JSON.stringify(err)); //TODO: How to react when verification failed
-                message.warn("The answer is wrong!",2.0);
+                message.warn("The answer is wrong!", 2.0);
             });
     }
 
@@ -194,7 +194,7 @@ const LoginForm = (props) => {
                                     <img style={{ marginTop: '10px' }} src={val_veriImageURL} height='50px' width='100px' /></div>
                                 <p className="veri-failed-warning">{val_veriFailWarning}</p>
                             </div>
-                            <div className="login-forget-password"><span onClick={() => { set_SigninStep(2) }} style={{cursor : 'pointer'}}>forget password?</span></div>
+                            <div className="login-forget-password"><span onClick={() => { set_SigninStep(2) }} style={{ cursor: 'pointer' }}>forget password?</span></div>
                             <input type="checkbox" id="mainMenuLogin_keepLoggedIn" />
                             <label>Keep me log in</label><br />
                             <Button style={{ marginTop: "10px", backgroundColor: '#5B28FF', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
@@ -227,23 +227,25 @@ const LoginForm = (props) => {
 
                             <h3> Please write your registration email below </h3>
 
-                            <div className="login-form-area-center">
+                            <div className="login-form-area-center" style={{marginTop:"30px"}}>
                                 <p>Email</p>
                                 <Input id="registration_email" type="email" name="email" />
                             </div>
-                            <Button style={{ marginTop: "10px", backgroundColor: '#D6D3DE', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
-                                () => {
-                                    set_SigninStep(1);
-                                }
-                            }>Previous</Button>
-                            <Button style={{ marginTop: "10px", backgroundColor: '#5B28FF', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
-                                () => {
+                            <div style={{marginTop:'150px',display:'flex',justifyContent:'space-around'}}>
+                                <Button style={{backgroundColor: '#D6D3DE', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
+                                    () => {
+                                        set_SigninStep(1);
+                                    }
+                                }>Previous</Button>
+                                <Button style={{backgroundColor: '#5B28FF', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
+                                    () => {
 
-                                    const email = document.getElementById("registration_email");
+                                        const email = document.getElementById("registration_email");
 
-                                    handle_emailVerification(email.value);
-                                }
-                            }> Next </Button>
+                                        handle_emailVerification(email.value);
+                                    }
+                                }> Next </Button>
+                            </div>
                         </div>
                         <div className="login-footer">
                             <p>Don't have an account?</p>
@@ -264,15 +266,16 @@ const LoginForm = (props) => {
 
                             <h3> Answer the safety question below </h3>
 
-                            <div className="login-form-area-center">
-                                <Select style={{width:'250px'}} onChange={(val)=>{set_selectedQuestion(val)}}>
+                            <div className="login-form-area-center" style={{marginTop:"30px"}}>
+                                <Select style={{ width: '250px' }} onChange={(val) => { set_selectedQuestion(val) }}>
                                     {
                                         questionList.map((item) =>
                                             (<Select.Option value={item.id}>{item.content}</Select.Option>))
                                     }
                                 </Select>
-                                <Input id="safetyquestion_answer" type="email" />
+                                <Input id="safetyquestion_answer" type="email" style={{marginTop:'30px'}} />
                             </div>
+                            <div style={{marginTop:'150px',display:'flex',justifyContent:'space-around'}}>
                             <Button style={{ marginTop: "10px", backgroundColor: '#D6D3DE', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
                                 () => {
                                     set_SigninStep(2);
@@ -282,10 +285,11 @@ const LoginForm = (props) => {
 
                                     // const question = document.getElementById("safetyquestion");
                                     const answer = document.getElementById("safetyquestion_answer");
-                                    
+
                                     handle_checkSafetyAnswer(answer.value);
                                 }
                             }> Next </Button>
+                            </div>
                         </div>
                         <div className="login-footer">
                             <p>Don't have an account?</p>
@@ -294,7 +298,7 @@ const LoginForm = (props) => {
                     </div>
                 </div>
             );
-            case 4:
+        case 4:
             return (
                 <div className="login-mask">
                     <div className="login-window">
@@ -306,19 +310,19 @@ const LoginForm = (props) => {
 
                             <h3> Enter new password </h3>
 
-                            <div className="login-form-area-center">
+                            <div className="login-form-area-center" style={{marginTop:"30px"}}>
                                 <p>Enter new password</p>
                                 <Input noFill id="new_password" type="password" />
                                 <p>Confirm your new password</p>
                                 <Input id="new_password_confirm" type="password" />
                             </div>
-                            
-                            <Button style={{ marginTop: "10px", backgroundColor: '#5B28FF', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
+
+                            <Button style={{ marginTop: "150px", backgroundColor: '#5B28FF', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
                                 () => {
 
                                     const newPassword = document.getElementById("new_password");
                                     const newPasswordConfirm = document.getElementById("new_password_confirm");
-                                    
+
                                     handle_changePassword(newPassword.value, newPasswordConfirm.value);
                                 }
                             }> Next </Button>

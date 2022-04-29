@@ -63,8 +63,8 @@ const SignUpForm = (props) => {
                 setTimeout(function () { message.info('Welcome ' + val_email + ' !', 2.0); }, 2000);
             },
             function (err) {
-                console.log('Signup failture');
-                message.warn('The email you used is already registered', 2.0);
+                console.log(err);
+                message.warn('Signup failed', 2.0);
             }
         )
 
@@ -353,7 +353,7 @@ const SignUpForm = (props) => {
                             <img src="images/header/logo.svg" width="60px" style={{ float: 'right', padding: '20px' }}></img>
                         </div>
                         <div className="signup-form-area">
-                            <div className="signup-form-area-title">
+                            <div className="signup-form-area-title" style={{marginBottom: '50px'}}>
                                 <h3> Entre three safety questions: </h3>
                             </div>
                             <Form
@@ -371,7 +371,7 @@ const SignUpForm = (props) => {
                                 <Form.Item
                                     name="question1">
 
-                                    <Select defaultValue={questionList[0].id}>
+                                    <Select>
                                         {
                                             questionList.map((item) =>
                                                 (<Select.Option value={item.id}>{item.content}</Select.Option>))
@@ -384,7 +384,7 @@ const SignUpForm = (props) => {
                                 </Form.Item>
                                 <Form.Item
                                     name="question2">
-                                    <Select defaultValue={questionList[1].id}>
+                                    <Select>
                                         {
                                             questionList.map((item) =>
                                                 (<Select.Option value={item.id}>{item.content}</Select.Option>))
@@ -397,7 +397,7 @@ const SignUpForm = (props) => {
                                 </Form.Item>
                                 <Form.Item
                                     name="question3">
-                                    <Select defaultValue={questionList[2].id}>
+                                    <Select>
                                         {
                                             questionList.map((item) =>
                                                 (<Select.Option value={item.id}>{item.content}</Select.Option>))
@@ -408,13 +408,13 @@ const SignUpForm = (props) => {
                                     name="answer3">
                                     <Input />
                                 </Form.Item>
-                                <Form.Item {...tailFormItemLayout}>
+                                <Form.Item style={{marginTop:'50px'}}>
                                     <Button style={{backgroundColor: '#D6D3DE', color: '#FFF', width: '150px', borderRadius: '10px' }} onClick={
                                         () => {
                                             set_SignupStep(1);
                                         }
                                     }>return</Button>
-                                    <Button type="primary" htmlType="submit" style={{ backgroundColor: "#5B28FF", width: "150px", borderRadius: "10px" }}>Create account</Button>
+                                    <Button type="primary" htmlType="submit" style={{ float:"right", backgroundColor: "#5B28FF", width: "150px", borderRadius: "10px" }}>Create account</Button>
                                 </Form.Item>
                             </Form>
                         </div>
