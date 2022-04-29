@@ -259,6 +259,8 @@ const CreationManagement = (props) => {
 								// itemRender={itemRender}
 								showTotal={total => `Total ${total} games`}
 								showQuickJumper
+								showSizeChanger={false}
+								hideOnSinglePage
 								className="page"
 							/>
 						</div>

@@ -65,13 +65,15 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
 	else if (_description_.length == 0) { message.warn("Have some description will bring you more notice.", 2.0); }
 	else {
 		const formData = new FormData();
+		const categoryStr = _category_.join(" ");
 		formData.append('file_body', imageList[0]);
 		formData.append('email', 'my_name_is_noBody@example.com');
 		formData.append('password', '123');
 		formData.append('game_id', _game_id_);
 		formData.append('game_name', _title_);
-		formData.append('zone', _category_);
+		formData.append('zone', categoryStr);
 		formData.append('description', _description_);
+		console.log("zone: ", categoryStr)
 		const promise = getInfoUploadService(formData);
 		promise.then(
 			values => {
@@ -194,10 +196,10 @@ const UploadForm1 = (props) => {
 		// console.log("checked", checked);
 		// console.log("category", category);
 		const selectedTags = checked ? [...category, tag] : category.filter(t => t !== tag);
-		const tagsStr = selectedTags.join(" ");
-		// console.log("tagsStr", tagsStr);
+		// const tagsStr = selectedTags.join(" ");
+		console.log("tags", selectedTags);
 		// console.log('type:', typeof(tagsStr));
-		updateCategory(tagsStr);
+		updateCategory(selectedTags);
 	}
 
 	return (

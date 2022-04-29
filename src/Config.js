@@ -28,14 +28,12 @@ export const API_COLLECT_NUM = `${DOMAIN}/v1/collect/num`
 export const API_GET_COMMENT = `${DOMAIN}/v1/rank/comment/time`
 export const API_ADD_COMMENT = `${DOMAIN}/v1/change/comment/add`
 
-
 //Rank
 export const API_RANK_AUTHOR = `${DOMAIN}/v1/rank/author`
 
-
-
-// Personal Centre URLs
+// Personal Centre
 export const API_USER_DETAIL = `${DOMAIN}/v1/user/detail`
 export const API_UPDATE_GAME = `${DOMAIN}/v1/update/game`
+export const API_AVATAR = `${DOMAIN}/v1/download/personal`
 
 //Login URLs, etc.

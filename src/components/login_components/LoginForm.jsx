@@ -104,7 +104,7 @@ const LoginForm = (props) => {
             }).catch((err) => {
                 // message.warn("This email is already registered");
                 console.log(JSON.stringify(err)); //TODO: How to react when verification failed
-                message.warn("This email does not exist!",2.0);
+                message.warn("This email does not exist!", 2.0);
             });
     }
 
@@ -124,7 +124,7 @@ const LoginForm = (props) => {
             }).catch((err) => {
                 // message.warn("This email is already registered");
                 console.log(JSON.stringify(err)); //TODO: How to react when verification failed
-                message.warn("The answer is wrong!",2.0);
+                message.warn("The answer is wrong!", 2.0);
             });
     }
 
@@ -194,7 +194,7 @@ const LoginForm = (props) => {
                                     <img style={{ marginTop: '10px' }} src={val_veriImageURL} height='50px' width='100px' /></div>
                                 <p className="veri-failed-warning">{val_veriFailWarning}</p>
                             </div>
-                            <div className="login-forget-password"><span onClick={() => { set_SigninStep(2) }} style={{cursor : 'pointer'}}>forget password?</span></div>
+                            <div className="login-forget-password"><span onClick={() => { set_SigninStep(2) }} style={{ cursor: 'pointer' }}>forget password?</span></div>
                             <input type="checkbox" id="mainMenuLogin_keepLoggedIn" />
                             <label>Keep me log in</label><br />
                             <Button style={{ marginTop: "10px", backgroundColor: '#5B28FF', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
@@ -265,7 +265,7 @@ const LoginForm = (props) => {
                             <h3> Answer the safety question below </h3>
 
                             <div className="login-form-area-center">
-                                <Select style={{width:'250px'}} onChange={(val)=>{set_selectedQuestion(val)}}>
+                                <Select style={{ width: '250px' }} onChange={(val) => { set_selectedQuestion(val) }}>
                                     {
                                         questionList.map((item) =>
                                             (<Select.Option value={item.id}>{item.content}</Select.Option>))
@@ -282,7 +282,7 @@ const LoginForm = (props) => {
 
                                     // const question = document.getElementById("safetyquestion");
                                     const answer = document.getElementById("safetyquestion_answer");
-                                    
+
                                     handle_checkSafetyAnswer(answer.value);
                                 }
                             }> Next </Button>
@@ -294,7 +294,7 @@ const LoginForm = (props) => {
                     </div>
                 </div>
             );
-            case 4:
+        case 4:
             return (
                 <div className="login-mask">
                     <div className="login-window">
@@ -312,13 +312,13 @@ const LoginForm = (props) => {
                                 <p>Confirm your new password</p>
                                 <Input id="new_password_confirm" type="password" />
                             </div>
-                            
+
                             <Button style={{ marginTop: "10px", backgroundColor: '#5B28FF', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
                                 () => {
 
                                     const newPassword = document.getElementById("new_password");
                                     const newPasswordConfirm = document.getElementById("new_password_confirm");
-                                    
+
                                     handle_changePassword(newPassword.value, newPasswordConfirm.value);
                                 }
                             }> Next </Button>

@@ -51,6 +51,13 @@ const PersonalPage = (props) => {
     const [showPinnedGame, setShowPinnedGame] = useState(true)
     const [menu, setMenu] = useState(menuLabels[0])
 
+    const setMenuAndLink = label => {
+        setMenu(label);
+        if (label == menuLabels[4]) {
+            window.location.href="./personal_centre"
+        }
+    }
+
     useEffect(() => {
         const getRank = async () => {
             const result = await getRankList({
@@ -80,7 +87,7 @@ const PersonalPage = (props) => {
                     </div>
                     <div className="menu">
                         {menuLabels.map(label => (<div key={label} className='menu-tab'>
-                            <button className={menu === label ? 'menu-btn active' : 'menu-btn'} onClick={() => setMenu(label)}>{label}</button>
+                            <button className={menu === label ? 'menu-btn active' : 'menu-btn'} onClick={() => setMenuAndLink(label)}>{label}</button>
                         </div>))}
                     </div>
                 </div>

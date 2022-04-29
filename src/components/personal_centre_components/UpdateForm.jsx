@@ -9,14 +9,31 @@
 
 import React, { Component, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Avatar, Button, Col, DatePicker, Divider, Form, Image, Input, message, Modal, Radio, Space, Row, Upload } from 'antd';
+import {
+	Avatar,
+	Button,
+	Col,
+	DatePicker,
+	Divider,
+	Form,
+	Image,
+	Input,
+	message,
+	Modal,
+	Radio,
+	Row,
+	Space,
+	Tooltip,
+	Upload
+} from 'antd';
 import { LineOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
 import request from 'umi-request';
 import moment from 'moment';
+import axios from 'axios';
 
 import "./UpdateForm.scss";
 import Header from '../header_components/Header.jsx';
-import { API_USER_DETAIL } from '../../Config.js';
+import { API_AVATAR, API_USER_DETAIL } from '../../Config.js';
 
 const normFile = e => {
 	if (Array.isArray(e)) {
@@ -37,33 +54,10 @@ const handleInfoChangeRequest = (_email_, _age_, _nickname_, _signature_, _gende
 	console.log("signature", _signature_);
 	console.log("gender", _gender_);
 	console.log("birthday", _birth_);
-
-	// if (_nickname_.length == 0) { message.warn("The nickname cannot be empty.", 2.0); }
-	// else {
-	// 	const formData = new FormData();
-	// 	formData.append('Email', _email_);
-	// 	formData.append('Age', _age_);
-	// 	formData.append('Nickname', _nickname_);
-	// 	formData.append('Signiature', _signature_);
-	// 	formData.append('Gender', _gender_);
-	// 	formData.append('Birth', _birth_);
-	// 	const promise = getInfoUploadService(formData);
-	// 	promise.then(
-	// 		values => {
-	// 			message.info('Your personal info has been updated successfully ! User:' + _email_, 2.0);
-	// 			history.push('/');
-	// 		},
-	// 		reasons => {
-	// 			message.info('Oops ! Something was wrong ! Please try again ! User:' + _email_, 2.0);
-	// 			history.push('/');
-	// 		})
-	// }
 }
 
-const API_INFO = "http://106.52.167.166:8084/v1/user/detail";//`${DOMAIN}/v1/upload/info`;
-
 const getInfoUploadService = (formData) => {
-	return request(API_INFO, {
+	return request(API_USER_DETAIL, {
 		method: "post",
 		data: formData,
 		requestType: "form",
@@ -78,21 +72,6 @@ const handleAvatarChangeRequest = (_email_, _age_, _icon_, history = null) => {
 	console.log("email", _email_);
 	console.log("age", _age_);
 	console.log("avatar", imageList[0]);
-
-	// const formData = new FormData();
-	// formData.append('Email', _email_);
-	// formData.append('Age', _age_);
-	// formData.append('Icon', _icon_);
-	// const promise = getInfoUploadService(formData);
-	// promise.then(
-	// 	values => {
-	// 		message.info('Your avatar has been updated successfully ! User:' + _email_, 2.0);
-	// 		history.push('/');
-	// 	},
-	// 	reasons => {
-	// 		message.info('Oops ! Something was wrong ! Please try again ! User:' + _email_, 2.0);
-	// 		history.push('/');
-	// 	})
 }
 
 const getBase64 = file => {
@@ -111,17 +90,6 @@ class UpdateAvatar extends Component {
 		previewTitle: '',
 		fileList: [],
 	};
-	// const [previewVisible, setPreviewVisible] = useState(false);
-	// const [previewImage, setPreviewImage] = useState("");
-	// const [previewTitle, setPreviewTitle] = useState("");
-	// const [fileList, setFileList] = useState([
-	// 	// {
-	// 	// 	uid: '-1',
-	// 	// 	name: 'icon.png',
-	// 	// 	status: 'done',
-	// 	// 	url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-	// 	// },
-	// ]);
 
 	beforeUpload = file => {
 		const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -148,11 +116,6 @@ class UpdateAvatar extends Component {
 			previewVisible: true,
 			previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
 		});
-		// const image = file.url ? file.url : file.preview;
-		// const name = file.name ? file.name : file.url.substring(file.url.lastIndexOf('/') + 1);
-		// setPreviewImage(image);
-		// setPreviewVisible(true);
-		// setPreviewTitle(name);
 	}
 
 	handleChange = ({ fileList, file }) => {
@@ -218,23 +181,49 @@ const UpdateForm = (props) => {
 	const [gender, setGender] = useState(1);
 	const [birth, setBirth] = useState(moment().format('YYYY-MM-DD'));
 
+	const [avatar, setAvatar] = useState();
 
-	const getUserDetailService = params => {
-		return request(`${API_USER_DETAIL}`, { params });
+	// const getUserDetailService = token => {
+	// 	return request(`${API_USER_DETAIL}`, { 
+	// 		method: "get",
+	// 		token: token 
+	// 	});
+	// }
+
+	const getUserAvatarService = token => {
+		return axios.get(`${API_AVATAR}`, { 
+			headers: {"Authorization" : `${token}`} });
 	}
 
 	useEffect(() => {
-		const getUserDetail = async () => {
-			const result = await getUserDetailService({
-				Email: 'yuanxinzhu1234',
-				Age: 0
-			});
-			// setEmail(result.detail.Email);
-			// setAge(result.detail.Age);
-			console.log(result.detail);
-			// console.log(data);
+		const user = localStorage.getItem('user');
+		const userDetails = JSON.parse(user);
+		const token = userDetails.token;
+
+		// const getUserDetails = async () => {
+		// 		const result = await getUserDetailService({
+		// 			token
+		// 		});
+		// 		console.log('result:', result);
+		// 		setEmail(result.email);
+		// 		setNickname(result.nickname);
+		// 		setSignature(result.signature);
+		// 		setGender(result.gender);
+		// 		setBirth(result.birth);
+		// 	}
+		
+		// getUserDetails();
+
+		const getUserAvatar = async () => {
+			if (userDetails != null) {
+				const result = await getUserAvatarService(token);
+				result.then(res => {
+					console.log(res.data)
+				})
+				// setAvatar(result);
+			}
 		}
-		getUserDetail();
+		getUserAvatar();
 	}, []);
 
 	const onChangePage = e => {
@@ -280,12 +269,14 @@ const UpdateForm = (props) => {
 			<Header />
 			<div style={style}>
 				<Form
+					className='uf'
 					{...layout}
 					onFinish={() => {
 						page == 1 ?
 							handleInfoChangeRequest("abc", age, nickname, signature, gender, birth, history)
-							:
-							handleAvatarChangeRequest("abc", age, imageList, history)
+							: page == 2 ?
+								handleAvatarChangeRequest("abc", age, imageList, history)
+								: null
 					}}
 				>
 					<Row>
@@ -330,6 +321,19 @@ const UpdateForm = (props) => {
 												Creation Management
 											</Radio.Button>
 										</Link>
+
+										<Link to='/personal_page'>
+											<Radio.Button
+												value={4}
+												style={{
+													width: '100%',
+													backgroundColor: page == 4 ? '#5B28FF' : '#fff',
+													borderColor: page == 4 ? '#5B28FF' : '#D3D3D3'
+												}}
+											>
+												My Homepage
+											</Radio.Button>
+										</Link>
 									</Space>
 								</Radio.Group>
 							</Form.Item>
@@ -343,13 +347,13 @@ const UpdateForm = (props) => {
 							<Col>
 								<p style={{ fontSize: '16px' }}>Personal Info</p>
 								<Form.Item label="Nickname">
-									<Input placeholder="" value={nickname} onChange={onChangeNickname} />
+									<Input placeholder="Input your nickname here" value={nickname} onChange={onChangeNickname} />
 								</Form.Item>
 
 								<Form.Item label="Email">{email}</Form.Item>
 
 								<Form.Item label="Signature">
-									<Input placeholder="" value={signature} onChange={onChangeSignature} />
+									<Input placeholder="Customize your signature here" value={signature} onChange={onChangeSignature} />
 								</Form.Item>
 
 								<Form.Item label="Gender">
@@ -379,11 +383,17 @@ const UpdateForm = (props) => {
 									<Form.Item
 										getValueFromEvent={normFile}
 									>
-										<UpdateAvatar id="IMG_LEFT" />
+										<UpdateAvatar
+											id="IMG_LEFT"
+											maxCount={1}
+											onchange={() => {
+												<Tooltip defaultVisible={true}></Tooltip>
+											}}
+										/>
 										<Divider type="vertical" />
 										<Avatar
-											size={100} style={{ marginLeft: '25px', verticalAlign: 'top' }}
-											src="https://joeschmoe.io/api/v1/random"
+											size={100} style={{ marginLeft: '25px', verticalAlign: 'top', border: '1px solid #5B28FF' }}
+											src={avatar ? avatar : "https://joeschmoe.io/api/v1/random"}
 											icon={<UserOutlined />}
 										/>
 										{/* <p style={{ fontSize: '14px' }} >Current Avatar</p> */}
@@ -395,7 +405,7 @@ const UpdateForm = (props) => {
 								</Col>
 								: null
 						}
-						</Row>
+					</Row>
 				</Form>
 			</div>
 		</div >
