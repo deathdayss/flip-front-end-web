@@ -266,7 +266,7 @@ const LoginForm = (props) => {
 
                             <h3> Answer the safety question below </h3>
 
-                            <div className="login-form-area-center" style={{marginTop:"30px"}}>
+                            <div className="login-form-area-center">
                                 <Select style={{ width: '250px' }} onChange={(val) => { set_selectedQuestion(val) }}>
                                     {
                                         questionList.map((item) =>
@@ -317,7 +317,7 @@ const LoginForm = (props) => {
                                 <Input id="new_password_confirm" type="password" />
                             </div>
 
-                            <Button style={{ marginTop: "150px", backgroundColor: '#5B28FF', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
+                            <Button style={{ marginTop: "10px", backgroundColor: '#5B28FF', color: '#FFF', width: '120px', borderRadius: '10px' }} onClick={
                                 () => {
 
                                     const newPassword = document.getElementById("new_password");
