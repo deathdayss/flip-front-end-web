@@ -1,0 +1,26 @@
+.category-container {
+    padding: 0 50px;
+    .category-radio-buttons-container {
+        padding: 0 5px;
+        margin-top: 10px;
+        .unchecked-category-radio-button {
+            background-color: #ebebeb;
+            border-radius: 5px;
+        }
+    }
+    .category-bottom-line {
+        margin-top: 10px;
+        height: 1px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    }
+
+    .category-cover-content {
+        margin-top: 15px;
+    }
+    .category-pagination-container {
+        display: flex;
+        .category-pagination {
+            margin: 0 auto;
+        }
+    }
+}

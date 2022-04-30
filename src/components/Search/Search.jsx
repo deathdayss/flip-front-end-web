@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from '../../hooks/routeHooks';
-import './Search.scss'
-import BlockGrid from '../commonComponent/BlockGrid/BlockGrid';
-import Header from '../header_components/Header';
-import CoverBlock from '../commonComponent/CoverBlock/CoverBlock';
-import { rankMethods, gameCategories } from "./initData";
+import { Pagination } from 'antd';
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { mapLocalizationToProps } from '../../redux/helper/mapProps'
+import { useParams } from '../../hooks/routeHooks';
+import { mapLocalizationToProps } from '../../redux/helper/mapProps';
 import { getRecommendationList } from '../../service/lastestRecommand';
-import { Pagination } from 'antd'
+import BlockGrid from '../commonComponent/BlockGrid/BlockGrid';
+import CoverBlock from '../commonComponent/CoverBlock/CoverBlock';
+import Header from '../header_components/Header';
+import { gameCategories, rankMethods } from "./initData";
+import RadioButtons from '../commonComponent/RadioButtons/RadioButtons';
+import './Search.scss';
 
-const Search = (props) => {
-    const filterLabels = props.localization.words.search.filter;
-    const gameCategoryLabels = props.localization.words.gameCategory;
+const Search = ({ localization }) => {
     const [searchConditions, setSearchConditions] = useState({
         rankMethod: 'comprehensive',
         category: 'all'
     });
     const [searchResults, setSearchResults] = useState([]);
+
     useParams((routeParams) => {
         delete routeParams.words;
         setSearchConditions(routeParams);
-    });
+    }, []);
 
     // TODO: change the fake service to the real one
     useEffect(() => {
         getRecommendationList().then((res) => setSearchResults(res));
     }, []);
 
-    const handleRankMethod = (value) => {
+    const handleRankMethod = (key) => {
         setSearchConditions({
             ...searchConditions,
-            rankMethod: value,
+            rankMethod: key,
         });
     }
-    const handleGameCategory = (value) => {
+    const handleGameCategory = (key) => {
         setSearchConditions({
             ...searchConditions,
-            category: value,
+            category: key,
         });
     }
     return <>
@@ -45,20 +45,18 @@ const Search = (props) => {
         <div className="search-container">
             <div className="search-filter-container">
                 <div className="search-filter-rank-method">
-                    {rankMethods.map(filterKey => <div key={filterKey}
-                        className={'rank-method ' + (filterKey === searchConditions.rankMethod ? 'checked-rank-method' : 'unchecked-rank-method')}
-                        onClick={() => handleRankMethod(filterKey)}
-                    >
-                        {filterLabels[filterKey]}
-                    </div>)}
+                    <RadioButtons keys={rankMethods}
+                        keyLabelMap={localization.words.search.rankMethod}
+                        checkedValue={searchConditions.rankMethod}
+                        onCheck={handleRankMethod}
+                    />
                 </div>
                 <div className="search-filter-game-category">
-                    {gameCategories.map(categoryKey => <div key={categoryKey}
-                        className={'game-category ' + (categoryKey === searchConditions.category ? 'checked-game-category' : 'unchecked-game-category')}
-                        onClick={() => handleGameCategory(categoryKey)}
-                    >
-                        {gameCategoryLabels[categoryKey]}
-                    </div>)}
+                    <RadioButtons keys={gameCategories}
+                        keyLabelMap={localization.words.gameCategory}
+                        checkedValue={searchConditions.category}
+                        onCheck={handleGameCategory}
+                    />
                 </div>
                 <div className="search-filter-bottom-line" />
             </div>
@@ -81,4 +79,4 @@ const Search = (props) => {
     </>
 }
 
-export default connect(mapLocalizationToProps)(Search)
+export default connect(mapLocalizationToProps)(Search);

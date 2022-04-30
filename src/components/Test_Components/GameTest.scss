@@ -1,0 +1,14 @@
+.progress-container {
+    margin: 0 auto;
+    width: 960px;
+    height: 600px;
+    background-color: #c4c4c4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .progress {
+        width: 300px;
+        background-color: #c4c4c4;
+    }
+}

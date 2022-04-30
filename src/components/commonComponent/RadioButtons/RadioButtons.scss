@@ -1,0 +1,19 @@
+.radio-button-container {
+    display: flex;
+    .ordinary-radio-button {
+        padding: 5px 10px;
+        cursor: pointer;
+        user-select: none;
+    }
+    .ordinary-radio-button:not(:last-child) {
+        margin-right: 15px;
+    }
+    .checked-radio-button {
+        color: #3fa3e6;
+        background-color: #dff6fd;
+        border-radius: 5px;
+    }
+    .unchecked-radio-button {
+        color: rgba(0, 0, 0, 0.85);
+    }
+}

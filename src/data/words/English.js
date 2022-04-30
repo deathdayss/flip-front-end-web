@@ -18,7 +18,7 @@ export const english = {
         }
     },
     search: {
-        filter: {
+        rankMethod: {
             comprehensive: 'Comprehensive',
             mostPlay: 'Play Count',
             mostCollect: 'Collect Count',
