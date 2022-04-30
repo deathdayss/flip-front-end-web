@@ -25,8 +25,28 @@
     }
 }
 
+.homepage-category-container {
+    padding: 0 5px;
+    margin-top: 10px;
+    .ordinary-category-radio-button {
+        padding: 5px 10px;
+        background-color: #ebebeb;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .ordinary-category-radio-button:not(:last-child) {
+        margin-right: 15px;
+    }
+    .bottom-line {
+        margin-top: 10px;
+        height: 1px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    }
+}
+
 .display-board {
     display: flex;
+    margin-top: 10px;
     .daily-pick-container {
         width: 80%;
     }
