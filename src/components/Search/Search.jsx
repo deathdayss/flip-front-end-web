@@ -9,6 +9,9 @@ import { connect } from "react-redux";
 import { mapLocalizationToProps } from '../../redux/helper/mapProps'
 import { getRecommendationList } from '../../service/lastestRecommand';
 import { Pagination } from 'antd'
+import request from 'umi-request';
+import { API_SEARCH_GAME_NOTOKEN } from "../../Config";
+import { API_SEARCH_GAME } from "../../Config";
 
 const Search = (props) => {
     const filterLabels = props.localization.words.search.filter;
@@ -18,15 +21,57 @@ const Search = (props) => {
         category: 'all'
     });
     const [searchResults, setSearchResults] = useState([]);
+    
     useParams((routeParams) => {
-        delete routeParams.words;
+        // delete routeParams.words;
         setSearchConditions(routeParams);
+        console.log(searchConditions);
     });
 
-    // TODO: change the fake service to the real one
-    useEffect(() => {
-        getRecommendationList().then((res) => setSearchResults(res));
-    }, []);
+    const get_params = () => {
+        let currParams = {};
+        currParams.words = new URLSearchParams(props.location.search).get("words");
+        currParams.rankMethod = new URLSearchParams(props.location.search).get("rankMethod");
+        currParams.category = new URLSearchParams(props.location.search).get("category");
+        setSearchConditions(currParams);
+    }
+
+    const handle_search = () => {
+        let response;
+        if (localStorage.getItem('user')) {
+            response = request(`${API_SEARCH_GAME}`, {
+                method: "get",
+                params: {
+                    num: 10,
+                    offset: 0,
+                    keyword: new URLSearchParams(props.location.search).get("words"),
+                    method: 'like',
+                    //TODO: Adjust method to prototype add zone
+
+                },
+                headers:{
+                    token: JSON.parse(localStorage.getItem('user')).token
+                }
+            });
+        } else {
+            response = request(`${API_SEARCH_GAME_NOTOKEN}`, {
+                method: "get",
+                params: {
+                    num: 10,
+                    offset: 0,
+                    keyword: new URLSearchParams(props.location.search).get("words"),
+                    method: 'like',
+                    zone: 'test'
+                    //TODO: Adjust method to prototype add zone
+
+                },
+            });
+        }
+        response.then((res) => { setSearchResults(res.List) }).catch(err => console.log(err.message));
+    }
+
+
+    useEffect(()=>{handle_search()}, []); 
 
     const handleRankMethod = (value) => {
         setSearchConditions({
@@ -63,10 +108,10 @@ const Search = (props) => {
                 <div className="search-filter-bottom-line" />
             </div>
             <div className="search-cover-container">
-                <BlockGrid colNum={5} data={searchResults} dataToItem={(data) => <CoverBlock playCount={data.playCount}
+                <BlockGrid colNum={5} data={searchResults} dataToItem={(data) => <CoverBlock playCount={data.DownloadNum}
                     AuthorName={data.AuthorName}
                     img={data.img}
-                    like_num={data.like_num}
+                    likeCount={data.like_num}
                     game_name={data.game_name} />}
                     idProperty='GID'
                     gridClass='cover-block-grid'
