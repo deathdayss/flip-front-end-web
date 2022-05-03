@@ -14,7 +14,7 @@ import request from 'umi-request';
 import { API_SEARCH_GAME_NOTOKEN } from "../../Config";
 import { API_SEARCH_GAME } from "../../Config";
 
-const Search = ({ localization }) => {
+const Search = ({ localization,location }) => {
     const [searchConditions, setSearchConditions] = useState({
         rankMethod: 'comprehensive',
         category: 'all'
@@ -28,9 +28,9 @@ const Search = ({ localization }) => {
 
     const get_params = () => {
         let currParams = {};
-        currParams.words = new URLSearchParams(props.location.search).get("words");
-        currParams.rankMethod = new URLSearchParams(props.location.search).get("rankMethod");
-        currParams.category = new URLSearchParams(props.location.search).get("category");
+        currParams.words = new URLSearchParams(location.search).get("words");
+        currParams.rankMethod = new URLSearchParams(location.search).get("rankMethod");
+        currParams.category = new URLSearchParams(location.search).get("category");
         setSearchConditions(currParams);
     }
 
@@ -42,7 +42,7 @@ const Search = ({ localization }) => {
                 params: {
                     num: 10,
                     offset: 0,
-                    keyword: new URLSearchParams(props.location.search).get("words"),
+                    keyword: new URLSearchParams(location.search).get("words"),
                     method: 'like',
                     //TODO: Adjust method to prototype add zone
 
@@ -57,7 +57,7 @@ const Search = ({ localization }) => {
                 params: {
                     num: 10,
                     offset: 0,
-                    keyword: new URLSearchParams(props.location.search).get("words"),
+                    keyword: new URLSearchParams(location.search).get("words"),
                     method: 'like',
                     zone: 'test'
                     //TODO: Adjust method to prototype add zone
