@@ -1,7 +1,7 @@
 /**
  * @author Huiying Hu
  * @create date 2021-07-23 20:35:00
- * @modify date 2022-04-30 00:12:13
+ * @modify date 2022-05-03 18:51:35
  */
 
 
@@ -14,8 +14,12 @@ export const API_MULTI_ZONE = `${DOMAIN}/v1/rank/multi_zone`
 export const API_IMG = `${DOMAIN}/v1/download/img`
 export const API_RANK_DOWNLOAD = `${DOMAIN}/v1/rank/download`
 export const DOWNLOAD_GAME = `${DOMAIN}/v1/download/game`
+
+//Header
 export const API_SEARCH_GAME_NOTOKEN = `${DOMAIN}/v1/search/notoken/item/game`
 export const API_SEARCH_GAME = `${DOMAIN}/v1/search/item/game`
+export const API_SEARCH_HISTORY = `${DOMAIN}/v1/search/history`
+export const API_SEARCH_HOTTOPIC = `${DOMAIN}/v1/search/notoken/rank/game`
 
 //GameDisplay - interaction btn
 export const API_PRODUCT = `${API_WT}/v1/get/product`

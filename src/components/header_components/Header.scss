@@ -19,11 +19,19 @@
         justify-content: center;
 
         .search-outer-div {
+            position: relative;
             margin-left: 10px;
             .ant-input-search-button {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }
+            .search-popup{
+                position: absolute;
+                z-index: 5;
+                padding: 10px;
+                width: 100%;
+                background-color: rgba(234,234,234,0.75);
             }
         }
     }
@@ -64,8 +72,8 @@
 }
 
 .main-menu-popup {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     text-align: center;

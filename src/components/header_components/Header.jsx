@@ -23,6 +23,8 @@ import LoginForm from '../login_components/LoginForm';
 import SignUpForm from '../signup_components/SignUpForm';
 import { useHistory } from 'react-router-dom';
 import QueryString from 'qs';
+import request from 'umi-request';
+import { API_SEARCH_HISTORY, API_SEARCH_HOTTOPIC } from "../../Config";
 
 const { Search } = Input;
 
@@ -38,26 +40,6 @@ const mapStateToProps = state => {
     headerState: state.headerState
   }
 }
-
-// TODO: Check Login State
-// const loginBeforeAfter = (userInfo) => {
-//     if (userInfo === null) {
-//         return (
-//             <div>Not Login</div>
-//         )
-//     }
-//     else {
-//         <div>Logined</div>
-//     }
-// }
-
-// ==========================================================================================
-// Login service
-const DOMAIN = "http://175.178.159.131:8084";
-const API_LOGIN = `${DOMAIN}/v1/user/login`;
-// const API_SIGNUP = `${DOMAIN}/v1/user/register`;
-const API_VERIFICATION_CODE = `${DOMAIN}/v1/verification/code`;//"http://175.178.159.131:8084/v1/verification/code";
-
 
 // const openSignup = (mail, name, pwd, veri) => {
 //     // if (veri === verificationCode) {
@@ -97,7 +79,10 @@ const Header = function (props) {
   const [isLoggedIn, set_IsLoggedIn] = useState(JSON.parse(localStorage.getItem('user')) ? true : false);
   const [shouldLoginDisplay, set_LoginDisplay] = useState(false);
   const [shouldSignupDisplay, set_SignupDisplay] = useState(false);
+  const [shouldSearchHintDisplay, set_SearchHintDisplay] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [recentlySearch, set_RecentlySearch] = useState(["GTA", "RDR2", "Cyberpunk2077"]);
+  const [hotTopic, set_HotTopic] = useState(["GTA", "RDR2", "Cyberpunk2077"]);
   const history = useHistory();
 
   useEffect(() => {
@@ -127,6 +112,8 @@ const Header = function (props) {
   }
 
 
+
+
   const handleRankBtn = () => { }
   // TODO: press the search button
   const headerSearch = value => { props.toggleLanguage(props.localization.lang) }
@@ -134,7 +121,7 @@ const Header = function (props) {
   const PersonalSocialInfo = (props) => {
     return (
       <div style={{ width: '80px', height: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <p>{props.name}</p>
+        <div style={{ backgroundColor: '#C9B8FF', borderRadius: '10px', color: 'white', marginTop: '10px', marginBottom: '20px' }}>{props.name}</div>
         <p style={{ fontWeight: 'bold' }}>{props.value}</p>
       </div>
     );
@@ -159,25 +146,23 @@ const Header = function (props) {
                 {!isLoggedIn ?
                   (
                     <div className='main-menu-popup-login'>
-                      
-                      <div className='main-menu-popup-item-login' onClick={openLogin} style={{backgroundColor:'#F6EAFF', cursor:'pointer', lineHeight:'60px'}}>Log in</div>
+
+                      <div className='main-menu-popup-item-login' onClick={openLogin} style={{ backgroundColor: '#F6EAFF', cursor: 'pointer', lineHeight: '60px' }}>Log in</div>
                       <div className='main-menu-popup-item-login'>
                         <div>First time using this?<br /> Click to <span style={{ color: '#DC06FF', textDecoration: 'underline', cursor: 'pointer' }} onClick={openSignup}>Sign up</span></div>
                       </div>
                     </div>
                   ) :
                   (<div className="main-menu-popup">
-                    <div className='main-menu-popup-item' style={{fontSize: '20px'}}> game point: 9000 </div>
                     <div className="personal-social-info-groups main-menu-popup-item">
-                      <PersonalSocialInfo name='Following' value='33' />
-                      <PersonalSocialInfo name='Followed' value='5' />
-                      <PersonalSocialInfo name='XXX' value='2' />
+                      <PersonalSocialInfo name='Followed' value='88' />
+                      <PersonalSocialInfo name='Liked' value='88' />
                     </div>
-                    <div className='main-menu-popup-item' style={{backgroundColor: '#EEE'}}>
-                    <img src="images/header/personal_center.svg" height="30px" width="30px" style={{marginRight:"10px"}}></img>
-                    <span>Personal Center</span>
+                    <div className='main-menu-popup-item' style={{ backgroundColor: '#EEE' }}>
+                      <img src="images/header/personal_center.svg" height="30px" width="30px" style={{ marginRight: "10px" }}></img>
+                      <span>Personal Center</span>
                     </div>
-                    <div className='main-menu-popup-item' style={{backgroundColor: '#F6EAFF', fontWeight:'bold', cursor: 'pointer'}} onClick={handle_logoutRequest}>Log out</div>
+                    <div className='main-menu-popup-item' style={{ backgroundColor: '#F6EAFF', fontWeight: 'bold', cursor: 'pointer' }} onClick={handle_logoutRequest}>Log out</div>
                   </div>
                   )}
               </div>
@@ -192,6 +177,13 @@ const Header = function (props) {
     })
   }
 
+  const SearchTag = (props) => {
+    return (
+      <div onClick={() => { props.addToSearchValue(props.tagName) }} style={{ color: 'white', cursor: 'pointer', backgroundColor: '#C9B8FF', display: 'inline-block', margin: '5px', borderRadius: '10px' }}>
+        <span style={{ margin: '10px' }}>{props.tagName}</span>
+      </div>
+    )
+  }
 
   const onSearch = (value) => {
     let search = `?words=${value}`;
@@ -211,6 +203,48 @@ const Header = function (props) {
     setSearchValue(e.target.value)
   };
 
+  const openSearchHint = () => {
+    if(shouldSearchHintDisplay){
+      set_SearchHintDisplay(false);
+      return;
+    }
+    let recentlySearch_request;
+    let hotTop_request;
+    if (isLoggedIn) {
+      recentlySearch_request = request(`${API_SEARCH_HISTORY}`, {
+        method: "get",
+        headers: {
+          token: JSON.parse(localStorage.getItem('user')).token
+        }
+      });
+      recentlySearch_request.then((res) => {
+        set_RecentlySearch(res.history);
+      }, (err) => {
+        console.log(err);
+      });
+    } else {
+      recentlySearch_request = new Promise.resolve();
+    }
+
+    hotTop_request = request(`${API_SEARCH_HOTTOPIC}`, {
+      method: "get",
+    });
+
+    hotTop_request.then((res) => {
+      set_HotTopic(res.words);
+    }, (err) => {
+      console.log(err);
+    });
+   Promise.all([recentlySearch_request, hotTop_request]).then(()=>{
+      set_SearchHintDisplay(true);
+    })
+    
+  }
+
+  const addToSearchValue = (value) => {
+    setSearchValue(value);
+  }
+
   return (
     <div className="header-border">
       <div className='logo-container'>
@@ -222,10 +256,30 @@ const Header = function (props) {
         <Link to='/rank' id='rank-btn-hide' className='my-link' onClick={handleRankBtn}>
           <img src='images/header/header_rank_btn.svg' height='28' width='28' />
         </Link>
-        <div className='search-outer-div'>
+        <div className='search-outer-div' onClick={openSearchHint}>
           <Search placeholder={props.localization.words.header.headerSearchbarHolder} onSearch={onSearch} style={{ width: '400px' }}
             value={searchValue}
             onChange={onSearchChange} />
+          {shouldSearchHintDisplay && (<div className='search-popup'>
+            {isLoggedIn && (
+              <div style={{ marginBottom: '50px' }}>
+                <p>recently search</p>
+                <div style={{ display: 'flex', justifyContent: 'left', flexWrap: 'wrap' }}>
+                  {recentlySearch.map((item) =>
+                    <SearchTag tagName={item} addToSearchValue={addToSearchValue} />)
+                  }
+                </div>
+              </div>
+            )}
+            <div>
+              <p>hot topic</p>
+              <div style={{ display: 'flex', justifyContent: 'left', flexWrap: 'wrap' }}>
+                {hotTopic.map((item) =>
+                  <SearchTag tagName={item} addToSearchValue={addToSearchValue} />)
+                }
+              </div>
+            </div>
+          </div>)}
         </div>
       </div>
       <div className='user-buttons-container'>
