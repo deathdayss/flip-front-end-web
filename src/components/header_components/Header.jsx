@@ -155,8 +155,8 @@ const Header = function (props) {
                   ) :
                   (<div className="main-menu-popup">
                     <div className="personal-social-info-groups main-menu-popup-item">
-                      <PersonalSocialInfo name='Followed' value='88' />
-                      <PersonalSocialInfo name='Liked' value='88' />
+                      <PersonalSocialInfo name='Followed' value='0' />
+                      <PersonalSocialInfo name='Liked' value='0' />
                     </div>
                     <div className='main-menu-popup-item' style={{ backgroundColor: '#EEE' }}>
                       <img src="images/header/personal_center.svg" height="30px" width="30px" style={{ marginRight: "10px" }}></img>
@@ -221,9 +221,10 @@ const Header = function (props) {
         set_RecentlySearch(res.history);
       }, (err) => {
         console.log(err);
+        set_RecentlySearch([]);
       });
     } else {
-      recentlySearch_request = new Promise.resolve();
+      recentlySearch_request = Promise.resolve();
     }
 
     hotTop_request = request(`${API_SEARCH_HOTTOPIC}`, {
@@ -234,6 +235,7 @@ const Header = function (props) {
       set_HotTopic(res.words);
     }, (err) => {
       console.log(err);
+      set_HotTopic([]);
     });
    Promise.all([recentlySearch_request, hotTop_request]).then(()=>{
       set_SearchHintDisplay(true);

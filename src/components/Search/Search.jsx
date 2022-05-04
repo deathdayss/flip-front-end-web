@@ -40,7 +40,7 @@ const Search = ({ localization,location }) => {
             response = request(`${API_SEARCH_GAME}`, {
                 method: "get",
                 params: {
-                    num: 10,
+                    num: 1,
                     offset: 0,
                     keyword: new URLSearchParams(location.search).get("words"),
                     method: 'like',
@@ -55,11 +55,10 @@ const Search = ({ localization,location }) => {
             response = request(`${API_SEARCH_GAME_NOTOKEN}`, {
                 method: "get",
                 params: {
-                    num: 10,
+                    num: 1,
                     offset: 0,
                     keyword: new URLSearchParams(location.search).get("words"),
                     method: 'like',
-                    zone: 'test'
                     //TODO: Adjust method to prototype add zone
 
                 },
@@ -116,7 +115,7 @@ const Search = ({ localization,location }) => {
                 />
             </div>
             <div className="search-pagination-container">
-                <Pagination className="search-pagination" total={500} />
+                <Pagination className="search-pagination" total={10} />
             </div>
         </div>
     </>
