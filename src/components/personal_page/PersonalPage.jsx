@@ -12,10 +12,10 @@ import { mapLocalizationToProps } from '../../redux/helper/mapProps'
 
 
 const gameDetail = {
-    creator: "Creator",
-    title: "Title title title title title",
-    play: "1000 plays",
-    date: "2021-08-20 11:46:28",
+    creator: "Flip Team",
+    title: "Demo Game", //"Title title title title title"
+    play: "1 plays",
+    date: "2022-05-04 11:46:28",
     subscribers: "4513 subscribers",
     subscribe: "SUBSCRIBE",
     description: "A doc-style video to summarize early design and gameplay elements that were much more impressive compared to the final product. Infinite went through many revisions over the course of its development, Irrational Games had to scale back a lot of ideas, which was disappointing for a lot of people after the E3 showcases. Everything shown here has been removed or downgraded to the point where it's just not comparable. Self-explanatory quote from Ken Levine: \"we cut enough content to make 5-6 full games\". There's more in the official artbook if you're interrested.",
@@ -54,7 +54,7 @@ const PersonalPage = (props) => {
     const setMenuAndLink = label => {
         setMenu(label);
         if (label == menuLabels[4]) {
-            window.location.href="./personal_centre"
+            window.location.href = "./personal_centre"
         }
     }
 

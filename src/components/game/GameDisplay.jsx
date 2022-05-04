@@ -28,10 +28,10 @@ const LOOP_ARR = [1, 2, 3, 4, 5, 6, 7]
 
 
 const gameDetail = {
-    creator: "Creator",
-    title: "Title title title title title",
-    play: "1000 plays",
-    date: "2021-08-20 11:46:28",
+    creator: "Flip Team",
+    title: "Demo Game", //"Title title title title title"
+    play: "1 plays",
+    date: "2022-05-04 11:46:28",
     subscribers: "4513 subscribers",
     subscribe: "SUBSCRIBE",
     description: "A doc-style video to summarize early design and gameplay elements that were much more impressive compared to the final product. Infinite went through many revisions over the course of its development, Irrational Games had to scale back a lot of ideas, which was disappointing for a lot of people after the E3 showcases. Everything shown here has been removed or downgraded to the point where it's just not comparable. Self-explanatory quote from Ken Levine: \"we cut enough content to make 5-6 full games\". There's more in the official artbook if you're interrested.",
@@ -242,27 +242,69 @@ const GameDisplay = (props) => {
     }
 
     const getLikeCheckService = (params) => {
-        return request(`${API_LIKE_CHECK}`, { params });
+        return request(`${API_LIKE_CHECK}`,
+            {
+                method: "get",
+                params,
+                headers: {
+                    token: JSON.parse(localStorage.getItem('user')).token
+                }
+            });
     }
 
     const getLikeClickService = (params) => {
-        return request(`${API_LIKE_CLICK}`, { params });
+        return request(`${API_LIKE_CLICK}`, {
+            method: "get",
+            params,
+            headers: {
+                token: JSON.parse(localStorage.getItem('user')).token
+            }
+        });
     }
 
     const getLikeNumService = (params) => {
-        return request(`${API_LIKE_NUM}`, { params });
+        return request(`${API_LIKE_NUM}`,
+            {
+                method: "get",
+                params,
+                headers: {
+                    token: JSON.parse(localStorage.getItem('user')).token
+                }
+            }
+        )
     }
 
     const getCollectNumService = (params) => {
-        return request(`${API_COLLECT_NUM}`, { params });
+        return request(`${API_COLLECT_NUM}`,
+            {
+                method: "get",
+                params,
+                headers: {
+                    token: JSON.parse(localStorage.getItem('user')).token
+                }
+            });
     }
 
     const getCollectClickService = (params) => {
-        return request(`${API_COLLECT_CLICK}`, { params });
+        return request(`${API_COLLECT_CLICK}`,
+            {
+                method: "get",
+                params,
+                headers: {
+                    token: JSON.parse(localStorage.getItem('user')).token
+                }
+            });
     }
 
     const getCollectCheckService = (params) => {
-        return request(`${API_COLLECT_CHECK}`, { params });
+        return request(`${API_COLLECT_CHECK}`,
+            {
+                method: "get",
+                params,
+                headers: {
+                    token: JSON.parse(localStorage.getItem('user')).token
+                }
+            });
     }
 
     const getProductInfoService = (params) => {
@@ -311,19 +353,12 @@ const GameDisplay = (props) => {
             </div>
         )
         return (
-            // <Box width={80} type="primary">
-            //     <Popover content={content} title={pop_title}>
-            //         <img src={btnInfos[2][0]} height={btnInfos[2][1]} width={btnInfos[2][1]} />
-            //     </Popover>
-            //     <span>123</span>
-            // </Box>
-
             <Box width={80}>
                 <Popover content={content} title={pop_title}>
 
                     <ForwardIcon className="like-icon" onClick={() => { setForward(!forward) }} style={{ color: forward ? "#5B28FF" : "#727272", }} />
                 </Popover>
-                <span className="btn-text">123</span>
+                <span className="btn-text">0</span>
             </Box>
         )
     }
