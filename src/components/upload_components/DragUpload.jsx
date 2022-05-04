@@ -28,14 +28,16 @@ const API_UPLOAD = "http://175.178.159.131:8084/v1/upload/game";//"https://68f8d
 
 const handle_uploadRequest = (options) => {
   const { onSuccess, onError, file, onProgress } = options;
+
   console.log(file);
   let formData = new FormData();
   const user = JSON.parse(localStorage.getItem('user'));
-  formData.append('email', user.email);
-  formData.append('password', user.password);
+  const token = user.token;
+  // formData.append('email', user.email);
+  // formData.append('password', user.password);
   formData.append('file_body', file);
 
-  const uploadPromise = getUploadSerive(formData);//{ email: "my_name_is_noBody@example.com",password: "123",file_body: file}
+  const uploadPromise = getUploadSerive(formData, token);//{ email: "my_name_is_noBody@example.com",password: "123",file_body: file}
   uploadPromise.then(
     function (value) {
       message.success(`${file.name} uploaded successfully.`);
@@ -50,11 +52,14 @@ const handle_uploadRequest = (options) => {
   )
 }
 
-const getUploadSerive = (params) => {
+const getUploadSerive = (params, token) => {
   return request(`${API_UPLOAD}`, {
     method: "post",
     data: params,
     requestType: 'form',
+    headers: {
+      token: token
+    }
     // headers:{'Content-Type': 'multipart/form-data'}
   });
 }

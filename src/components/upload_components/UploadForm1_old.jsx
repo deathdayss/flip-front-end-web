@@ -235,6 +235,7 @@ const UploadForm1 = (props) => {
     // const _path_ = props.location.pathname;
     const _gid_ = props.location.search.split("=")[1];//_path_.split('/')[1];
     // console.log(_gid_);
+    console.log(props);
 
     const [title, updateTitle] = useState("");
     const [category, updateCategory] = useState("3D");

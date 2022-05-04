@@ -27,7 +27,7 @@ const tagsData = [
 	'Music',
 	'Puzzle',
 	'Racing',
-	'Role Playing',
+	'Role-Playing',
 	'Simulation',
 	'Sports',
 	'Strategy'
@@ -49,6 +49,9 @@ const imageList = [];
 // Form Upload Logic
 
 const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _category_, history = null) => {
+	const user = localStorage.getItem('user');
+	const userDetails = JSON.parse(user);
+	const token = userDetails.token;
 
 	console.log('===================================');
 	console.log("Game ID: \t" + _game_id_);
@@ -66,15 +69,16 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
 	else {
 		const formData = new FormData();
 		const categoryStr = _category_.join(" ");
+
 		formData.append('file_body', imageList[0]);
-		formData.append('email', 'my_name_is_noBody@example.com');
-		formData.append('password', '123');
+		// formData.append('email', userDetails.email);
+		// formData.append('password', userDetails.password);
 		formData.append('game_id', _game_id_);
 		formData.append('game_name', _title_);
 		formData.append('zone', categoryStr);
 		formData.append('description', _description_);
 
-		const promise = getInfoUploadService(formData);
+		const promise = getInfoUploadService(formData, token);
 		promise.then(
 			values => {
 				message.info('Your game has been uploaded successfully ! GID:' + _game_id_, 2.0);
@@ -89,12 +93,9 @@ const handleSubmitRequest = (_game_id_, _title_, _folder_, _description_, _categ
 }
 
 // const DOMAIN = "http://106.52.167.166:8084";
-const API_INFO = "http://175.178.159.131:8084/v2/upload/info";//`${DOMAIN}/v1/upload/info`;
+const API_INFO = "http://175.178.159.131:8084/v1/upload/info";//`${DOMAIN}/v1/upload/info`;
 
-const getInfoUploadService = (formData) => {
-	const user = localStorage.getItem('user');
-	const userDetails = JSON.parse(user);
-	const token = userDetails.token;
+const getInfoUploadService = (formData, token) => {
 	return request(API_INFO, {
 		method: "post",
 		headers: {
@@ -189,12 +190,12 @@ const style = {
 
 const UploadForm1 = (props) => {
 	const history = useHistory();
-	const _gid_ = props.location.search.split("=")[1];//_path_.split('/')[1];
+	const gid = props.location.search.split("=")[1];//_path_.split('/')[1];
+	console.log("gid 11:", gid)
 
 	const [title, updateTitle] = useState("");
 	const [category, updateCategory] = useState("");
-	const [folder, updateFolder] = useState("GAME" + _gid_);
-	const [game_id, updateGameID] = useState(_gid_);
+	const [folder, updateFolder] = useState("GAME" + gid);
 	const [description, updateDescription] = useState("");
 
 	const handleChange = (tag, checked) => {
@@ -215,7 +216,7 @@ const UploadForm1 = (props) => {
 				<Form
 					name="game_info_upload"
 					id="upload_form"
-					onFinish={() => handleSubmitRequest(game_id, title, folder, description, category, history)}
+					onFinish={() => handleSubmitRequest(gid, title, folder, description, category, history)}
 				>
 					<Form.Item
 						name="file_name"

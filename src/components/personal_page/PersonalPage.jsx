@@ -54,7 +54,7 @@ const PersonalPage = (props) => {
     const setMenuAndLink = label => {
         setMenu(label);
         if (label == menuLabels[4]) {
-            window.location.href="./personal_centre"
+            window.location.href="./personal_center"
         }
     }
 
