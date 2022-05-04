@@ -371,7 +371,7 @@ const SignUpForm = (props) => {
 								<Form.Item
 									name="question1">
 
-									<Select defaultValue={questionList[0].id}>
+									<Select>
 										{
 											questionList.map((item) =>
 												(<Select.Option value={item.id}>{item.content}</Select.Option>))
@@ -384,7 +384,7 @@ const SignUpForm = (props) => {
 								</Form.Item>
 								<Form.Item
 									name="question2">
-									<Select defaultValue={questionList[1].id}>
+									<Select>
 										{
 											questionList.map((item) =>
 												(<Select.Option value={item.id}>{item.content}</Select.Option>))
@@ -397,7 +397,7 @@ const SignUpForm = (props) => {
 								</Form.Item>
 								<Form.Item
 									name="question3">
-									<Select defaultValue={questionList[2].id}>
+									<Select>
 										{
 											questionList.map((item) =>
 												(<Select.Option value={item.id}>{item.content}</Select.Option>))
@@ -409,12 +409,14 @@ const SignUpForm = (props) => {
 									<Input />
 								</Form.Item>
 								<Form.Item {...tailFormItemLayout}>
-									<Button style={{ backgroundColor: '#D6D3DE', color: '#FFF', width: '150px', borderRadius: '10px' }} onClick={
+									
+									<Button style={{ backgroundColor: '#D6D3DE', color: '#FFF', width: '150px', borderRadius: '10px', marginLeft:'-90px',marginRight:'20px' }} onClick={
 										() => {
 											set_SignupStep(1);
 										}
 									}>return</Button>
 									<Button type="primary" htmlType="submit" style={{ backgroundColor: "#5B28FF", width: "150px", borderRadius: "10px" }}>Create account</Button>
+									
 								</Form.Item>
 							</Form>
 						</div>
