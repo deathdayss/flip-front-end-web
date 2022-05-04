@@ -8,6 +8,7 @@ import { DOWNLOAD_GAME } from "../../Config.js";
 import InnerHTML from 'dangerously-set-html-content'
 import './GameTest.scss'
 
+
 const GameTest = () => {
     var JSZip = require("jszip");
     const [percent, setPercent] = useState(0)
@@ -48,7 +49,7 @@ const GameTest = () => {
                                     //             setFileUrl(fileUrl)
                                     //         });
                                     // }
-                                    if (f == "index.html") {
+                                    if (f.indexOf("index.html") !== -1) {
                                         new_zip.file(f).async("string").then(function (text) {
                                             // console.log(text)
                                             setGameHtml(text)
@@ -90,6 +91,7 @@ const GameTest = () => {
         {/* <img id="game-file" src={fileUrl}></img> */}
         {/* <div dangerouslySetInnerHTML={{ __html: gameHtml }}></div> */}
         <div style={{ display: loading ? 'flex' : 'none' }} className='progress-container'>
+            <img className='arthor-gif' src='images/game/Arthor.gif' alt='loading' />
             <Progress percent={percent} strokeColor={'#5B28FF'} className='progress' />
         </div>
         <InnerHTML html={gameHtml} />
