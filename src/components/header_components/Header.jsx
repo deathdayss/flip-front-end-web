@@ -160,7 +160,7 @@ const Header = function (props) {
                     </div>
                     <div className='main-menu-popup-item' style={{ backgroundColor: '#EEE' }}>
                       <img src="images/header/personal_center.svg" height="30px" width="30px" style={{ marginRight: "10px" }}></img>
-                      <span>Personal Center</span>
+                      <span style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => {window.location.href="./personal_center"}}>Personal Center</span>
                     </div>
                     <div className='main-menu-popup-item' style={{ backgroundColor: '#F6EAFF', fontWeight: 'bold', cursor: 'pointer' }} onClick={handle_logoutRequest}>Log out</div>
                   </div>

@@ -4,7 +4,6 @@
  * @modify date 2022-03-27 18:16:19
  */
 
-
 /* eslint-disable */
 
 import React, { Component, useEffect, useState } from 'react';
@@ -34,6 +33,7 @@ import axios from 'axios';
 import "./UpdateForm.scss";
 import Header from '../header_components/Header.jsx';
 import { API_AVATAR, API_USER_DETAIL } from '../../Config.js';
+import { getDefaultNormalizer } from '@testing-library/react';
 
 const normFile = e => {
 	if (Array.isArray(e)) {
@@ -51,13 +51,16 @@ const handleInfoChangeRequest = (_nickname_, _signature_, _gender_, _birth_, his
 	const userDetails = JSON.parse(user);
 	const token = userDetails.token;
 
-	console.log("nickname", _nickname_);
-	console.log("signature", _signature_);
-	console.log("gender", _gender_);
-	console.log("birthday", _birth_);
+	console.log("token:", token);
+	console.log("nickname:", _nickname_);
+	console.log("signature:", _signature_);
+	console.log("gender:", _gender_);
+	console.log("birthday:", _birth_);
 
-	if (!token) { message.warn("Authentization times out! Please try re-login to continue.", 2.0); }
-	else if (_nickname_.length == 0) { message.warn("Please enter a nickname.", 2.0); }
+	if (!token) { message.warn("Authentization expired! Please try re-login to continue.", 2.0); }
+	else if (!_nickname_) { message.warn("Please enter your nickname", 2.0); }
+	else if (!_gender_) { message.warn("Please select your gender", 2.0); }
+	else if (!_birth_) { message.warn("Please select your birthday", 2.0); }
 	else {
 		const formData = new FormData();
 		formData.append('nickname', _nickname_);
@@ -67,12 +70,12 @@ const handleInfoChangeRequest = (_nickname_, _signature_, _gender_, _birth_, his
 		const promise = getInfoUpdateService(formData, token);
 		promise.then(
 			values => {
-				message.info('Your game has been uploaded successfully!', 2.0);
-				history.push('/');
+				message.info('Your personal info has been updated successfully!', 2.0);
+				history.push('/personal_centre');
 
 			},
 			reasons => {
-				message.info('Your game has been uploaded successfully!', 2.0);
+				message.info('Your personal info has been updated successfully!', 2.0);
 				history.push('/');
 			})
 	}
@@ -92,29 +95,41 @@ const getInfoUpdateService = (formData, token) => {
 // =========================================================================================
 // Avatar display & upload
 
-const handleAvatarChangeRequest = (_token_, _icon_, history = null) => {
+const handleAvatarChangeRequest = (_token_, _imageList_, history = null) => {
 	const user = localStorage.getItem('user');
 	const userDetails = JSON.parse(user);
 	const token = userDetails.token;
 
+	console.log("token:", token);
 	console.log("avatar", imageList[0]);
 
 	if (!token) { message.warn("Authentization times out! Please try re-login to continue.", 2.0); }
 	else {
 		const formData = new FormData();
 		formData.append('file_body', imageList[0]);
-		const promise = getAvatarUploadService(formData, token);
+		const promise = getAvatarUpdateService(formData, token);
 		promise.then(
 			values => {
-				message.info('Your game has been uploaded successfully!', 2.0);
-				history.push('/');
+				message.info('Your avatar has been updated successfully!', 2.0);
+				history.push('/personal_centre');
 
 			},
 			reasons => {
-				message.info('Your game has been uploaded successfully!', 2.0);
+				message.info('Your avatar has been updated successfully!', 2.0);
 				history.push('/');
 			})
 	}
+}
+
+const getAvatarUpdateService = (formData, token) => {
+	return request(API_AVATAR, {
+		method: "post",
+		headers: {
+			token: token
+		},
+		data: formData,
+		requestType: "form",
+	});
 }
 
 const getBase64 = file => {
@@ -135,15 +150,6 @@ class UpdateAvatar extends Component {
 	};
 
 	beforeUpload = file => {
-		// const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-		// if (!isJpgOrPng) {
-		// 	message.error('You can only upload .jpg/.png file!');
-		// }
-		// const isLt2MB = file.size / 1024 / 1024 < 2;
-		// if (!isLt2MB) {
-		// 	message.error('Image must be smaller than 2MB!');
-		// }
-		// return isJpgOrPng && isLt2MB;
 		return false;
 	}
 
@@ -174,7 +180,7 @@ class UpdateAvatar extends Component {
 		const uploadButton = (
 			<div>
 				<PlusOutlined />
-				<div style={{ marginTop: 8 }}>Upload a New Image Here</div>
+				<div style={{ fontSize: '12px', marginTop: 8 }}>Upload a New Image Here</div>
 			</div>
 		);
 
@@ -216,12 +222,16 @@ const style = {
 const UpdateForm = (props) => {
 	const history = useHistory();
 
+	const user = localStorage.getItem('user');
+	const userDetails = JSON.parse(user);
+	const token = userDetails.token;
+
 	const [email, setEmail] = useState("");
 	const [page, setPage] = useState(1);
 	const [age, setAge] = useState(0);
 	const [nickname, setNickname] = useState("");
 	const [signature, setSignature] = useState("");
-	const [gender, setGender] = useState(1);
+	const [gender, setGender] = useState("");
 	const [birth, setBirth] = useState(moment().format('YYYY-MM-DD'));
 
 	const [avatar, setAvatar] = useState();
@@ -235,37 +245,37 @@ const UpdateForm = (props) => {
 		});
 	}
 
-	const getUserAvatarService = token => {
+	const getUserAvatarService = email => {
 		return request(`${API_AVATAR}`, {
 			method: "get",
-			headers: {
-				token: token
+			params: {
+				email: email
 			}
 		});
 	}
 
 	useEffect(() => {
-		const user = localStorage.getItem('user');
-		const userDetails = JSON.parse(user);
-		const token = userDetails.token;
+		console.log('token:', token);
+		console.log('email:', email);
 
 		const getUserDetails = async () => {
-			if (userDetails != null) {
+			if (token != null) {
 				const result = await getUserDetailService(token);
 				console.log('result:', result);
-				// 	setEmail(result.email);
-				// 	setNickname(result.nickname);
-				// 	setSignature(result.signature);
-				// 	setGender(result.gender);
-				// 	setBirth(result.birth);
+				setEmail(result.detail.Email);
+				setNickname(result.detail.nickname);
+				setSignature(result.detail.signature);
+				setGender(result.detail.gender);
+				setBirth(result.detail.birth);
 			}
 		}
 		getUserDetails();
 
 		const getUserAvatar = async () => {
-			if (userDetails != null) {
-				const result = await getUserAvatarService(token);
-				// setAvatar(result);
+			if (email != null) {
+				const result = await getUserAvatarService(email);
+				console.log('avatar:', result)
+				setAvatar(result.file_body);
 			}
 		}
 		getUserAvatar();
@@ -318,15 +328,15 @@ const UpdateForm = (props) => {
 					{...layout}
 					onFinish={() => {
 						page == 1 ?
-							handleInfoChangeRequest("abc", age, nickname, signature, gender, birth, history)
+							handleInfoChangeRequest(token, nickname, signature, gender, birth, history)
 							: page == 2 ?
-								handleAvatarChangeRequest("abc", age, imageList, history)
+								handleAvatarChangeRequest(token, imageList, history)
 								: null
 					}}
 				>
 					<Row>
 						<Col span={5}>
-							<p style={{ fontSize: '16px', textAlign: 'center', fontWeight: 'bold' }}>Personal Centre</p>
+							<p style={{ fontSize: '16px', textAlign: 'center', fontWeight: 'bold' }}>Personal Center</p>
 							<Form.Item name="layout">
 								<Radio.Group
 									value={page}
@@ -392,7 +402,7 @@ const UpdateForm = (props) => {
 							<Col>
 								<p style={{ fontSize: '16px' }}>Personal Info</p>
 								<Form.Item label="Nickname">
-									<Input placeholder="Input your nickname here" value={nickname} onChange={onChangeNickname} />
+									<Input placeholder="Input your nickname here" value={"Flip Team"} onChange={onChangeNickname} />
 								</Form.Item>
 
 								<Form.Item label="Email">{email}</Form.Item>
