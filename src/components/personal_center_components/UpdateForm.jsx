@@ -99,15 +99,15 @@ const handleAvatarChangeRequest = (_token_, _imageList_, history = null) => {
 	const user = localStorage.getItem('user');
 	const userDetails = JSON.parse(user);
 	const token = userDetails.token;
-	const email = userDetails.email;
 
 	console.log("token:", token);
 	console.log("avatar", imageList[0]);
 
 	if (!token) { message.warn("Authentization times out! Please try re-login to continue.", 2.0); }
 	else {
+		const formData = new FormData();
 		formData.append('file_body', imageList[0]);
-		const promise = getAvatarUpdateService(formData, email);
+		const promise = getAvatarUpdateService(formData, token);
 		promise.then(
 			values => {
 				message.info('Your avatar has been updated successfully!', 2.0);
@@ -121,12 +121,14 @@ const handleAvatarChangeRequest = (_token_, _imageList_, history = null) => {
 	}
 }
 
-const getAvatarUpdateService = (formData, email) => {
+const getAvatarUpdateService = (formData, token) => {
 	return request(API_AVATAR, {
 		method: "post",
-		data: {
-			email: email
-		}
+		headers: {
+			token: token
+		},
+		data: formData,
+		requestType: "form",
 	});
 }
 
@@ -328,7 +330,7 @@ const UpdateForm = (props) => {
 						page == 1 ?
 							handleInfoChangeRequest(token, nickname, signature, gender, birth, history)
 							: page == 2 ?
-								handleAvatarChangeRequest(imageList, history)
+								handleAvatarChangeRequest(token, imageList, history)
 								: null
 					}}
 				>
@@ -400,7 +402,7 @@ const UpdateForm = (props) => {
 							<Col>
 								<p style={{ fontSize: '16px' }}>Personal Info</p>
 								<Form.Item label="Nickname">
-									<Input placeholder="Input your nickname here" value={nickname} onChange={onChangeNickname} />
+									<Input placeholder="Input your nickname here" value={"Flip Team"} onChange={onChangeNickname} />
 								</Form.Item>
 
 								<Form.Item label="Email">{email}</Form.Item>
