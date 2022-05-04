@@ -11,10 +11,14 @@ import { gameCategories, rankMethods } from "./initData";
 import RadioButtons from '../commonComponent/RadioButtons/RadioButtons';
 import './Search.scss';
 import request from 'umi-request';
+import { useHistory } from 'react-router-dom';
 import { API_SEARCH_GAME_NOTOKEN } from "../../Config";
 import { API_SEARCH_GAME } from "../../Config";
 
 const Search = ({ localization,location }) => {
+
+    const history = useHistory();
+
     const [searchConditions, setSearchConditions] = useState({
         rankMethod: 'comprehensive',
         category: 'all'
@@ -104,6 +108,7 @@ const Search = ({ localization,location }) => {
             </div>
             <div className="search-cover-container">
                 <BlockGrid colNum={5} data={searchResults} dataToItem={(data) => <CoverBlock playCount={data.DownloadNum}
+                    onClick={()=>{history.push('/gameDisplay?pid=1')}}
                     AuthorName={data.AuthorName}
                     img={data.img}
                     likeCount={data.like_num}
