@@ -20,15 +20,16 @@ const Comment = () => {
         setAction('liked');
     };
 
+    const getComment = async () => {
+        const result = await getCommentList({
+            GID: 1,
+            num: 2,
+        })
+        console.log(result.List)
+        setCommentList(result.List)
+    }
+
     useEffect(() => {
-        const getComment = async () => {
-            const result = await getCommentList({
-                GID: 1,
-                num: 2,
-            })
-            console.log(result.List)
-            setCommentList(result.List)
-        }
         getComment()
     }, [])
 
@@ -94,7 +95,10 @@ const Comment = () => {
                 game_id: 1,
                 comment: values.textarea,
             })
-            console.log(result.msg)
+            if (result.status == 200) {
+                setSubmitting(false)
+                getComment()
+            }
         }
         addComment()
     };

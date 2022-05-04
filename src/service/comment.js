@@ -8,6 +8,10 @@ export const getCommentList = (params) => {
 export const addCommentService = (params) => {
     return request(`${API_ADD_COMMENT}`, {
         method: "post",
-        data: params
+        data: params,
+        headers: {
+            token: JSON.parse(localStorage.getItem('user')).token
+        },
+        requestType: "form"
     });
 }
