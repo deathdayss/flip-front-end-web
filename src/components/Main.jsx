@@ -38,7 +38,7 @@ import UpdateForm from './personal_center_components/UpdateForm.jsx'
 import CreationManagement from './personal_center_components/CreationManagement.jsx'
 import UpdateGame from './personal_center_components/DragUpload1.jsx'
 import Category from './category/Category';
-import Search from './search/Search';
+import Search from './Search/Search';
 import './Main.scss'
 import { useHistory } from 'react-router-dom'
 import PersonalPage from './personal_page/PersonalPage.jsx'
