@@ -1,0 +1,26 @@
+.search-container {
+    padding: 0 50px;
+    .search-filter-container {
+        padding: 0 5px;
+        .search-filter-rank-method {
+            margin-top: 10px;
+        }
+        .search-filter-game-category {
+            margin-top: 10px;
+        }
+        .search-filter-bottom-line {
+            margin-top: 10px;
+            height: 1px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15)
+        }
+    }
+    .search-cover-container {
+        margin-top: 15px;
+    }
+    .search-pagination-container {
+        display: flex;
+        .search-pagination {
+            margin: 0 auto;
+        }
+    }
+}

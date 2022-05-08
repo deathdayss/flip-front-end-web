@@ -5,7 +5,7 @@
  */
 
 
-const DOMAIN = "http://175.178.159.131:8084"
+const DOMAIN = "https://175.178.159.131" //http://175.178.159.131:8084
 const API_WT = "http://rinato.ticp.vip"
 
 //Homepage
