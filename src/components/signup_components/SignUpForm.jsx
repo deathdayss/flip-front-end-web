@@ -8,16 +8,16 @@ import { message } from 'antd';
 import $ from 'jquery'
 import { useHistory } from 'react-router-dom'
 import request from 'umi-request';
-
+import { API_SIGNUP, API_VERIFYEMAIL,API_REQUESTQUESTION,API_VERIFICATION_CODE } from "../../Config";
 
 
 const formItemLayout = { labelCol: { xs: { span: 24, }, sm: { span: 8, }, }, wrapperCol: { xs: { span: 24, }, sm: { span: 16, }, }, };
 const tailFormItemLayout = { wrapperCol: { xs: { span: 24, offset: 0, }, sm: { span: 16, offset: 8, }, }, };
-const DOMAIN = "http://175.178.159.131:8084";
-const API_SIGNUP = `${DOMAIN}/v1/notoken/register`;
-const API_VERIFYEMAIL = `${DOMAIN}/v1/notoken/verify`;
-const API_REQUESTQUESTION = `${DOMAIN}/v1/security/question`;
-const API_VERIFICATION_CODE = `${DOMAIN}/v1/verification/code`;
+// const DOMAIN = "http://175.178.159.131:8084";
+// const API_SIGNUP = `${DOMAIN}/v1/notoken/register`;
+// const API_VERIFYEMAIL = `${DOMAIN}/v1/notoken/verify`;
+// const API_REQUESTQUESTION = `${DOMAIN}/v1/security/question`;
+// const API_VERIFICATION_CODE = `${DOMAIN}/v1/verification/code`;
 
 const SignUpForm = (props) => {
 	const [form] = Form.useForm();

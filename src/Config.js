@@ -1,7 +1,7 @@
 /**
  * @author Huiying Hu
  * @create date 2021-07-23 20:35:00
- * @modify date 2022-05-03 18:51:35
+ * @modify date 2022-05-09 23:42:59
  */
 
 
@@ -42,4 +42,15 @@ export const API_USER_DETAIL = `${DOMAIN}/v1/user/detail`
 export const API_UPDATE_GAME = `${DOMAIN}/v1/update/game`
 export const API_AVATAR = `${DOMAIN}/v1/download/personal`
 
-//Login URLs, etc.
+//Sign in
+export const API_LOGIN = `${DOMAIN}/v1/notoken/login`;
+export const API_VERIFY_USER_EMAIL = `${DOMAIN}/v1/notoken/change/vertify`;
+export const API_VERIFYQUESTION = `${DOMAIN}/v1/notoken/change/answer`;
+export const API_CHANGEPASSWORD = `${DOMAIN}/v1/notoken/change/password`;
+export const API_USER_REQUESTQUESTION = `${DOMAIN}/v1/security/user/question`;
+//Sign up
+export const API_SIGNUP = `${DOMAIN}/v1/notoken/register`;
+export const API_VERIFYEMAIL = `${DOMAIN}/v1/notoken/verify`;
+export const API_REQUESTQUESTION = `${DOMAIN}/v1/security/question`;
+//CAPTCHA
+export const API_VERIFICATION_CODE = `${DOMAIN}/v1/verification/code`;

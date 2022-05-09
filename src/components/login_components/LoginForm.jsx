@@ -5,18 +5,18 @@ import './LoginForm.scss';
 import { useHistory } from 'react-router-dom'
 import request from 'umi-request';
 import React, { useState, useEffect } from 'react';
-
+import { API_LOGIN, API_VERIFICATION_CODE, API_VERIFY_USER_EMAIL,API_VERIFYQUESTION,API_CHANGEPASSWORD,API_USER_REQUESTQUESTION } from "../../Config";
 
 const tailFormItemLayout = { wrapperCol: { xs: { span: 24, offset: 0, }, sm: { span: 16, offset: 8, }, }, };
 const formItemLayout = { labelCol: { xs: { span: 24, }, sm: { span: 8, }, }, wrapperCol: { xs: { span: 24, }, sm: { span: 16, }, }, };
 
-const DOMAIN = "http://175.178.159.131:8084";
-const API_LOGIN = `${DOMAIN}/v1/notoken/login`;
-const API_VERIFICATION_CODE = `${DOMAIN}/v1/verification/code`;
-const API_VERIFYEMAIL = `${DOMAIN}/v1/notoken/change/vertify`;
-const API_VERIFYQUESTION = `${DOMAIN}/v1/notoken/change/answer`;
-const API_CHANGEPASSWORD = `${DOMAIN}/v1/notoken/change/password`;
-const API_REQUESTQUESTION = `${DOMAIN}/v1/security/user/question`;
+// const DOMAIN = "http://175.178.159.131:8084";
+// const API_LOGIN = `${DOMAIN}/v1/notoken/login`;
+// const API_VERIFICATION_CODE = `${DOMAIN}/v1/verification/code`;
+// const API_VERIFYEMAIL = `${DOMAIN}/v1/notoken/change/vertify`;
+// const API_VERIFYQUESTION = `${DOMAIN}/v1/notoken/change/answer`;
+// const API_CHANGEPASSWORD = `${DOMAIN}/v1/notoken/change/password`;
+// const API_REQUESTQUESTION = `${DOMAIN}/v1/security/user/question`;
 
 const LoginForm = (props) => {
 
@@ -72,7 +72,7 @@ const LoginForm = (props) => {
 	}
 
 	const handle_getQuestionList = (value) => {
-		const result = request(`${API_REQUESTQUESTION}`, {
+		const result = request(`${API_USER_REQUESTQUESTION}`, {
 			method: "get",
 			params: {
 				email: value
@@ -89,7 +89,7 @@ const LoginForm = (props) => {
 	}
 
 	const handle_emailVerification = (value) => {
-		const result = request(`${API_VERIFYEMAIL}`, {
+		const result = request(`${API_VERIFY_USER_EMAIL}`, {
 			method: "post",
 			data: {
 				email: value
