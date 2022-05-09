@@ -24,6 +24,7 @@ const Search = ({ localization,location }) => {
         category: 'all'
     });
     const [searchResults, setSearchResults] = useState([]);
+    const [resultNum, setResultNum] = useState(0);
     
     useParams((routeParams) => {
         // delete routeParams.words;
@@ -44,7 +45,7 @@ const Search = ({ localization,location }) => {
             response = request(`${API_SEARCH_GAME}`, {
                 method: "get",
                 params: {
-                    num: 1,
+                    num: 10,
                     offset: 0,
                     keyword: new URLSearchParams(location.search).get("words"),
                     method: 'like',
@@ -59,7 +60,7 @@ const Search = ({ localization,location }) => {
             response = request(`${API_SEARCH_GAME_NOTOKEN}`, {
                 method: "get",
                 params: {
-                    num: 1,
+                    num: 10,
                     offset: 0,
                     keyword: new URLSearchParams(location.search).get("words"),
                     method: 'like',
@@ -68,7 +69,10 @@ const Search = ({ localization,location }) => {
                 },
             });
         }
-        response.then((res) => { setSearchResults(res.List) }).catch(err => console.log(err.message));
+        response.then((res) => { 
+            setSearchResults(res.List);
+            setResultNum(res.recordNum);
+         }).catch(err => console.log(err.message));
     }
 
 
@@ -120,7 +124,7 @@ const Search = ({ localization,location }) => {
                 />
             </div>
             <div className="search-pagination-container">
-                <Pagination className="search-pagination" total={10} />
+                <Pagination className="search-pagination" total={resultNum} />
             </div>
         </div>
     </>
