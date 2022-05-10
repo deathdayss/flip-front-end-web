@@ -2,7 +2,6 @@ import React from 'react';
 import { Progress } from 'antd';
 import { useState, useEffect } from 'react';
 import Play from '../Test_Components/PlayComponent.jsx';
-import $ from 'jquery'
 import request from 'umi-request';
 import { DOWNLOAD_GAME } from "../../Config.js";
 import InnerHTML from 'dangerously-set-html-content'
@@ -23,7 +22,7 @@ const GameTest = () => {
                 // })
                 // console.log(result)
 
-                fetch("http://175.178.159.131:8084/v1/download/game?game_id=1", {
+                fetch(`${DOWNLOAD_GAME}?game_id=1`, {
                     method: 'get',
                     responseType: 'blob'
                 }).then(res => res.blob())
